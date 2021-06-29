@@ -23,8 +23,19 @@ namespace Assets.Scripts.Localisation
         {
             if (_localizationRepository.localization.ContainsKey(key))
             {
-                int languageId = _localizationRepository.localization[key].IndexOf(SelectedLanguage);
-                return _localizationRepository.localization[key][languageId];
+
+                var keyList = _localizationRepository.localization[key];
+                string keyTranslate = string.Empty;
+                foreach (var pair in keyList)
+                {
+                    if (pair.Key == SelectedLanguage)
+                    {
+                        keyTranslate = pair.Value;
+                        break;
+                    }
+                }
+
+                return keyTranslate;
             }
 
             return null;

@@ -1,7 +1,6 @@
 ﻿using Assets.Scripts.Abstracts.Controller;
 using Assets.Scripts.Abstracts.Repository;
 using Assets.Scripts.Localisation;
-using Assets.Scripts.View;
 using Assets.Scripts.Abstracts.Scene;
 using System;
 using System.Collections.Generic;

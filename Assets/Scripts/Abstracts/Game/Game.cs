@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Abstracts.Scene;
 using System.Collections;
+using Assets.Scripts.Scenes.SceneManagers;
 
 namespace Assets.Scripts.Abstracts.Game
 {
@@ -8,6 +9,7 @@ namespace Assets.Scripts.Abstracts.Game
         public static SceneManagerBase sceneManagerBase { get; private set; }
         public static void Run()
         {
+            sceneManagerBase = new StartSceneManager();
             Coroutines.Coroutines.StartRoutine(InitializeGameRoutine());
         }
 

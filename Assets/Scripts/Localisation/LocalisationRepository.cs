@@ -6,23 +6,24 @@ namespace Assets.Scripts.Localisation
 {
     public class LocalisationRepository : Repository
     {
-        private const string LOCALISATION_FILE_PATH = @"..\..\Assets\Localisation\Localisation.xml";
+        private const string LOCALISATION_FILE_PATH = @"C:\Users\KompAZ\Documents\GitHub\Acranoid\Assets\Resources\Localisation\Localisation.xml";
 
         public string SelectedLanguage { get; set; }
-        public Dictionary<string, List<string>> localization { get; private set; }
+        public Dictionary<string, List<KeyValuePair<string, string>>> localization { get; private set; }
 
         public override void Initialize()
         {
-            localization = new Dictionary<string, List<string>>();
+            localization = new Dictionary<string, List<KeyValuePair<string, string>>>();
             XmlDocument localizationDoc = new XmlDocument();
-            localizationDoc.LoadXml(LOCALISATION_FILE_PATH);
+            localizationDoc.Load(LOCALISATION_FILE_PATH);
             foreach (XmlNode key in localizationDoc["Keys"].ChildNodes)
             {
                 string keyName = key.Attributes["Name"].Value;
-                List<string> values = new List<string>();
+                List<KeyValuePair<string, string>> values = new List<KeyValuePair<string, string>>();
                 foreach (XmlNode translate in key["Translates"])
                 {
-                    values.Add(translate.Value);
+                    var pair = new KeyValuePair<string, string>(translate.Name, translate.InnerText);
+                    values.Add(pair);
                 }
 
                 localization[keyName] = values;

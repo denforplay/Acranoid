@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Keys xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Key Name="Start">
+		<Translates>
+			<en>Start</en>
+			<ru>Старт</ru>
+		</Translates>
+	</Key>
+	<Key Name="Exit">
+		<Translates>
+			<en>Exit</en>
+			<ru>Выйти</ru>
+		</Translates>
+	</Key>
+</Keys>

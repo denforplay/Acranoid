@@ -1,5 +1,4 @@
 ﻿using System;
-using Assets.Scripts.LifeSystem;
 using System.Collections.Generic;
 using Assets.Scripts.Abstracts.Scene;
 

@@ -6,7 +6,7 @@ namespace Assets.Scripts.Localisation
 {
     public class LocalisationRepository : Repository
     {
-        private const string LOCALISATION_FILE_PATH = @"..\..\Assets\Localisation.xml";
+        private const string LOCALISATION_FILE_PATH = @"..\..\Assets\Localisation\Localisation.xml";
 
         public string SelectedLanguage { get; set; }
         public Dictionary<string, List<string>> localization { get; private set; }
@@ -31,7 +31,6 @@ namespace Assets.Scripts.Localisation
 
         public override void Save()
         {
-
         }
     }
 }

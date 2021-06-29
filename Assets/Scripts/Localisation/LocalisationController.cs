@@ -32,7 +32,8 @@ namespace Assets.Scripts.Localisation
          
         public override void Initialize()
         {
-            Localization.Initialize(this);
+            _localizationRepository.Initialize();
+
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Assets.Scripts.LifeSystem;
 using Assets.Scripts.Abstracts.Scene;
 
 namespace Assets.Scripts.Abstracts.Controller

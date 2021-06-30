@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Abstracts.Controller;
 using Assets.Scripts.Abstracts.Repository;
+using Assets.Scripts.Abstracts.Game;
 using System.Collections;
 using UnityEngine;
 
@@ -40,6 +41,7 @@ namespace Assets.Scripts.Abstracts.Scene
             _controllerBase.SendOnStartToAllControllers();
             _repositoriesBase.SendOnStartToAllRepositories();
             yield return null;
+            Game.Game.state = State.isLoaded;
         }
 
         public T GetRepository<T>() where T : Repository.Repository

@@ -2,16 +2,10 @@
 {
     public abstract class Controller
     {
-        public virtual void OnCreate()
-        {
-        }
+        public abstract void OnCreate();
 
-        public virtual void Initialize()
-        { 
-        }
+        public abstract void Initialize();
 
-        public virtual void OnStart()
-        {
-        }
+        public abstract void OnStart();
     }
 }

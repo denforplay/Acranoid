@@ -10,7 +10,6 @@ namespace Assets.Scripts.Localisation
         public string SelectedLanguage => this._localizationRepository.SelectedLanguage;
         public override void OnCreate()
         {
-            base.OnCreate();
             this._localizationRepository = Game.GetRepository<LocalisationRepository>();
         }
 
@@ -44,7 +43,10 @@ namespace Assets.Scripts.Localisation
         public override void Initialize()
         {
             _localizationRepository.Initialize();
+        }
 
+        public override void OnStart()
+        {
         }
     }
 }

@@ -6,8 +6,7 @@ namespace Assets.Scripts.Localisation
 {
     public class LocalisationRepository : Repository
     {
-        private const string LOCALISATION_FILE_PATH = @"C:\Users\KompAZ\Documents\GitHub\Acranoid\Assets\Resources\Localisation\Localisation.xml";
-
+        private const string LOCALISATION_FILE_PATH = @"Assets\Resources\Localisation\Localisation.xml";
         public string SelectedLanguage { get; set; }
         public Dictionary<string, List<KeyValuePair<string, string>>> localization { get; private set; }
 
@@ -28,6 +27,14 @@ namespace Assets.Scripts.Localisation
 
                 localization[keyName] = values;
             }
+        }
+
+        public override void OnCreate()
+        {
+        }
+
+        public override void OnStart()
+        {
         }
 
         public override void Save()

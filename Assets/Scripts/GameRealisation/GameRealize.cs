@@ -5,17 +5,11 @@ namespace Assets.Scripts.GameRealisation
 {
     public class GameRealize : MonoBehaviour
     {
-        private void Start()
+
+
+        private void Awake()
         {
             Game.Run();
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Debug.Log("hello");
-            }
         }
     }
 }

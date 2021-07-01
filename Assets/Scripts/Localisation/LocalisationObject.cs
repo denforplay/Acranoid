@@ -8,7 +8,13 @@ namespace Assets.Scripts.Localisation
     public class LocalisationObject : MonoBehaviour
     {
         private TextMeshProUGUI _text;
-        private string _key;
+        [SerializeField] private string _key;
+
+        private void Start()
+        {
+            Initialize();
+            Localisation.OnLocalisationLoaded += Translate;
+        }
 
         private void Initialize()
         {
@@ -16,22 +22,10 @@ namespace Assets.Scripts.Localisation
             _key = _text.text;
         }
 
-        public void Localise()
+        private void Translate()
         {
-            if (_text == null)
-            {
-                Initialize();
-            }
-
-            if (Game.state == State.isLoaded)
-            {
-                Game.GetController<LocalisationController>().SetLanguage("ru");
-                _text.text = Game.GetController<LocalisationController>().GetTranslate(_key);
-            }
-            else
-            {
-                Localise();
-            }
+            Localisation.SetLanguage("ru");
+            _text.text = Localisation.GetTranslate(_key);
         }
     }
 }

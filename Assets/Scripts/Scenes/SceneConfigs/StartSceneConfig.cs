@@ -2,7 +2,6 @@
 using Assets.Scripts.Abstracts.Repository;
 using Assets.Scripts.Localisation;
 using Assets.Scripts.Abstracts.Scene;
-using Assets.Scripts.Camera;
 using System;
 using System.Collections.Generic;
 

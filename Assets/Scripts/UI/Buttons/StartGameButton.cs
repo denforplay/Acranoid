@@ -2,12 +2,11 @@
 using Assets.Scripts.Scenes.SceneConfigs;
 using Assets.Scripts.Scenes.SceneManagers;
 using UnityEngine;
-using UnityEngine.EventSystems;
 namespace Assets.Scripts.UI.Buttons
 {
-    public class StartGameButton : MonoBehaviour, IPointerClickHandler
+    public class StartGameButton : MonoBehaviour
     {
-        public void OnPointerClick(PointerEventData eventData)
+        public void LoadGameScene()
         {
             Game.sceneManagerBase.LoadNewSceneAsync(GameSceneConfig.SCENE_NAME);
         }

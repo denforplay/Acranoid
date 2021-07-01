@@ -7,10 +7,10 @@ TextureImporter:
     second: Platform
   - first:
       213: -1025663872027914400
-    second: block
+    second: Block
   - first:
       213: -9005960956174632500
-    second: ball
+    second: Ball
   - first:
       213: -6249511323087580677
     second: AngleBorder
@@ -19,7 +19,13 @@ TextureImporter:
     second: BackGroundTile
   - first:
       213: 820076373618689533
-    second: Border
+    second: RussiaFlag
+  - first:
+      213: 1524375868468601761
+    second: RussiaFlag
+  - first:
+      213: 6902343314338982727
+    second: BritainFlag
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -154,7 +160,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: block
+      name: Block
       rect:
         serializedVersion: 2
         x: 0
@@ -175,7 +181,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ball
+      name: Ball
       rect:
         serializedVersion: 2
         x: 72
@@ -238,6 +244,27 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: RussiaFlag
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 90
+        width: 61
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df58b3aed1f716b00800000000000000
+      internalID: 820076373618689533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: Border
       rect:
         serializedVersion: 2
@@ -252,8 +279,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df58b3aed1f716b00800000000000000
-      internalID: 820076373618689533
+      spriteID: 1a3af30a6cba72510800000000000000
+      internalID: 1524375868468601761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BritainFlag
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 27
+        width: 61
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74ba7f89cac0acf50800000000000000
+      internalID: 6902343314338982727
       vertices: []
       indices: 
       edges: []

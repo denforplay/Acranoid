@@ -19,6 +19,7 @@ namespace Assets.Scripts.Abstracts.Game
             sceneManagerBase = new StartSceneManager();
             state = State.isLoading;
             Coroutines.Coroutines.StartRoutine(InitializeGameRoutine());
+            state = State.isLoaded;
         }
 
         private static IEnumerator InitializeGameRoutine()

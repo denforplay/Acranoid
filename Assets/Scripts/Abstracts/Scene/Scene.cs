@@ -41,7 +41,6 @@ namespace Assets.Scripts.Abstracts.Scene
             _controllerBase.SendOnStartToAllControllers();
             _repositoriesBase.SendOnStartToAllRepositories();
             yield return null;
-            Game.Game.state = State.isLoaded;
         }
 
         public T GetRepository<T>() where T : Repository.Repository

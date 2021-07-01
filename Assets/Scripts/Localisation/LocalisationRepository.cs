@@ -29,14 +29,6 @@ namespace Assets.Scripts.Localisation
             }
         }
 
-        public override void OnCreate()
-        {
-        }
-
-        public override void OnStart()
-        {
-        }
-
         public override void Save()
         {
         }

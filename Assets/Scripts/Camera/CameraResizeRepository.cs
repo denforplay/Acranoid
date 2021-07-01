@@ -7,7 +7,7 @@ namespace Assets.Scripts.Camera
     {
         private const float SIZE_X = 1920.0f;
         private const float SIZE_Y = 1080.0f;
-        private const bool IS_HORIZONTAL = true;
+        private const bool IS_HORIZONTAL = false;
         
         public float HalfSize { get => 200.0f; }
         public UnityEngine.Camera camera { get; private set; }

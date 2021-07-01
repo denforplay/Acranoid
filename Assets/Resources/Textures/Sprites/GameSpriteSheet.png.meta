@@ -7,10 +7,19 @@ TextureImporter:
     second: Platform
   - first:
       213: -1025663872027914400
-    second: Block
+    second: block
   - first:
       213: -9005960956174632500
-    second: Ball
+    second: ball
+  - first:
+      213: -6249511323087580677
+    second: AngleBorder
+  - first:
+      213: 4226259555205033962
+    second: BackGroundTile
+  - first:
+      213: 820076373618689533
+    second: Border
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -128,11 +137,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 240
+        y: 229
         width: 100
-        height: 14
+        height: 25
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -145,15 +154,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Block
+      name: block
       rect:
         serializedVersion: 2
         x: 0
-        y: 217
+        y: 201
         width: 60
         height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -166,15 +175,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ball
+      name: ball
       rect:
         serializedVersion: 2
         x: 72
-        y: 217
+        y: 201
         width: 20
         height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -182,6 +191,69 @@ TextureImporter:
       bones: []
       spriteID: cc97c2ad936640380800000000000000
       internalID: -9005960956174632500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AngleBorder
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 137
+        width: 48
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf1559f10964549a0800000000000000
+      internalID: -6249511323087580677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackGroundTile
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 0
+        width: 132
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aefa89c7ca0b6aa30800000000000000
+      internalID: 4226259555205033962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Border
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 48
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df58b3aed1f716b00800000000000000
+      internalID: 820076373618689533
       vertices: []
       indices: 
       edges: []

@@ -17,7 +17,6 @@ namespace Assets.Scripts.Scenes.SceneConfigs
         {
             var controllersMap = new Dictionary<Type, Controller>();
             this.CreateController<LocalisationController>(controllersMap);
-            this.CreateController<CameraResizeController>(controllersMap);
             return controllersMap;
         }
 
@@ -25,7 +24,6 @@ namespace Assets.Scripts.Scenes.SceneConfigs
         {
             var repositoriesMap = new Dictionary<Type, Repository>();
             this.CreateRepository<LocalisationRepository>(repositoriesMap);
-            this.CreateRepository<CameraResizeRepository>(repositoriesMap);
             return repositoriesMap;
         }
     }

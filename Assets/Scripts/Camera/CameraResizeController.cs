@@ -24,11 +24,7 @@ namespace Assets.Scripts.Camera
             float screenRatio = (float)Screen.width / Screen.height;
             float targerRatio = this._cameraResizeRepository.TargetSizeX / this._cameraResizeRepository.TargetSizeY;
 
-            if (screenRatio >= targerRatio)
-            {
-                Resize();
-            }
-            else
+            if (screenRatio != targerRatio)
             {
                 float differentSize = targerRatio / screenRatio;
                 Resize(differentSize);

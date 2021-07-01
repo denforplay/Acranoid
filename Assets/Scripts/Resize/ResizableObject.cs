@@ -4,7 +4,7 @@ namespace Assets.Scripts.Resize
 {
     public class ResizableObject : MonoBehaviour
     {
-        private const float BORDER_WIDTH = 0.16f;
+        private const float BORDER_WIDTH = 0.2f;
         private Vector2 _setupScreen = new Vector2(1080, 1920);
         private UnityEngine.Camera _camera;
 
@@ -17,9 +17,10 @@ namespace Assets.Scripts.Resize
         private void ResizeObjectsOnScreen()
         {
             float horizontal = Screen.width / _setupScreen.x;
-            float vertical =Screen.height / _setupScreen.y;
+            float vertical = Screen.height / _setupScreen.y;
             Vector3 localScale = this.transform.localScale;
-            this.transform.localScale = new Vector2(horizontal, vertical);
+            if (horizontal != vertical)
+            this.transform.localScale = new Vector2(horizontal - BORDER_WIDTH, localScale.y);
         }
     }
 }

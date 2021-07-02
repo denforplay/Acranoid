@@ -1,26 +1,27 @@
 ﻿using UnityEngine;
+using Assets.Scripts.PlatformMovement;
 
 namespace Assets.Scripts.Resize
 {
     public class ResizableObject : MonoBehaviour
     {
-        private const float BORDER_WIDTH = 0.2f;
-        private Vector2 _setupScreen = new Vector2(1080, 1920);
-        private UnityEngine.Camera _camera;
-
+        [SerializeField] PlatformMoveConfig _platformMoveConfig;
+        [SerializeField] float _defaultBorderPosition = 3.5f;
         private void Start()
         {
-            _camera = UnityEngine.Camera.main;
-            ResizeObjectsOnScreen();
+            Resize();
         }
 
-        private void ResizeObjectsOnScreen()
+        private void Resize()
         {
-            float horizontal = Screen.width / _setupScreen.x;
-            float vertical = Screen.height / _setupScreen.y;
-            Vector3 localScale = this.transform.localScale;
-            if (horizontal != vertical)
-            this.transform.localScale = new Vector2(horizontal - BORDER_WIDTH, localScale.y);
+            _platformMoveConfig.borderPosition = _defaultBorderPosition;
+            if (Screen.height > 1920)
+            {
+                var localScale = this.gameObject.transform.localScale;
+                float horizontalScale = 1920f / Screen.height;
+                _platformMoveConfig.borderPosition *= horizontalScale;
+                this.gameObject.transform.localScale = new Vector2(horizontalScale, localScale.y);
+            }
         }
     }
 }

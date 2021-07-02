@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Assets.Scripts.Abstracts.Controller;
 namespace Assets.Scripts.Abstracts.Scene
 {
     public abstract class SceneConfig

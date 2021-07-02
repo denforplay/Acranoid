@@ -9,6 +9,7 @@ namespace Assets.Scripts.BallMovement
         private Rigidbody2D _rigidBody2D;
         private bool _isActive;
 
+
         private void Start()
         {
             _rigidBody2D = GetComponent<Rigidbody2D>();

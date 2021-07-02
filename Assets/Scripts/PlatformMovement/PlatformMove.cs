@@ -6,15 +6,15 @@ namespace Assets.Scripts.PlatformMovement
     {
         [SerializeField] private PlatformMoveConfig _platformMoveConfig;
         private float _direction = 0f;
-        public SpriteRenderer _spriteRenderer;
+        public SpriteRenderer _spriteRenderer { get; private set; }
         public Rigidbody2D _rigidBody2D;
-        public UnityEngine.Camera _camera;
+        public Camera _camera;
 
         private void Awake()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _rigidBody2D = GetComponent<Rigidbody2D>();
-            _camera = UnityEngine.Camera.main;
+            _camera = Camera.main;
         }
 
         private void Move()

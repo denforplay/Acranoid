@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Keys xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Key Name="Start">
 		<Translates>
@@ -10,6 +10,12 @@
 		<Translates>
 			<en>Exit</en>
 			<ru>Выйти</ru>
+		</Translates>
+	</Key>
+	<Key Name="Text">
+		<Translates>
+			<en>Text</en>
+			<ru>Текст</ru>
 		</Translates>
 	</Key>
 </Keys>

@@ -1,0 +1,17 @@
+﻿    {
+      "levels":
+      [
+        {
+          "blocksCountInRow": 2,
+          "blocksCountInColumn": "2"
+        },
+        {
+          "blocksCountInRow": 3,
+          "blocksCountInColumn": "2"
+        },
+        {
+          "blocksCountInRow": 3,
+          "blocksCountInColumn": "3"
+        }
+      ]
+    }

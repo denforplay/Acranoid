@@ -13,7 +13,6 @@ namespace Assets.Scripts.Localisation
         private void Start()
         {
             Initialize();
-            Localisation.OnLocalisationLoaded += Translate;
         }
 
         private void Initialize()
@@ -24,8 +23,19 @@ namespace Assets.Scripts.Localisation
 
         private void Translate()
         {
-            Localisation.SetLanguage("ru");
-            _text.text = Localisation.GetTranslate(_key);
+            _text.text = LocalisationManager.instance.GetTranslate(_key);
+        }
+
+        private void OnEnable()
+        {
+            LocalisationManager.OnLocalisationLoaded += Translate;
+            LocalisationManager.OnLanguageChanged += Translate;
+        }
+
+        private void OnDisable()
+        {
+            LocalisationManager.OnLocalisationLoaded -= Translate;
+            LocalisationManager.OnLanguageChanged -= Translate;
         }
     }
 }

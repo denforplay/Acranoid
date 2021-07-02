@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BallConfig
   m_EditorClassIdentifier: 
   force: 300
-  offSetX: 100
+  offSetX: 0

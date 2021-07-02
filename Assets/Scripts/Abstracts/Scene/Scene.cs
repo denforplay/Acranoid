@@ -26,20 +26,20 @@ namespace Assets.Scripts.Abstracts.Scene
 
         private IEnumerator InitializeRoutine()
         {
-            _controllerBase.CreateAllControllers();
             _repositoriesBase.CreateAllRepositories();
+            _controllerBase.CreateAllControllers();
             yield return null;
 
-            _controllerBase.SendOnCreateToAllControllers();
             _repositoriesBase.SendOnCreateToAllRepositories();
+            _controllerBase.SendOnCreateToAllControllers();
             yield return null;
 
-            _controllerBase.InitializeAllControllers();
             _repositoriesBase.InitializeAllRepositories();
+            _controllerBase.InitializeAllControllers();
             yield return null;
 
-            _controllerBase.SendOnStartToAllControllers();
             _repositoriesBase.SendOnStartToAllRepositories();
+            _controllerBase.SendOnStartToAllControllers();
             yield return null;
         }
 

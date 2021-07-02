@@ -9,6 +9,11 @@ namespace Assets.Scripts.Localisation
         private LocalisationRepository _localizationRepository;
         public string SelectedLanguage => this._localizationRepository.SelectedLanguage;
 
+        public void AddLocalisation(string key, List<KeyValuePair<string, string>> list)
+        {
+            _localizationRepository.localization[key] = list;
+        }
+
         public void SetLanguage(string selectedLanguage)
         {
             _localizationRepository.SelectedLanguage = selectedLanguage;
@@ -47,12 +52,7 @@ namespace Assets.Scripts.Localisation
 
         public override void Initialize()
         {
-            Localisation.Initialize(this);
-        }
-
-
-        public override void OnStart()
-        {
+            LocalisationManager.instance.Initialize(this);
         }
     }
 }

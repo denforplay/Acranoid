@@ -10,7 +10,7 @@ TextureImporter:
     second: Block
   - first:
       213: -9005960956174632500
-    second: Ball
+    second: Block
   - first:
       213: -6249511323087580677
     second: AngleBorder
@@ -19,13 +19,13 @@ TextureImporter:
     second: BackGroundTile
   - first:
       213: 820076373618689533
-    second: RussiaFlag
+    second: GameSpriteSheet_5
   - first:
       213: 1524375868468601761
-    second: RussiaFlag
+    second: GameSpriteSheet_5
   - first:
       213: 6902343314338982727
-    second: BritainFlag
+    second: GameSpriteSheet_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -160,12 +160,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Block
+      name: Ball
       rect:
         serializedVersion: 2
-        x: 0
-        y: 201
-        width: 60
+        x: 112
+        y: 233
+        width: 20
         height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -181,13 +181,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ball
+      name: Block
       rect:
         serializedVersion: 2
-        x: 72
-        y: 201
-        width: 20
-        height: 20
+        x: 0
+        y: 198
+        width: 100
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,7 +244,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RussiaFlag
+      name: GameSpriteSheet_5
       rect:
         serializedVersion: 2
         x: 193
@@ -286,7 +286,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BritainFlag
+      name: GameSpriteSheet_7
       rect:
         serializedVersion: 2
         x: 193

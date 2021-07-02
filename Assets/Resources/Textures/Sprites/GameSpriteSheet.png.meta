@@ -4,19 +4,19 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -1733324851671871659
-    second: Platform
+    second: GameSpriteSheet_0
   - first:
       213: -1025663872027914400
-    second: Block
+    second: GameSpriteSheet_1
   - first:
       213: -9005960956174632500
-    second: Block
+    second: GameSpriteSheet_1
   - first:
       213: -6249511323087580677
-    second: AngleBorder
+    second: GameSpriteSheet_3
   - first:
       213: 4226259555205033962
-    second: BackGroundTile
+    second: GameSpriteSheet_4
   - first:
       213: 820076373618689533
     second: GameSpriteSheet_5
@@ -26,6 +26,12 @@ TextureImporter:
   - first:
       213: 6902343314338982727
     second: GameSpriteSheet_7
+  - first:
+      213: -5299650402646999644
+    second: GameSpriteSheet_8
+  - first:
+      213: -2466332007245680300
+    second: GameSpriteSheet_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -139,7 +145,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Platform
+      name: GameSpriteSheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -160,7 +166,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ball
+      name: GameSpriteSheet_1
       rect:
         serializedVersion: 2
         x: 112
@@ -181,13 +187,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Block
+      name: GameSpriteSheet_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 198
+        y: 188
         width: 100
-        height: 23
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,13 +208,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AngleBorder
+      name: GameSpriteSheet_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 137
-        width: 48
-        height: 46
+        x: 108
+        y: 190
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,13 +229,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BackGroundTile
+      name: GameSpriteSheet_4
       rect:
         serializedVersion: 2
-        x: 57
-        y: 0
-        width: 132
-        height: 141
+        x: 148
+        y: 190
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,10 +253,10 @@ TextureImporter:
       name: GameSpriteSheet_5
       rect:
         serializedVersion: 2
-        x: 193
-        y: 90
-        width: 61
-        height: 52
+        x: 0
+        y: 137
+        width: 48
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,13 +271,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Border
+      name: GameSpriteSheet_6
       rect:
         serializedVersion: 2
-        x: 0
+        x: 57
         y: 0
-        width: 48
-        height: 130
+        width: 132
+        height: 141
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -290,6 +296,48 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 193
+        y: 90
+        width: 61
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74ba7f89cac0acf50800000000000000
+      internalID: 6902343314338982727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameSpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 48
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ad387c990cd376b0800000000000000
+      internalID: -5299650402646999644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameSpriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 193
         y: 27
         width: 61
         height: 53
@@ -300,8 +348,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74ba7f89cac0acf50800000000000000
-      internalID: 6902343314338982727
+      spriteID: 451f1f94b14d5cdd0800000000000000
+      internalID: -2466332007245680300
       vertices: []
       indices: 
       edges: []

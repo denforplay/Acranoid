@@ -11,12 +11,12 @@ namespace Assets.Scripts.PlatformMovement
         public static event Action OnMove;
 
         public Rigidbody2D _rigidBody2D;
-        public UnityEngine.Camera _camera;
+        public Camera _camera;
 
         private void Awake()
         {
             _rigidBody2D = GetComponent<Rigidbody2D>();
-            _camera = UnityEngine.Camera.main;
+            _camera = Camera.main;
         }
 
         private void Update()

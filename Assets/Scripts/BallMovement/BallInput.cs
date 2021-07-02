@@ -5,7 +5,7 @@ namespace Assets.Scripts.BallMovement
 {
     public class BallInput : MonoBehaviour
     {
-        public static event Action OnBallActivatingEvent; 
+        public static event Action OnBallActivatingEvent;
         private Rigidbody2D _rigidBody2D;
         private bool _isActive;
 
@@ -17,7 +17,7 @@ namespace Assets.Scripts.BallMovement
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && !_isActive)
+            if (Input.GetMouseButtonUp(0) && !_isActive)
             {
                 _isActive = true;
                 OnBallActivatingEvent?.Invoke();

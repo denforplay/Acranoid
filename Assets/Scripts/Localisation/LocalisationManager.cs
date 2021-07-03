@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
-
+using Assets.Scripts.Abstracts.Singleton;
 namespace Assets.Scripts.Localisation
 {
     public class LocalisationManager : MonoBehaviour
@@ -27,6 +27,7 @@ namespace Assets.Scripts.Localisation
             }
 
             DontDestroyOnLoad(gameObject);
+
         }
 
         public string Language

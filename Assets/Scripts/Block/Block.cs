@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.Abstracts.Pool.Interfaces;
 using UnityEngine;
 
 namespace Assets.Scripts.Block
 {
-    public class Block : MonoBehaviour
+    public class Block : MonoBehaviour, IPoolable
     {
         public static int count = 0;
         private List<Sprite> _sprites = new List<Sprite>();
@@ -40,6 +41,10 @@ namespace Assets.Scripts.Block
         private void OnDisable()
         {
             count--;
+        }
+
+        public void ResetState()
+        {
         }
     }
 }

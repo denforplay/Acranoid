@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using Assets.Scripts.Health;
+using Assets.Scripts.Abstracts.Pool.Interfaces;
+using Assets.Scripts.Abstracts.Pool;
 
 namespace Assets.Scripts.BallMovement
 {
-    public class Ball : MonoBehaviour
+    public class Ball : MonoBehaviour, IPoolable
     {
         [SerializeField] private BallConfig _ballConfig;
         private BallInput _ballInput;
         private BallCollisions _ballCollisions;
         private Rigidbody2D _rigidbody2D;
-
         private GameObject _rememberedParent;
-
         private void Start()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -67,6 +67,11 @@ namespace Assets.Scripts.BallMovement
         private void OnDisable()
         {
             BallInput.OnBallActivatingEvent -= BallActivate;
+        }
+
+        public void ResetState()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -11,9 +11,18 @@ namespace Assets.Scripts.Health
         public event Action OnHeartSpendEvent;
         public static HealthManager instance;
         [SerializeField] HeartConfig _heartConfig;
-        List<GameObject> hearts = new List<GameObject>();
         public bool IsInitialized { get; private set; }
         private HealthController _healthController;
+        private HealthViewController _healthViewController;
+
+        public HeartConfig HeartConfig
+        {
+            get
+            {
+                CheckHeartsInitialized();
+                return _heartConfig;
+            }
+        }
 
         public int Health
         {
@@ -37,7 +46,7 @@ namespace Assets.Scripts.Health
 
             OnHealthInitializedEvent += () =>
             {
-                EventAdder();
+                LevelManager.OnLevelsInitialized += ShowHealth;
             };
             DontDestroyOnLoad(gameObject);
         }
@@ -45,21 +54,7 @@ namespace Assets.Scripts.Health
         private void ShowHealth()
         {
             CheckHeartsInitialized();
-            float posX = Screen.width - _heartConfig.borderPosition;
-            float posY = Screen.height - _heartConfig.borderPosition;
-            for (int i = 0; i < Health; i++)
-            {
-                GameObject heart = Instantiate(_heartConfig.heartPrefab);
-                Vector2 heartPosition = Camera.main.ScreenToWorldPoint(new Vector3(posX - i * _heartConfig.heartSize, posY));
-                heart.transform.position = heartPosition;
-                heart.TryGetComponent(out SpriteRenderer spriteRenderer);
-                if (spriteRenderer != null)
-                {
-                    spriteRenderer.sprite = _heartConfig.activeHeart;
-                }
-
-                hearts.Add(heart);
-            }
+            _healthViewController.ViewHearts();
         }
 
         public void SpendHeart(int value)
@@ -80,23 +75,20 @@ namespace Assets.Scripts.Health
             OnHealthInitializedEvent?.Invoke();
         }
 
+        public void InitializeViewController(HealthViewController healthViewController)
+        {
+            _healthViewController = healthViewController;
+        }
+
+        public GameObject CreateHeart()
+        {
+            return Instantiate(_heartConfig.heartPrefab);
+        }
+
         public void DeleteHealthView()
         {
             CheckHeartsInitialized();
-            for (int i = 0; i < hearts.Count; i++)
-            {
-                hearts[i].TryGetComponent(out SpriteRenderer spriteRender);
-                if (spriteRender.sprite == _heartConfig.activeHeart)
-                {
-                    spriteRender.sprite = _heartConfig.inActiveHeart;
-                    break;
-                }
-            }
-        }
-
-        private void EventAdder()
-        {
-            LevelManager.OnLevelsInitialized += ShowHealth;
+            _healthViewController.DeleteHealthView();
         }
 
         private void CheckHeartsInitialized()

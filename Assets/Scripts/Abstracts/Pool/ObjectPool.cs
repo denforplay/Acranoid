@@ -4,7 +4,7 @@ using System.Collections.Concurrent;
 
 namespace Assets.Scripts.Abstracts.Pool
 {
-    public abstract class ObjectPool<T> where T : class, IPoolable
+    public class ObjectPool<T> where T : class, IPoolable
     {
         private readonly ConcurrentBag<T> _container = new ConcurrentBag<T>();
         private readonly IPoolObjectCreator<T> _objectCreator;

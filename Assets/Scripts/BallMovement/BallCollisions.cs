@@ -5,16 +5,29 @@ using System;
 
 namespace Assets.Scripts.BallMovement
 {
-    public class BallCollisions : MonoBehaviour
+    public class BallCollisions
     {
-        [SerializeField] private Rigidbody2D _rigidBody2D;
-        [SerializeField] private BallConfig _ballConfig;
-        public void MoveCollision(Collision2D collision)
+        private Rigidbody2D _rigidBody2D;
+        private BallConfig _ballConfig;
+
+        public BallCollisions(BallConfig ballConfig, Rigidbody2D rigidBody2D)
         {
-            Vector2 ballPos = transform.position;
-            if (collision.gameObject.TryGetComponent(out PlatformInput platorm))
+            _ballConfig = ballConfig;
+            _rigidBody2D = rigidBody2D;
+        }
+
+        public void Call(Collision2D collision)
+        {
+            MoveCollision(collision);
+            BlockDamageCollision(collision);
+        }
+
+        private void MoveCollision(Collision2D collision)
+        {
+            Vector2 ballPos = _rigidBody2D.transform.position;
+            if (collision.gameObject.TryGetComponent(out Platform platform))
             {
-                Vector2 platformPos = platorm.gameObject.transform.position;
+                Vector2 platformPos = platform.gameObject.transform.position;
                 float distanceFromCenter = platformPos.x - ballPos.x;
                 float direction = ballPos.x > platformPos.x ? 1f : -1f;
                 _rigidBody2D.velocity = Vector2.zero;
@@ -22,9 +35,8 @@ namespace Assets.Scripts.BallMovement
             }
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void BlockDamageCollision(Collision2D collision)
         {
-            MoveCollision(collision);
             if (collision.gameObject.TryGetComponent(out Block.Block block))
             {
                 block.ApplyDamage();

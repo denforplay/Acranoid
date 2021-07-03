@@ -4,34 +4,40 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -1733324851671871659
-    second: GameSpriteSheet_0
+    second: Platform
   - first:
       213: -1025663872027914400
-    second: GameSpriteSheet_1
+    second: Ball
   - first:
       213: -9005960956174632500
-    second: GameSpriteSheet_1
+    second: Ball
   - first:
       213: -6249511323087580677
-    second: GameSpriteSheet_3
+    second: ActiveHeart
   - first:
       213: 4226259555205033962
-    second: GameSpriteSheet_4
+    second: InActiveHeart
   - first:
       213: 820076373618689533
-    second: GameSpriteSheet_5
+    second: AngleBorder
   - first:
       213: 1524375868468601761
-    second: GameSpriteSheet_5
+    second: AngleBorder
   - first:
       213: 6902343314338982727
-    second: GameSpriteSheet_7
+    second: StartButton
   - first:
       213: -5299650402646999644
-    second: GameSpriteSheet_8
+    second: Border
   - first:
       213: -2466332007245680300
-    second: GameSpriteSheet_9
+    second: BackgroundTile
+  - first:
+      213: -743885422277212957
+    second: RussianFlag
+  - first:
+      213: 4348445834941203281
+    second: BritainFlag
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -145,7 +151,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GameSpriteSheet_0
+      name: Platform
       rect:
         serializedVersion: 2
         x: 0
@@ -166,7 +172,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GameSpriteSheet_1
+      name: Ball
       rect:
         serializedVersion: 2
         x: 112
@@ -187,7 +193,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GameSpriteSheet_2
+      name: Block
       rect:
         serializedVersion: 2
         x: 0
@@ -208,13 +214,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GameSpriteSheet_3
+      name: ActiveHeart
       rect:
         serializedVersion: 2
-        x: 108
-        y: 190
-        width: 32
-        height: 32
+        x: 103
+        y: 205
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,13 +235,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GameSpriteSheet_4
+      name: InActiveHeart
       rect:
         serializedVersion: 2
-        x: 148
-        y: 190
-        width: 32
-        height: 32
+        x: 103
+        y: 187
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,11 +256,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GameSpriteSheet_5
+      name: AngleBorder
       rect:
         serializedVersion: 2
         x: 0
-        y: 137
+        y: 132
         width: 48
         height: 46
       alignment: 0
@@ -271,13 +277,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GameSpriteSheet_6
+      name: PauseButton
       rect:
         serializedVersion: 2
-        x: 57
-        y: 0
-        width: 132
-        height: 141
+        x: 50
+        y: 138
+        width: 47
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,13 +298,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GameSpriteSheet_7
+      name: StartButton
       rect:
         serializedVersion: 2
-        x: 193
-        y: 90
-        width: 61
-        height: 52
+        x: 99
+        y: 138
+        width: 47
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,7 +319,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GameSpriteSheet_8
+      name: Border
       rect:
         serializedVersion: 2
         x: 0
@@ -334,13 +340,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GameSpriteSheet_9
+      name: BackgroundTile
       rect:
         serializedVersion: 2
-        x: 193
-        y: 27
-        width: 61
-        height: 53
+        x: 50
+        y: 0
+        width: 132
+        height: 135
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -350,6 +356,48 @@ TextureImporter:
       bones: []
       spriteID: 451f1f94b14d5cdd0800000000000000
       internalID: -2466332007245680300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RussianFlag
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 54
+        width: 61
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e4439356203da5f0800000000000000
+      internalID: -743885422277212957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BritainFlag
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 0
+        width: 61
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15382b4a278c85c30800000000000000
+      internalID: 4348445834941203281
       vertices: []
       indices: 
       edges: []

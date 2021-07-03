@@ -12,7 +12,7 @@ namespace Assets.Scripts.Block
         [SerializeField] private BlockConfig _blockConfig;
 
         private float horizontalDistance = (float)Screen.width / 1080f * 150f;
-        private float verticalDistance = (float)Screen.height / 1920f * 25f;
+        private float verticalDistance = (float)Screen.height / 1920f * 50f;
         private Camera _camera;
 
         private void Start()
@@ -22,20 +22,20 @@ namespace Assets.Scripts.Block
 
         private void ShowBlocks()
         {
-            Level.Level level = LevelManager.instance.GetNextLevel();
-            float horizontal = Screen.width / 2;
-            float vertical = Screen.height / 2;
+            Level.Level level = LevelManager.instance.GetCurrentLevel();
+            float horizontal = Screen.width / 2 - level.blocksCountInRow * verticalDistance / 2;
+            float vertical = Screen.height / 2 + level.blocksCountInColumn * horizontalDistance / 2;
             for (int i = 1; i <= level.blocksCountInColumn; i++)
             {
                 for (int j = 1; j <= level.blocksCountInRow; j++)
                 {
                     Block block = Instantiate(blockPrefab, _parent.transform);
-                    vertical += j * verticalDistance;
+                    vertical += verticalDistance;
                     block.transform.position = _camera.ScreenToWorldPoint(new Vector3(horizontal, vertical, _camera.nearClipPlane));
                     block.SetData(_blockConfig);
                 }
-                vertical = Screen.height / 2;
-                horizontal += i * horizontalDistance;
+                vertical = Screen.height / 2 + level.blocksCountInColumn * horizontalDistance / 2; ;
+                horizontal += horizontalDistance;
             }
         }
 

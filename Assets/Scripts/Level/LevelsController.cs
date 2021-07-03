@@ -6,8 +6,12 @@ namespace Assets.Scripts.Level
     public class LevelsController : Controller
     {
         private LevelRepository _levelRepository;
-
         public int CurrentLevel => _levelRepository.CurrentLevel;
+
+        public int GetCurrentLevelLifes()
+        {
+            return GetLastLevel().lifes;
+        }
 
         public Level GetLastLevel()
         {

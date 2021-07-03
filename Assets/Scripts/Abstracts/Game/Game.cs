@@ -4,22 +4,13 @@ using Assets.Scripts.Scenes.SceneManagers;
 
 namespace Assets.Scripts.Abstracts.Game
 {
-    public enum State
-    {
-        isLoading,
-        isLoaded
-    }
-
     public static class Game
     {
-        public static State state { get;  set; }
         public static SceneManagerBase sceneManagerBase { get; private set; }
         public static void Run()
         {
             sceneManagerBase = new StartSceneManager();
-            state = State.isLoading;
             Coroutines.Coroutines.StartRoutine(InitializeGameRoutine());
-            state = State.isLoaded;
         }
 
         private static IEnumerator InitializeGameRoutine()

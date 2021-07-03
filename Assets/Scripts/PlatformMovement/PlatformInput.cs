@@ -3,9 +3,9 @@ using System;
 
 namespace Assets.Scripts.PlatformMovement
 {
-    public class PlatformInput : MonoBehaviour
+    public class PlatformInput
     {
-        [SerializeField] private PlatformMoveConfig _platformMoveConfig;
+        private PlatformMoveConfig _platformMoveConfig;
         private const int LEFT_MOUSE_BUTTON = 0;
         private bool _onMouseDown = false;
         public static event Action OnMove;
@@ -13,23 +13,20 @@ namespace Assets.Scripts.PlatformMovement
         public Rigidbody2D _rigidBody2D;
         public Camera _camera;
 
-        private void Awake()
+        public PlatformInput(PlatformMoveConfig platformMoveConfig, Rigidbody2D rigidbody2D, Camera camera)
         {
-            _rigidBody2D = GetComponent<Rigidbody2D>();
-            _camera = Camera.main;
+            _platformMoveConfig = platformMoveConfig;
+            _camera = camera;
+            _rigidBody2D = rigidbody2D;
         }
 
-        private void Update()
-        {
-            GetInput();
-        }
-        private void GetInput()
+        public void GetInput()
         {
             if (Input.GetMouseButtonDown(LEFT_MOUSE_BUTTON))
             {
                 _onMouseDown = true;
             }
-            else if (Input.GetMouseButtonUp(0))
+            else if (Input.GetMouseButtonUp(LEFT_MOUSE_BUTTON))
             {
                 _onMouseDown = false;
             }

@@ -1,17 +1,19 @@
-﻿    {
-      "levels":
-      [
-        {
-          "blocksCountInRow": 2,
-          "blocksCountInColumn": "2"
-        },
-        {
-          "blocksCountInRow": 3,
-          "blocksCountInColumn": "2"
-        },
-        {
-          "blocksCountInRow": 3,
-          "blocksCountInColumn": "3"
-        }
-      ]
+﻿{
+  "levels": [
+    {
+      "blocksCountInRow": 4,
+      "blocksCountInColumn": 4,
+      "lifes": 3
+    },
+    {
+      "blocksCountInRow": 3,
+      "blocksCountInColumn": 3,
+      "lifes": 3
+    },
+    {
+      "blocksCountInRow": 4,
+      "blocksCountInColumn": 4,
+      "lifes": 3
     }
+  ]
+}

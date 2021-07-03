@@ -6,7 +6,7 @@ namespace Assets.Scripts.Level
     public class LevelManager : MonoBehaviour
     {
         public static event Action OnLevelsInitialized;
-        public static LevelManager instance = null;
+        public static LevelManager instance;
 
         [SerializeField] private TextAsset _jsonLevelsFile;
 
@@ -37,10 +37,15 @@ namespace Assets.Scripts.Level
             }
         }
 
-        public Level GetNextLevel()
+        public Level GetCurrentLevel()
         {
             CheckLevelsLoaded();
             return _levelsController.GetLastLevel();
+        }
+
+        public int GetCurrentLevelLifes()
+        {
+            return GetCurrentLevel().lifes;
         }
 
         public void Initialize(LevelsController levelsController)

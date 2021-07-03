@@ -3,25 +3,24 @@ using UnityEngine;
 
 namespace Assets.Scripts.BallMovement
 {
-    public class BallInput : MonoBehaviour
+    public class BallInput
     {
+        private const int LEFT_MOUSE_BUTTON = 0;
         public static event Action OnBallActivatingEvent;
-        private Rigidbody2D _rigidBody2D;
         private bool _isActive;
 
-
-        private void Start()
+        public void CheckInput()
         {
-            _rigidBody2D = GetComponent<Rigidbody2D>();
-        }
-
-        private void Update()
-        {
-            if (Input.GetMouseButtonUp(0) && !_isActive)
+            if (Input.GetMouseButtonUp(LEFT_MOUSE_BUTTON) && !_isActive)
             {
                 _isActive = true;
                 OnBallActivatingEvent?.Invoke();
             }
+        }
+
+        public void SetActive(bool active)
+        {
+            _isActive = active;
         }
     }
 }

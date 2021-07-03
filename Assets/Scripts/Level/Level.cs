@@ -7,5 +7,6 @@ namespace Assets.Scripts.Level
     {
         public int blocksCountInRow;
         public int blocksCountInColumn;
+        public int lifes;
     }
 }

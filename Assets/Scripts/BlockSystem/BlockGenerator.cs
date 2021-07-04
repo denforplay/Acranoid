@@ -8,7 +8,7 @@ namespace Assets.Scripts.Block
     public class BlockGenerator : MonoBehaviour
     {
         [SerializeField] private GameObject _parent;
-        [SerializeField] private Block blockPrefab;
+        [SerializeField] private ColorBlock blockPrefab;
         [SerializeField] private BlockConfig _blockConfig;
 
         private float horizontalDistance = (float)Screen.width / 1080f * 150f;
@@ -29,7 +29,7 @@ namespace Assets.Scripts.Block
             {
                 for (int j = 1; j <= level.blocksCountInRow; j++)
                 {
-                    Block block = BlocksManager.instance.GetBlock();
+                    BaseBlock block = BlocksManager.instance.GetBlock();
                     vertical += verticalDistance;
                     block.transform.position = _camera.ScreenToWorldPoint(new Vector3(horizontal, vertical, _camera.nearClipPlane));
                     block.SetData(_blockConfig);

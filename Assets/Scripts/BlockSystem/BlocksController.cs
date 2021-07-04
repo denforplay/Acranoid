@@ -12,12 +12,12 @@ namespace Assets.Scripts.Block
             _blocksRepository = Game.GetRepository<BlocksRepository>();
         }
 
-        public void ReturnBlock(Block block)
+        public void ReturnBlock(BaseBlock block)
         {
             _blocksRepository.blocksPool.ReturnToPool(block);
         }
 
-        public Block GetBlock()
+        public BaseBlock GetBlock()
         {
             return _blocksRepository.blocksPool.GetPrefabInstance();
         }

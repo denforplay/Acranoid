@@ -9,18 +9,18 @@ namespace Assets.Scripts.Block
     public class BlocksRepository : Repository
     {
         public event Action OnBlocksRepoInitialied;
-        public List<Block> gameBlocks;
-        public ObjectPool<Block> blocksPool;
+        public List<BaseBlock> gameBlocks;
+        public ObjectPool<BaseBlock> blocksPool;
 
         public override void Initialize()
         {
-            gameBlocks = new List<Block>();
+            gameBlocks = new List<BaseBlock>();
             BlocksManager.OnBlocksManagerInitializedEvent += InitializePool;
         }
 
         public void InitializePool()
         {
-            blocksPool = new ObjectPool<Block>(BlocksManager.instance.blockPrefab);
+            blocksPool = new ObjectPool<BaseBlock>(BlocksManager.instance.blockPrefab);
             OnBlocksRepoInitialied?.Invoke();
         }
     }

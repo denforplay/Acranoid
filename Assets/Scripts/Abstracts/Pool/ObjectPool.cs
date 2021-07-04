@@ -29,7 +29,6 @@ namespace Assets.Scripts.Abstracts.Pool
 
             }
             instance.Origin = this;
-            instance.Prepare();
 
             return instance;
         }

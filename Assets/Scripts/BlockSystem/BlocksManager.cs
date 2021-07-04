@@ -7,7 +7,7 @@ namespace Assets.Scripts.Block
     public class BlocksManager : MonoBehaviour
     {
         public static event Action OnBlocksManagerInitializedEvent;
-        public Block blockPrefab;
+        public ColorBlock blockPrefab;
         [SerializeField] private BlockConfig _blockConfig;
         public static BlocksManager instance;
         private BlocksController _blocksController;
@@ -34,15 +34,15 @@ namespace Assets.Scripts.Block
         }
 
 
-        public Block GetBlock()
+        public BaseBlock GetBlock()
         {
             CheckInitialize();
-            Block block = _blocksController.GetBlock();
+            BaseBlock block = _blocksController.GetBlock();
             block.SetData(_blockConfig);
             return _blocksController.GetBlock();
         }
 
-        public void ReturnBlock(Block block)
+        public void ReturnBlock(ColorBlock block)
         {
             CheckInitialize();
             _blocksController.ReturnBlock(block);

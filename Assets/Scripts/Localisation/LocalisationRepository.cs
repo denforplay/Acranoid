@@ -14,11 +14,5 @@ namespace Assets.Scripts.Localisation
             localization = new Dictionary<string, List<KeyValuePair<string, string>>>();
 
         }
-
-       
-
-        public override void Save()
-        {
-        }
     }
 }

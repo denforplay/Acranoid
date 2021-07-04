@@ -3,8 +3,9 @@
 namespace Assets.Scripts.Level
 {
     [Serializable]
-    public class Levels
+    public class LevelPack
     {
+        public string levelPackName;
         public Level[] levels;
     }
 }

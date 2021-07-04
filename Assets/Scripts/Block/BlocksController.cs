@@ -11,6 +11,17 @@ namespace Assets.Scripts.Block
             base.OnCreate();
             _blocksRepository = Game.GetRepository<BlocksRepository>();
         }
+
+        public void ReturnBlock(Block block)
+        {
+            _blocksRepository.blocksPool.ReturnToPool(block);
+        }
+
+        public Block GetBlock()
+        {
+            return _blocksRepository.blocksPool.GetPrefabInstance();
+        }
+
         public override void Initialize()
         {
             BlocksManager.instance.Initialize(this);

@@ -1,19 +1,50 @@
 ﻿{
-  "levels": [
+  "levelPacks": [
     {
-      "blocksCountInRow": 4,
-      "blocksCountInColumn": 4,
-      "lifes": 3
+      "levelPackName": "summerPack",
+      "levels": [
+        {
+          "levelName" : "1-1",
+          "blocksCountInRow": 4,
+          "blocksCountInColumn": 4,
+          "lifes": 3
+        },
+        {
+          "levelName": "1-2",
+          "blocksCountInRow": 3,
+          "blocksCountInColumn": 3,
+          "lifes": 3
+        },
+        {
+          "levelName": "1-3",
+          "blocksCountInRow": 4,
+          "blocksCountInColumn": 4,
+          "lifes": 3
+        }
+      ]
     },
     {
-      "blocksCountInRow": 3,
-      "blocksCountInColumn": 3,
-      "lifes": 3
-    },
-    {
-      "blocksCountInRow": 4,
-      "blocksCountInColumn": 4,
-      "lifes": 3
+      "levelPackName": "winterPack",
+      "levels": [
+        {
+          "levelName" : "2-1",
+          "blocksCountInRow": 4,
+          "blocksCountInColumn": 4,
+          "lifes": 3
+        },
+        {
+          "levelName" : "2-2",
+          "blocksCountInRow": 3,
+          "blocksCountInColumn": 3,
+          "lifes": 3
+        },
+        {
+          "levelName" : "2-3",
+          "blocksCountInRow": 4,
+          "blocksCountInColumn": 4,
+          "lifes": 3
+        }
+      ]
     }
   ]
 }

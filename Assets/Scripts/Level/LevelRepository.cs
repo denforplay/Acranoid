@@ -5,17 +5,14 @@ namespace Assets.Scripts.Level
 {
     public class LevelRepository : Repository
     {
-        public List<Level> _levels { get; private set; }
+        public List<LevelPack> levelPacks { get; private set; }
         private int _currentLevel = 0;
+        private int _currentPack = 0;
         public int CurrentLevel => _currentLevel;
-
+        public int CurrentPack => _currentPack;
         public override void Initialize()
         {
-            _levels = new List<Level>();
-        }
-
-        public override void Save()
-        {
+            levelPacks = new List<LevelPack>();
         }
     }
 }

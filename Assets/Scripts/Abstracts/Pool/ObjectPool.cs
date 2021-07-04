@@ -1,47 +1,52 @@
 ﻿using Assets.Scripts.Abstracts.Pool.Interfaces;
 using System;
 using System.Collections.Concurrent;
+using UnityEngine;
 
 namespace Assets.Scripts.Abstracts.Pool
 {
-    public class ObjectPool<T> where T : class, IPoolable
+    public class ObjectPool<T> : IObjectPool<T> where T : MonoBehaviour, IPoolable
     {
+        private T _prefab;
         private readonly ConcurrentBag<T> _container = new ConcurrentBag<T>();
-        private readonly IPoolObjectCreator<T> _objectCreator;
-        public int Count
+
+        public ObjectPool(T prefab)
         {
-            get
-            {
-                return this._container.Count;
-            }
+            _prefab = prefab;
         }
 
-        public ObjectPool(IPoolObjectCreator<T> creator)
+        public T GetPrefabInstance()
         {
-            if (creator == null)
+            T instance = null;
+            if (_container.Count > 0 && _container.TryTake(out instance))
             {
-                throw new ArgumentNullException("creator can't be null");
+                instance.transform.SetParent(null);
+                instance.gameObject.SetActive(true);
             }
+            else
+            {
+                instance = GameObject.Instantiate(_prefab);
 
-            this._objectCreator = creator;
+            }
+            instance.Origin = this;
+            instance.Prepare();
+
+            return instance;
         }
 
-        public T GetObject()
+        public void ReturnToPool(T instance)
         {
-            T obj;
-            if (this._container.TryTake(out obj))
-            {
-                return obj;
-            }
+            instance.gameObject.SetActive(false);
 
-            return this._objectCreator.CreateObject();
+            _container.Add(instance);
         }
 
-        public void ReturnObject(ref T obj)
+        public void ReturnToPool(object instance)
         {
-            obj.ResetState();
-            this._container.Add(obj);
-            obj = null;
+            if (instance is T)
+            {
+                ReturnToPool(instance as T);
+            }
         }
     }
 }

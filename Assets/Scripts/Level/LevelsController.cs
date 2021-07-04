@@ -7,7 +7,7 @@ namespace Assets.Scripts.Level
     {
         private LevelRepository _levelRepository;
         public int CurrentLevel => _levelRepository.CurrentLevel;
-
+        public int CurrentPack => _levelRepository.CurrentPack;
         public int GetCurrentLevelLifes()
         {
             return GetLastLevel().lifes;
@@ -15,12 +15,12 @@ namespace Assets.Scripts.Level
 
         public Level GetLastLevel()
         {
-            return _levelRepository._levels[CurrentLevel];
+            return _levelRepository.levelPacks[CurrentPack].levels[CurrentLevel];
         }
 
-        public void AddLevel(Level level)
+        public void AddPack(LevelPack levelPack)
         {
-            _levelRepository._levels.Add(level);
+            _levelRepository.levelPacks.Add(levelPack);
         }
 
         public override void OnCreate()

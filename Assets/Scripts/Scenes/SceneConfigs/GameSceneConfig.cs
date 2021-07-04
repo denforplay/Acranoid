@@ -6,7 +6,7 @@ using Assets.Scripts.Health;
 using Assets.Scripts.Abstracts.Scene;
 using System;
 using System.Collections.Generic;
-
+using Assets.Scripts.Block;
 namespace Assets.Scripts.Scenes.SceneConfigs
 {
     class GameSceneConfig : SceneConfig
@@ -19,6 +19,7 @@ namespace Assets.Scripts.Scenes.SceneConfigs
             this.CreateController<HealthController>(controllersMap);
             this.CreateController<HealthViewController>(controllersMap);
             this.CreateController<LevelsController>(controllersMap);
+            this.CreateController<BlocksController>(controllersMap);
             this.CreateController<LocalisationController>(controllersMap);
             return controllersMap;
         }
@@ -27,6 +28,7 @@ namespace Assets.Scripts.Scenes.SceneConfigs
         {
             var repositoriesMap = new Dictionary<Type, Repository>();
             this.CreateRepository<HealthRepository>(repositoriesMap);
+            this.CreateRepository<BlocksRepository>(repositoriesMap);
             this.CreateRepository<LevelRepository>(repositoriesMap);
             this.CreateRepository<LocalisationRepository>(repositoriesMap);
             return repositoriesMap;

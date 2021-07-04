@@ -5,7 +5,7 @@ using Assets.Scripts.Abstracts.Pool;
 
 namespace Assets.Scripts.BallMovement
 {
-    public class Ball : MonoBehaviour, IPoolable
+    public class Ball : MonoBehaviour
     {
         [SerializeField] private BallConfig _ballConfig;
         private BallInput _ballInput;

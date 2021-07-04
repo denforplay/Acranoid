@@ -8,7 +8,7 @@ namespace Assets.Scripts.Abstracts.Repository
 
         public virtual void OnStart() { }
 
-        public abstract void Save();
+        public virtual void Save() { }
     }
 }
 

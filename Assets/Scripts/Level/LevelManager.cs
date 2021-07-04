@@ -6,12 +6,16 @@ namespace Assets.Scripts.Level
     public class LevelManager : MonoBehaviour
     {
         public static event Action OnLevelsInitialized;
+        public static event Action OnLevelLoaded;
+
         public static LevelManager instance;
 
         [SerializeField] private TextAsset _jsonLevelsFile;
 
-        public bool IsInitialized { get; private set; }
         private LevelsController _levelsController;
+
+        public bool IsInitialized { get; private set; }
+        public Level CurrentLevel { get; private set; }
 
         private void Awake()
         {
@@ -29,11 +33,11 @@ namespace Assets.Scripts.Level
 
         private void LoadJsonLevels()
         {
-            Levels levels = JsonUtility.FromJson<Levels>(_jsonLevelsFile.text);
+            LevelPackages levelPackages = JsonUtility.FromJson<LevelPackages>(_jsonLevelsFile.text);
 
-            foreach (Level level in levels.levels)
+            foreach (LevelPack levelPack in levelPackages.levelPacks)
             {
-                _levelsController.AddLevel(level);
+                _levelsController.AddPack(levelPack);
             }
         }
 

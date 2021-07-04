@@ -12,9 +12,5 @@ namespace Assets.Scripts.Health
         {
             this.Health = 3;
         }
-
-        public override void Save()
-        {
-        }
     }
 }

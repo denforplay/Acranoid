@@ -6,11 +6,13 @@ namespace Assets.Scripts.Block
 {
     public class Block : MonoBehaviour, IPoolable
     {
-        public static int count = 0;
         private List<Sprite> _sprites = new List<Sprite>();
         private int _score;
         private SpriteRenderer _spriteRenderer;
         private int _life;
+
+        public IObjectPool Origin { get; set; }
+
         public void SetData(BlockConfig blockConfig)
         {
             _sprites = new List<Sprite>(blockConfig._sprites);
@@ -25,7 +27,7 @@ namespace Assets.Scripts.Block
             _life--;
             if (_life < 1)
             {
-                Destroy(gameObject);
+                BlocksManager.instance.ReturnBlock(this);
             }
             else
             {
@@ -33,18 +35,13 @@ namespace Assets.Scripts.Block
             }
         }
 
-        private void OnEnable()
+        public void Prepare()
         {
-            count++;
         }
 
-        private void OnDisable()
+        public void ReturnToPool()
         {
-            count--;
-        }
-
-        public void ResetState()
-        {
+            Origin.ReturnToPool(this);
         }
     }
 }

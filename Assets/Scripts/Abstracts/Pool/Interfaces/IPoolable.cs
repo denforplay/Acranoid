@@ -3,6 +3,8 @@ namespace Assets.Scripts.Abstracts.Pool.Interfaces
 {
     public interface IPoolable
     {
-        void ResetState();
+        IObjectPool Origin { get; set; }
+        void Prepare();
+        void ReturnToPool();
     }
 }

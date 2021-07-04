@@ -29,7 +29,7 @@ namespace Assets.Scripts.Block
             {
                 for (int j = 1; j <= level.blocksCountInRow; j++)
                 {
-                    Block block = Instantiate(blockPrefab, _parent.transform);
+                    Block block = BlocksManager.instance.GetBlock();
                     vertical += verticalDistance;
                     block.transform.position = _camera.ScreenToWorldPoint(new Vector3(horizontal, vertical, _camera.nearClipPlane));
                     block.SetData(_blockConfig);
@@ -41,12 +41,12 @@ namespace Assets.Scripts.Block
 
         private void OnEnable()
         {
-            LevelManager.OnLevelsInitialized += ShowBlocks;
+            Game.GetRepository<BlocksRepository>().OnBlocksRepoInitialied += ShowBlocks;
         }
 
         private void OnDisable()
         {
-            LevelManager.OnLevelsInitialized -= ShowBlocks;
+            Game.GetRepository<BlocksRepository>().OnBlocksRepoInitialied -= ShowBlocks;
         }
     }
 }

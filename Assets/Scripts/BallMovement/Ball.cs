@@ -12,9 +12,11 @@ namespace Assets.Scripts.BallMovement
         private BallInput _ballInput;
         private BallCollisions _ballCollisions;
         private Rigidbody2D _rigidbody2D;
+        private CircleCollider2D _circleCollider2D;
         private GameObject _rememberedParent;
         private void Start()
         {
+            _circleCollider2D = GetComponent<CircleCollider2D>();
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
             _ballCollisions = new BallCollisions(_ballConfig, _rigidbody2D);
@@ -35,7 +37,8 @@ namespace Assets.Scripts.BallMovement
         {
             this.gameObject.SetActive(true);
             transform.SetParent(_rememberedParent.transform);
-            transform.position = _rememberedParent.transform.position;
+            Vector3 positon = _rememberedParent.transform.position;
+            transform.position = new Vector3(positon.x, positon.y + _circleCollider2D.radius * 2, positon.z);
         }
 
         private void BallActivate()
@@ -64,12 +67,14 @@ namespace Assets.Scripts.BallMovement
             {
                 HealthManager.instance.OnHeartSpendEvent += ReturnBallOnPosition;
             };
-            LevelManager.OnLevelLoaded += ReturnBallOnPosition;
+
+            LevelManager.OnNextLevelLoaded += ReturnBallOnPosition;
         }
+
         private void OnDisable()
         {
             BallInput.OnBallActivatingEvent -= BallActivate;
-            LevelManager.OnLevelLoaded -= ReturnBallOnPosition;
+            LevelManager.OnNextLevelLoaded -= ReturnBallOnPosition;
         }
     }
 }

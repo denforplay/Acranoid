@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Level;
 using System;
 using UnityEngine;
+using Assets.Scripts.UI.PopUps;
 
 namespace Assets.Scripts.Health
 {
@@ -74,8 +75,12 @@ namespace Assets.Scripts.Health
             {
                 DeleteHealthView();
                 OnHeartSpendEvent?.Invoke();
+                _healthController.SpendLife(value);
             }
-            _healthController.SpendLife(value);
+            else
+            {
+                PopupManager.instance.HealthEndedPopUp();
+            }
         }
 
         public void InitializeHealthController(HealthController healthController)

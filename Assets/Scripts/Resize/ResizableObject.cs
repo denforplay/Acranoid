@@ -7,6 +7,7 @@ namespace Assets.Scripts.Resize
     {
         [SerializeField] PlatformMoveConfig _platformMoveConfig;
         [SerializeField] float _defaultBorderPosition = 3.5f;
+
         private void Start()
         {
             Resize();

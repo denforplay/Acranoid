@@ -10,7 +10,12 @@ namespace Assets.Scripts.Health
 
         public override void Initialize()
         {
-            this.Health = 3;
+            this.Health = 0;
+        }
+         
+        public void InitializeHearts()
+        {
+            this.Health = LevelManager.instance.GetCurrentLevelLifes();
         }
     }
 }

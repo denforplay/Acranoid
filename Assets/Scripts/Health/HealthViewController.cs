@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.Abstracts.Game;
+using Assets.Scripts.Abstracts.Pool;
 
 namespace Assets.Scripts.Health
 {
@@ -24,6 +25,16 @@ namespace Assets.Scripts.Health
             _heartConfig = HealthManager.instance.HeartConfig;
             HealthManager.instance.InitializeViewController(this);
         }
+
+        public void DeleteAllHearts()
+        {
+            foreach (var item in _heartsView)
+            {
+                GameObject.Destroy(item.gameObject);
+            }
+            _heartsView.Clear();
+        }
+
         public void DeleteHealthView()
         {
             for (int i = 0; i < _heartsView.Count; i++)
@@ -41,7 +52,7 @@ namespace Assets.Scripts.Health
         {
             float posX = Screen.width - _heartConfig.borderPosition;
             float posY = Screen.height - _heartConfig.borderPosition;
-            for (int i = 0; i < _health; i++)
+            for (int i = 0; i < _healthRepository.Health; i++)
             {
                 GameObject heart = HealthManager.instance.CreateHeart();
                 Vector2 heartPosition = Camera.main.ScreenToWorldPoint(new Vector3(posX - i * _heartConfig.heartSize, posY));

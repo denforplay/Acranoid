@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.Level;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Health
@@ -46,7 +45,18 @@ namespace Assets.Scripts.Health
 
             OnHealthInitializedEvent += () =>
             {
-                LevelManager.OnLevelsInitialized += ShowHealth;
+                LevelManager.OnLevelsInitialized += () =>
+                {
+                    _healthController.InitializeHearts();
+                    ShowHealth();
+                };
+
+                LevelManager.OnNextLevelLoaded += () =>
+                {
+                    _healthViewController.DeleteAllHearts();
+                    _healthController.InitializeHearts();
+                    ShowHealth();
+                };
             };
             DontDestroyOnLoad(gameObject);
         }

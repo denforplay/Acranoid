@@ -17,6 +17,11 @@ namespace Assets.Scripts.Health
             this._healthRepository = Game.GetRepository<HealthRepository>();
         }
 
+        public void InitializeHearts()
+        {
+            _healthRepository.InitializeHearts();
+        }
+
         public override void Initialize()
         {
             HealthManager.instance.InitializeHealthController(this);

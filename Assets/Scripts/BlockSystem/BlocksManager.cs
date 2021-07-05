@@ -33,13 +33,12 @@ namespace Assets.Scripts.Block
             OnBlocksManagerInitializedEvent?.Invoke();
         }
 
-
         public BaseBlock GetBlock()
         {
             CheckInitialize();
             BaseBlock block = _blocksController.GetBlock();
             block.SetData(_blockConfig);
-            return _blocksController.GetBlock();
+            return block;
         }
 
         public void ReturnBlock(ColorBlock block)

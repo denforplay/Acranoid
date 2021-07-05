@@ -32,7 +32,6 @@ namespace Assets.Scripts.Block
                     BaseBlock block = BlocksManager.instance.GetBlock();
                     vertical += verticalDistance;
                     block.transform.position = _camera.ScreenToWorldPoint(new Vector3(horizontal, vertical, _camera.nearClipPlane));
-                    block.SetData(_blockConfig);
                 }
                 vertical = Screen.height / 2 + level.blocksCountInColumn * horizontalDistance / 2; ;
                 horizontal += horizontalDistance;
@@ -42,11 +41,13 @@ namespace Assets.Scripts.Block
         private void OnEnable()
         {
             Game.GetRepository<BlocksRepository>().OnBlocksRepoInitialied += ShowBlocks;
+            LevelManager.OnNextLevelLoaded += ShowBlocks;
         }
 
         private void OnDisable()
         {
             Game.GetRepository<BlocksRepository>().OnBlocksRepoInitialied -= ShowBlocks;
+            LevelManager.OnNextLevelLoaded -= ShowBlocks;
         }
     }
 }

@@ -9,12 +9,10 @@ namespace Assets.Scripts.Block
     public class BlocksRepository : Repository
     {
         public event Action OnBlocksRepoInitialied;
-        public List<BaseBlock> gameBlocks;
         public ObjectPool<BaseBlock> blocksPool;
-
+        public int Count = 0;
         public override void Initialize()
         {
-            gameBlocks = new List<BaseBlock>();
             BlocksManager.OnBlocksManagerInitializedEvent += InitializePool;
         }
 

@@ -6,10 +6,8 @@ namespace Assets.Scripts.Level
     public class LevelRepository : Repository
     {
         public List<LevelPack> levelPacks { get; private set; }
-        private int _currentLevel = 0;
-        private int _currentPack = 0;
-        public int CurrentLevel => _currentLevel;
-        public int CurrentPack => _currentPack;
+        public int CurrentLevel { get; set; }
+        public int CurrentPack { get; set; }
         public override void Initialize()
         {
             levelPacks = new List<LevelPack>();

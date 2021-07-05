@@ -2,6 +2,7 @@
 using Assets.Scripts.Health;
 using Assets.Scripts.Abstracts.Pool.Interfaces;
 using Assets.Scripts.Abstracts.Pool;
+using Assets.Scripts.Level;
 
 namespace Assets.Scripts.BallMovement
 {
@@ -63,15 +64,12 @@ namespace Assets.Scripts.BallMovement
             {
                 HealthManager.instance.OnHeartSpendEvent += ReturnBallOnPosition;
             };
+            LevelManager.OnLevelLoaded += ReturnBallOnPosition;
         }
         private void OnDisable()
         {
             BallInput.OnBallActivatingEvent -= BallActivate;
-        }
-
-        public void ResetState()
-        {
-            throw new System.NotImplementedException();
+            LevelManager.OnLevelLoaded -= ReturnBallOnPosition;
         }
     }
 }

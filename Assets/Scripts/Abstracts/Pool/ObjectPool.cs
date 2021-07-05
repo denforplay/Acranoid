@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using UnityEngine;
+using System.Linq;
 
 namespace Assets.Scripts.Abstracts.Pool
 {
@@ -9,7 +10,8 @@ namespace Assets.Scripts.Abstracts.Pool
     {
         private T _prefab;
         private readonly ConcurrentBag<T> _container = new ConcurrentBag<T>();
-
+        public int ActiveCount => _container.Count(x => x.gameObject.activeSelf == true);
+        public int Count => _container.Count;
         public ObjectPool(T prefab)
         {
             _prefab = prefab;
@@ -26,7 +28,6 @@ namespace Assets.Scripts.Abstracts.Pool
             else
             {
                 instance = GameObject.Instantiate(_prefab);
-
             }
             instance.Origin = this;
 

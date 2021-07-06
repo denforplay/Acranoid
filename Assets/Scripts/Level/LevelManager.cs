@@ -5,6 +5,7 @@ namespace Assets.Scripts.Level
 {
     public class LevelManager : MonoBehaviour
     {
+        public static event Action OnLevelCompeted;
         public static event Action OnLevelsInitialized;
         public static event Action OnNextLevelLoaded;
         public static event Action OnLevelLoaded;
@@ -43,6 +44,7 @@ namespace Assets.Scripts.Level
         public Level LoadNextLevel()
         {
             CheckLevelsLoaded();
+            OnLevelCompeted?.Invoke();
             CurrentLevel = _levelsController.LoadNextLevel();
             OnNextLevelLoaded?.Invoke();
             return CurrentLevel;

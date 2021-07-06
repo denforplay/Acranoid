@@ -1501,9 +1501,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02da3646acb0d0847bab9befce3f9093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parent: {fileID: 1008963695}
-  blockPrefab: {fileID: 5777492366066851709, guid: 7c320b6fc9489094b8347a3dbc424e00, type: 3}
-  _blockConfig: {fileID: 11400000, guid: 540cb3c0d14d7724ea6ff5cfdab71021, type: 2}
 --- !u!1 &1008963695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2470,8 +2467,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d84e9cc77449e6a4cae9ece335d75ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockPrefab: {fileID: 5777492366066851709, guid: 7c320b6fc9489094b8347a3dbc424e00, type: 3}
-  _blockConfig: {fileID: 11400000, guid: 540cb3c0d14d7724ea6ff5cfdab71021, type: 2}
+  colorBlockPrefab: {fileID: 5777492366066851709, guid: 7c320b6fc9489094b8347a3dbc424e00, type: 3}
+  graniteBlockPrefab: {fileID: 2844844497975778269, guid: 372fbce1d7abc0944958e100048a5b2a, type: 3}
+  _colorBlockConfig: {fileID: 11400000, guid: 540cb3c0d14d7724ea6ff5cfdab71021, type: 2}
+  _graniteBlockConfig: {fileID: 11400000, guid: c8b6334ad9410a642ac0155521dae340, type: 2}
 --- !u!4 &1610473549
 Transform:
   m_ObjectHideFlags: 0

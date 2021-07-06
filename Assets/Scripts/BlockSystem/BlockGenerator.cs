@@ -7,10 +7,6 @@ namespace Assets.Scripts.Block
 {
     public class BlockGenerator : MonoBehaviour
     {
-        [SerializeField] private GameObject _parent;
-        [SerializeField] private ColorBlock blockPrefab;
-        [SerializeField] private BlockConfig _blockConfig;
-
         private float horizontalDistance = (float)Screen.width / 1080f * 150f;
         private float verticalDistance = (float)Screen.height / 1920f * 50f;
         private Camera _camera;
@@ -29,7 +25,16 @@ namespace Assets.Scripts.Block
             {
                 for (int j = 1; j <= level.blocksCountInRow; j++)
                 {
-                    BaseBlock block = BlocksManager.instance.GetBlock();
+                    BaseBlock block;
+                    if (level.graniteBlocksCount > 0)
+                    {
+                        level.graniteBlocksCount--;
+                        block = BlocksManager.instance.GetBlock(BlocksManager.instance.graniteBlockPrefab);
+                    }
+                    else
+                    {
+                        block = BlocksManager.instance.GetBlock(BlocksManager.instance.colorBlockPrefab);
+                    }
                     vertical += verticalDistance;
                     block.transform.position = _camera.ScreenToWorldPoint(new Vector3(horizontal, vertical, _camera.nearClipPlane));
                 }

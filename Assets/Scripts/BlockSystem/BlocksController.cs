@@ -1,6 +1,8 @@
 ﻿using Assets.Scripts.Abstracts.Controller;
 using Assets.Scripts.Abstracts.Game;
+using Assets.Scripts.Abstracts.Pool;
 using Assets.Scripts.Level;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.Block
 {
@@ -14,20 +16,31 @@ namespace Assets.Scripts.Block
             _blocksRepository = Game.GetRepository<BlocksRepository>();
         }
 
+
+        public ObjectPool<BaseBlock> FindPool(BaseBlock baseBlock)
+        {
+           return _blocksRepository.blocksPools.Find(x => x.GetPrefab.GetType() == baseBlock.GetType());
+        }
+
         public void ReturnBlock(BaseBlock block)
         {
             _blocksRepository.Count--;
-            _blocksRepository.blocksPool.ReturnToPool(block);
+            var pool = FindPool(block);
+            pool.ReturnToPool(block);
             if (_blocksRepository.Count == 0)
             {
                 LevelManager.instance.LoadNextLevel();
             }
         }
 
-        public BaseBlock GetBlock()
+        public BaseBlock GetBlock(BaseBlock block)
         {
-            _blocksRepository.Count++;
-            return _blocksRepository.blocksPool.GetPrefabInstance();
+            if (block is ColorBlock)
+            {
+                _blocksRepository.Count++;
+            }
+
+            return FindPool(block).GetPrefabInstance();
         }
 
         public override void Initialize()

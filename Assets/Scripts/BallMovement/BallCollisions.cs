@@ -37,7 +37,7 @@ namespace Assets.Scripts.BallMovement
 
         private void BlockDamageCollision(Collision2D collision)
         {
-            if (collision.gameObject.TryGetComponent(out Block.ColorBlock block))
+            if (collision.gameObject.TryGetComponent(out BaseBlock block))
             {
                 block.ApplyDamage();
             }

@@ -3,18 +3,20 @@ using System;
 using System.Collections.Concurrent;
 using UnityEngine;
 using System.Linq;
+using Assets.Scripts.BlockSystem.FactoryPattern;
 
 namespace Assets.Scripts.Abstracts.Pool
 {
     public class ObjectPool<T> : IObjectPool<T> where T : MonoBehaviour, IPoolable
     {
-        private T _prefab;
         private readonly ConcurrentBag<T> _container = new ConcurrentBag<T>();
+        private IFactory<T> _factory;
         public int ActiveCount => _container.Count(x => x.gameObject.activeSelf == true);
         public int Count => _container.Count;
-        public ObjectPool(T prefab)
+        public T GetPrefab => _factory.Prefab;
+        public ObjectPool(IFactory<T> factory)
         {
-            _prefab = prefab;
+            _factory = factory;
         }
 
         public T GetPrefabInstance()
@@ -27,7 +29,7 @@ namespace Assets.Scripts.Abstracts.Pool
             }
             else
             {
-                instance = GameObject.Instantiate(_prefab);
+                instance = _factory.GetNewInstance();
             }
             instance.Origin = this;
 

@@ -8,16 +8,23 @@ namespace Assets.Scripts.UI.PopUps
 {
     public class PopupManager : MonoBehaviour, IPopupButtons, IPopupController
     {
+
+        private Action buttonLeft;
+        private Action buttonRight;
+        public static PopupManager instance;
+        private PopupController _popupController;
         [SerializeField] private GameObject _popup;
         [SerializeField] private TextMeshProUGUI _tittle;
         [SerializeField] private TextMeshProUGUI _text;
         [SerializeField] private Button _leftButton;
         [SerializeField] private Button _rightButton;
 
-        private Action buttonLeft;
-        private Action buttonRight;
-        public static PopupManager instance;
         public bool IsInitialized { get; private set; }
+        public GameObject Popup => _popup;
+        public Button LeftButton => _leftButton;
+        public Button RightButton => _rightButton;
+        public TextMeshProUGUI Tittle => _tittle;
+        public TextMeshProUGUI Text => _text;
         private void Awake()
         {
             if (instance is null)
@@ -34,6 +41,11 @@ namespace Assets.Scripts.UI.PopUps
             DontDestroyOnLoad(gameObject);
         }
 
+        public void Initialize(PopupController popupController)
+        {
+            _popupController = popupController;
+        }
+
         public void HealthEndedPopUp()
         {
             IPopupConfig popupConfig = new Popup("GAME OVER", "Choose button", null, null);
@@ -43,24 +55,13 @@ namespace Assets.Scripts.UI.PopUps
         public void ShowPopup(IPopupConfig popupConfig, Action right = null, Action left = null)
         {
             CheckInitialization();
-            buttonLeft = left;
-            buttonRight = right;
-            _leftButton.onClick.AddListener(left.Invoke);
-            _rightButton.onClick.AddListener(right.Invoke);
-            _popup.SetActive(true);
-            SetPopupData(popupConfig);
+            _popupController.ShowPopup(popupConfig, right, left);
         }
 
         public void HidePopup()
         {
             CheckInitialization();
-            buttonLeft = null;
-            buttonRight = null;
-
-            if (_popup.activeSelf)
-            {
-                _popup.SetActive(false);
-            }
+            _popupController.HidePopup();
         }
 
         public void ButtonLeftAction()
@@ -101,16 +102,6 @@ namespace Assets.Scripts.UI.PopUps
             {
                 throw new ArgumentNullException("Popup manager no intialized yet");
             }
-        }
-
-        private void SetPopupData(IPopupConfig popupConfig)
-        {
-            CheckInitialization();
-            _rightButton.gameObject.SetActive(true);
-            _leftButton.gameObject.SetActive(true);
-
-            _tittle.text = popupConfig.Title;
-            _text.text = popupConfig.Text;
         }
     }
 }

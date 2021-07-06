@@ -6,6 +6,7 @@ namespace Assets.Scripts.Level
     public class Level
     {
         public string LevelName;
+        public int graniteBlocksCount;
         public int blocksCountInRow;
         public int blocksCountInColumn;
         public int lifes;

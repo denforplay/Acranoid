@@ -20,8 +20,8 @@ namespace Assets.Scripts.Block
         public void InitializePool()
         {
             blocksPools = new List<ObjectPool<BaseBlock>>();
-            blocksPools.Add(new ObjectPool<BaseBlock>(new BlockFactory<BaseBlock>(BlocksManager.instance.colorBlockPrefab, BlocksManager.instance._colorBlockConfig)));
-            blocksPools.Add(new ObjectPool<BaseBlock>(new BlockFactory<BaseBlock>(BlocksManager.instance.graniteBlockPrefab, BlocksManager.instance._graniteBlockConfig)));
+            blocksPools.Add(new ObjectPool<BaseBlock>(new BlockFactory<BaseBlock>(BlocksManager.GetInstance.colorBlockPrefab, BlocksManager.GetInstance._colorBlockConfig)));
+            blocksPools.Add(new ObjectPool<BaseBlock>(new BlockFactory<BaseBlock>(BlocksManager.GetInstance.graniteBlockPrefab, BlocksManager.GetInstance._graniteBlockConfig)));
             OnBlocksRepoInitialied?.Invoke();
         }
     }

@@ -15,5 +15,5 @@ MonoBehaviour:
   prefab: {fileID: 377238297854035381, guid: 7c320b6fc9489094b8347a3dbc424e00, type: 3}
   _sprites:
   - {fileID: -9005960956174632500, guid: 7793e67069397e44bb35da42cde48cd3, type: 3}
-  baseColor: {r: 1, g: 1, b: 1, a: 0}
+  baseColor: {r: 1, g: 1, b: 1, a: 1}
   score: 0

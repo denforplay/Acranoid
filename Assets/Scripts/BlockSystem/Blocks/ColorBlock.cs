@@ -11,7 +11,7 @@ namespace Assets.Scripts.Block
             _life--;
             if (_life < 1)
             {
-                BlocksManager.instance.ReturnBlock(this);
+                BlocksManager.GetInstance.ReturnBlock(this);
             }
             else
             {

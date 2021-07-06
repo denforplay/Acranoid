@@ -15,7 +15,7 @@ namespace Assets.Scripts.Health
          
         public void InitializeHearts()
         {
-            this.Health = LevelManager.instance.GetCurrentLevelLifes();
+            this.Health = LevelManager.GetInstance.GetCurrentLevelLifes();
         }
     }
 }

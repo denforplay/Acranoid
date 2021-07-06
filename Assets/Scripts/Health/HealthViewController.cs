@@ -22,8 +22,8 @@ namespace Assets.Scripts.Health
         public override void Initialize()
         {
             _heartsView = new List<GameObject>();
-            _heartConfig = HealthManager.instance.HeartConfig;
-            HealthManager.instance.InitializeViewController(this);
+            _heartConfig = HealthManager.GetInstance.HeartConfig;
+            HealthManager.GetInstance.InitializeViewController(this);
         }
 
         public void DeleteAllHearts()
@@ -54,7 +54,7 @@ namespace Assets.Scripts.Health
             float posY = Screen.height - _heartConfig.borderPosition;
             for (int i = 0; i < _healthRepository.Health; i++)
             {
-                GameObject heart = HealthManager.instance.CreateHeart();
+                GameObject heart = HealthManager.GetInstance.CreateHeart();
                 Vector2 heartPosition = Camera.main.ScreenToWorldPoint(new Vector3(posX - i * _heartConfig.heartSize, posY));
                 heart.transform.position = heartPosition;
                 heart.TryGetComponent(out SpriteRenderer spriteRenderer);

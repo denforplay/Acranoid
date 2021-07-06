@@ -27,7 +27,7 @@ namespace Assets.Scripts.Health
 
         public override void Initialize()
         {
-            HealthManager.instance.InitializeHealthController(this);
+            HealthManager.GetInstance.InitializeHealthController(this);
         }
 
         public bool IsEnoughLifes(int value) => Health > value;

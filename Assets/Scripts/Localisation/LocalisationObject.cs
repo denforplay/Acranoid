@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Abstracts.Game;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 namespace Assets.Scripts.Localisation
@@ -23,7 +22,7 @@ namespace Assets.Scripts.Localisation
 
         private void Translate()
         {
-            _text.text = LocalisationManager.instance.GetTranslate(_key);
+            _text.text = LocalisationManager.GetInstance.GetTranslate(_key);
         }
 
         private void OnEnable()

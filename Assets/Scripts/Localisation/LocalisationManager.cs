@@ -1,33 +1,18 @@
-﻿using System;
+﻿using Assets.Scripts.Abstracts.Singeton;
+using System;
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
 namespace Assets.Scripts.Localisation
 {
-    public class LocalisationManager : MonoBehaviour
+    public class LocalisationManager : Singleton <LocalisationManager>
     {
         [SerializeField] TextAsset _localizationFile;
-        public static LocalisationManager instance;
         public static event Action OnLocalisationLoaded;
         public static event Action OnLanguageChanged;
         public bool IsInitialized { get; private set; }
         private LocalisationController _localisationController;
         public LocalisationController LocalisationController => _localisationController;
-
-        private void Awake()
-        {
-            if (instance is null)
-            {
-                instance = this;
-            }
-            else if (instance != this)
-            {
-                Destroy(gameObject);
-            }
-
-            DontDestroyOnLoad(gameObject);
-
-        }
 
         public string Language
         {

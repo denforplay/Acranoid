@@ -29,7 +29,7 @@ namespace Assets.Scripts.Block
             pool.ReturnToPool(block);
             if (_blocksRepository.Count == 0)
             {
-                LevelManager.instance.LoadNextLevel();
+                LevelManager.GetInstance.LoadNextLevel();
             }
         }
 
@@ -45,7 +45,7 @@ namespace Assets.Scripts.Block
 
         public override void Initialize()
         {
-            BlocksManager.instance.Initialize(this);
+            BlocksManager.GetInstance.Initialize(this);
         }
     }
 }

@@ -52,7 +52,7 @@ namespace Assets.Scripts.Localisation
 
         public override void Initialize()
         {
-            LocalisationManager.instance.Initialize(this);
+            LocalisationManager.GetInstance.Initialize(this);
         }
     }
 }

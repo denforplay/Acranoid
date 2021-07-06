@@ -46,7 +46,7 @@ namespace Assets.Scripts.Level
 
         public override void Initialize()
         {
-            LevelManager.instance.Initialize(this);
+            LevelManager.GetInstance.Initialize(this);
         }
     }
 }

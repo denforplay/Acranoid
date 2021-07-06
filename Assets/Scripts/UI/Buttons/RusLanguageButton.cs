@@ -7,7 +7,7 @@ namespace Assets.Scripts.UI.Buttons
     {
         public void SetRusLanguage()
         {
-            LocalisationManager.instance.SetLanguage("ru");
+            LocalisationManager.GetInstance.SetLanguage("ru");
         }
     }
 }

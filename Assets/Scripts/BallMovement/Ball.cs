@@ -52,7 +52,7 @@ namespace Assets.Scripts.BallMovement
         private void BallInactivate()
         {
             this.gameObject.SetActive(false);
-            HealthManager.instance.SpendHeart(1);
+            HealthManager.GetInstance.SpendHeart(1);
         }
 
         private void OnBecameInvisible()
@@ -65,7 +65,7 @@ namespace Assets.Scripts.BallMovement
             BallInput.OnBallActivatingEvent += BallActivate;
             HealthManager.OnHealthInitializedEvent += () =>
             {
-                HealthManager.instance.OnHeartSpendEvent += ReturnBallOnPosition;
+                HealthManager.GetInstance.OnHeartSpendEvent += ReturnBallOnPosition;
             };
 
             LevelManager.OnNextLevelLoaded += ReturnBallOnPosition;

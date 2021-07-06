@@ -2,14 +2,14 @@
 using System;
 using UnityEngine;
 using Assets.Scripts.UI.PopUps;
+using Assets.Scripts.Abstracts.Singeton;
 
 namespace Assets.Scripts.Health
 {
-    public class HealthManager : MonoBehaviour
+    public class HealthManager : Singleton<HealthManager>
     {
         public static event Action OnHealthInitializedEvent;
         public event Action OnHeartSpendEvent;
-        public static HealthManager instance;
         [SerializeField] HeartConfig _heartConfig;
         public bool IsInitialized { get; private set; }
         private HealthController _healthController;
@@ -33,39 +33,12 @@ namespace Assets.Scripts.Health
             }
         }
 
-        private void Awake()
-        {
-            if (instance == null)
-            {
-                instance = this;
-            }
-            else if (instance != this)
-            {
-                Destroy(gameObject);
-            }
-
-            OnHealthInitializedEvent += () =>
-            {
-                LevelManager.OnLevelsInitialized += () =>
-                {
-                    _healthController.InitializeHearts();
-                    ShowHealth();
-                };
-
-                LevelManager.OnNextLevelLoaded += () =>
-                {
-                    _healthViewController.DeleteAllHearts();
-                    _healthController.InitializeHearts();
-                    ShowHealth();
-                };
-            };
-            DontDestroyOnLoad(gameObject);
-        }
 
         private void ShowHealth()
         {
             CheckHeartsInitialized();
-            _healthViewController.ViewHearts();
+       
+        _healthViewController.ViewHearts();
         }
 
         public void SpendHeart(int value)
@@ -87,6 +60,21 @@ namespace Assets.Scripts.Health
         {
             _healthController = healthController;
             IsInitialized = true;
+            OnHealthInitializedEvent += () =>
+            {
+                LevelManager.OnLevelsInitialized += () =>
+                {
+                    _healthController.InitializeHearts();
+                    ShowHealth();
+                };
+
+                LevelManager.OnNextLevelLoaded += () =>
+                {
+                    _healthViewController.DeleteAllHearts();
+                    _healthController.InitializeHearts();
+                    ShowHealth();
+                };
+            };
             OnHealthInitializedEvent?.Invoke();
         }
 

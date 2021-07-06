@@ -1,35 +1,20 @@
-﻿using System;
+﻿using Assets.Scripts.Abstracts.Singeton;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Level
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelManager : Singleton<LevelManager>
     {
+        [SerializeField] private TextAsset _jsonLevelsFile;
         public static event Action OnLevelCompeted;
         public static event Action OnLevelsInitialized;
         public static event Action OnNextLevelLoaded;
         public static event Action OnLevelLoaded;
-        public static LevelManager instance;
-        [SerializeField] private TextAsset _jsonLevelsFile;
-
         private LevelsController _levelsController;
 
         public bool IsInitialized { get; private set; }
         public Level CurrentLevel { get; private set; }
-
-        private void Awake()
-        {
-            if (instance == null)
-            {
-                instance = this;
-            }
-            else if (instance != this)
-            {
-                Destroy(gameObject);
-            }
-
-            DontDestroyOnLoad(gameObject);
-        }
 
         private void LoadJsonLevels()
         {

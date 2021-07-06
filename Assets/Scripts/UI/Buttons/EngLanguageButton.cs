@@ -7,7 +7,7 @@ namespace Assets.Scripts.UI.Buttons
     {
         public void SetEngLanguage()
         {
-            LocalisationManager.instance.SetLanguage("en");
+            LocalisationManager.GetInstance.SetLanguage("en");
         }
     }
 }

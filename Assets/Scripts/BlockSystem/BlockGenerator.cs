@@ -18,7 +18,7 @@ namespace Assets.Scripts.Block
 
         private void ShowBlocks()
         {
-            Level.Level level = LevelManager.instance.GetCurrentLevel();
+            Level.Level level = LevelManager.GetInstance.GetCurrentLevel();
             float horizontal = Screen.width / 2 - level.blocksCountInRow * verticalDistance / 2;
             float vertical = Screen.height / 2 + level.blocksCountInColumn * horizontalDistance / 2;
             for (int i = 1; i <= level.blocksCountInColumn; i++)
@@ -29,11 +29,11 @@ namespace Assets.Scripts.Block
                     if (level.graniteBlocksCount > 0)
                     {
                         level.graniteBlocksCount--;
-                        block = BlocksManager.instance.GetBlock(BlocksManager.instance.graniteBlockPrefab);
+                        block = BlocksManager.GetInstance.GetBlock(BlocksManager.GetInstance.graniteBlockPrefab);
                     }
                     else
                     {
-                        block = BlocksManager.instance.GetBlock(BlocksManager.instance.colorBlockPrefab);
+                        block = BlocksManager.GetInstance.GetBlock(BlocksManager.GetInstance.colorBlockPrefab);
                     }
                     vertical += verticalDistance;
                     block.transform.position = _camera.ScreenToWorldPoint(new Vector3(horizontal, vertical, _camera.nearClipPlane));

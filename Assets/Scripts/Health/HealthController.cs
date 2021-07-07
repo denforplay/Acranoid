@@ -2,13 +2,14 @@
 using Assets.Scripts.Abstracts.Game;
 using Assets.Scripts.Abstracts.Pool;
 using Assets.Scripts.Block;
+using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events;
 using System;
 
 namespace Assets.Scripts.Health
 {
     public class HealthController : Controller
     {
-        public event Action OnHeartSpendedEvent;
         private HealthRepository _healthRepository;
 
         public int Health => this._healthRepository.Health;
@@ -43,7 +44,7 @@ namespace Assets.Scripts.Health
             this._healthRepository.Health -= value;
             if (IsEnoughLifes(0))
             {
-                OnHeartSpendedEvent?.Invoke();
+                EventBusManager.GetInstance.Invoke<OnHeartSpendEvent>(new OnHeartSpendEvent());
                 return;
             }
 

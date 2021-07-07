@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using Assets.Scripts.Health;
-using Assets.Scripts.Abstracts.Pool.Interfaces;
-using Assets.Scripts.Abstracts.Pool;
 using Assets.Scripts.Level;
+using Assets.Scripts.EventBus.Events;
+using Assets.Scripts.Abstracts.EventBus.Interfaces;
+using Assets.Scripts.EventBus;
 
 namespace Assets.Scripts.BallMovement
 {
@@ -33,7 +34,7 @@ namespace Assets.Scripts.BallMovement
             _ballCollisions.Call(collision);
         }
 
-        public void ReturnBallOnPosition()
+        public void ReturnBallOnPosition(IEvent ievent)
         {
             this.gameObject.SetActive(true);
             transform.SetParent(_rememberedParent.transform);
@@ -41,7 +42,7 @@ namespace Assets.Scripts.BallMovement
             transform.position = new Vector3(positon.x, positon.y + _circleCollider2D.radius * 2, positon.z);
         }
 
-        private void BallActivate()
+        private void BallActivate(IEvent ievent)
         {
             _rememberedParent = transform.parent.gameObject;
             transform.SetParent(null);
@@ -62,19 +63,24 @@ namespace Assets.Scripts.BallMovement
 
         private void OnEnable()
         {
-            BallInput.OnBallActivatingEvent += BallActivate;
-            HealthManager.OnHealthInitializedEvent += () =>
-            {
-                HealthManager.GetInstance.OnHeartSpendEvent += ReturnBallOnPosition;
-            };
+            EventBusManager.OnEventBusManagerInitializedEvent += EventAdder;
+        }
 
-            LevelManager.OnNextLevelLoaded += ReturnBallOnPosition;
+        private void EventAdder()
+        {
+            EventBusManager.GetInstance.Subscribe<OnBallActivatingEvent>(BallActivate);
+            EventBusManager.GetInstance.Subscribe<OnHeathInitizliedEvent>((OnHeathInitizliedEvent) =>
+            {
+                EventBusManager.GetInstance.Subscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
+            });
+
+            EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>(ReturnBallOnPosition);
         }
 
         private void OnDisable()
         {
-            BallInput.OnBallActivatingEvent -= BallActivate;
-            LevelManager.OnNextLevelLoaded -= ReturnBallOnPosition;
+            EventBusManager.GetInstance.Unsubscribe<OnBallActivatingEvent>(BallActivate);
+            EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ReturnBallOnPosition);
         }
     }
 }

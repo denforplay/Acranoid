@@ -3,13 +3,14 @@ using System;
 using UnityEngine;
 using Assets.Scripts.UI.PopUps;
 using Assets.Scripts.Abstracts.Singeton;
+using Assets.Scripts.EventBus.Events;
+using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events.LevelEvents;
 
 namespace Assets.Scripts.Health
 {
     public class HealthManager : Singleton<HealthManager>
     {
-        public static event Action OnHealthInitializedEvent;
-        public event Action OnHeartSpendEvent;
         [SerializeField] HeartConfig _heartConfig;
         public bool IsInitialized { get; private set; }
         private HealthController _healthController;
@@ -37,8 +38,8 @@ namespace Assets.Scripts.Health
         private void ShowHealth()
         {
             CheckHeartsInitialized();
-       
-        _healthViewController.ViewHearts();
+
+            _healthViewController.ViewHearts();
         }
 
         public void SpendHeart(int value)
@@ -47,7 +48,7 @@ namespace Assets.Scripts.Health
             if (_healthController.IsEnoughLifes(0))
             {
                 DeleteHealthView();
-                OnHeartSpendEvent?.Invoke();
+                EventBus.EventBusManager.GetInstance.Invoke(new OnHeartSpendEvent());
                 _healthController.SpendLife(value);
             }
             else
@@ -60,22 +61,23 @@ namespace Assets.Scripts.Health
         {
             _healthController = healthController;
             IsInitialized = true;
-            OnHealthInitializedEvent += () =>
+            EventBusManager.GetInstance.Subscribe<OnHeathInitizliedEvent>((OnHeathInitizliedEvent) => 
             {
-                LevelManager.OnLevelsInitialized += () =>
+                EventBusManager.GetInstance.Subscribe<OnLevelsInitialized>((OnLevelsInitialized) =>
                 {
                     _healthController.InitializeHearts();
                     ShowHealth();
-                };
+                });
 
-                LevelManager.OnNextLevelLoaded += () =>
+                EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>((OnNextLevelLoaded) =>
                 {
                     _healthViewController.DeleteAllHearts();
                     _healthController.InitializeHearts();
                     ShowHealth();
-                };
-            };
-            OnHealthInitializedEvent?.Invoke();
+                });
+            });
+
+            EventBusManager.GetInstance.Invoke(new OnHeathInitizliedEvent());
         }
 
         public void InitializeViewController(HealthViewController healthViewController)

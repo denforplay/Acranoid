@@ -1,12 +1,12 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events;
 
 namespace Assets.Scripts.BallMovement
 {
     public class BallInput
     {
         private const int LEFT_MOUSE_BUTTON = 0;
-        public static event Action OnBallActivatingEvent;
         private bool _isActive;
 
         public void CheckInput()
@@ -14,7 +14,7 @@ namespace Assets.Scripts.BallMovement
             if (Input.GetMouseButtonUp(LEFT_MOUSE_BUTTON) && !_isActive)
             {
                 _isActive = true;
-                OnBallActivatingEvent?.Invoke();
+                EventBusManager.GetInstance.Invoke(new OnBallActivatingEvent());
             }
         }
 

@@ -1,4 +1,6 @@
 ﻿
+using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events.LevelEvents;
 using Assets.Scripts.Level;
 
 namespace Assets.Scripts.Block
@@ -11,7 +13,7 @@ namespace Assets.Scripts.Block
 
         private void OnEnable()
         {
-            LevelManager.OnLevelCompeted += base.ReturnToPool;
+            EventBusManager.GetInstance.Subscribe<OnLevelCompletedEvent>((OnLevelCompletedEvent) => base.ReturnToPool());
         }
     }
 }

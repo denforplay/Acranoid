@@ -2,7 +2,6 @@
 using Assets.Scripts.Abstracts.Game;
 using Assets.Scripts.Abstracts.Pool;
 using Assets.Scripts.Level;
-using System.Collections.Generic;
 
 namespace Assets.Scripts.Block
 {

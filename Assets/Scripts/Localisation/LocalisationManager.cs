@@ -1,8 +1,11 @@
 ﻿using Assets.Scripts.Abstracts.Singeton;
+using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events;
 using System;
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
+
 namespace Assets.Scripts.Localisation
 {
     public class LocalisationManager : Singleton <LocalisationManager>

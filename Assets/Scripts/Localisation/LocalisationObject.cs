@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using TMPro;
+using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events;
+using Assets.Scripts.Abstracts.EventBus.Interfaces;
 
 namespace Assets.Scripts.Localisation
 {

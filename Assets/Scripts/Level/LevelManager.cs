@@ -1,16 +1,15 @@
 ﻿using Assets.Scripts.Abstracts.Singeton;
 using System;
 using UnityEngine;
+using Assets.Scripts.EventBus.Events;
+using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events.LevelEvents;
 
 namespace Assets.Scripts.Level
 {
     public class LevelManager : Singleton<LevelManager>
     {
         [SerializeField] private TextAsset _jsonLevelsFile;
-        public static event Action OnLevelCompeted;
-        public static event Action OnLevelsInitialized;
-        public static event Action OnNextLevelLoaded;
-        public static event Action OnLevelLoaded;
         private LevelsController _levelsController;
 
         public bool IsInitialized { get; private set; }
@@ -29,9 +28,9 @@ namespace Assets.Scripts.Level
         public Level LoadNextLevel()
         {
             CheckLevelsLoaded();
-            OnLevelCompeted?.Invoke();
+            EventBusManager.GetInstance.Invoke<OnLevelCompletedEvent>(new OnLevelCompletedEvent());
             CurrentLevel = _levelsController.LoadNextLevel();
-            OnNextLevelLoaded?.Invoke();
+            EventBusManager.GetInstance.Invoke<OnNextLevelLoadedEvent>(new OnNextLevelLoadedEvent());
             return CurrentLevel;
         }
 
@@ -51,7 +50,7 @@ namespace Assets.Scripts.Level
             _levelsController = levelsController;
             LoadJsonLevels();
             IsInitialized = true;
-            OnLevelsInitialized?.Invoke();
+            EventBusManager.GetInstance.Invoke<OnLevelsInitialized>(new OnLevelsInitialized());
         }
 
         private void CheckLevelsLoaded()

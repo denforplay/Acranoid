@@ -1,14 +1,12 @@
-﻿
-using Assets.Scripts.Abstracts.Singeton;
+﻿using Assets.Scripts.Abstracts.Singeton;
+using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events;
 using System;
-using UnityEditor;
-using UnityEngine;
 
 namespace Assets.Scripts.Block
 {
     public class BlocksManager : Singleton<BlocksManager>
     {
-        public static event Action OnBlocksManagerInitializedEvent;
         public ColorBlock colorBlockPrefab;
         public GraniteBlock graniteBlockPrefab;
         public BlockConfig _colorBlockConfig;
@@ -19,7 +17,7 @@ namespace Assets.Scripts.Block
         {
             _blocksController = blocksController;
             _isInitialized = true;
-            OnBlocksManagerInitializedEvent?.Invoke();
+            EventBusManager.GetInstance.Invoke<OnBlocksManagerInitializedEvent>(new OnBlocksManagerInitializedEvent());
         }
 
         public BaseBlock GetBlock(BaseBlock baseBlock)

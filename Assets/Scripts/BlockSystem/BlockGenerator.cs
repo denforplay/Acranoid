@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 using Assets.Scripts.Level;
 using Assets.Scripts.Abstracts.Game;
+using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events;
+using Assets.Scripts.Abstracts.EventBus.Interfaces;
 
 namespace Assets.Scripts.Block
 {
@@ -16,7 +18,7 @@ namespace Assets.Scripts.Block
             _camera = Camera.main;
         }
 
-        private void ShowBlocks()
+        private void ShowBlocks(IEvent ievent)
         {
             Level.Level level = LevelManager.GetInstance.GetCurrentLevel();
             float horizontal = Screen.width / 2 - level.blocksCountInRow * verticalDistance / 2;
@@ -45,14 +47,19 @@ namespace Assets.Scripts.Block
 
         private void OnEnable()
         {
-            Game.GetRepository<BlocksRepository>().OnBlocksRepoInitialied += ShowBlocks;
-            LevelManager.OnNextLevelLoaded += ShowBlocks;
+            EventBusManager.OnEventBusManagerInitializedEvent += SubscribeOnNextLevelLoaded;
+        }
+
+        private void SubscribeOnNextLevelLoaded()
+        {
+            EventBusManager.GetInstance.Subscribe<OnBlocksRepositoryInitializedEvent>(ShowBlocks);
+            EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>(ShowBlocks);
         }
 
         private void OnDisable()
         {
-            Game.GetRepository<BlocksRepository>().OnBlocksRepoInitialied -= ShowBlocks;
-            LevelManager.OnNextLevelLoaded -= ShowBlocks;
+            EventBusManager.GetInstance.Unsubscribe<OnBlocksRepositoryInitializedEvent>(ShowBlocks);
+            EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ShowBlocks);
         }
     }
 }

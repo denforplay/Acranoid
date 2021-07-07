@@ -6,7 +6,7 @@ namespace Assets.Scripts.Abstracts.Singeton
     {
         private static T _instance;
         public static T GetInstance => _instance;
-        private void Awake()
+        protected void Awake()
         {
             if (_instance == null)
             {

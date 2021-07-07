@@ -26,6 +26,7 @@ namespace Assets.Scripts.Block
 
         public void ReturnToPool()
         {
+            this.gameObject.transform.localScale = Vector3.one;
             Origin.ReturnToPool(this);
         }
     }

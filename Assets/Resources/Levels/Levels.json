@@ -5,22 +5,22 @@
       "levels": [
         {
           "levelName" : "1-1",
-          "blocksCountInRow": 1,
-          "blocksCountInColumn": 1,
+          "blocksCountInRow": 2,
+          "blocksCountInColumn": 2,
           "graniteBlocksCount": 0,
           "lifes": 1
         },
         {
           "levelName": "1-2",
-          "blocksCountInRow": 1,
-          "blocksCountInColumn": 2,
+          "blocksCountInRow": 3,
+          "blocksCountInColumn": 3,
           "graniteBlocksCount": 0,
           "lifes": 2
         },
         {
           "levelName": "1-3",
-          "blocksCountInRow": 1,
-          "blocksCountInColumn": 3,
+          "blocksCountInRow": 4,
+          "blocksCountInColumn": 4,
           "graniteBlocksCount": 1,
           "lifes": 3
         }
@@ -31,22 +31,22 @@
       "levels": [
         {
           "levelName": "2-1",
-          "blocksCountInRow": 2,
-          "blocksCountInColumn": 2,
+          "blocksCountInRow": 5,
+          "blocksCountInColumn": 5,
           "graniteBlocksCount": 1,
           "lifes": 1
         },
         {
           "levelName": "2-2",
-          "blocksCountInRow": 2,
-          "blocksCountInColumn": 3,
+          "blocksCountInRow": 5,
+          "blocksCountInColumn": 5,
           "graniteBlocksCount": 1,
           "lifes": 2
         },
         {
           "levelName": "2-3",
-          "blocksCountInRow": 3,
-          "blocksCountInColumn": 3,
+          "blocksCountInRow": 5,
+          "blocksCountInColumn": 5,
           "graniteBlocksCount": 1,
           "lifes": 3
         }

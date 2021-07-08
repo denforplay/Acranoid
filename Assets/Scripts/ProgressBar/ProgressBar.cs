@@ -36,7 +36,6 @@ namespace Assets.Scripts.ProgressBar
         private void ResetProgress(IEvent ievent)
         {
             var level = LevelManager.GetInstance.GetCurrentLevel();
-            _slider.maxValue = level.blocksCountInColumn * level.blocksCountInRow - level.graniteBlocksCount;
             _slider.value = 0;
             _targetProgress = 0;
         }
@@ -44,12 +43,9 @@ namespace Assets.Scripts.ProgressBar
 
         private void OnEnable()
         {
-            EventBusManager.OnEventBusManagerInitializedEvent += () =>
-            {
-                EventBusManager.GetInstance.Subscribe<OnLevelsInitialized>(ResetProgress);
-                EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>(ResetProgress);
-                EventBusManager.GetInstance.Subscribe<OnBlockDestroyEvent>(IncrementProgress);
-            };
+            EventBusManager.GetInstance.Subscribe<OnLevelsInitialized>(ResetProgress);
+            EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>(ResetProgress);
+            EventBusManager.GetInstance.Subscribe<OnBlockDestroyEvent>(IncrementProgress);
         }
 
         private void OnDisable()

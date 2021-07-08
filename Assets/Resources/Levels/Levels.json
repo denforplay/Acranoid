@@ -4,24 +4,19 @@
       "levelPackName": "summerPack",
       "levels": [
         {
-          "levelName" : "1-1",
-          "blocksCountInRow": 2,
-          "blocksCountInColumn": 2,
-          "graniteBlocksCount": 0,
+          "levelName": "1-1",
+          "blocksData": [1, 1, 1, 1, 1],
           "lifes": 1
         },
         {
           "levelName": "1-2",
-          "blocksCountInRow": 3,
-          "blocksCountInColumn": 3,
-          "graniteBlocksCount": 0,
+          "blocksData":[1, 0, 1, 0 ,1, 1, -2,1,1 -1,
+                       -2, 1, 0 , 1 ,0, -2],
           "lifes": 2
         },
         {
           "levelName": "1-3",
-          "blocksCountInRow": 4,
-          "blocksCountInColumn": 4,
-          "graniteBlocksCount": 1,
+          "blocksData":[1, 0 , 1 , -2, 1, 0 ,1],
           "lifes": 3
         }
       ]
@@ -31,23 +26,18 @@
       "levels": [
         {
           "levelName": "2-1",
-          "blocksCountInRow": 5,
-          "blocksCountInColumn": 5,
-          "graniteBlocksCount": 1,
+          "blocksData":[1, 1, 1, -1,
+                         1, 1, 1],
           "lifes": 1
         },
         {
           "levelName": "2-2",
-          "blocksCountInRow": 5,
-          "blocksCountInColumn": 5,
-          "graniteBlocksCount": 1,
+          "blocksData":[1,1,1,-1,1,1,1],
           "lifes": 2
         },
         {
           "levelName": "2-3",
-          "blocksCountInRow": 5,
-          "blocksCountInColumn": 5,
-          "graniteBlocksCount": 1,
+          "blocksData":[1, 1],
           "lifes": 3
         }
       ]

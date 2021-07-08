@@ -4,6 +4,7 @@ using UnityEngine;
 using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.LevelEvents;
+using Newtonsoft.Json;
 
 namespace Assets.Scripts.Level
 {
@@ -17,8 +18,7 @@ namespace Assets.Scripts.Level
 
         private void LoadJsonLevels()
         {
-            LevelPackages levelPackages = JsonUtility.FromJson<LevelPackages>(_jsonLevelsFile.text);
-
+            LevelPackages levelPackages = JsonConvert.DeserializeObject<LevelPackages>(_jsonLevelsFile.text);
             foreach (LevelPack levelPack in levelPackages.levelPacks)
             {
                 _levelsController.AddPack(levelPack);

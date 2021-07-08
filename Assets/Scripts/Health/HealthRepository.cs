@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Abstracts.Repository;
-using Assets.Scripts.Abstracts.Game;
 using Assets.Scripts.Level;
 
 namespace Assets.Scripts.Health
@@ -12,7 +11,7 @@ namespace Assets.Scripts.Health
         {
             this.Health = 0;
         }
-         
+
         public void InitializeHearts()
         {
             this.Health = LevelManager.GetInstance.GetCurrentLevelLifes();

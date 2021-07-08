@@ -4,7 +4,7 @@ using Assets.Scripts.EventBus.Events;
 
 namespace Assets.Scripts.BallMovement
 {
-    public class BallInput
+    public class BallInput : MonoBehaviour
     {
         private const int LEFT_MOUSE_BUTTON = 0;
         private bool _isActive;
@@ -18,9 +18,9 @@ namespace Assets.Scripts.BallMovement
             }
         }
 
-        public void SetActive(bool active)
+        private void Update()
         {
-            _isActive = active;
+            CheckInput();
         }
     }
 }

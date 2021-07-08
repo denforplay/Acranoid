@@ -6,13 +6,11 @@ namespace Assets.Scripts.EventBus
 {
     public class EventBusManager : Singleton<EventBusManager>
     {
-        public static Action OnEventBusManagerInitializedEvent;
         private IEventBus _eventBus;
         private new void Awake()
         {
             base.Awake();
             Initialize();
-            OnEventBusManagerInitializedEvent?.Invoke();
         }
 
         private void Initialize()

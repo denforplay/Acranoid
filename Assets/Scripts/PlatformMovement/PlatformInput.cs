@@ -3,21 +3,18 @@ using System;
 
 namespace Assets.Scripts.PlatformMovement
 {
-    public class PlatformInput
+    public class PlatformInput : MonoBehaviour
     {
-        private PlatformMoveConfig _platformMoveConfig;
+        [SerializeField] public Rigidbody2D _rigidBody2D;
+        [SerializeField] public Camera _camera;
+        [SerializeField] private PlatformMoveConfig _platformMoveConfig;
         private const int LEFT_MOUSE_BUTTON = 0;
         private bool _onMouseDown = false;
         public static event Action OnMove;
 
-        public Rigidbody2D _rigidBody2D;
-        public Camera _camera;
-
-        public PlatformInput(PlatformMoveConfig platformMoveConfig, Rigidbody2D rigidbody2D, Camera camera)
+        private void Update()
         {
-            _platformMoveConfig = platformMoveConfig;
-            _camera = camera;
-            _rigidBody2D = rigidbody2D;
+            GetInput();
         }
 
         public void GetInput()

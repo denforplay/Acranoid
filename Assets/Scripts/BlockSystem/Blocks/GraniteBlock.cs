@@ -1,4 +1,5 @@
 ﻿
+using Assets.Scripts.Abstracts.EventBus.Interfaces;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.LevelEvents;
 using Assets.Scripts.Level;
@@ -13,12 +14,17 @@ namespace Assets.Scripts.Block
 
         private void OnEnable()
         {
-            EventBusManager.GetInstance.Subscribe<OnLevelCompletedEvent>((OnLevelCompletedEvent) => base.ReturnToPool());
+            EventBusManager.GetInstance.Subscribe<OnLevelCompletedEvent>(ReturnToPool);
         }
 
         private void OnDisable()
         {
-            EventBusManager.GetInstance.Unsubscribe<OnLevelCompletedEvent>((OnLevelCompletedEvent) => base.ReturnToPool());
+            EventBusManager.GetInstance.Unsubscribe<OnLevelCompletedEvent>(ReturnToPool);
+        }
+
+        public void ReturnToPool(IEvent ievent)
+        {
+            base.ReturnToPool();
         }
     }
 }

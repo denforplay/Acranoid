@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cb40102e4470e94dbca9e43d7a16559, type: 3}
-  m_Name: BallConfig
+  m_Script: {fileID: 11500000, guid: e89da44d04687b04fbc4983ec4eb6369, type: 3}
+  m_Name: BlockGeneratorConfig
   m_EditorClassIdentifier: 
-  force: 400
-  offSetX: 0
+  screenWidth: 1080
+  screenHeight: 1920
+  blockWidth: 135
+  blockHeight: 45
+  startX: 70
+  startY: 280

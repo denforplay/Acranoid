@@ -5,6 +5,9 @@ namespace Assets.Scripts.Resize
 {
     public class ResizableObject : MonoBehaviour
     {
+        public const float SCREEN_HEIGHT_CONFIG = 1920f;
+        public const float SCREEN_WIDTH_CONFIG = 1080f;
+
         [SerializeField] PlatformMoveConfig _platformMoveConfig;
         [SerializeField] float _defaultBorderPosition = 3.5f;
 
@@ -16,10 +19,10 @@ namespace Assets.Scripts.Resize
         private void Resize()
         {
             _platformMoveConfig.borderPosition = _defaultBorderPosition;
-            if (Screen.height > 1920)
+            if (Screen.height > SCREEN_HEIGHT_CONFIG)
             {
                 var localScale = this.gameObject.transform.localScale;
-                float horizontalScale = 1920f / Screen.height;
+                float horizontalScale = SCREEN_HEIGHT_CONFIG / Screen.height;
                 _platformMoveConfig.borderPosition *= horizontalScale;
                 this.gameObject.transform.localScale = new Vector2(horizontalScale, localScale.y);
             }

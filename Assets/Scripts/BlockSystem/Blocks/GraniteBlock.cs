@@ -15,6 +15,11 @@ namespace Assets.Scripts.Block
         {
             EventBusManager.GetInstance.Subscribe<OnLevelCompletedEvent>((OnLevelCompletedEvent) => base.ReturnToPool());
         }
+
+        private void OnDisable()
+        {
+            EventBusManager.GetInstance.Unsubscribe<OnLevelCompletedEvent>((OnLevelCompletedEvent) => base.ReturnToPool());
+        }
     }
 }
  

@@ -36,8 +36,8 @@ namespace Assets.Scripts.BallMovement
 
         public void ReturnBallOnPosition(IEvent ievent)
         {
-            this.gameObject.SetActive(true);
             transform.SetParent(_rememberedParent.transform);
+            this.gameObject.SetActive(true);
             Vector3 positon = _rememberedParent.transform.position;
             transform.position = new Vector3(positon.x, positon.y + _circleCollider2D.radius * 2, positon.z);
         }
@@ -79,7 +79,12 @@ namespace Assets.Scripts.BallMovement
 
         private void OnDisable()
         {
+            EventBusManager.OnEventBusManagerInitializedEvent -= EventAdder;
             EventBusManager.GetInstance.Unsubscribe<OnBallActivatingEvent>(BallActivate);
+            EventBusManager.GetInstance.Unsubscribe<OnHeathInitizliedEvent>((OnHeathInitizliedEvent) =>
+            {
+                EventBusManager.GetInstance.Subscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
+            });
             EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ReturnBallOnPosition);
         }
     }

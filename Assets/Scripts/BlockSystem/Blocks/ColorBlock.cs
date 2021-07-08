@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Assets.Scripts.Abstracts.Pool.Interfaces;
-using UnityEngine;
+﻿using Assets.Scripts.Abstracts.Pool.Interfaces;
+using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events.BlockEvents;
 
 namespace Assets.Scripts.Block
 {
@@ -11,9 +11,10 @@ namespace Assets.Scripts.Block
             _life--;
             if (_life < 1)
             {
+                EventBusManager.GetInstance.Invoke<OnBlockDestroyEvent>(new OnBlockDestroyEvent());
                 BlocksManager.GetInstance.ReturnBlock(this);
             }
-            else
+            else 
             {
                 _spriteRenderer.sprite = _sprites[_life - 1];
             }

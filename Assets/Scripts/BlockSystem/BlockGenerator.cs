@@ -20,8 +20,8 @@ namespace Assets.Scripts.Block
         private void ShowBlocks(IEvent ievent)
         {
             Level.Level level = LevelManager.GetInstance.GetCurrentLevel();
-            float startHorizontal = 100;
-            float horizontal = 100;
+            float startHorizontal = 70;
+            float horizontal = 70;
             float vertical = Screen.height - 280;
             float scaler = (Screen.width - 2 * startHorizontal) / (horizontalDistance * level.blocksCountInRow);
             horizontalDistance *= scaler;
@@ -65,6 +65,7 @@ namespace Assets.Scripts.Block
 
         private void OnDisable()
         {
+            EventBusManager.OnEventBusManagerInitializedEvent -= SubscribeOnNextLevelLoaded;
             EventBusManager.GetInstance.Unsubscribe<OnBlocksRepositoryInitializedEvent>(ShowBlocks);
             EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ShowBlocks);
         }

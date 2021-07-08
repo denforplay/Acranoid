@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.Abstracts.Game;
 using Assets.Scripts.Scenes.SceneConfigs;
-using Assets.Scripts.Scenes.SceneManagers;
 using UnityEngine;
 namespace Assets.Scripts.UI.Buttons
 {

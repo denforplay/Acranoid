@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Abstracts.EventBus.Interfaces;
+using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events.PlatformEvents;
+using UnityEngine;
 
 namespace Assets.Scripts.PlatformMovement
 {
@@ -17,7 +20,7 @@ namespace Assets.Scripts.PlatformMovement
             _camera = Camera.main;
         }
 
-        private void Move()
+        private void Move(IEvent ievent)
         {
             Vector3 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
             _platformMoveConfig.direction = mousePos.x > _rigidBody2D.position.x ? _platformMoveConfig.rightDirection : _platformMoveConfig.leftDirection;
@@ -30,12 +33,12 @@ namespace Assets.Scripts.PlatformMovement
 
         private void OnEnable()
         {
-            PlatformInput.OnMove += Move;
+            EventBusManager.GetInstance.Subscribe<OnPlatformMovingEvent>(Move);
         }
 
         private void OnDisable()
         {
-            PlatformInput.OnMove -= Move;
+            EventBusManager.GetInstance.Unsubscribe<OnPlatformMovingEvent>(Move);
         }
 
     }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c473d98f91a25084f8963411619fb4d1, type: 3}
+  m_Name: SummerPack
+  m_EditorClassIdentifier: 
+  packName: SummerPack
+  _jsonLevelsFiles:
+  - {fileID: 4900000, guid: 9a0df513cf500da44bd15af65af435df, type: 3}
+  - {fileID: 4900000, guid: 7a5bac14b8a6ab040ad58520d288d78c, type: 3}
+  - {fileID: 4900000, guid: 046adf7e19f26d04cbb0414b1f1d28c1, type: 3}
+  - {fileID: 4900000, guid: 7a942acf0144519498bb9e7b2006dd27, type: 3}

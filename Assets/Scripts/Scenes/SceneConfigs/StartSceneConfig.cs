@@ -4,6 +4,7 @@ using Assets.Scripts.Localisation;
 using Assets.Scripts.Abstracts.Scene;
 using System;
 using System.Collections.Generic;
+using Assets.Scripts.Level;
 
 namespace Assets.Scripts.Scenes.SceneConfigs
 {
@@ -16,6 +17,7 @@ namespace Assets.Scripts.Scenes.SceneConfigs
         {
             var controllersMap = new Dictionary<Type, Controller>();
             this.CreateController<LocalisationController>(controllersMap);
+            this.CreateController<LevelsController>(controllersMap);
             return controllersMap;
         }
 
@@ -23,6 +25,7 @@ namespace Assets.Scripts.Scenes.SceneConfigs
         {
             var repositoriesMap = new Dictionary<Type, Repository>();
             this.CreateRepository<LocalisationRepository>(repositoriesMap);
+            this.CreateRepository<LevelRepository>(repositoriesMap);
             return repositoriesMap;
         }
     }

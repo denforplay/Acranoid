@@ -46,6 +46,11 @@ namespace Assets.Scripts.Abstracts.Scene
             return Coroutines.Coroutines.StartRoutine(this.LoadNewSceneRoutine(config));
         }
 
+        internal void LoadNewSceneAsync(object ganeSceneConfig)
+        {
+            throw new NotImplementedException();
+        }
+
         private IEnumerator LoadNewSceneRoutine(SceneConfig sceneConfig)
         {
             this.IsLoading = true;

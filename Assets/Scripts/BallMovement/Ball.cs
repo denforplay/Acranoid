@@ -48,7 +48,6 @@ namespace Assets.Scripts.BallMovement
 
         private void BallInactivate()
         {
-            this.gameObject.SetActive(false);
             this.gameObject.transform.SetParent(_rememberedParent.transform);
             HealthManager.GetInstance.SpendHeart(1);
         }

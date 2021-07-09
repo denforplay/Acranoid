@@ -20,7 +20,6 @@ namespace Assets.Scripts.Scenes.SceneConfigs
             var controllersMap = new Dictionary<Type, Controller>();
             this.CreateController<HealthController>(controllersMap);
             this.CreateController<HealthViewController>(controllersMap);
-            this.CreateController<LevelsController>(controllersMap);
             this.CreateController<BlocksController>(controllersMap);
             this.CreateController<LocalisationController>(controllersMap);
             this.CreateController<PopupController>(controllersMap);
@@ -32,7 +31,6 @@ namespace Assets.Scripts.Scenes.SceneConfigs
             var repositoriesMap = new Dictionary<Type, Repository>();
             this.CreateRepository<HealthRepository>(repositoriesMap);
             this.CreateRepository<BlocksRepository>(repositoriesMap);
-            this.CreateRepository<LevelRepository>(repositoriesMap);
             this.CreateRepository<LocalisationRepository>(repositoriesMap);
             return repositoriesMap;
         }

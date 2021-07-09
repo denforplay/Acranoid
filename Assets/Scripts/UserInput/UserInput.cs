@@ -1,23 +1,36 @@
-﻿using UnityEngine;
-using System;
+﻿using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events;
+using Assets.Scripts.EventBus.Events.PlatformEvents;
+using Assets.Scripts.PlatformMovement;
+using UnityEngine;
 
-namespace Assets.Scripts.PlatformMovement
+namespace Assets.Scripts.UserInput
 {
-    public class PlatformInput : MonoBehaviour
+    public class UserInput : MonoBehaviour
     {
         [SerializeField] public Rigidbody2D _rigidBody2D;
         [SerializeField] public Camera _camera;
         [SerializeField] private PlatformMoveConfig _platformMoveConfig;
         private const int LEFT_MOUSE_BUTTON = 0;
+        private bool _isActive;
         private bool _onMouseDown = false;
-        public static event Action OnMove;
 
         private void Update()
         {
-            GetInput();
+            CheckInputForBall();
+            GetInputForPlatform();
         }
 
-        public void GetInput()
+        public void CheckInputForBall()
+        {
+            if (Input.GetMouseButtonUp(LEFT_MOUSE_BUTTON) && !_isActive)
+            {
+                _isActive = true;
+                EventBusManager.GetInstance.Invoke(new OnBallActivatingEvent());
+            }
+        }
+
+        public void GetInputForPlatform()
         {
             if (Input.GetMouseButtonDown(LEFT_MOUSE_BUTTON))
             {
@@ -32,9 +45,8 @@ namespace Assets.Scripts.PlatformMovement
 
             if (_onMouseDown && Mathf.Abs(mousePos.x - _rigidBody2D.position.x) > _platformMoveConfig.mouseSensivity)
             {
-                OnMove?.Invoke();
+                EventBusManager.GetInstance.Invoke<OnPlatformMovingEvent>(new OnPlatformMovingEvent());
             }
         }
-
     }
 }

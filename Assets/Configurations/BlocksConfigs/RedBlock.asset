@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 377238297854035381, guid: 7c320b6fc9489094b8347a3dbc424e00, type: 3}
   _sprites:
-  - {fileID: -1025663872027914400, guid: 7793e67069397e44bb35da42cde48cd3, type: 3}
+  - {fileID: 820076373618689533, guid: 7793e67069397e44bb35da42cde48cd3, type: 3}
+  - {fileID: -9005960956174632500, guid: 7793e67069397e44bb35da42cde48cd3, type: 3}
+  - {fileID: -6249511323087580677, guid: 7793e67069397e44bb35da42cde48cd3, type: 3}
   baseColor: {r: 1, g: 0, b: 0, a: 1}
   score: 5

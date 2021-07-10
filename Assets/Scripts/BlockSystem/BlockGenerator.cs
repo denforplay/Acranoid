@@ -36,6 +36,7 @@ namespace Assets.Scripts.Block
 
         private void ShowBlocks(IEvent ievent)
         {
+            EventBusManager.GetInstance.Invoke<OnNextLevelLoadedEvent>(new OnNextLevelLoadedEvent());
             Level.Level level = LevelManager.GetInstance.GetCurrentLevel();
             int[] blocksData = level.blocksData;
             InitializeData(blocksData);
@@ -96,13 +97,11 @@ namespace Assets.Scripts.Block
         private void OnEnable()
         {
             EventBusManager.GetInstance.Subscribe<OnBlocksRepositoryInitializedEvent>(ShowBlocks);
-            EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>(ShowBlocks);
         }
 
         private void OnDisable()
         {
             EventBusManager.GetInstance.Unsubscribe<OnBlocksRepositoryInitializedEvent>(ShowBlocks);
-            EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ShowBlocks);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Abstracts.Pool.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts.Block
@@ -18,6 +19,7 @@ namespace Assets.Scripts.Block
             _sprites = new List<Sprite>(blockConfig._sprites);
             _score = blockConfig.score;
             _spriteRenderer = GetComponent<SpriteRenderer>();
+            _spriteRenderer.sprite = _sprites.Last();
             _spriteRenderer.color = blockConfig.baseColor;
             _life = blockConfig._sprites.Count;
         }

@@ -32,10 +32,13 @@ namespace Assets.Scripts.BallMovement
 
         public void ReturnBallOnPosition(IEvent ievent)
         {
-            transform.SetParent(_rememberedParent.transform);
-            this.gameObject.SetActive(true);
-            Vector3 positon = _rememberedParent.transform.position;
-            transform.position = new Vector3(positon.x, positon.y + _circleCollider2D.radius * 2, positon.z);
+            if (_rememberedParent != null)
+            {
+                transform.SetParent(_rememberedParent.transform);
+                this.gameObject.SetActive(true);
+                Vector3 positon = _rememberedParent.transform.position;
+                transform.position = new Vector3(positon.x, positon.y + _circleCollider2D.radius * 2, positon.z);
+            }
         }
 
         private void BallActivate(IEvent ievent)

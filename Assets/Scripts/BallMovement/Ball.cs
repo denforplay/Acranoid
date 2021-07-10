@@ -4,6 +4,7 @@ using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.Abstracts.EventBus.Interfaces;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.Abstracts.Pool.Interfaces;
+using Assets.Scripts.EventBus.Events.BallEvents;
 
 namespace Assets.Scripts.BallMovement
 {
@@ -25,6 +26,14 @@ namespace Assets.Scripts.BallMovement
             _ballCollisions = new BallCollisions(_ballConfig, _rigidbody2D);
         }
 
+        private void FixedUpdate()
+        {
+            if (_rigidbody2D.isKinematic)
+            {
+                _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * _ballConfig.velocity;
+            }
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             _ballCollisions.Call(collision);
@@ -34,6 +43,7 @@ namespace Assets.Scripts.BallMovement
         {
             if (_rememberedParent != null)
             {
+                _rigidbody2D.isKinematic = true;
                 transform.SetParent(_rememberedParent.transform);
                 this.gameObject.SetActive(true);
                 Vector3 positon = _rememberedParent.transform.position;
@@ -45,13 +55,17 @@ namespace Assets.Scripts.BallMovement
         {
             _rememberedParent = transform.parent.gameObject;
             transform.SetParent(null);
+
             _rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
-            _rigidbody2D.AddForce(new Vector2(_ballConfig.offSetX, _ballConfig.force));
+            _rigidbody2D.velocity = new Vector2(_ballConfig.offSetX, _ballConfig.velocity);
         }
 
         private void BallInactivate()
         {
-            this.gameObject.transform.SetParent(_rememberedParent.transform);
+            _rigidbody2D.velocity = Vector2.zero;
+            _rigidbody2D.isKinematic = false;
+            EventBusManager.GetInstance.Invoke<OnBallInactivatingEvent>(new OnBallInactivatingEvent());
+            this.transform.SetParent(_rememberedParent.transform);
             HealthManager.GetInstance.SpendHeart(1);
         }
 

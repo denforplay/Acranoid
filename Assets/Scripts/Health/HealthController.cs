@@ -1,10 +1,7 @@
 ﻿using Assets.Scripts.Abstracts.Controller;
 using Assets.Scripts.Abstracts.Game;
-using Assets.Scripts.Abstracts.Pool;
-using Assets.Scripts.Block;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events;
-using System;
 
 namespace Assets.Scripts.Health
 {
@@ -13,7 +10,6 @@ namespace Assets.Scripts.Health
         private HealthRepository _healthRepository;
 
         public int Health => this._healthRepository.Health;
-
 
         public override void OnCreate()
         {
@@ -29,6 +25,12 @@ namespace Assets.Scripts.Health
         public override void Initialize()
         {
             HealthManager.GetInstance.InitializeHealthController(this);
+            _healthRepository.Initialize();
+        }
+
+        public void SetHeartPrefab(Heart prefab)
+        {
+            _healthRepository.heartPrefab = prefab;
         }
 
         public bool IsEnoughLifes(int value) => Health > value;
@@ -47,8 +49,6 @@ namespace Assets.Scripts.Health
                 EventBusManager.GetInstance.Invoke<OnHeartSpendEvent>(new OnHeartSpendEvent());
                 return;
             }
-
-            this._healthRepository.Save();
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using Assets.Scripts.EventBus;
+﻿using Assets.Scripts.Abstracts.EventBus.Interfaces;
+using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events;
+using Assets.Scripts.EventBus.Events.BallEvents;
 using Assets.Scripts.EventBus.Events.PlatformEvents;
 using Assets.Scripts.PlatformMovement;
 using UnityEngine;
@@ -47,6 +49,21 @@ namespace Assets.Scripts.UserInput
             {
                 EventBusManager.GetInstance.Invoke<OnPlatformMovingEvent>(new OnPlatformMovingEvent());
             }
+        }
+
+        public void SetFalseActive(IEvent ievent)
+        {
+            _isActive = false;
+        }
+
+        public void OnEnable()
+        {
+            EventBusManager.GetInstance.Subscribe<OnBallInactivatingEvent>(SetFalseActive);
+        }
+
+        public void OnDestroy()
+        {
+            EventBusManager.GetInstance.Unsubscribe<OnBallInactivatingEvent>(SetFalseActive);
         }
     }
 }

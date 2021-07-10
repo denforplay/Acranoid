@@ -6,22 +6,33 @@ using Assets.Scripts.Abstracts.Singeton;
 using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.LevelEvents;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Health
 {
     public class HealthManager : Singleton<HealthManager>
     {
-        [SerializeField] HeartConfig _heartConfig;
+        [SerializeField] private Heart _heartPrefab;
+        [SerializeField] private GameObject _healthPanel;
         public bool IsInitialized { get; private set; }
         private HealthController _healthController;
         private HealthViewController _healthViewController;
 
-        public HeartConfig HeartConfig
+        public Heart HeartPrefaab
         {
             get
             {
                 CheckHeartsInitialized();
-                return _heartConfig;
+                return _heartPrefab;
+            }
+        }
+
+        public GameObject HealthPanel
+        {
+            get
+            {
+                CheckHeartsInitialized();
+                return _healthPanel;
             }
         }
 
@@ -38,7 +49,6 @@ namespace Assets.Scripts.Health
         private void ShowHealth()
         {
             CheckHeartsInitialized();
-
             _healthViewController.ViewHearts();
         }
 
@@ -48,7 +58,7 @@ namespace Assets.Scripts.Health
             if (_healthController.IsEnoughLifes(0))
             {
                 DeleteHealthView();
-                EventBus.EventBusManager.GetInstance.Invoke(new OnHeartSpendEvent());
+                EventBusManager.GetInstance.Invoke(new OnHeartSpendEvent());
                 _healthController.SpendLife(value);
             }
             else
@@ -61,6 +71,7 @@ namespace Assets.Scripts.Health
         {
             _healthController = healthController;
             IsInitialized = true;
+            _healthController.SetHeartPrefab(_heartPrefab);
             EventBusManager.GetInstance.Subscribe<OnHeathInitizliedEvent>((OnHeathInitizliedEvent) => 
             {
                 EventBusManager.GetInstance.Subscribe<OnLevelsInitialized>((OnLevelsInitialized) =>
@@ -83,11 +94,6 @@ namespace Assets.Scripts.Health
         public void InitializeViewController(HealthViewController healthViewController)
         {
             _healthViewController = healthViewController;
-        }
-
-        public GameObject CreateHeart()
-        {
-            return Instantiate(_heartConfig.heartPrefab);
         }
 
         public void DeleteHealthView()

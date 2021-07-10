@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.Abstracts.Game;
-using Assets.Scripts.Abstracts.Pool;
+using System.Linq;
 
 namespace Assets.Scripts.Health
 {
     public class HealthViewController : Controller
     {
-        private List<GameObject> _heartsView;
-        private HeartConfig _heartConfig;
+        private List<Heart> _heartsView;
         private HealthRepository _healthRepository;
         private int _health => _healthRepository.Health;
+        private GameObject _healthPanel;
 
         public override void OnCreate()
         {
@@ -21,48 +21,32 @@ namespace Assets.Scripts.Health
 
         public override void Initialize()
         {
-            _heartsView = new List<GameObject>();
-            _heartConfig = HealthManager.GetInstance.HeartConfig;
+            _heartsView = new List<Heart>();
+            _healthPanel = HealthManager.GetInstance.HealthPanel;
             HealthManager.GetInstance.InitializeViewController(this);
         }
 
         public void DeleteAllHearts()
         {
-            foreach (var item in _heartsView)
+            foreach (var heart in _heartsView)
             {
-                GameObject.Destroy(item.gameObject);
+                _healthRepository._heartPool.ReturnToPool(heart);
             }
             _heartsView.Clear();
         }
 
         public void DeleteHealthView()
         {
-            for (int i = 0; i < _heartsView.Count; i++)
-            {
-                _heartsView[i].TryGetComponent(out SpriteRenderer spriteRender);
-                if (spriteRender.sprite == _heartConfig.activeHeart)
-                {
-                    spriteRender.sprite = _heartConfig.inActiveHeart;
-                    break;
-                }
-            }
+            _heartsView.Last(x => x.gameObject.activeInHierarchy).ReturnToPool();
         }
 
         public void ViewHearts()
         {
-            float posX = Screen.width - _heartConfig.borderPosition;
-            float posY = Screen.height - _heartConfig.borderPosition;
             for (int i = 0; i < _healthRepository.Health; i++)
             {
-                GameObject heart = HealthManager.GetInstance.CreateHeart();
-                Vector2 heartPosition = Camera.main.ScreenToWorldPoint(new Vector3(posX - i * _heartConfig.heartSize, posY));
-                heart.transform.position = heartPosition;
-                heart.TryGetComponent(out SpriteRenderer spriteRenderer);
-                if (spriteRenderer != null)
-                {
-                    spriteRenderer.sprite = _heartConfig.activeHeart;
-                }
-
+                Heart heart = _healthRepository._heartPool.GetPrefabInstance();
+                heart.transform.SetParent(_healthPanel.transform);
+                heart.gameObject.transform.position = _healthPanel.transform.position;
                 _heartsView.Add(heart);
             }
         }

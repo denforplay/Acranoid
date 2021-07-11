@@ -6,6 +6,7 @@ using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.LevelEvents;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using Assets.Scripts.Health;
 
 namespace Assets.Scripts.Level
 {
@@ -28,9 +29,11 @@ namespace Assets.Scripts.Level
         private void LoadJsonPack(LevelPackObject levelPackObject)
         {
             List<Level> levelsPack = new List<Level>();
+            JsonParser jsonParser = new JsonParser();
             foreach (var levelData in levelPackObject._jsonLevelsFiles)
             {
-                Level level = JsonConvert.DeserializeObject<Level>(levelData.text);
+                Level level = jsonParser.LoadJsonData(levelData);
+                level.textAsset = levelData;
                 levelsPack.Add(level);
             }
 
@@ -48,12 +51,19 @@ namespace Assets.Scripts.Level
         public void SetCurrentLevel(int level)
         {
             _levelsController.SetCurrentLevel(level);
+            CurrentLevel = _levelsController.GetCurrentLevel();
         }
 
+        public void SetCurrentPack(int index)
+        {
+            _levelsController.SetCurrentPack(index);
+        }
 
         public Level LoadNextLevel()
         {
             CheckLevelsLoaded();
+            JsonParser jsonParser = new JsonParser();
+            jsonParser.SetJsonData(CurrentLevel);
             EventBusManager.GetInstance.Invoke<OnLevelCompletedEvent>(new OnLevelCompletedEvent());
             CurrentLevel = _levelsController.LoadNextLevel();
             EventBusManager.GetInstance.Invoke<OnNextLevelLoadedEvent>(new OnNextLevelLoadedEvent());

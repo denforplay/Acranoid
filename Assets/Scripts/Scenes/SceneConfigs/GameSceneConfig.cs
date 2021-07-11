@@ -7,7 +7,6 @@ using Assets.Scripts.Abstracts.Scene;
 using System;
 using System.Collections.Generic;
 using Assets.Scripts.Block;
-using Assets.Scripts.UI.PopUps;
 
 namespace Assets.Scripts.Scenes.SceneConfigs
 {
@@ -22,7 +21,6 @@ namespace Assets.Scripts.Scenes.SceneConfigs
             this.CreateController<HealthViewController>(controllersMap);
             this.CreateController<BlocksController>(controllersMap);
             this.CreateController<LocalisationController>(controllersMap);
-            this.CreateController<PopupController>(controllersMap);
             return controllersMap;
         }
 

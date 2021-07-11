@@ -18,4 +18,40 @@
 			<ru>Текст</ru>
 		</Translates>
 	</Key>
+	<Key Name="Level">
+		<Translates>
+			<en>Level</en>
+			<ru>Уровень</ru>
+		</Translates>
+	</Key>
+	<Key Name="Package">
+		<Translates>
+			<en>Package</en>
+			<ru>Набор</ru>
+		</Translates>
+	</Key>
+	<Key Name="Introduction">
+		<Translates>
+			<en>Introduction</en>
+			<ru>Вступление</ru>
+		</Translates>
+	</Key>
+	<Key Name="Easy summer">
+		<Translates>
+			<en>Easy summer</en>
+			<ru>Легкое лето</ru>
+		</Translates>
+	</Key>
+	<Key Name="Middle summer">
+		<Translates>
+			<en>Middle summer</en>
+			<ru>Среднее лето</ru>
+		</Translates>
+	</Key>
+	<Key Name="Hard summer">
+		<Translates>
+			<en>Hard summer</en>
+			<ru>Сложное лето</ru>
+		</Translates>
+	</Key>
 </Keys>

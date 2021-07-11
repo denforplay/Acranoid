@@ -10,8 +10,7 @@ namespace Assets.Scripts.Localisation
     public class LocalisationObject : MonoBehaviour
     {
         private TextMeshProUGUI _text;
-        [SerializeField] private string _key;
-
+        private string _key;
         private void Start()
         {
             Initialize();
@@ -23,21 +22,21 @@ namespace Assets.Scripts.Localisation
             _key = _text.text;
         }
 
-        private void Translate()
+        private void Translate(IEvent ievent)
         {
-            _text.text = LocalisationManager.GetInstance.GetTranslate(_key);
+            _text.text = LocalisationManager.GetInstance.GetTranslate(_key, LocalisationManager.GetInstance.LanguageId);
         }
 
         private void OnEnable()
         {
-            LocalisationManager.OnLocalisationLoaded += Translate;
-            LocalisationManager.OnLanguageChanged += Translate;
+            EventBusManager.GetInstance.Subscribe<OnLocalisationLoadedEvent>(Translate);
+            EventBusManager.GetInstance.Subscribe<OnLanguageChanged>(Translate);
         }
 
-        private void OnDisable()
+        private void OnBecameInvisible()
         {
-            LocalisationManager.OnLocalisationLoaded -= Translate;
-            LocalisationManager.OnLanguageChanged -= Translate;
+            EventBusManager.GetInstance.Subscribe<OnLocalisationLoadedEvent>(Translate);
+            EventBusManager.GetInstance.Subscribe<OnLanguageChanged>(Translate);
         }
     }
 }

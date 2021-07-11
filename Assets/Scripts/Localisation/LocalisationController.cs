@@ -7,42 +7,26 @@ namespace Assets.Scripts.Localisation
     public class LocalisationController : Controller
     {
         private LocalisationRepository _localizationRepository;
-        public string SelectedLanguage => this._localizationRepository.SelectedLanguage;
+        public int LanguageId => this._localizationRepository.SelectedLanguage;
 
-        public void AddLocalisation(string key, List<KeyValuePair<string, string>> list)
+        public void SetLocalisation(Dictionary<string, List<string>> localisation)
         {
-            _localizationRepository.localization[key] = list;
+            _localizationRepository.localization = localisation;
         }
 
-        public void SetLanguage(string selectedLanguage)
+        public void SetLanguage(int selectedLanguage)
         {
             _localizationRepository.SelectedLanguage = selectedLanguage;
         }
 
-        public string GetTranslate(string key)
+        public string GetTranslate(string key, int languageId)
         {
-            if (_localizationRepository.localization is null)
-            {
-                _localizationRepository.Initialize();
-            }
-
             if (_localizationRepository.localization.ContainsKey(key))
             {
-                var keyList = _localizationRepository.localization[key];
-                string keyTranslate = string.Empty;
-                foreach (var pair in keyList)
-                {
-                    if (pair.Key == SelectedLanguage)
-                    {
-                        keyTranslate = pair.Value;
-                        break;
-                    }
-                }
-
-                return keyTranslate;
+                return _localizationRepository.localization[key][languageId];
             }
 
-            return null;
+            return key;
         }
 
         public override void OnCreate()

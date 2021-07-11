@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Abstracts.Controller;
 using Assets.Scripts.Abstracts.Game;
 using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.EventBus.Events.LevelEvents;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,6 +63,11 @@ namespace Assets.Scripts.Level
         public void SetCurrentLevel(int index)
         {
             _levelRepository.CurrentLevel = _levelRepository.CurrentPack[index];
+        }
+
+        public void SetCurrentPack(int index)
+        {
+            _levelRepository.CurrentPack = _levelRepository.levelPacks[index];
         }
 
         public List<Level> GetCurrentPack()

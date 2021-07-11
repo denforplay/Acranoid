@@ -11,37 +11,23 @@ namespace Assets.Scripts.Localisation
     public class LocalisationManager : Singleton <LocalisationManager>
     {
         [SerializeField] TextAsset _localizationFile;
-        public static event Action OnLocalisationLoaded;
-        public static event Action OnLanguageChanged;
         public bool IsInitialized { get; private set; }
         private LocalisationController _localisationController;
         public LocalisationController LocalisationController => _localisationController;
 
-        public string Language
+        public int LanguageId
         {
             get
             {
                 CheckLocalisation();
-                return _localisationController.SelectedLanguage;
+                return _localisationController.LanguageId;
             }
         }
 
         public void ReadXmlData()
         {
-            XmlDocument localizationDoc = new XmlDocument();
-            localizationDoc.LoadXml(_localizationFile.text);
-            foreach (XmlNode key in localizationDoc["Keys"].ChildNodes)
-            {
-                string keyName = key.Attributes["Name"].Value;
-                List<KeyValuePair<string, string>> values = new List<KeyValuePair<string, string>>();
-                foreach (XmlNode translate in key["Translates"])
-                {
-                    var pair = new KeyValuePair<string, string>(translate.Name, translate.InnerText);
-                    values.Add(pair);
-                }
-
-                _localisationController.AddLocalisation(keyName, values);
-            }
+            XmlParser xmlParser = new XmlParser();
+            _localisationController.SetLocalisation(xmlParser.ParseXml(_localizationFile));
         }
 
         public void Initialize(LocalisationController localisationController)
@@ -51,25 +37,25 @@ namespace Assets.Scripts.Localisation
                 _localisationController = localisationController;
                 ReadXmlData();
                 IsInitialized = true;
-                OnLocalisationLoaded?.Invoke();
+                EventBusManager.GetInstance.Invoke<OnLocalisationLoadedEvent>(new OnLocalisationLoadedEvent());
             }
             else
             {
-                OnLocalisationLoaded?.Invoke();
+                EventBusManager.GetInstance.Invoke<OnLocalisationLoadedEvent>(new OnLocalisationLoadedEvent());
             }
         }
 
-        public string GetTranslate(string key)
+        public string GetTranslate(string key, int languageId)
         {
             CheckLocalisation();
-            return _localisationController.GetTranslate(key);
+            return _localisationController.GetTranslate(key, languageId);
         }
 
-        public void SetLanguage(string language)
+        public void SetLanguage(int languageId)
         {
             CheckLocalisation();
-            _localisationController.SetLanguage(language);
-            OnLanguageChanged?.Invoke();
+            _localisationController.SetLanguage(languageId);
+            EventBusManager.GetInstance.Invoke<OnLanguageChanged>(new OnLanguageChanged());
         }
 
         private void CheckLocalisation()

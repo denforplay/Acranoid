@@ -5,7 +5,7 @@ namespace Assets.Scripts.Localisation
     [CreateAssetMenu]
     public class LocalisationLanguagesConfig : ScriptableObject
     {
-        public string RussianLanguage = "ru";
-        public string EnglishLanguage = "en";
+        public int EnglishLanguageId = 0;
+        public int RussianLanguageId = 1;
     }
 }

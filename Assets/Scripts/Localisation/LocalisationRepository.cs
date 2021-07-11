@@ -6,12 +6,12 @@ namespace Assets.Scripts.Localisation
 {
     public class LocalisationRepository : Repository
     {
-        public string SelectedLanguage { get; set; } = "en";
-        public Dictionary<string, List<KeyValuePair<string, string>>> localization { get; private set; }
+        public int SelectedLanguage { get; set; } = 0;
+        public Dictionary<string, List<string>> localization { get; set; }
 
         public override void Initialize()
         {
-            localization = new Dictionary<string, List<KeyValuePair<string, string>>>();
+            localization = new Dictionary<string, List<string>>();
 
         }
     }

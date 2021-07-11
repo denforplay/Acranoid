@@ -1,7 +1,6 @@
 ﻿using Assets.Scripts.Level;
 using System;
 using UnityEngine;
-using Assets.Scripts.UI.PopUps;
 using Assets.Scripts.Abstracts.Singeton;
 using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.EventBus;
@@ -63,7 +62,6 @@ namespace Assets.Scripts.Health
             }
             else
             {
-                PopupManager.instance.HealthEndedPopUp();
             }
         }
 

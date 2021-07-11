@@ -2042,7 +2042,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1293612656}
-  - component: {fileID: 1293612655}
   m_Layer: 0
   m_Name: PopupManager
   m_TagString: Untagged
@@ -2050,23 +2049,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1293612655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1293612654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd63a802bef942949a656bb1ef589c0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _popup: {fileID: 441583322}
-  _tittle: {fileID: 24068884}
-  _text: {fileID: 100344966}
-  _leftButton: {fileID: 693879400}
-  _rightButton: {fileID: 1979451396}
 --- !u!4 &1293612656
 Transform:
   m_ObjectHideFlags: 0
@@ -2128,6 +2110,7 @@ GameObject:
   - component: {fileID: 1386971171}
   - component: {fileID: 1386971173}
   - component: {fileID: 1386971172}
+  - component: {fileID: 1386971174}
   m_Layer: 5
   m_Name: LevelText
   m_TagString: Untagged
@@ -2174,9 +2157,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Level
-
-    0'
+  m_text: Level
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2253,6 +2234,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1386971170}
   m_CullTransparentMesh: 1
+--- !u!114 &1386971174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386971170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8b8c68b28fc4742a4983cae1957f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1397294694
 GameObject:
   m_ObjectHideFlags: 0
@@ -2641,6 +2634,7 @@ GameObject:
   - component: {fileID: 1524811027}
   - component: {fileID: 1524811029}
   - component: {fileID: 1524811028}
+  - component: {fileID: 1524811030}
   m_Layer: 5
   m_Name: PackageText
   m_TagString: Untagged
@@ -2687,9 +2681,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Package
-
-    0'
+  m_text: Package
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2766,6 +2758,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1524811026}
   m_CullTransparentMesh: 1
+--- !u!114 &1524811030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524811026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8b8c68b28fc4742a4983cae1957f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1547563691
 GameObject:
   m_ObjectHideFlags: 0

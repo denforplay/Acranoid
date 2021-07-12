@@ -7,6 +7,7 @@ using Assets.Scripts.EventBus.Events.LevelEvents;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Assets.Scripts.Health;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Level
 {
@@ -16,7 +17,8 @@ namespace Assets.Scripts.Level
         private LevelsController _levelsController;
         public bool IsInitialized { get; private set; }
         public Level CurrentLevel { get; private set; }
-
+        public Sprite CurrentPackSprite { get; private set; }
+        public string CurrentPackName { get; private set; }
         public void Initialize(LevelsController levelsController)
         {
             _levelsController = levelsController;
@@ -44,6 +46,8 @@ namespace Assets.Scripts.Level
         public void SetLevelPackObject(LevelPackObject levelPackObject)
         {
             _levelPackObject = levelPackObject;
+            CurrentPackSprite = levelPackObject._packImage;
+            CurrentPackName = levelPackObject.packName;
             LoadJsonPack(levelPackObject);
             EventBusManager.GetInstance.Invoke<OnPackChangedEvent>(new OnPackChangedEvent());
         }
@@ -71,7 +75,6 @@ namespace Assets.Scripts.Level
             CheckLevelsLoaded();
             JsonParser jsonParser = new JsonParser();
             jsonParser.SetJsonData(CurrentLevel);
-            EventBusManager.GetInstance.Invoke<OnLevelCompletedEvent>(new OnLevelCompletedEvent());
             CurrentLevel = _levelsController.LoadNextLevel();
             EventBusManager.GetInstance.Invoke<OnNextLevelLoadedEvent>(new OnNextLevelLoadedEvent());
             return _levelsController.GetCurrentLevel();

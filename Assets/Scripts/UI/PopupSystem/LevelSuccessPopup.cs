@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.UI.PopupSystem
 {
-    public class ChooseLevelPopup : Popup
+    public class LevelSuccessPopup : Popup
     {
     }
 }

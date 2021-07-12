@@ -9,7 +9,7 @@ namespace Assets.Scripts.Resize
         public const float SCREEN_WIDTH_CONFIG = 1080f;
 
         [SerializeField] PlatformMoveConfig _platformMoveConfig;
-        [SerializeField] float _defaultBorderPosition = 3.5f;
+        [SerializeField] float _defaultBorderPosition = 3.4f;
 
         private void Start()
         {

@@ -28,8 +28,10 @@ namespace Assets.Scripts.Block
 
         public void ReturnToPool()
         {
+            this.gameObject.SetActive(false);
+            this._life = _sprites.Count;
+            this._spriteRenderer.sprite = _sprites.Last();
             this.gameObject.transform.localScale = Vector3.one;
-            Origin.ReturnToPool(this);
         }
     }
 }

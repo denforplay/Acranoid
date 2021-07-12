@@ -64,7 +64,6 @@ namespace Assets.Scripts.Block
                     default:
                         {
                             BaseBlock block = BlocksManager.GetInstance.GetBlock(_blockConfigs[blocksData[i]]);
-                            block._spriteRenderer.sprite = block._sprites.Last();
                             var scale = block.gameObject.transform.localScale;
                             block.gameObject.transform.localScale = new Vector3(scaler, scale.y, scale.z);
                             if (_camera != null)

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c473d98f91a25084f8963411619fb4d1, type: 3}
   m_Name: WinterPack
   m_EditorClassIdentifier: 
+  _packImage: {fileID: 1322926182224112737, guid: a0d9fb1e077254d4382dfc3ef90c4882, type: 3}
   packName: WinterPack
   _jsonLevelsFiles:
   - {fileID: 4900000, guid: 101f4b3459e981745bba3a13e3e1167f, type: 3}

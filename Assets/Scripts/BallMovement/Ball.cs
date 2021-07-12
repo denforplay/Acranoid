@@ -5,10 +5,11 @@ using Assets.Scripts.Abstracts.EventBus.Interfaces;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.Abstracts.Pool.Interfaces;
 using Assets.Scripts.EventBus.Events.BallEvents;
+using Assets.Scripts.EventBus.Events.LevelEvents;
 
 namespace Assets.Scripts.BallMovement
 {
-    public class Ball : MonoBehaviour, IPoolable
+    public class Ball : MonoBehaviour
     {
         [SerializeField] private BallConfig _ballConfig;
         private BallCollisions _ballCollisions;
@@ -28,10 +29,7 @@ namespace Assets.Scripts.BallMovement
 
         private void FixedUpdate()
         {
-            if (_rigidbody2D.isKinematic)
-            {
-                _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * _ballConfig.velocity;
-            }
+            _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * _ballConfig.velocity;
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -55,7 +53,6 @@ namespace Assets.Scripts.BallMovement
         {
             _rememberedParent = transform.parent.gameObject;
             transform.SetParent(null);
-
             _rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
             _rigidbody2D.velocity = new Vector2(_ballConfig.offSetX, _ballConfig.velocity);
         }
@@ -63,7 +60,7 @@ namespace Assets.Scripts.BallMovement
         private void BallInactivate()
         {
             if (gameObject != null && _rememberedParent != null)
-            { 
+            {
                 _rigidbody2D.velocity = Vector2.zero;
                 _rigidbody2D.isKinematic = false;
                 EventBusManager.GetInstance.Invoke<OnBallInactivatingEvent>(new OnBallInactivatingEvent());
@@ -84,7 +81,7 @@ namespace Assets.Scripts.BallMovement
             {
                 EventBusManager.GetInstance.Subscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
             });
-
+            EventBusManager.GetInstance.Subscribe<OnLevelCompletedEvent>(ReturnBallOnPosition);
             EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>(ReturnBallOnPosition);
         }
 
@@ -96,14 +93,9 @@ namespace Assets.Scripts.BallMovement
                 EventBusManager.GetInstance.Subscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
             });
 
-            EventBusManager.GetInstance.Unsubscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
             EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ReturnBallOnPosition);
+            EventBusManager.GetInstance.Unsubscribe<OnLevelCompletedEvent>(ReturnBallOnPosition);
             EventBusManager.GetInstance.Unsubscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
-        }
-
-        public void ReturnToPool()
-        {
-            Origin.ReturnToPool(this);
         }
     }
 }

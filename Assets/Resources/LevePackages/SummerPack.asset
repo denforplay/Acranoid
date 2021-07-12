@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c473d98f91a25084f8963411619fb4d1, type: 3}
   m_Name: SummerPack
   m_EditorClassIdentifier: 
+  _packImage: {fileID: 768516669770671291, guid: a0d9fb1e077254d4382dfc3ef90c4882, type: 3}
   packName: SummerPack
   _jsonLevelsFiles:
   - {fileID: 4900000, guid: 9a0df513cf500da44bd15af65af435df, type: 3}

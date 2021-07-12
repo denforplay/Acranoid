@@ -6,6 +6,24 @@
 			<ru>Старт</ru>
 		</Translates>
 	</Key>
+	<Key Name="Success!">
+		<Translates>
+			<en>Success!</en>
+			<ru>Успех!</ru>
+		</Translates>
+	</Key>
+	<Key Name="Main menu">
+		<Translates>
+			<en>Main menu</en>
+			<ru>Главное меню</ru>
+		</Translates>
+	</Key>
+	<Key Name="Next level">
+		<Translates>
+			<en>Next level</en>
+			<ru>Следующий уровень</ru>
+		</Translates>
+	</Key>
 	<Key Name="Exit">
 		<Translates>
 			<en>Exit</en>

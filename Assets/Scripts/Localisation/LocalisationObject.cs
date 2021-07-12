@@ -3,6 +3,7 @@ using TMPro;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.Abstracts.EventBus.Interfaces;
+using Assets.Scripts.EventBus.Events.LocalisationEvents;
 
 namespace Assets.Scripts.Localisation
 {
@@ -11,7 +12,7 @@ namespace Assets.Scripts.Localisation
     {
         private TextMeshProUGUI _text;
         private string _key;
-        private void Start()
+        private void Awake()
         {
             Initialize();
         }
@@ -20,6 +21,7 @@ namespace Assets.Scripts.Localisation
         {
             _text = GetComponent<TextMeshProUGUI>();
             _key = _text.text;
+            EventBusManager.GetInstance.Invoke<OnLocalisationObjectAwakeEvent>(new OnLocalisationObjectAwakeEvent());
         }
 
         private void Translate(IEvent ievent)
@@ -30,6 +32,7 @@ namespace Assets.Scripts.Localisation
         private void OnEnable()
         {
             EventBusManager.GetInstance.Subscribe<OnLocalisationLoadedEvent>(Translate);
+            EventBusManager.GetInstance.Subscribe<OnLocalisationLoadedEvent>((OnLocalisationLoadedEvent) => EventBusManager.GetInstance.Subscribe<OnLocalisationObjectAwakeEvent>(Translate));
             EventBusManager.GetInstance.Subscribe<OnLanguageChanged>(Translate);
         }
 

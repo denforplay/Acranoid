@@ -20,7 +20,8 @@ namespace Assets.Scripts.Abstracts.Singeton
             }
         }
 
-        protected void Awake()
+
+        public void Awake()
         {
             if (_instance == null)
             {
@@ -33,5 +34,6 @@ namespace Assets.Scripts.Abstracts.Singeton
                     
             DontDestroyOnLoad(gameObject);
         }
+
     }
 }

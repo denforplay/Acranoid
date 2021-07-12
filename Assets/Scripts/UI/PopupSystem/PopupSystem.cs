@@ -26,6 +26,7 @@ namespace Assets.Scripts.UI.PopupSystem
         private Stack<Popup> _popupsOnCanvas = new Stack<Popup>();
         public Popup SpawnPopup(Type type)
         {
+            Time.timeScale = 0;
             Popup popUpPrefab = _popupConfig.Popups.Find(a => a.GetType() == type);
             Popup popup = CreatePopup(popUpPrefab);
             _popupsOnCanvas.Push(popup);
@@ -40,6 +41,7 @@ namespace Assets.Scripts.UI.PopupSystem
 
         public void DeletePopUp()
         {
+            Time.timeScale = 1;
             Popup popup = _popupsOnCanvas.Pop();
             Destroy(popup.gameObject);
         }

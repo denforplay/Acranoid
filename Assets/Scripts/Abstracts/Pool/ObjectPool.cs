@@ -41,8 +41,7 @@ namespace Assets.Scripts.Abstracts.Pool
 
         public void ReturnToPool(T instance)
         {
-            instance.gameObject.SetActive(false);
-
+            instance.ReturnToPool();
             _container.Add(instance);
         }
 

@@ -9,7 +9,7 @@ namespace Assets.Scripts.Health
 
         public void ReturnToPool()
         {
-            Origin.ReturnToPool(this);
+            this.gameObject.SetActive(false);
         }
     }
 }

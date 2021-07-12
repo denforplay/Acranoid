@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65d4af2c40893ac46aadf3845aeb184f, type: 3}
+  m_Name: YellowBlock
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 377238297854035381, guid: 7c320b6fc9489094b8347a3dbc424e00, type: 3}
+  _sprites:
+  - {fileID: 820076373618689533, guid: 7793e67069397e44bb35da42cde48cd3, type: 3}
+  - {fileID: -6249511323087580677, guid: 7793e67069397e44bb35da42cde48cd3, type: 3}
+  baseColor: {r: 1, g: 0.9823611, b: 0, a: 1}
+  score: 5

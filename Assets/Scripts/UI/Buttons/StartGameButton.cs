@@ -50,7 +50,7 @@ namespace Assets.Scripts.UI.Buttons
         public Button CreateButton(string btnText, Button _btnPrefab, Transform _parent)
         {
             Button button = Instantiate(_btnPrefab, _parent);
-            Text text = button.GetComponentInChildren<Text>();
+            TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
             text.text = btnText;
             return button;
         }

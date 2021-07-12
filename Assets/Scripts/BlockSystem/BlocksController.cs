@@ -2,8 +2,10 @@
 using Assets.Scripts.Abstracts.Game;
 using Assets.Scripts.Abstracts.Pool;
 using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.EventBus.Events.LevelEvents;
 using Assets.Scripts.Level;
+using Assets.Scripts.UI.PopupSystem;
 
 namespace Assets.Scripts.Block
 {
@@ -34,7 +36,8 @@ namespace Assets.Scripts.Block
             pool.ReturnToPool(block);
             if (_blocksRepository.Count == 0)
             {
-                LevelManager.GetInstance.LoadNextLevel();
+                EventBusManager.GetInstance.Invoke(new OnLevelCompletedEvent());
+                PopupSystem.GetInstance.SpawnPopup(typeof(LevelSuccessPopup));
             }
         }
 
@@ -47,7 +50,7 @@ namespace Assets.Scripts.Block
 
             return FindPool(block).GetPrefabInstance();
         }
-
+        
         public override void Initialize()
         {
             BlocksManager.GetInstance.Initialize(this);

@@ -19,10 +19,15 @@ namespace Assets.Scripts.Block
 
         public void InitializePool(IEvent ievent)
         {
+            InitializePools();
+            EventBusManager.GetInstance.Invoke<OnBlocksRepositoryInitializedEvent>(new OnBlocksRepositoryInitializedEvent());
+        }
+
+        public void InitializePools()
+        {
             blocksPools = new List<ObjectPool<BaseBlock>>();
             blocksPools.Add(new ObjectPool<BaseBlock>(new BlockFactory<BaseBlock>(BlocksManager.GetInstance.colorBlockPrefab, BlocksManager.GetInstance._colorBlockConfig)));
             blocksPools.Add(new ObjectPool<BaseBlock>(new BlockFactory<BaseBlock>(BlocksManager.GetInstance.graniteBlockPrefab, BlocksManager.GetInstance._graniteBlockConfig)));
-            EventBusManager.GetInstance.Invoke<OnBlocksRepositoryInitializedEvent>(new OnBlocksRepositoryInitializedEvent());
         }
     }
 }

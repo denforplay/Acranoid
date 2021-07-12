@@ -1,6 +1,8 @@
 ﻿using Assets.Scripts.Abstracts.Controller;
 using Assets.Scripts.Abstracts.Game;
 using Assets.Scripts.Abstracts.Pool;
+using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events.LevelEvents;
 using Assets.Scripts.Level;
 
 namespace Assets.Scripts.Block
@@ -18,6 +20,10 @@ namespace Assets.Scripts.Block
 
         public ObjectPool<BaseBlock> FindPool(BaseBlock baseBlock)
         {
+           if (_blocksRepository.blocksPools == null)
+            {
+                _blocksRepository.InitializePools();
+            }
            return _blocksRepository.blocksPools.Find(x => x.GetPrefab.GetType() == baseBlock.GetType());
         }
 

@@ -7,9 +7,9 @@ namespace Assets.Scripts.Block
 {
     public abstract class BaseBlock : MonoBehaviour, IPoolable
     {
-        protected List<Sprite> _sprites = new List<Sprite>();
+        public List<Sprite> _sprites = new List<Sprite>();
         protected int _score;
-        protected SpriteRenderer _spriteRenderer;
+        public SpriteRenderer _spriteRenderer;
         protected int _life;
 
         public IObjectPool Origin { get ; set; }

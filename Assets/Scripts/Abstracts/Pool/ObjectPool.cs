@@ -24,8 +24,11 @@ namespace Assets.Scripts.Abstracts.Pool
             T instance = null;
             if (_container.Count > 0 && _container.TryTake(out instance))
             {
-                instance.transform.SetParent(null);
-                instance.gameObject.SetActive(true);
+                if (instance != null)
+                {
+                    instance.transform.SetParent(null);
+                    instance.gameObject.SetActive(true);
+                }
             }
             else
             {

@@ -8,7 +8,21 @@ namespace Assets.Scripts.UI.PopupSystem
     public class PopupSystem : Singleton<PopupSystem>
     {
         [SerializeField] private PopupConfig _popupConfig;
-        [SerializeField] private Canvas _canvas;
+        [SerializeField] private GameObject _canvas;
+
+        public GameObject GetCanvas 
+        {
+            get
+            {
+                if (_canvas == null)
+                {
+                    _canvas = GameObject.Find("Canvas");
+                }
+
+                return _canvas;
+            }
+        }
+
         private Stack<Popup> _popupsOnCanvas = new Stack<Popup>();
         public Popup SpawnPopup(Type type)
         {
@@ -20,7 +34,7 @@ namespace Assets.Scripts.UI.PopupSystem
 
         public Popup CreatePopup(Popup popupPrefab)
         {
-            Popup popUp = Instantiate(popupPrefab, _canvas.transform);
+            Popup popUp = Instantiate(popupPrefab, GetCanvas.transform);
             return popUp;
         }
 

@@ -5,6 +5,7 @@ using Assets.Scripts.Abstracts.Scene;
 using System;
 using System.Collections.Generic;
 using Assets.Scripts.Level;
+using Assets.Scripts.Health;
 
 namespace Assets.Scripts.Scenes.SceneConfigs
 {

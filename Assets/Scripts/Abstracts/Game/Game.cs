@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Abstracts.Scene;
 using System.Collections;
 using Assets.Scripts.Scenes.SceneManagers;
+using Assets.Scripts.Scenes.SceneConfigs;
 
 namespace Assets.Scripts.Abstracts.Game
 {

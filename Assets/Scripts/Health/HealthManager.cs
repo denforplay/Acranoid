@@ -6,13 +6,14 @@ using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.LevelEvents;
 using UnityEngine.UI;
+using Assets.Scripts.UI.PopupSystem;
 
 namespace Assets.Scripts.Health
 {
     public class HealthManager : Singleton<HealthManager>
     {
         [SerializeField] private Heart _heartPrefab;
-        [SerializeField] private GameObject _healthPanel;
+        [SerializeField] private GameObject _healthContent;
         public bool IsInitialized { get; private set; }
         private HealthController _healthController;
         private HealthViewController _healthViewController;
@@ -31,7 +32,11 @@ namespace Assets.Scripts.Health
             get
             {
                 CheckHeartsInitialized();
-                return _healthPanel;
+                if (_healthContent == null)
+                {
+                    _healthContent = GameObject.Find("HealthContent");
+                }
+                return _healthContent;
             }
         }
 
@@ -62,6 +67,7 @@ namespace Assets.Scripts.Health
             }
             else
             {
+                PopupSystem.GetInstance.SpawnPopup(typeof(HeartEndsPopup));
             }
         }
 

@@ -62,11 +62,14 @@ namespace Assets.Scripts.BallMovement
 
         private void BallInactivate()
         {
-            _rigidbody2D.velocity = Vector2.zero;
-            _rigidbody2D.isKinematic = false;
-            EventBusManager.GetInstance.Invoke<OnBallInactivatingEvent>(new OnBallInactivatingEvent());
-            this.transform.SetParent(_rememberedParent.transform);
-            HealthManager.GetInstance.SpendHeart(1);
+            if (gameObject != null && _rememberedParent != null)
+            { 
+                _rigidbody2D.velocity = Vector2.zero;
+                _rigidbody2D.isKinematic = false;
+                EventBusManager.GetInstance.Invoke<OnBallInactivatingEvent>(new OnBallInactivatingEvent());
+                this.transform.SetParent(_rememberedParent.transform);
+                HealthManager.GetInstance.SpendHeart(1);
+            }
         }
 
         private void OnBecameInvisible()
@@ -94,7 +97,8 @@ namespace Assets.Scripts.BallMovement
             });
 
             EventBusManager.GetInstance.Unsubscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
-            EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>(ReturnBallOnPosition);
+            EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ReturnBallOnPosition);
+            EventBusManager.GetInstance.Unsubscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
         }
 
         public void ReturnToPool()

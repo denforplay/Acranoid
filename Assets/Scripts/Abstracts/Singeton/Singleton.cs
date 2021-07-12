@@ -5,6 +5,7 @@ namespace Assets.Scripts.Abstracts.Singeton
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static T _instance;
+
         public static T GetInstance
         {
             get
@@ -18,6 +19,7 @@ namespace Assets.Scripts.Abstracts.Singeton
                 return _instance;
             }
         }
+
         protected void Awake()
         {
             if (_instance == null)
@@ -28,7 +30,7 @@ namespace Assets.Scripts.Abstracts.Singeton
             {
                 Destroy(gameObject);
             }
-
+                    
             DontDestroyOnLoad(gameObject);
         }
     }

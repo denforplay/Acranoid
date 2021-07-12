@@ -9,9 +9,6 @@ namespace Assets.Scripts.Abstracts.Scene
     public abstract class SceneManagerBase
     {
         private const float LOAD_PROGRESS = 0.9f;
-
-        public bool IsLoading { get; private set; }
-
         public Scene scene { get; private set; }
 
         protected Dictionary<string, SceneConfig> sceneConfigMap;
@@ -25,11 +22,6 @@ namespace Assets.Scripts.Abstracts.Scene
 
         public Coroutine LoadCurrentSceneAsync()
         {
-            if (this.IsLoading)
-            {
-                throw new Exception("Scene is loading");
-            }
-
             var sceneName = SceneManager.GetActiveScene().name;
             SceneConfig config = this.sceneConfigMap[sceneName];
             return Coroutines.Coroutines.StartRoutine(this.LoadCurrentSceneRoutine(config));
@@ -37,11 +29,6 @@ namespace Assets.Scripts.Abstracts.Scene
 
         public Coroutine LoadNewSceneAsync(string sceneName)
         {
-            if (this.IsLoading)
-            {
-                throw new Exception("Scene is loading");
-            }
-
             SceneConfig config = this.sceneConfigMap[sceneName];
             return Coroutines.Coroutines.StartRoutine(this.LoadNewSceneRoutine(config));
         }
@@ -53,17 +40,13 @@ namespace Assets.Scripts.Abstracts.Scene
 
         private IEnumerator LoadNewSceneRoutine(SceneConfig sceneConfig)
         {
-            this.IsLoading = true;
             yield return Coroutines.Coroutines.StartRoutine(this.LoadSceneRoutine(sceneConfig));
             yield return Coroutines.Coroutines.StartRoutine(this.InitializeSceneRoutine(sceneConfig));
-            this.IsLoading = false;
         }
 
         private IEnumerator LoadCurrentSceneRoutine(SceneConfig sceneConfig)
         {
-            this.IsLoading = true;
             yield return Coroutines.Coroutines.StartRoutine(this.InitializeSceneRoutine(sceneConfig));
-            this.IsLoading = false;
         }
 
         private IEnumerator LoadSceneRoutine(SceneConfig sceneConfig)

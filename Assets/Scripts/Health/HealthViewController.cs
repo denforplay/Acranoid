@@ -11,7 +11,6 @@ namespace Assets.Scripts.Health
         private List<Heart> _heartsView;
         private HealthRepository _healthRepository;
         private int _health => _healthRepository.Health;
-        private GameObject _healthPanel;
 
         public override void OnCreate()
         {
@@ -22,7 +21,6 @@ namespace Assets.Scripts.Health
         public override void Initialize()
         {
             _heartsView = new List<Heart>();
-            _healthPanel = HealthManager.GetInstance.HealthPanel;
             HealthManager.GetInstance.InitializeViewController(this);
         }
 
@@ -42,12 +40,16 @@ namespace Assets.Scripts.Health
 
         public void ViewHearts()
         {
+            if (HealthManager.GetInstance.HealthPanel != null)
             for (int i = 0; i < _healthRepository.Health; i++)
             {
                 Heart heart = _healthRepository._heartPool.GetPrefabInstance();
-                heart.transform.SetParent(_healthPanel.transform);
-                heart.gameObject.transform.position = _healthPanel.transform.position;
-                _heartsView.Add(heart);
+                if (heart != null)
+                {
+                    heart.transform.SetParent(HealthManager.GetInstance.HealthPanel.transform);
+                    heart.gameObject.transform.position = HealthManager.GetInstance.HealthPanel.transform.position;
+                    _heartsView.Add(heart);
+                }
             }
         }
     }

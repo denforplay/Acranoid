@@ -25,6 +25,7 @@ namespace Assets.Scripts.Block
         private float startX;
         private float countInRow;
         private float scaler;
+        private bool initialized;
         private Camera _camera;
         private void Start()
         {
@@ -36,7 +37,13 @@ namespace Assets.Scripts.Block
 
         private void ShowBlocks(IEvent ievent)
         {
-            EventBusManager.GetInstance.Invoke<OnNextLevelLoadedEvent>(new OnNextLevelLoadedEvent());
+
+            if (!initialized)
+            {
+                EventBusManager.GetInstance.Invoke<OnNextLevelLoadedEvent>(new OnNextLevelLoadedEvent());
+                EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>(ShowBlocks);
+                initialized = true;
+            }
             Level.Level level = LevelManager.GetInstance.GetCurrentLevel();
             int[] blocksData = level.blocksData;
             InitializeData(blocksData);
@@ -57,8 +64,10 @@ namespace Assets.Scripts.Block
                     default:
                         {
                             BaseBlock block = BlocksManager.GetInstance.GetBlock(_blockConfigs[blocksData[i]]);
+                            block._spriteRenderer.sprite = block._sprites.Last();
                             var scale = block.gameObject.transform.localScale;
                             block.gameObject.transform.localScale = new Vector3(scaler, scale.y, scale.z);
+                            if (_camera != null)
                             block.transform.position = _camera.ScreenToWorldPoint(new Vector3(horizontal, vertical, _camera.nearClipPlane));
                             horizontal += horizontalDistance;
                         }
@@ -71,7 +80,6 @@ namespace Assets.Scripts.Block
 
         private void InitializeData(int[] blocksData)
         {
-
             horizontal = _blockGeneratorConfig.startX;
             vertical = Screen.height - _blockGeneratorConfig.startY;
             countInRow = blocksData.TakeWhile(x => x != NEW_ROW).Count();
@@ -99,9 +107,10 @@ namespace Assets.Scripts.Block
             EventBusManager.GetInstance.Subscribe<OnBlocksRepositoryInitializedEvent>(ShowBlocks);
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             EventBusManager.GetInstance.Unsubscribe<OnBlocksRepositoryInitializedEvent>(ShowBlocks);
+            EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ShowBlocks);
         }
     }
 }

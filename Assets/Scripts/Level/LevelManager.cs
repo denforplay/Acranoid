@@ -59,6 +59,13 @@ namespace Assets.Scripts.Level
             _levelsController.SetCurrentPack(index);
         }
 
+        public Level LoadCurrentLevel()
+        {
+            CheckLevelsLoaded();
+            EventBusManager.GetInstance.Invoke<OnNextLevelLoadedEvent>(new OnNextLevelLoadedEvent());
+            return _levelsController.GetCurrentLevel();
+        }
+
         public Level LoadNextLevel()
         {
             CheckLevelsLoaded();
@@ -81,8 +88,6 @@ namespace Assets.Scripts.Level
             CheckLevelsLoaded();
             return GetCurrentLevel().lifes;
         }
-
-        
 
         private void CheckLevelsLoaded()
         {

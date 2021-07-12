@@ -6,6 +6,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Newtonsoft.Json;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.UI.Buttons
 {
@@ -40,7 +41,7 @@ namespace Assets.Scripts.UI.Buttons
                 button.onClick.AddListener(() => OnLevelClickEvent(index));
                 if (!prevLevel.isCompleted)
                 {
-                    button.enabled = false;
+                    button.interactable = false;
                 }
                 prevLevel = level;
             }

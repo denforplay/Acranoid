@@ -6,6 +6,7 @@ using Assets.Scripts.EventBus;
 using Assets.Scripts.Abstracts.Pool.Interfaces;
 using Assets.Scripts.EventBus.Events.BallEvents;
 using Assets.Scripts.EventBus.Events.LevelEvents;
+using System;
 
 namespace Assets.Scripts.BallMovement
 {
@@ -87,13 +88,14 @@ namespace Assets.Scripts.BallMovement
 
         private void OnDestroy()
         {
-            EventBusManager.GetInstance.Unsubscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
-            EventBusManager.GetInstance.Unsubscribe<OnBallActivatingEvent>(BallActivate);
             EventBusManager.GetInstance.Unsubscribe<OnHeathInitizliedEvent>((OnHeathInitizliedEvent) =>
             {
                 EventBusManager.GetInstance.Subscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
             });
 
+            EventBusManager.GetInstance.Unsubscribe<OnBallActivatingEvent>(BallActivate);
+            EventBusManager.GetInstance.Unsubscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
+            EventBusManager.GetInstance.Unsubscribe<OnLevelCompletedEvent>(ReturnBallOnPosition);
             EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ReturnBallOnPosition);
         }
     }

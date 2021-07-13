@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.Abstracts.Game;
 using System.Linq;
+using System;
 
 namespace Assets.Scripts.Health
 {
@@ -35,7 +36,7 @@ namespace Assets.Scripts.Health
 
         public void DeleteHealthView()
         {
-            _heartsView.Last(x => x.gameObject!= null && x.gameObject.activeInHierarchy).ReturnToPool();
+            _heartsView.Last(x => x.gameObject != null && x.gameObject.activeInHierarchy).ReturnToPool();
         }
 
         public void ViewHearts()

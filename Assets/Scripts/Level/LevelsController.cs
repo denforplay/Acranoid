@@ -61,9 +61,11 @@ namespace Assets.Scripts.Level
         {
             JsonParser jsonParser = new JsonParser();
             List<Level> pack = new List<Level>();
-            foreach (var level in _levelPack._jsonLevelsFiles)
+            foreach (var levelAsset in _levelPack._jsonLevelsFiles)
             {
-                pack.Add(jsonParser.LoadJsonData(level));
+                Level level = jsonParser.LoadJsonData(levelAsset);
+                level.textAsset = levelAsset;
+                pack.Add(level);
             }
 
             _levelRepository.CurrentPack = pack;

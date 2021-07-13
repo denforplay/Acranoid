@@ -9,6 +9,7 @@ namespace Assets.Scripts.Health
 
         public void ReturnToPool()
         {
+            if (gameObject != null)
             this.gameObject.SetActive(false);
         }
     }

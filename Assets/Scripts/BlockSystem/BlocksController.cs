@@ -36,6 +36,8 @@ namespace Assets.Scripts.Block
             pool.ReturnToPool(block);
             if (_blocksRepository.Count == 0)
             {
+                JsonParser jsonParser = new JsonParser();
+                jsonParser.SetJsonData(LevelManager.GetInstance.CurrentLevel);
                 EventBusManager.GetInstance.Invoke(new OnLevelCompletedEvent());
                 PopupSystem.GetInstance.SpawnPopup(typeof(LevelSuccessPopup));
             }

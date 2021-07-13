@@ -10,6 +10,7 @@ namespace Assets.Scripts.UI.Buttons
 
         private void Awake()
         {
+
             _button.onClick.AddListener(LoadNextLevel);
         }
 

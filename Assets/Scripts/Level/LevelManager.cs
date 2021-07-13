@@ -57,8 +57,6 @@ namespace Assets.Scripts.Level
         public Level LoadNextLevel()
         {
             CheckLevelsLoaded();
-            JsonParser jsonParser = new JsonParser();
-            jsonParser.SetJsonData(CurrentLevel);
             CurrentLevel = _levelsController.LoadNextLevel();
             EventBusManager.GetInstance.Invoke<OnNextLevelLoadedEvent>(new OnNextLevelLoadedEvent());
             return _levelsController.GetCurrentLevel();

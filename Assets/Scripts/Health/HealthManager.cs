@@ -19,6 +19,11 @@ namespace Assets.Scripts.Health
         private HealthController _healthController;
         private HealthViewController _healthViewController;
 
+        private new void Awake()
+        {
+            IsDestroy = true;
+            base.Awake();
+        }
         public Heart HeartPrefaab
         {
             get
@@ -113,6 +118,12 @@ namespace Assets.Scripts.Health
             {
                 throw new ArgumentNullException("Hearts are not initialized yet");
             }
+        }
+
+        private void OnDestroy()
+        {
+            if (_healthViewController != null)
+            _healthViewController.DeleteAllHearts();
         }
     }
 }

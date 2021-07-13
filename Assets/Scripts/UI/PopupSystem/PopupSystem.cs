@@ -50,5 +50,13 @@ namespace Assets.Scripts.UI.PopupSystem
             Popup popup = _popupsOnCanvas.Pop();
             Destroy(popup.gameObject);
         }
+
+        private void OnDestroy()
+        {
+            while(_popupsOnCanvas.Count != 0)
+            {
+                DeletePopUp();
+            }
+        }
     }
 }

@@ -88,8 +88,8 @@ namespace Assets.Scripts.BallMovement
             {
                 EventBusManager.GetInstance.Subscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
             });
-            EventBusManager.GetInstance.Subscribe<OnLevelCompletedEvent>(ReturnBallOnPosition);
             EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>(ReturnBallOnPosition);
+            EventBusManager.GetInstance.Subscribe<OnLevelCompletedEvent>(ReturnBallOnPosition);
         }
 
         private void OnDestroy()

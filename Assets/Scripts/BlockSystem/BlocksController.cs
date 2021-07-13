@@ -5,6 +5,7 @@ using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.EventBus.Events.LevelEvents;
 using Assets.Scripts.Level;
+using Assets.Scripts.PlayerData;
 using Assets.Scripts.UI.PopupSystem;
 
 namespace Assets.Scripts.Block

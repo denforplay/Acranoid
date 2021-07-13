@@ -2,6 +2,8 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using System.Linq;
+using Assets.Scripts.PlayerData;
 
 namespace Assets.Scripts.Level
 {
@@ -15,12 +17,9 @@ namespace Assets.Scripts.Level
         public void SetJsonData(Level level)
         {
             level.isCompleted = true;
-            JsonSerializer serializer = new JsonSerializer();
-            using (StreamWriter sw = new StreamWriter(AssetDatabase.GetAssetPath(level.textAsset)))
-            using (JsonWriter writer = new JsonTextWriter(sw))
-            {
-                serializer.Serialize(writer, level);
-            }
+            string jsonLevel = JsonConvert.SerializeObject(level);
+
+            PlayerDataManager.GetInstance.SetLevelDataForKey(LevelManager.GetInstance.CurrentLevel.textAsset.name, jsonLevel);
         }
     }
 }

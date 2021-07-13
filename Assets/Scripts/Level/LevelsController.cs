@@ -3,6 +3,7 @@ using Assets.Scripts.Abstracts.Game;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.EventBus.Events.LevelEvents;
+using Assets.Scripts.PlayerData;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -37,12 +38,14 @@ namespace Assets.Scripts.Level
 
         public Level LoadNextLevel()
         {
-            int nextLevelIndex = _levelRepository.CurrentPack.IndexOf(_levelRepository.CurrentLevel) + 1;
+            Level currentLevel = _levelRepository.CurrentPack.Find(x => x.levelName == _levelRepository.CurrentLevel.levelName);
+            int currentLevelIndex = _levelRepository.CurrentPack.IndexOf(currentLevel);
+            int nextLevelIndex = currentLevelIndex + 1;
             if (nextLevelIndex < _levelRepository.CurrentPack.Count)
             {
                 EventBusManager.GetInstance.Invoke<OnPackCompletedEvent>(new OnPackCompletedEvent());
             }
-            Level nextLevel = _levelRepository.CurrentPack[_levelRepository.CurrentPack.IndexOf(_levelRepository.CurrentLevel) + 1];
+            Level nextLevel = _levelRepository.CurrentPack[nextLevelIndex];
             _levelRepository.CurrentLevel = nextLevel;
             return nextLevel;
         }
@@ -54,7 +57,8 @@ namespace Assets.Scripts.Level
 
         public void SetCurrentLevel(int index)
         {
-            _levelRepository.CurrentLevel = _levelRepository.CurrentPack[index];
+            _levelRepository.CurrentLevel = PlayerDataManager.GetInstance.GetLevelDataForKey(_levelRepository.CurrentPack[index].textAsset.name);
+            _levelRepository.CurrentLevel.textAsset = _levelRepository.CurrentPack[index].textAsset;
         }
 
         public void SetCurrentPack(LevelPackObject _levelPack)
@@ -65,6 +69,8 @@ namespace Assets.Scripts.Level
             {
                 Level level = jsonParser.LoadJsonData(levelAsset);
                 level.textAsset = levelAsset;
+                if (PlayerDataManager.GetInstance.GetLevelDataForKey(level.textAsset.name) == null)
+                PlayerDataManager.GetInstance.SetLevelDataForKey(level.textAsset.name, level.textAsset.text);
                 pack.Add(level);
             }
 

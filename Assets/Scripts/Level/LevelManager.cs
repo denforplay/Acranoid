@@ -22,25 +22,9 @@ namespace Assets.Scripts.Level
         public void Initialize(LevelsController levelsController)
         {
             _levelsController = levelsController;
-            LoadJsonPack(_levelPackObject);
             _levelsController.OnInitialized();
             IsInitialized = true;
             EventBusManager.GetInstance.Invoke<OnLevelsInitialized>(new OnLevelsInitialized());
-        }
-
-        private void LoadJsonPack(LevelPackObject levelPackObject)
-        {
-            List<Level> levelsPack = new List<Level>();
-            JsonParser jsonParser = new JsonParser();
-            foreach (var levelData in levelPackObject._jsonLevelsFiles)
-            {
-                Level level = jsonParser.LoadJsonData(levelData);
-                level.textAsset = levelData;
-                levelsPack.Add(level);
-            }
-
-            _levelsController.SetPack(levelsPack);
-            _levelsController.AddPack(levelsPack);
         }
 
         public void SetLevelPackObject(LevelPackObject levelPackObject)
@@ -48,7 +32,7 @@ namespace Assets.Scripts.Level
             _levelPackObject = levelPackObject;
             CurrentPackSprite = levelPackObject._packImage;
             CurrentPackName = levelPackObject.packName;
-            LoadJsonPack(levelPackObject);
+            _levelsController.SetCurrentPack(levelPackObject);
             EventBusManager.GetInstance.Invoke<OnPackChangedEvent>(new OnPackChangedEvent());
         }
 
@@ -58,9 +42,9 @@ namespace Assets.Scripts.Level
             CurrentLevel = _levelsController.GetCurrentLevel();
         }
 
-        public void SetCurrentPack(int index)
+        public void SetCurrentPack(LevelPackObject levelPackObject)
         {
-            _levelsController.SetCurrentPack(index);
+            _levelsController.SetCurrentPack(levelPackObject);
         }
 
         public Level LoadCurrentLevel()
@@ -89,7 +73,14 @@ namespace Assets.Scripts.Level
         public int GetCurrentLevelLifes()
         {
             CheckLevelsLoaded();
-            return GetCurrentLevel().lifes;
+            if (GetCurrentLevel() != null)
+            {
+                return GetCurrentLevel().lifes;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         private void CheckLevelsLoaded()

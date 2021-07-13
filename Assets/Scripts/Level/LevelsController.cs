@@ -29,8 +29,7 @@ namespace Assets.Scripts.Level
 
         public void OnInitialized()
         {
-            _levelRepository.CurrentPack = _levelRepository.levelPacks.First();
-            if (_levelRepository.CurrentLevel is null)
+            if (_levelRepository.CurrentPack != null && _levelRepository.CurrentPack.Count != 0)
             {
                 _levelRepository.CurrentLevel = _levelRepository.CurrentPack.First();
             }
@@ -53,21 +52,21 @@ namespace Assets.Scripts.Level
             _levelRepository.CurrentPack = levels;
         }
 
-        public List<Level> LoadNextPack()
-        {
-            List<Level> nextPack = _levelRepository.levelPacks[_levelRepository.levelPacks.IndexOf(_levelRepository.CurrentPack) + 1];
-            _levelRepository.CurrentPack = nextPack;
-            return nextPack;
-        }
-
         public void SetCurrentLevel(int index)
         {
             _levelRepository.CurrentLevel = _levelRepository.CurrentPack[index];
         }
 
-        public void SetCurrentPack(int index)
+        public void SetCurrentPack(LevelPackObject _levelPack)
         {
-            _levelRepository.CurrentPack = _levelRepository.levelPacks[index];
+            JsonParser jsonParser = new JsonParser();
+            List<Level> pack = new List<Level>();
+            foreach (var level in _levelPack._jsonLevelsFiles)
+            {
+                pack.Add(jsonParser.LoadJsonData(level));
+            }
+
+            _levelRepository.CurrentPack = pack;
         }
 
         public List<Level> GetCurrentPack()
@@ -78,11 +77,6 @@ namespace Assets.Scripts.Level
         public Level GetCurrentLevel()
         {
             return _levelRepository.CurrentLevel;
-        }
-
-        public void AddPack(List<Level> levelPack)
-        {
-            _levelRepository.levelPacks.Add(levelPack);
         }
     }
 }

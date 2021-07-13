@@ -7,16 +7,21 @@ namespace Assets.Scripts.UI.PopupSystem
 {
     public class PopupSystem : Singleton<PopupSystem>
     {
+        private const string CANVAS_NAME = "Canvas";
         [SerializeField] private PopupConfig _popupConfig;
         [SerializeField] private GameObject _canvas;
-
+        private new void Awake()
+        {
+            IsDestroy = true;
+            base.Awake();
+        }
         public GameObject GetCanvas 
         {
             get
             {
                 if (_canvas == null)
                 {
-                    _canvas = GameObject.Find("Canvas");
+                    _canvas = GameObject.Find(CANVAS_NAME);
                 }
 
                 return _canvas;

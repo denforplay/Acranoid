@@ -63,11 +63,12 @@ namespace Assets.Scripts.Block
                         }
                     default:
                         {
+
                             BaseBlock block = BlocksManager.GetInstance.GetBlock(_blockConfigs[blocksData[i]]);
                             var scale = block.gameObject.transform.localScale;
                             block.gameObject.transform.localScale = new Vector3(scaler, scale.y, scale.z);
                             if (_camera != null)
-                            block.transform.position = _camera.ScreenToWorldPoint(new Vector3(horizontal, vertical, _camera.nearClipPlane));
+                                block.transform.position = _camera.ScreenToWorldPoint(new Vector3(horizontal, vertical, _camera.nearClipPlane));
                             horizontal += horizontalDistance;
                         }
                         break;
@@ -94,6 +95,7 @@ namespace Assets.Scripts.Block
             horizontal -= horizontalDistance / 2;
             horizontalDistance /= scaler;
             countInRow = blocksData.Skip(skipIndex + 1).TakeWhile(x => x != NEW_ROW).Count();
+            if (countInRow != 0)
             scaler = (Screen.width - 2 * startX) / (horizontalDistance * countInRow);
             horizontalDistance *= scaler;
             startX += horizontalDistance / 2;

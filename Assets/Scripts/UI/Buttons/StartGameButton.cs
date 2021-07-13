@@ -64,14 +64,14 @@ namespace Assets.Scripts.UI.Buttons
                 var btnText = button.GetComponentInChildren<TextMeshProUGUI>();
                 btnText.text = _levelPackObjects[i].packName;
                 int index = i;
-                button.onClick.AddListener(() => OnPackageClickEvent(index, _levelPackObjects[index]));
+                button.onClick.AddListener(() => OnPackageClickEvent(_levelPackObjects[index]));
             }
         }
 
-        private void OnPackageClickEvent(int packIndex, LevelPackObject _levelPackObject)
+        private void OnPackageClickEvent(LevelPackObject _levelPackObject)
         {
+            LevelManager.GetInstance.SetCurrentPack(_levelPackObject);
             SetLevelsData(_levelPackObject);
-            LevelManager.GetInstance.SetCurrentPack(packIndex);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Assets.Scripts.Health
 {
     public class HealthManager : Singleton<HealthManager>
     {
+        private const string HEALTH_CONTENT_NAME = "HealthContent";
         [SerializeField] private Heart _heartPrefab;
         [SerializeField] private GameObject _healthContent;
         public bool IsInitialized { get; private set; }
@@ -34,7 +35,7 @@ namespace Assets.Scripts.Health
                 CheckHeartsInitialized();
                 if (_healthContent == null)
                 {
-                    _healthContent = GameObject.Find("HealthContent");
+                    _healthContent = GameObject.Find(HEALTH_CONTENT_NAME);
                 }
                 return _healthContent;
             }

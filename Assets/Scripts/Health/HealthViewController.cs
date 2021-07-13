@@ -35,7 +35,7 @@ namespace Assets.Scripts.Health
 
         public void DeleteHealthView()
         {
-            _heartsView.Last(x => x.gameObject.activeInHierarchy).ReturnToPool();
+            _heartsView.Last(x => x.gameObject!= null && x.gameObject.activeInHierarchy).ReturnToPool();
         }
 
         public void ViewHearts()

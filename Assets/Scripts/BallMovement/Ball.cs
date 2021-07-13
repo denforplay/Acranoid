@@ -39,7 +39,7 @@ namespace Assets.Scripts.BallMovement
 
         public void ReturnBallOnPosition(IEvent ievent)
         {
-            if (_rememberedParent != null)
+            if (_rememberedParent != null && this != null)
             {
                 _rigidbody2D.isKinematic = true;
                 transform.SetParent(_rememberedParent.transform);
@@ -87,6 +87,7 @@ namespace Assets.Scripts.BallMovement
 
         private void OnDestroy()
         {
+            EventBusManager.GetInstance.Unsubscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
             EventBusManager.GetInstance.Unsubscribe<OnBallActivatingEvent>(BallActivate);
             EventBusManager.GetInstance.Unsubscribe<OnHeathInitizliedEvent>((OnHeathInitizliedEvent) =>
             {
@@ -94,8 +95,6 @@ namespace Assets.Scripts.BallMovement
             });
 
             EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ReturnBallOnPosition);
-            EventBusManager.GetInstance.Unsubscribe<OnLevelCompletedEvent>(ReturnBallOnPosition);
-            EventBusManager.GetInstance.Unsubscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
         }
     }
 }

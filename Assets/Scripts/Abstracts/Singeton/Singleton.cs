@@ -5,7 +5,7 @@ namespace Assets.Scripts.Abstracts.Singeton
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static T _instance;
-
+        public static bool IsDestroy = false;
         public static T GetInstance
         {
             get
@@ -13,6 +13,7 @@ namespace Assets.Scripts.Abstracts.Singeton
                 if (_instance is null)
                 {
                     _instance = new GameObject().AddComponent<T>();
+                    if (!IsDestroy)
                     DontDestroyOnLoad(_instance);
                 }
 

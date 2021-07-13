@@ -36,22 +36,28 @@ namespace Assets.Scripts.Health
 
         public void DeleteHealthView()
         {
-            _heartsView.Last(x => x.gameObject != null && x.gameObject.activeInHierarchy).ReturnToPool();
+            try
+            {
+                _heartsView.Last(x => x != null && x.gameObject.activeInHierarchy).ReturnToPool();
+            }
+            catch
+            {
+            }
         }
 
         public void ViewHearts()
         {
             if (HealthManager.GetInstance.HealthPanel != null)
-            for (int i = 0; i < _healthRepository.Health; i++)
-            {
-                Heart heart = _healthRepository._heartPool.GetPrefabInstance();
-                if (heart != null)
+                for (int i = 0; i < _healthRepository.Health; i++)
                 {
-                    heart.transform.SetParent(HealthManager.GetInstance.HealthPanel.transform);
-                    heart.gameObject.transform.position = HealthManager.GetInstance.HealthPanel.transform.position;
-                    _heartsView.Add(heart);
+                    Heart heart = _healthRepository._heartPool.GetPrefabInstance();
+                    if (heart != null)
+                    {
+                        heart.transform.SetParent(HealthManager.GetInstance.HealthPanel.transform);
+                        heart.gameObject.transform.position = HealthManager.GetInstance.HealthPanel.transform.position;
+                        _heartsView.Add(heart);
+                    }
                 }
-            }
         }
     }
 }

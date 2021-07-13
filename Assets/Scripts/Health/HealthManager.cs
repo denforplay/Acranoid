@@ -123,7 +123,10 @@ namespace Assets.Scripts.Health
         private void OnDestroy()
         {
             if (_healthViewController != null)
-            _healthViewController.DeleteAllHearts();
+            {
+                _healthViewController.DeleteAllHearts();
+            }
+
         }
     }
 }

@@ -40,11 +40,17 @@ namespace Assets.Scripts.BallMovement
 
         public void ReturnBallOnPosition(IEvent ievent)
         {
-            if (_rememberedParent != null && this != null)
+            if (_rememberedParent != null && this != null && gameObject.activeInHierarchy != false)
             {
                 _rigidbody2D.isKinematic = true;
                 transform.SetParent(_rememberedParent.transform);
-                this.gameObject.SetActive(true);
+                try
+                {
+                    this.gameObject.SetActive(true);
+                }
+                catch
+                {
+                }
                 Vector3 positon = _rememberedParent.transform.position;
                 transform.position = new Vector3(positon.x, positon.y + _circleCollider2D.radius * 2, positon.z);
             }
@@ -88,6 +94,7 @@ namespace Assets.Scripts.BallMovement
 
         private void OnDestroy()
         {
+            _rememberedParent = null;
             EventBusManager.GetInstance.Unsubscribe<OnHeathInitizliedEvent>((OnHeathInitizliedEvent) =>
             {
                 EventBusManager.GetInstance.Subscribe<OnHeartSpendEvent>(ReturnBallOnPosition);

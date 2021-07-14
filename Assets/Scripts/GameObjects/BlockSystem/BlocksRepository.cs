@@ -26,8 +26,8 @@ namespace Assets.Scripts.Block
         public void InitializePools()
         {
             blocksPools = new List<ObjectPool<BaseBlock>>();
-            blocksPools.Add(new ObjectPool<BaseBlock>(new BlockFactory<BaseBlock>(BlocksManager.GetInstance.colorBlockPrefab, BlocksManager.GetInstance._colorBlockConfig)));
-            blocksPools.Add(new ObjectPool<BaseBlock>(new BlockFactory<BaseBlock>(BlocksManager.GetInstance.graniteBlockPrefab, BlocksManager.GetInstance._graniteBlockConfig)));
+            blocksPools.Add(new ObjectPool<BaseBlock>(new BlockFactory<BaseBlock>(BlocksManager.GetInstance.colorBlockPrefab)));
+            blocksPools.Add(new ObjectPool<BaseBlock>(new BlockFactory<BaseBlock>(BlocksManager.GetInstance.graniteBlockPrefab)));
         }
     }
 }

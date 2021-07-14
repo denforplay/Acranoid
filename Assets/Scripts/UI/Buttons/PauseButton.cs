@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts.UI.PopupSystem;
+
 namespace Assets.Scripts.UI.Buttons
 {
     public class PauseButton : MonoBehaviour
@@ -18,13 +19,13 @@ namespace Assets.Scripts.UI.Buttons
         {
             _stopGame.gameObject.SetActive(false);
             _continueGame.gameObject.SetActive(true);
-            PopupSystem.PopupSystem.GetInstance.SpawnPopup(typeof(PausePopup));
+            PopupManager.GetInstance.SpawnPopup<PausePopup>();
             Time.timeScale = 0;
         }
 
         public void ContinueGame()
         {
-            PopupSystem.PopupSystem.GetInstance.DeletePopUp();
+            PopupManager.GetInstance.DeletePopUp();
             _stopGame.gameObject.SetActive(true);
             _continueGame.gameObject.SetActive(false);
             Time.timeScale = 1;

@@ -7,6 +7,7 @@ using Assets.Scripts.Abstracts.Scene;
 using System;
 using System.Collections.Generic;
 using Assets.Scripts.Block;
+using Assets.Scripts.UI.PopupSystem;
 
 namespace Assets.Scripts.Scenes.SceneConfigs
 {
@@ -17,6 +18,7 @@ namespace Assets.Scripts.Scenes.SceneConfigs
         public override Dictionary<Type, Controller> CreateAllControllers()
         {
             var controllersMap = new Dictionary<Type, Controller>();
+            this.CreateController<PopupController>(controllersMap);
             this.CreateController<HealthController>(controllersMap);
             this.CreateController<HealthViewController>(controllersMap);
             this.CreateController<BlocksController>(controllersMap);
@@ -27,6 +29,7 @@ namespace Assets.Scripts.Scenes.SceneConfigs
         public override Dictionary<Type, Repository> CreateAllRepositories()
         {
             var repositoriesMap = new Dictionary<Type, Repository>();
+            this.CreateRepository<PopupRepository>(repositoriesMap);
             this.CreateRepository<HealthRepository>(repositoriesMap);
             this.CreateRepository<BlocksRepository>(repositoriesMap);
             this.CreateRepository<LocalisationRepository>(repositoriesMap);

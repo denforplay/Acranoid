@@ -17,6 +17,7 @@ namespace Assets.Scripts.BallMovement
         private Rigidbody2D _rigidbody2D;
         private CircleCollider2D _circleCollider2D;
         private GameObject _rememberedParent;
+        private Camera _camera;
 
         public IObjectPool Origin { get; set; }
 
@@ -26,6 +27,7 @@ namespace Assets.Scripts.BallMovement
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
             _ballCollisions = new BallCollisions(_ballConfig, _rigidbody2D);
+            _camera = Camera.main;
         }
 
         private void FixedUpdate()

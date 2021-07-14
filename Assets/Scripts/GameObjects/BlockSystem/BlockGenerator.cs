@@ -7,6 +7,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using System;
+using Assets.Scripts.GameObjects.Borders;
 
 namespace Assets.Scripts.Block
 {
@@ -16,23 +17,29 @@ namespace Assets.Scripts.Block
         private const int NEW_ROW = -1;
         private const int GRANITE_BLOCK = 0;
         private const int COLOR_BLOCK = 1;
-        [SerializeField] List<BaseBlock> _blockConfigs;
+        [SerializeField] List<BaseBlock> _blocksPrefabs;
+        [SerializeField] List<BlockConfig> _blockConfigs;
         [SerializeField] private BlockGeneratorConfig _blockGeneratorConfig;
-        private float horizontalDistance;
-        private float verticalDistance;
-        private float horizontal;
-        private float vertical;
-        private float startX;
+        [SerializeField] private SpriteRenderer _leftBorderRender;
+        [SerializeField] private SpriteRenderer _topBorderRender;
+        [SerializeField] private SpriteRenderer _blockRender;
+        private Vector2 distance = new Vector2();
+        private Vector2 position = new Vector2();
+        private Vector2 startPosition = new Vector2();
+        private Vector2 screen;
         private float countInRow;
         private float scaler;
         private bool initialized;
         private Camera _camera;
         private void Start()
         {
-            horizontalDistance = (float)Screen.width / _blockGeneratorConfig.screenWidth * _blockGeneratorConfig.blockWidth;
-            verticalDistance = (float)Screen.height / _blockGeneratorConfig.screenHeight * _blockGeneratorConfig.blockHeight;
-            startX = (float)Screen.width / _blockGeneratorConfig.screenWidth * _blockGeneratorConfig.startX;
             _camera = Camera.main;
+            screen = new Vector2(Screen.width, Screen.height);
+            var screenInWorld = _camera.ScreenToWorldPoint(screen);
+            distance.x = screen.x / _blockGeneratorConfig.screenWidth * _blockGeneratorConfig.blockWidth;
+            distance.y = screen.y / _blockGeneratorConfig.screenHeight * _blockGeneratorConfig.blockHeight;
+            startPosition = new Vector2(_leftBorderRender.size.x - screenInWorld.x, screenInWorld.y - _topBorderRender.size.y -_blockRender.size.x/2);
+            startPosition = _camera.WorldToScreenPoint(startPosition);
         }
 
         private void ShowBlocks(IEvent ievent)
@@ -53,7 +60,7 @@ namespace Assets.Scripts.Block
                 {
                     case EMPTY_BLOCK:
                         {
-                            horizontal += horizontalDistance;
+                            position.x += distance.x;
                             continue;
                         }
                     case NEW_ROW:
@@ -63,44 +70,53 @@ namespace Assets.Scripts.Block
                         }
                     default:
                         {
-
-                            BaseBlock block = BlocksManager.GetInstance.GetBlock(_blockConfigs[blocksData[i]]);
+                            BaseBlock block;
+                            if (blocksData[i] != GRANITE_BLOCK)
+                            {
+                                block = BlocksManager.GetInstance.GetBlock(_blocksPrefabs[COLOR_BLOCK]);
+                                block.SetData(_blockConfigs[blocksData[i] - 1]);
+                            }
+                            else
+                            {
+                                block = BlocksManager.GetInstance.GetBlock(_blocksPrefabs[GRANITE_BLOCK]);
+                            }
                             var scale = block.gameObject.transform.localScale;
                             block.gameObject.transform.localScale = new Vector3(scaler, scale.y, scale.z);
                             if (_camera != null)
-                                block.transform.position = _camera.ScreenToWorldPoint(new Vector3(horizontal, vertical, _camera.nearClipPlane));
-                            horizontal += horizontalDistance;
+                                block.transform.position = _camera.ScreenToWorldPoint(new Vector3(position.x, position.y, _camera.nearClipPlane));
+
+                            position.x += distance.x;
                         }
                         break;
                 }
             }
-            startX -= horizontalDistance / 2;
-            horizontalDistance /= scaler;
+            startPosition.x -= distance.x / 2;
+            distance /= scaler;
         }
 
         private void InitializeData(int[] blocksData)
         {
-            horizontal = _blockGeneratorConfig.startX;
-            vertical = Screen.height - _blockGeneratorConfig.startY;
+            position.x = startPosition.x;
+            position.y = startPosition.y;
             countInRow = blocksData.TakeWhile(x => x != NEW_ROW).Count();
-            scaler = (Screen.width - 2 * startX) / (horizontalDistance * countInRow);
-            horizontalDistance *= scaler;
-            startX += horizontalDistance / 2;
-            horizontal += horizontalDistance / 2;
+            scaler = (screen.x - 2 * startPosition.x) / (distance.x * countInRow);
+            distance *= scaler;
+            startPosition.x += distance.x / 2;
+            position.x = startPosition.x;
         }
 
         private void CalculateDataForNewRow(int[] blocksData, int skipIndex)
         {
-            startX -= horizontalDistance / 2;
-            horizontal -= horizontalDistance / 2;
-            horizontalDistance /= scaler;
+            startPosition.x -= distance.x / 2;
+            position.x -= distance.x / 2;
+            distance /= scaler;
             countInRow = blocksData.Skip(skipIndex + 1).TakeWhile(x => x != NEW_ROW).Count();
             if (countInRow != 0)
-            scaler = (Screen.width - 2 * startX) / (horizontalDistance * countInRow);
-            horizontalDistance *= scaler;
-            startX += horizontalDistance / 2;
-            vertical -= verticalDistance;
-            horizontal = startX;
+            scaler = (Screen.width - 2 * startPosition.x) / (distance.x * countInRow);
+            distance *= scaler;
+            startPosition.x += distance.x / 2;
+            position.y -= distance.y;
+            position.x = startPosition.x;
         }
 
         private void OnEnable()

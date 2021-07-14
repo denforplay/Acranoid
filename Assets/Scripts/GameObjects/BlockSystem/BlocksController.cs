@@ -2,10 +2,8 @@
 using Assets.Scripts.Abstracts.Game;
 using Assets.Scripts.Abstracts.Pool;
 using Assets.Scripts.EventBus;
-using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.EventBus.Events.LevelEvents;
 using Assets.Scripts.Level;
-using Assets.Scripts.PlayerData;
 using Assets.Scripts.UI.PopupSystem;
 
 namespace Assets.Scripts.Block
@@ -40,7 +38,7 @@ namespace Assets.Scripts.Block
                 JsonParser jsonParser = new JsonParser();
                 jsonParser.SetJsonData(LevelManager.GetInstance.CurrentLevel);
                 EventBusManager.GetInstance.Invoke(new OnLevelCompletedEvent());
-                PopupSystem.GetInstance.SpawnPopup(typeof(LevelSuccessPopup));
+                PopupManager.GetInstance.SpawnPopup<LevelSuccessPopup>();
             }
         }
 

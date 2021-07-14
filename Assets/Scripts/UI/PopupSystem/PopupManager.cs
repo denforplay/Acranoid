@@ -1,21 +1,25 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Abstracts.Singeton;
+using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events.Popup;
 using System.Collections.Generic;
-using Assets.Scripts.Abstracts.Singeton;
-using System;
+using UnityEngine;
 
 namespace Assets.Scripts.UI.PopupSystem
 {
-    public class PopupSystem : Singleton<PopupSystem>
+    public class PopupManager : Singleton<PopupManager>
     {
         private const string CANVAS_NAME = "Canvas";
         [SerializeField] private PopupConfig _popupConfig;
         [SerializeField] private GameObject _canvas;
+
+        private Stack<Popup> _popupsOnCanvas = new Stack<Popup>();
+
         private new void Awake()
         {
             IsDestroy = true;
             base.Awake();
         }
-        public GameObject GetCanvas 
+        public GameObject GetCanvas
         {
             get
             {
@@ -28,12 +32,12 @@ namespace Assets.Scripts.UI.PopupSystem
             }
         }
 
-        private Stack<Popup> _popupsOnCanvas = new Stack<Popup>();
-        public Popup SpawnPopup(Type type)
+        public Popup SpawnPopup<T>() where T : Popup
         {
             Time.timeScale = 0;
-            Popup popUpPrefab = _popupConfig.Popups.Find(a => a.GetType() == type);
+            Popup popUpPrefab = _popupConfig.Popups.Find(a => a.GetType() == typeof(T));
             Popup popup = CreatePopup(popUpPrefab);
+            popup.Show();
             _popupsOnCanvas.Push(popup);
             return popup;
         }
@@ -48,12 +52,13 @@ namespace Assets.Scripts.UI.PopupSystem
         {
             Time.timeScale = 1;
             Popup popup = _popupsOnCanvas.Pop();
+            popup.Hide();
             Destroy(popup.gameObject);
         }
 
         private void OnDestroy()
         {
-            while(_popupsOnCanvas.Count != 0)
+            while (_popupsOnCanvas.Count != 0)
             {
                 DeletePopUp();
             }

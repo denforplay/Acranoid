@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Level;
+using Assets.Scripts.UI.PopupSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +17,7 @@ namespace Assets.Scripts.UI.Buttons
         public void RestartCurrentLevel()
         {
             LevelManager.GetInstance.LoadCurrentLevel();
-            PopupSystem.PopupSystem.GetInstance.DeletePopUp();
+            PopupManager.GetInstance.DeletePopUp();
         }
     }
 }

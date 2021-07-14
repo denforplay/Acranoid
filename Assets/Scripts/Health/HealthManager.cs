@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Level;
-using System;
+﻿using System;
 using UnityEngine;
 using Assets.Scripts.Abstracts.Singeton;
 using Assets.Scripts.EventBus.Events;
@@ -73,7 +72,7 @@ namespace Assets.Scripts.Health
             }
             else
             {
-                PopupSystem.GetInstance.SpawnPopup(typeof(HeartEndsPopup));
+                PopupManager.GetInstance.SpawnPopup<HeartEndsPopup>();
             }
         }
 

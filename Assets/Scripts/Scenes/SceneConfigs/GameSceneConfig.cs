@@ -7,6 +7,7 @@ using Assets.Scripts.Abstracts.Scene;
 using System;
 using System.Collections.Generic;
 using Assets.Scripts.Block;
+using Assets.Scripts.UI.PopupSystem;
 
 namespace Assets.Scripts.Scenes.SceneConfigs
 {

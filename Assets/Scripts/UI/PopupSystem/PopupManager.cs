@@ -9,13 +9,11 @@ namespace Assets.Scripts.UI.PopupSystem
     public class PopupManager : Singleton<PopupManager>
     {
         private const string CANVAS_NAME = "Canvas";
-
         [SerializeField] private PopupConfig _popupConfig;
         [SerializeField] private GameObject _canvas;
-        public PopupConfig PopupConfig => _popupConfig;
-        private bool isInitialized { get; set; }
-        private PopupController _popupController;
+
         private Stack<Popup> _popupsOnCanvas = new Stack<Popup>();
+
         private new void Awake()
         {
             IsDestroy = true;
@@ -34,25 +32,28 @@ namespace Assets.Scripts.UI.PopupSystem
             }
         }
 
-        public void Initialize(PopupController popupController)
-        {
-            _popupController = popupController;
-            isInitialized = true;
-            EventBusManager.GetInstance.Invoke(new OnPopupManagerInitializedEvent());
-        }
-
-        public void SpawnPopup<T>() where T : Popup
+        public Popup SpawnPopup<T>() where T : Popup
         {
             Time.timeScale = 0;
-            Popup popUpPrefab = _popupController.GetPopup(typeof(T));
-            _popupsOnCanvas.Push(popUpPrefab);
+            Popup popUpPrefab = _popupConfig.Popups.Find(a => a.GetType() == typeof(T));
+            Popup popup = CreatePopup(popUpPrefab);
+            popup.Show();
+            _popupsOnCanvas.Push(popup);
+            return popup;
+        }
+
+        public Popup CreatePopup(Popup popupPrefab)
+        {
+            Popup popUp = Instantiate(popupPrefab, GetCanvas.transform);
+            return popUp;
         }
 
         public void DeletePopUp()
         {
             Time.timeScale = 1;
             Popup popup = _popupsOnCanvas.Pop();
-            popup.ReturnToPool();
+            popup.Hide();
+            Destroy(popup.gameObject);
         }
 
         private void OnDestroy()

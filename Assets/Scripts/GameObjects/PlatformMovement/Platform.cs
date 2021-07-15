@@ -13,10 +13,11 @@ namespace Assets.Scripts.PlatformMovement
         private Rigidbody2D _rigidBody2D;
         private Camera _camera;
 
-        private Vector2 _screen = new Vector2(Screen.width, Screen.height);
+        private Vector2 _screen;
 
         private void Awake()
         {
+            _screen = new Vector2(Screen.width, Screen.height);
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _rigidBody2D = GetComponent<Rigidbody2D>();
             _camera = Camera.main;

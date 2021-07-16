@@ -44,6 +44,8 @@ namespace Assets.Scripts.BallMovement
         {
             if (_rememberedParent != null && this != null && gameObject.activeInHierarchy != false)
             {
+                EventBusManager.GetInstance.Invoke<OnBallReturnEvent>(new OnBallReturnEvent());
+                _rigidbody2D.velocity = Vector2.zero;
                 _rigidbody2D.isKinematic = true;
                 transform.SetParent(_rememberedParent.transform);
                 try

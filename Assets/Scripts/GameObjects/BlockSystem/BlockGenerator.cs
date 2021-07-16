@@ -66,6 +66,7 @@ namespace Assets.Scripts.Block
                     case NEW_ROW:
                         {
                             CalculateDataForNewRow(blocksData, i);
+                            position.y -= 5;
                             continue;
                         }
                     default:
@@ -81,7 +82,7 @@ namespace Assets.Scripts.Block
                                 block = BlocksManager.GetInstance.GetBlock(_blocksPrefabs[GRANITE_BLOCK]);
                             }
                             var scale = block.gameObject.transform.localScale;
-                            block.gameObject.transform.localScale = new Vector3(scaler, scaler, scale.z);
+                            block.gameObject.transform.localScale = new Vector3(scaler, scale.y, scale.z);
                             if (_camera != null)
                                 block.transform.position = _camera.ScreenToWorldPoint(new Vector3(position.x, position.y, _camera.nearClipPlane));
 

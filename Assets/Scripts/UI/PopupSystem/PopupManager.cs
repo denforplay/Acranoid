@@ -37,14 +37,14 @@ namespace Assets.Scripts.UI.PopupSystem
             Time.timeScale = 0;
             Popup popUpPrefab = _popupConfig.Popups.Find(a => a.GetType() == typeof(T));
             Popup popup = CreatePopup(popUpPrefab);
-            popup.Show();
             _popupsOnCanvas.Push(popup);
             return popup;
         }
 
-        public Popup CreatePopup(Popup popupPrefab)
+        private Popup CreatePopup(Popup popupPrefab)
         {
             Popup popUp = Instantiate(popupPrefab, GetCanvas.transform);
+            popUp.Show();
             return popUp;
         }
 

@@ -81,7 +81,7 @@ namespace Assets.Scripts.UI.Buttons
 
         private void OnLevelClickEvent(int levelIndex)
         {
-            LevelManager.GetInstance.SetCurrentLevel(levelIndex);
+            LevelManager.GetInstance.SetCurrentLevel(this, levelIndex);
             Game.sceneManagerBase.LoadNewSceneAsync(GameSceneConfig.SCENE_NAME);
         }
 

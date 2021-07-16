@@ -4,6 +4,8 @@ using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.EventBus.Events.LevelEvents;
 using Assets.Scripts.PlayerData;
+using Assets.Scripts.UI.PopupSystem;
+using Assets.Scripts.UI.PopupSystem.ConcretePopups;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -36,17 +38,28 @@ namespace Assets.Scripts.Level
             }
         }
 
+        public bool IsCurrentLastLevel()
+        {
+            Level currentLevel = _levelRepository.CurrentPack.Find(x => x.levelName == _levelRepository.CurrentLevel.levelName);
+            int currentLevelIndex = _levelRepository.CurrentPack.IndexOf(currentLevel);
+            return currentLevelIndex + 1 >= _levelRepository.CurrentPack.Count;
+        }
+
         public Level LoadNextLevel()
         {
             Level currentLevel = _levelRepository.CurrentPack.Find(x => x.levelName == _levelRepository.CurrentLevel.levelName);
             int currentLevelIndex = _levelRepository.CurrentPack.IndexOf(currentLevel);
             int nextLevelIndex = currentLevelIndex + 1;
-            if (nextLevelIndex < _levelRepository.CurrentPack.Count)
+            Level nextLevel = null;
+            if (nextLevelIndex >= _levelRepository.CurrentPack.Count)
             {
                 EventBusManager.GetInstance.Invoke<OnPackCompletedEvent>(new OnPackCompletedEvent());
             }
-            Level nextLevel = _levelRepository.CurrentPack[nextLevelIndex];
-            _levelRepository.CurrentLevel = nextLevel;
+            else
+            {
+                nextLevel = _levelRepository.CurrentPack[nextLevelIndex];
+                _levelRepository.CurrentLevel = nextLevel;
+            }
             return nextLevel;
         }
 

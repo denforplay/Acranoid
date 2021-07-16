@@ -1,7 +1,10 @@
-﻿using Assets.Scripts.Abstracts.Singeton;
+﻿using Assets.Scripts.Abstracts.EventBus.Interfaces;
+using Assets.Scripts.Abstracts.Singeton;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events;
+using Assets.Scripts.EventBus.Events.LevelEvents;
 using System;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.Block
 {
@@ -13,10 +16,13 @@ namespace Assets.Scripts.Block
         public BlockConfig _graniteBlockConfig;
         private BlocksController _blocksController;
         private bool _isInitialized;
+        public List<BaseBlock> allBlocks;
         public void Initialize(BlocksController blocksController)
         {
+            allBlocks = new List<BaseBlock>();
             _blocksController = blocksController;
             _isInitialized = true;
+            EventBusManager.GetInstance.Subscribe<OnLevelCompletedEvent>(ReturnAllBlocks);
             EventBusManager.GetInstance.Invoke<OnBlocksManagerInitializedEvent>(new OnBlocksManagerInitializedEvent());
         }
 
@@ -24,15 +30,26 @@ namespace Assets.Scripts.Block
         {
             CheckInitialize();
             BaseBlock block = _blocksController.GetBlock(baseBlock);
+            allBlocks.Add(block);
             return block;
         }
 
-        public void ReturnBlock(ColorBlock block)
+        public void ReturnBlock(BaseBlock block)
         {
             CheckInitialize();
             _blocksController.ReturnBlock(block);
         }
 
+        public void ReturnAllBlocks(IEvent ievent)
+        {
+            foreach (var block in allBlocks)
+            {
+                if (block.gameObject.activeInHierarchy)
+                {
+                    block.ReturnToPool();
+                }
+            }
+        }
         private void CheckInitialize()
         {
             if (!_isInitialized)

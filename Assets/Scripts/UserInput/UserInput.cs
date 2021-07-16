@@ -59,11 +59,13 @@ namespace Assets.Scripts.UserInput
         public void OnEnable()
         {
             EventBusManager.GetInstance.Subscribe<OnBallInactivatingEvent>(SetFalseActive);
+            EventBusManager.GetInstance.Subscribe<OnBallReturnEvent>(SetFalseActive);
         }
 
         public void OnDestroy()
         {
             EventBusManager.GetInstance.Unsubscribe<OnBallInactivatingEvent>(SetFalseActive);
+            EventBusManager.GetInstance.Unsubscribe<OnBallReturnEvent>(SetFalseActive);
         }
     }
 }

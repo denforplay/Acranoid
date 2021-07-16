@@ -27,19 +27,25 @@ namespace Assets.Scripts.Level
             EventBusManager.GetInstance.Invoke<OnLevelsInitialized>(new OnLevelsInitialized());
         }
 
+        public bool IsCurrentLastLevel()
+        {
+            return _levelsController.IsCurrentLastLevel();
+        }    
+
         public void SetLevelPackObject(LevelPackObject levelPackObject)
         {
             _levelPackObject = levelPackObject;
             CurrentPackSprite = levelPackObject._packImage;
             CurrentPackName = levelPackObject.packName;
             _levelsController.SetCurrentPack(levelPackObject);
-            EventBusManager.GetInstance.Invoke<OnPackChangedEvent>(new OnPackChangedEvent());
         }
 
-        public void SetCurrentLevel(int level)
+        public void SetCurrentLevel(System.Object sender, int level)
         {
             _levelsController.SetCurrentLevel(level);
             CurrentLevel = _levelsController.GetCurrentLevel();
+            if (sender is ChooseLevelPopup)
+                EventBusManager.GetInstance.Invoke<OnNextLevelLoadedEvent>(new OnNextLevelLoadedEvent());
         }
 
         public void SetCurrentPack(LevelPackObject levelPackObject)

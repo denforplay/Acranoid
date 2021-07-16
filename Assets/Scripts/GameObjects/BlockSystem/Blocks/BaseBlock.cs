@@ -26,7 +26,7 @@ namespace Assets.Scripts.Block
 
         public abstract void ApplyDamage();
 
-        public void ReturnToPool()
+        public virtual void ReturnToPool()
         {
             this.gameObject.SetActive(false);
             this._life = _sprites.Count;

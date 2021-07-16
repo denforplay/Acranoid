@@ -5,6 +5,7 @@ using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.LevelEvents;
 using Assets.Scripts.Level;
 using Assets.Scripts.UI.PopupSystem;
+using Assets.Scripts.UI.PopupSystem.ConcretePopups;
 
 namespace Assets.Scripts.Block
 {
@@ -17,7 +18,6 @@ namespace Assets.Scripts.Block
             base.OnCreate();
             _blocksRepository = Game.GetRepository<BlocksRepository>();
         }
-
 
         public ObjectPool<BaseBlock> FindPool(BaseBlock baseBlock)
         {
@@ -38,7 +38,14 @@ namespace Assets.Scripts.Block
                 JsonParser jsonParser = new JsonParser();
                 jsonParser.SetJsonData(LevelManager.GetInstance.CurrentLevel);
                 EventBusManager.GetInstance.Invoke(new OnLevelCompletedEvent());
-                PopupManager.GetInstance.SpawnPopup<LevelSuccessPopup>();
+                if (LevelManager.GetInstance.IsCurrentLastLevel())
+                {
+                    PopupManager.GetInstance.SpawnPopup<PackSuccesPopup>();
+                }
+                else
+                {
+                    PopupManager.GetInstance.SpawnPopup<LevelSuccessPopup>();
+                }
             }
         }
 

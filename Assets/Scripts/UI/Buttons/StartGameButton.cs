@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine.UI;
 using Newtonsoft.Json;
 using Assets.Scripts.PlayerData;
+using Assets.Scripts.Localisation;
 
 namespace Assets.Scripts.UI.Buttons
 {
@@ -34,6 +35,7 @@ namespace Assets.Scripts.UI.Buttons
                 Button button = CreateLevelButton(level, prevLevel, i);
                 prevLevel = level;
             }
+            LocalisationManager.GetInstance.Initialize();
         }
 
 
@@ -44,6 +46,7 @@ namespace Assets.Scripts.UI.Buttons
             {
                 CreatePackageButton(_levelPackObjects[i], i);
             }
+            LocalisationManager.GetInstance.Initialize();
         }
 
         private void CreatePackageButton(LevelPackObject levelPackObject, int index)
@@ -51,6 +54,7 @@ namespace Assets.Scripts.UI.Buttons
             Button button = Instantiate(_packageButtonPrefab, _scrollViewContent.transform);
             var btnText = button.GetComponentInChildren<TextMeshProUGUI>();
             btnText.text = levelPackObject.packName;
+            btnText.gameObject.AddComponent<LocalisationObject>();
             button.onClick.AddListener(() => OnPackageClickEvent(_levelPackObjects[index]));
         }
 
@@ -59,6 +63,7 @@ namespace Assets.Scripts.UI.Buttons
             Button button = Instantiate(_levelButtonPrefab, _levelScrollContent.transform);
             TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
             text.text = level.levelName;
+            text.gameObject.AddComponent<LocalisationObject>();
             button.onClick.AddListener(() => OnLevelClickEvent(index));
             if (prevLevel != null && !prevLevel.isCompleted)
             {

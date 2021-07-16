@@ -19,7 +19,7 @@ namespace Assets.Scripts.Level
             level.isCompleted = true;
             string jsonLevel = JsonConvert.SerializeObject(level);
 
-            PlayerDataManager.GetInstance.SetLevelDataForKey(LevelManager.GetInstance.CurrentLevel.textAsset.name, jsonLevel);
+            PlayerDataManager.GetInstance.SetStringDataForKey(LevelManager.GetInstance.CurrentLevel.textAsset.name, jsonLevel);
         }
     }
 }

@@ -2,8 +2,6 @@
 using Assets.Scripts.Abstracts.Repository;
 using Assets.Scripts.BlockSystem.FactoryPattern;
 using Assets.Scripts.Level;
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Scripts.Health
 {

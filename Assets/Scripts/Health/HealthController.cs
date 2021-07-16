@@ -46,7 +46,6 @@ namespace Assets.Scripts.Health
             this._healthRepository.Health -= value;
             if (IsEnoughLifes(0))
             {
-                EventBusManager.GetInstance.Invoke<OnHeartSpendEvent>(new OnHeartSpendEvent());
                 return;
             }
         }

@@ -21,7 +21,10 @@ namespace Assets.Scripts.Localisation
         {
             _text = GetComponent<TextMeshProUGUI>();
             _key = _text.text;
-            EventBusManager.GetInstance.Invoke<OnLocalisationObjectAwakeEvent>(new OnLocalisationObjectAwakeEvent());
+            if (LocalisationManager.IsInitialized)
+            {
+                _text.text = LocalisationManager.GetInstance.GetTranslate(_key, LocalisationManager.GetInstance.LanguageId);
+            }
         }
 
         private void Translate(IEvent ievent)

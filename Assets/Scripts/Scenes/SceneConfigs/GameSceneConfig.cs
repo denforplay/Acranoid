@@ -1,13 +1,11 @@
 ﻿using Assets.Scripts.Abstracts.Controller;
 using Assets.Scripts.Abstracts.Repository;
 using Assets.Scripts.Localisation;
-using Assets.Scripts.Level;
 using Assets.Scripts.Health;
 using Assets.Scripts.Abstracts.Scene;
 using System;
 using System.Collections.Generic;
 using Assets.Scripts.Block;
-using Assets.Scripts.UI.PopupSystem;
 
 namespace Assets.Scripts.Scenes.SceneConfigs
 {
@@ -19,7 +17,6 @@ namespace Assets.Scripts.Scenes.SceneConfigs
         {
             var controllersMap = new Dictionary<Type, Controller>();
             this.CreateController<HealthController>(controllersMap);
-            this.CreateController<HealthViewController>(controllersMap);
             this.CreateController<BlocksController>(controllersMap);
             this.CreateController<LocalisationController>(controllersMap);
             return controllersMap;

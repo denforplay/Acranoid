@@ -11,37 +11,22 @@ namespace Assets.Scripts.Health
 {
     public class HealthManager : Singleton<HealthManager>
     {
-        private const string HEALTH_CONTENT_NAME = "HealthContent";
         [SerializeField] private Heart _heartPrefab;
-        [SerializeField] private GameObject _healthContent;
         public bool IsInitialized { get; private set; }
         private HealthController _healthController;
-        private HealthViewController _healthViewController;
 
         private new void Awake()
         {
             IsDestroy = true;
             base.Awake();
         }
+
         public Heart HeartPrefaab
         {
             get
             {
                 CheckHeartsInitialized();
                 return _heartPrefab;
-            }
-        }
-
-        public GameObject HealthPanel
-        {
-            get
-            {
-                CheckHeartsInitialized();
-                if (_healthContent == null)
-                {
-                    _healthContent = GameObject.Find(HEALTH_CONTENT_NAME);
-                }
-                return _healthContent;
             }
         }
 
@@ -54,19 +39,11 @@ namespace Assets.Scripts.Health
             }
         }
 
-
-        private void ShowHealth()
-        {
-            CheckHeartsInitialized();
-            _healthViewController.ViewHearts();
-        }
-
         public void SpendHeart(int value)
         {
             CheckHeartsInitialized();
             if (_healthController.IsEnoughLifes(0))
             {
-                DeleteHealthView();
                 EventBusManager.GetInstance.Invoke(new OnHeartSpendEvent());
                 _healthController.SpendLife(value);
             }
@@ -81,34 +58,12 @@ namespace Assets.Scripts.Health
             _healthController = healthController;
             IsInitialized = true;
             _healthController.SetHeartPrefab(_heartPrefab);
-            EventBusManager.GetInstance.Subscribe<OnHeathInitizliedEvent>((OnHeathInitizliedEvent) => 
+            _healthController.InitializeHearts();
+            EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>((OnNextLevelLoaded) =>
             {
-                EventBusManager.GetInstance.Subscribe<OnLevelsInitialized>((OnLevelsInitialized) =>
-                {
-                    _healthController.InitializeHearts();
-                    ShowHealth();
-                });
-
-                EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>((OnNextLevelLoaded) =>
-                {
-                    _healthViewController.DeleteAllHearts();
-                    _healthController.InitializeHearts();
-                    ShowHealth();
-                });
+                _healthController.InitializeHearts();
             });
-
             EventBusManager.GetInstance.Invoke(new OnHeathInitizliedEvent());
-        }
-
-        public void InitializeViewController(HealthViewController healthViewController)
-        {
-            _healthViewController = healthViewController;
-        }
-
-        public void DeleteHealthView()
-        {
-            CheckHeartsInitialized();
-            _healthViewController.DeleteHealthView();
         }
 
         private void CheckHeartsInitialized()
@@ -117,15 +72,6 @@ namespace Assets.Scripts.Health
             {
                 throw new ArgumentNullException("Hearts are not initialized yet");
             }
-        }
-
-        private void OnDestroy()
-        {
-            if (_healthViewController != null)
-            {
-                _healthViewController.DeleteAllHearts();
-            }
-
         }
     }
 }

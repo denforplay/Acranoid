@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Level;
+using Assets.Scripts.Localisation;
 using Assets.Scripts.Scenes.SceneConfigs;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,6 +16,7 @@ namespace Assets.Scripts.UI.PopupSystem
         {
             _mainMenu.onClick.AddListener(OpenMainMenu);
             _restartButton.onClick.AddListener(RestartLevel);
+            LocalisationManager.GetInstance.Initialize();
         }
 
         private void OpenMainMenu()

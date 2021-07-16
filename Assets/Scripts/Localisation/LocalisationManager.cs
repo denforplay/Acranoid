@@ -8,10 +8,10 @@ using UnityEngine;
 
 namespace Assets.Scripts.Localisation
 {
-    public class LocalisationManager : Singleton <LocalisationManager>
+    public class LocalisationManager : Singleton<LocalisationManager>
     {
         [SerializeField] TextAsset _localizationFile;
-        public bool IsInitialized { get; private set; }
+        public static bool IsInitialized { get; private set; }
         private LocalisationController _localisationController;
         public LocalisationController LocalisationController => _localisationController;
 
@@ -43,6 +43,10 @@ namespace Assets.Scripts.Localisation
             {
                 EventBusManager.GetInstance.Invoke<OnLocalisationLoadedEvent>(new OnLocalisationLoadedEvent());
             }
+        }
+        public void Initialize()
+        {
+            EventBusManager.GetInstance.Invoke<OnLocalisationLoadedEvent>(new OnLocalisationLoadedEvent());
         }
 
         public string GetTranslate(string key, int languageId)

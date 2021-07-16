@@ -72,4 +72,22 @@
 			<ru>Сложное лето</ru>
 		</Translates>
 	</Key>
+	<Key Name="SummerPack">
+		<Translates>
+			<en>SummerPack</en>
+			<ru>Летний набор</ru>
+		</Translates>
+	</Key>
+	<Key Name="WinterPack">
+		<Translates>
+			<en>WinterPack</en>
+			<ru>Зимний набор</ru>
+		</Translates>
+	</Key>
+	<Key Name="Start Game">
+		<Translates>
+			<en>Start game</en>
+			<ru>Начать игру</ru>
+		</Translates>
+	</Key>
 </Keys>

@@ -1,34 +1,43 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts.UI.PopupSystem;
+using Assets.Scripts.EventBus;
+using Assets.Scripts.Abstracts.EventBus.Interfaces;
+using Assets.Scripts.EventBus.Events.Popup;
 
 namespace Assets.Scripts.UI.Buttons
 {
     public class PauseButton : MonoBehaviour
     {
-        [SerializeField] private Button _continueGame;
         [SerializeField] private Button _stopGame;
 
-        private void Awake()
+        private GameObject _stopGameGO;
+        private void Start()
         {
             _stopGame.onClick.AddListener(PauseGame);
-            _continueGame.onClick.AddListener(ContinueGame);
+            _stopGameGO = _stopGame.gameObject;
         }
 
         public void PauseGame()
         {
-            _stopGame.gameObject.SetActive(false);
-            _continueGame.gameObject.SetActive(true);
+            _stopGameGO.SetActive(false);
             PopupManager.GetInstance.SpawnPopup<PausePopup>();
             Time.timeScale = 0;
         }
 
-        public void ContinueGame()
+        private void ReturnButton(IEvent ievent)
         {
-            PopupManager.GetInstance.DeletePopUp();
-            _stopGame.gameObject.SetActive(true);
-            _continueGame.gameObject.SetActive(false);
-            Time.timeScale = 1;
+            _stopGameGO.SetActive(true);
+        }
+
+        public void OnDisable()
+        {
+            EventBusManager.GetInstance.Subscribe<OnPausePopupClosedEvent>(ReturnButton);
+        }
+
+        public void OnEnable()
+        {
+            EventBusManager.GetInstance.Unsubscribe<OnPausePopupClosedEvent>(ReturnButton);
         }
     }
 }

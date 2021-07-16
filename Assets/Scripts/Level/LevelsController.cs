@@ -83,7 +83,7 @@ namespace Assets.Scripts.Level
                 Level level = jsonParser.LoadJsonData(levelAsset);
                 level.textAsset = levelAsset;
                 if (PlayerDataManager.GetInstance.GetLevelDataForKey(level.textAsset.name) == null)
-                PlayerDataManager.GetInstance.SetLevelDataForKey(level.textAsset.name, level.textAsset.text);
+                PlayerDataManager.GetInstance.SetStringDataForKey(level.textAsset.name, level.textAsset.text);
                 pack.Add(level);
             }
 

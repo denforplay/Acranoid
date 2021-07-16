@@ -1,4 +1,5 @@
 using Assets.Scripts.Abstracts.Game;
+using Assets.Scripts.Block;
 using Assets.Scripts.Level;
 using Assets.Scripts.PlayerData;
 using Assets.Scripts.Scenes.SceneConfigs;
@@ -82,8 +83,9 @@ public class ChooseLevelPopup : Popup
 
     private void OnLevelClickEvent(int levelIndex)
     {
+        BlocksManager.GetInstance.ReturnAllBlocks(null);
         LevelManager.GetInstance.SetCurrentLevel(this, levelIndex);
-        PopupManager.GetInstance.DeletePopUp();
+        PopupManager.GetInstance.DeleteAllPopups();
     }
 
     private void OnPackageClickEvent(LevelPackObject _levelPackObject)

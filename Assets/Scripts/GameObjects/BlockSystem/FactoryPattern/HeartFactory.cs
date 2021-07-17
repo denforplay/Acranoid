@@ -14,8 +14,14 @@ namespace Assets.Scripts.BlockSystem.FactoryPattern
 
         public Heart GetNewInstance()
         {
-            Heart instance = GameObject.Instantiate(Prefab);
-            return instance;
+            try
+            {
+                Heart instance = GameObject.Instantiate(Prefab);
+                return instance;
+            }
+            catch
+            { }
+            return null;
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using Assets.Scripts.Abstracts.Controller;
-using Assets.Scripts.Abstracts.Game;
+using Assets.Scripts.EnergySystem.Timer;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.Energy;
 using System;
 using System.Collections;
 
-namespace Assets.Scripts.EnergySystem
+namespace Assets.Scripts.EnergySystem.Energy
 {
     public class EnergyController : Controller
     {
@@ -13,7 +13,6 @@ namespace Assets.Scripts.EnergySystem
         public bool isAdding = false;
         public bool restoring = false;
         public int TotalEnergy => _energyRepository._totalEnergy;
-        public DateTime NextEnergyTime => _energyRepository._nextEnergyTime;
         public override void OnCreate()
         {
             _energyRepository = new EnergyRepository();
@@ -31,7 +30,7 @@ namespace Assets.Scripts.EnergySystem
             while (_energyRepository._totalEnergy < EnergyManager.GetInstance.MaxEnergy)
             {
                 DateTime currentTime = DateTime.Now;
-                DateTime counter = _energyRepository._nextEnergyTime;
+                DateTime counter = TimerManager.GetInstance.NextEnergyTime;
                 isAdding = false;
                 while (currentTime > counter)
                 {
@@ -51,7 +50,7 @@ namespace Assets.Scripts.EnergySystem
                 if (isAdding)
                 {
                     _energyRepository._lastAddedTime = DateTime.Now;
-                    _energyRepository._nextEnergyTime = counter;
+                    TimerManager.GetInstance.SetNextEnergyTime(counter);
                 }
 
                 EventBusManager.GetInstance.Invoke<OnRestoringEnergyEvent>(new OnRestoringEnergyEvent());
@@ -74,7 +73,7 @@ namespace Assets.Scripts.EnergySystem
             {
                 if (_energyRepository._totalEnergy + 1 == EnergyManager.GetInstance.MaxEnergy)
                 {
-                    _energyRepository._nextEnergyTime = EnergyManager.GetInstance.AddDuration(_energyRepository._nextEnergyTime, EnergyManager.GetInstance.RestoreDuration);
+                    TimerManager.GetInstance.SetNextEnergyTime(EnergyManager.GetInstance.AddDuration(TimerManager.GetInstance.NextEnergyTime, EnergyManager.GetInstance.RestoreDuration));
                 }
                 Coroutines.Coroutines.StartRoutine(RestoreRoutine());
             }

@@ -32,8 +32,6 @@ namespace Assets.Scripts.Abstracts.Singeton
             {
                 Destroy(gameObject);
             }
-                    
-            DontDestroyOnLoad(gameObject);
         }
 
     }

@@ -6,6 +6,8 @@ using Assets.Scripts.Abstracts.Scene;
 using System;
 using System.Collections.Generic;
 using Assets.Scripts.Block;
+using Assets.Scripts.EnergySystem.Timer;
+using Assets.Scripts.EnergySystem.Energy;
 
 namespace Assets.Scripts.Scenes.SceneConfigs
 {
@@ -16,6 +18,8 @@ namespace Assets.Scripts.Scenes.SceneConfigs
         public override Dictionary<Type, Controller> CreateAllControllers()
         {
             var controllersMap = new Dictionary<Type, Controller>();
+            this.CreateController<TimerController>(controllersMap);
+            this.CreateController<EnergyController>(controllersMap);
             this.CreateController<HealthController>(controllersMap);
             this.CreateController<BlocksController>(controllersMap);
             this.CreateController<LocalisationController>(controllersMap);

@@ -50,6 +50,8 @@ namespace Assets.Scripts.Block
                     block.ReturnToPool();
                 }
             }
+
+            _blocksController.ReturnAllBlocks();
         }
         private void CheckInitialize()
         {

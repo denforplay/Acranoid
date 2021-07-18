@@ -26,6 +26,7 @@ public class ChooseLevelPopup : Popup
 
     public override void Show()
     {
+        base.Show();
         LoadPackageData();
     }
 
@@ -56,6 +57,7 @@ public class ChooseLevelPopup : Popup
     private void CreatePackageButton(LevelPackObject levelPackObject, int index)
     {
         Button button = Instantiate(_packageButtonPrefab, _scrollViewContent.transform);
+        button.gameObject.AddComponent<ButtonAnimation>();
         var btnText = button.GetComponentInChildren<TextMeshProUGUI>();
         btnText.text = levelPackObject.packName;
         btnText.gameObject.AddComponent<LocalisationObject>();
@@ -65,6 +67,7 @@ public class ChooseLevelPopup : Popup
     private Button CreateLevelButton(Level level, Level prevLevel, int index)
     {
         Button button = Instantiate(_levelButtonPrefab, _levelScrollContent.transform);
+        button.gameObject.AddComponent<ButtonAnimation>();
         TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
         text.text = level.levelName;
         text.gameObject.AddComponent<LocalisationObject>();

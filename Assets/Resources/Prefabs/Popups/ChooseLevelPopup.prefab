@@ -93,7 +93,7 @@ MonoBehaviour:
   _scrollViewPackage: {fileID: 4261931259722573027}
   _scrollViewContent: {fileID: 4261931259722573026}
   _levelScrollContent: {fileID: 4261931258692220517}
-  _levelButtonPrefab: {fileID: 1302502957644668427, guid: 92710243cfc7b6448a18c345788c31b2, type: 3}
+  _levelButtonPrefab: {fileID: 1302502957644668427, guid: 5bd8d231c55a981478ead2c825a0d5ec, type: 3}
   _levelScrollViewPrefab: {fileID: 4261931258692220514}
   _packageButtonPrefab: {fileID: 8652822535236707699, guid: 978f6114d10786a4c83002a5e0b76856, type: 3}
 --- !u!1001 &6871000613821716746

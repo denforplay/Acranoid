@@ -2,6 +2,8 @@
 using Assets.Scripts.Level;
 using Assets.Scripts.Localisation;
 using Assets.Scripts.Scenes.SceneConfigs;
+using Assets.Scripts.UI.Buttons.Strategies.ButtonMethods;
+using Assets.Scripts.UI.Buttons.Strategies.Interfaces;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,27 +12,17 @@ namespace Assets.Scripts.UI.PopupSystem
 {
     public class HeartEndsPopup : Popup
     {
-        [SerializeField] private Button _mainMenu;
-        [SerializeField] private Button _restartButton;
+        [SerializeField] private Button _mainMenuButton;
+        [SerializeField] private Button _restartLevelButton;
+
+        IButtonMethod _mainMenuButtonMethod = new OpenMainMenu();
+        IButtonMethod _restartLevelButtonMethod = new RestartLevel();
 
         private void Awake()
         {
-            _mainMenu.onClick.AddListener(OpenMainMenu);
-            _restartButton.onClick.AddListener(RestartLevel);
+            _mainMenuButton.onClick.AddListener(() => _mainMenuButtonMethod.Call());
+            _restartLevelButton.onClick.AddListener(() => _restartLevelButtonMethod.Call());
             LocalisationManager.GetInstance.Initialize();
-        }
-
-        private void OpenMainMenu()
-        {
-            PopupManager.GetInstance.DeletePopUp();
-            SceneManager.LoadScene(StartSceneConfig.SCENE_NAME);
-        }
-
-        private void RestartLevel()
-        {
-            EnergyManager.GetInstance.SpendEnergy(1);
-            PopupManager.GetInstance.DeletePopUp();
-            LevelManager.GetInstance.LoadCurrentLevel();
         }
     }
 }

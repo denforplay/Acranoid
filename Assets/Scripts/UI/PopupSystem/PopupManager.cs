@@ -8,9 +8,10 @@ namespace Assets.Scripts.UI.PopupSystem
 {
     public class PopupManager : Singleton<PopupManager>
     {
-        private const string CANVAS_NAME = "Canvas";
         [SerializeField] private PopupConfig _popupConfig;
         [SerializeField] private GameObject _canvas;
+
+        public GameObject Canvas => _canvas;
 
         private Stack<Popup> _popupsOnCanvas = new Stack<Popup>();
 
@@ -23,11 +24,6 @@ namespace Assets.Scripts.UI.PopupSystem
         {
             get
             {
-                if (_canvas == null)
-                {
-                    _canvas = GameObject.Find(CANVAS_NAME);
-                }
-
                 return _canvas;
             }
         }

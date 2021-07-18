@@ -2,6 +2,8 @@
 using Assets.Scripts.EnergySystem.Timer;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.Energy;
+using Assets.Scripts.UI.PopupSystem;
+using Assets.Scripts.UI.PopupSystem.ConcretePopups;
 using System;
 using System.Collections;
 
@@ -67,6 +69,7 @@ namespace Assets.Scripts.EnergySystem.Energy
         {
             if (_energyRepository._totalEnergy == 0)
             {
+                PopupManager.GetInstance.SpawnPopup<EnergyEndedPopup>();
                 return;
             }
 
@@ -75,6 +78,20 @@ namespace Assets.Scripts.EnergySystem.Energy
             if (!restoring)
             {
                 if (_energyRepository._totalEnergy + 1 == EnergyManager.GetInstance.MaxEnergy)
+                {
+                    TimerManager.GetInstance.SetNextEnergyTime(EnergyManager.GetInstance.AddDuration(TimerManager.GetInstance.NextEnergyTime, EnergyManager.GetInstance.RestoreDuration));
+                }
+                Coroutines.Coroutines.StartRoutine(RestoreRoutine());
+            }
+        }
+
+        public void AddEnergy(int value)
+        {
+            _energyRepository._totalEnergy++;
+            EventBusManager.GetInstance.Invoke<OnEnergySpendEvent>(new OnEnergySpendEvent());
+            if (!restoring)
+            {
+                if (_energyRepository._totalEnergy < EnergyManager.GetInstance.MaxEnergy)
                 {
                     TimerManager.GetInstance.SetNextEnergyTime(EnergyManager.GetInstance.AddDuration(TimerManager.GetInstance.NextEnergyTime, EnergyManager.GetInstance.RestoreDuration));
                 }

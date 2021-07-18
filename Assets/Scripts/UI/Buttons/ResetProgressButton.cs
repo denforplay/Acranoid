@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.EnergySystem.Energy;
+using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.Buttons
@@ -9,7 +11,7 @@ namespace Assets.Scripts.UI.Buttons
 
         private void Awake()
         {
-            _resetProgressButton.onClick.AddListener(() => PlayerPrefs.DeleteKey("totalEnergy"));
+            _resetProgressButton.onClick.AddListener(() => EnergyManager.GetInstance.SpendEnergy(1));
         }
     }
 }

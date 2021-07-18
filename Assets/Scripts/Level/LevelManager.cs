@@ -45,7 +45,9 @@ namespace Assets.Scripts.Level
             _levelsController.SetCurrentLevel(level);
             CurrentLevel = _levelsController.GetCurrentLevel();
             if (sender is ChooseLevelPopup)
+            {
                 EventBusManager.GetInstance.Invoke<OnNextLevelLoadedEvent>(new OnNextLevelLoadedEvent());
+            }
         }
 
         public void SetCurrentPack(LevelPackObject levelPackObject)

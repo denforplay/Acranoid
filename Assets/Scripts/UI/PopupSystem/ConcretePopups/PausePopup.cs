@@ -1,6 +1,8 @@
 ﻿using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.Popup;
 using Assets.Scripts.Scenes.SceneConfigs;
+using Assets.Scripts.UI.Buttons.Strategies.ButtonMethods;
+using Assets.Scripts.UI.Buttons.Strategies.Interfaces;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,34 +15,19 @@ namespace Assets.Scripts.UI.PopupSystem
         [SerializeField] Button _levelChooseButton;
         [SerializeField] Button _mainMenuButton;
 
+        private IButtonMethod _levelChooseButtonMethod = new ShowNextPack();
+        private IButtonMethod _mainMenuButtonMethod = new OpenMainMenu();
+        private IButtonMethod _continueButtonMethod = new ContinueGame();
         private void Awake()
         {
-            _continueButton.onClick.AddListener(ContinueGame);
-            _levelChooseButton.onClick.AddListener(CallLevelChoosePopup);
-            _mainMenuButton.onClick.AddListener(OpenMainMenu);
+            _continueButton.onClick.AddListener(() => _continueButtonMethod.Call());
+            _levelChooseButton.onClick.AddListener(() => _levelChooseButtonMethod.Call());
+            _mainMenuButton.onClick.AddListener(() => _mainMenuButtonMethod.Call());
         }
 
         public override void Hide()
         {
             EventBusManager.GetInstance.Invoke<OnPausePopupClosedEvent>(new OnPausePopupClosedEvent());
-        }
-
-        public void OpenMainMenu()
-        {
-            PopupManager.GetInstance.DeletePopUp();
-            SceneManager.LoadScene(StartSceneConfig.SCENE_NAME);
-        }
-
-        public void ContinueGame()
-        {
-            Time.timeScale = 1;
-            PopupManager.GetInstance.DeletePopUp();
-        }
-
-        public void CallLevelChoosePopup()
-        {
-            PopupManager.GetInstance.DeletePopUp();
-            PopupManager.GetInstance.SpawnPopup<ChooseLevelPopup>();
         }
     }
 }

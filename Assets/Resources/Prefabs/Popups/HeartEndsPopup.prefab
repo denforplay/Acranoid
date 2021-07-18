@@ -627,8 +627,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71619f16100d0c44294634d999c74c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainMenu: {fileID: 5778692677631339679}
-  _restartButton: {fileID: 2572525855060736526}
+  _mainMenuButton: {fileID: 5778692677631339679}
+  _restartLevelButton: {fileID: 2572525855060736526}
 --- !u!1 &7988254726385945353
 GameObject:
   m_ObjectHideFlags: 0

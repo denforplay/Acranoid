@@ -32,7 +32,7 @@ namespace Assets.Scripts.Localisation
 
         public void Initialize(LocalisationController localisationController)
         {
-            if (!IsInitialized)
+            if (_localisationController == null)
             {
                 _localisationController = localisationController;
                 ReadXmlData();
@@ -43,6 +43,7 @@ namespace Assets.Scripts.Localisation
             {
                 EventBusManager.GetInstance.Invoke<OnLocalisationLoadedEvent>(new OnLocalisationLoadedEvent());
             }
+
         }
         public void Initialize()
         {

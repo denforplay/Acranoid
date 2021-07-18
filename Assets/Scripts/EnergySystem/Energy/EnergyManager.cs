@@ -45,6 +45,11 @@ namespace Assets.Scripts.EnergySystem.Energy
             _energyController.SpendEnergy(value);
         }
 
+        public void AddEnergy(int value)
+        {
+            _energyController.AddEnergy(value);
+        }
+
         public DateTime AddDuration(DateTime time, int duration)
         {
             return time.AddSeconds(duration);

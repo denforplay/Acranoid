@@ -21,11 +21,11 @@ namespace Assets.Scripts.Block
 
         public ObjectPool<BaseBlock> FindPool(BaseBlock baseBlock)
         {
-           if (_blocksRepository.blocksPools == null)
+            if(_blocksRepository.blocksPools == null)
             {
                 _blocksRepository.InitializePools();
             }
-           return _blocksRepository.blocksPools.Find(x => x.GetPrefab.GetType() == baseBlock.GetType());
+            return _blocksRepository.blocksPools.Find(x => x.GetPrefab.GetType() == baseBlock.GetType());
         }
 
         public void ReturnBlock(BaseBlock block)
@@ -49,6 +49,11 @@ namespace Assets.Scripts.Block
             }
         }
 
+        public void ReturnAllBlocks()
+        {
+            _blocksRepository.Count = 0;
+        }
+
         public BaseBlock GetBlock(BaseBlock block)
         {
             if (block is ColorBlock)
@@ -58,7 +63,7 @@ namespace Assets.Scripts.Block
 
             return FindPool(block).GetPrefabInstance();
         }
-        
+
         public override void Initialize()
         {
             BlocksManager.GetInstance.Initialize(this);

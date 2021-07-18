@@ -9,6 +9,7 @@ using Assets.Scripts.PlayerData;
 using Assets.Scripts.Scenes.SceneConfigs;
 using Assets.Scripts.UI.PopupSystem;
 using Newtonsoft.Json;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,7 +18,6 @@ using UnityEngine.UI;
 public class ChooseLevelPopup : Popup
 {
     [SerializeField] private LevelPacksConfig _levelPacksConfig;
-    [SerializeField] private GameObject _scrollViewPackage;
     [SerializeField] private GameObject _scrollViewContent;
     [SerializeField] private GameObject _levelScrollContent;
     [SerializeField] private Button _levelButtonPrefab;
@@ -34,15 +34,16 @@ public class ChooseLevelPopup : Popup
     {
         LevelManager.GetInstance.SetLevelPackObject(_levelPackObject);
         _levelScrollViewPrefab.SetActive(true);
-        Level prevLevel = CreateLevel(_levelPackObject._jsonLevelsFiles[0]);
-        Button btn = CreateLevelButton(prevLevel, null, 0);
-        btn.onClick.AddListener(() => OnLevelClickEvent(0));
-        for (int i = 1; i < _levelPackObject._jsonLevelsFiles.Count; i++)
+        Level currentLevel = CreateLevel(_levelPackObject._jsonLevelsFiles.Last());
+        for (int i = _levelPackObject._jsonLevelsFiles.Count - 2; i >= 0; i--)
         {
             Level level = CreateLevel(_levelPackObject._jsonLevelsFiles[i]);
-            Button button = CreateLevelButton(level, prevLevel, i);
-            prevLevel = level;
+            Button button = CreateLevelButton(currentLevel, level, i);
+            currentLevel = level;
         }
+
+        Level nextLevel = CreateLevel(_levelPackObject._jsonLevelsFiles.First());
+        CreateLevelButton(nextLevel, null, 0);
     }
 
 
@@ -58,21 +59,23 @@ public class ChooseLevelPopup : Popup
     {
         Button button = Instantiate(_packageButtonPrefab, _scrollViewContent.transform);
         button.gameObject.AddComponent<ButtonAnimation>();
-        var btnText = button.GetComponentInChildren<TextMeshProUGUI>();
-        btnText.text = levelPackObject.packName;
-        btnText.gameObject.AddComponent<LocalisationObject>();
+        Image btnImage = button.GetComponentsInChildren<Image>()[1];
+        btnImage.sprite = levelPackObject._packImage;
+        TextMeshProUGUI[] btnTexts = button.GetComponentsInChildren<TextMeshProUGUI>();
+        btnTexts[0].text = levelPackObject.packName;
+        btnTexts[0].gameObject.AddComponent<LocalisationObject>();
         button.onClick.AddListener(() => OnPackageClickEvent(_levelPacksConfig.levelPacks[index]));
     }
 
-    private Button CreateLevelButton(Level level, Level prevLevel, int index)
+    private Button CreateLevelButton(Level currentLevel, Level nextLevel, int index)
     {
         Button button = Instantiate(_levelButtonPrefab, _levelScrollContent.transform);
         button.gameObject.AddComponent<ButtonAnimation>();
         TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
-        text.text = level.levelName;
+        text.text = currentLevel.levelName;
         text.gameObject.AddComponent<LocalisationObject>();
         button.onClick.AddListener(() => OnLevelClickEvent(index));
-        if (prevLevel != null && !prevLevel.isCompleted)
+        if (nextLevel != null && !nextLevel.isCompleted)
         {
             button.interactable = false;
         }

@@ -5,7 +5,6 @@ using Assets.Scripts.Abstracts.Singeton;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.Energy;
 using Assets.Scripts.Abstracts.EventBus.Interfaces;
-using Assets.Scripts.EnergySystem.Timer;
 
 namespace Assets.Scripts.EnergySystem.Energy
 {
@@ -13,9 +12,9 @@ namespace Assets.Scripts.EnergySystem.Energy
     {
         [SerializeField] private TextMeshProUGUI _energyText;
         [SerializeField] private int _maxEnergy;
+        [SerializeField] private int _restoreDuration = 15;
 
         private EnergyController _energyController;
-        private int _restoreDuration = 15;
 
         public int RestoreDuration => _restoreDuration;
         public int TotalEnergy => _energyController.TotalEnergy;
@@ -57,7 +56,7 @@ namespace Assets.Scripts.EnergySystem.Energy
 
         private void UpdateEnergy(IEvent ievent)
         {
-            _energyText.text = _energyController.TotalEnergy.ToString();
+            _energyText.text = $"{_energyController.TotalEnergy}/{_maxEnergy}";
         }
 
         private void OnDestroy()

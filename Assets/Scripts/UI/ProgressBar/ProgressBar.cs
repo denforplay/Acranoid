@@ -22,7 +22,7 @@ namespace Assets.Scripts.ProgressBar
         {
             _slider = gameObject.GetComponent<Slider>();
             var level = LevelManager.GetInstance.GetCurrentLevel();
-            _slider.maxValue = level.blocksData.Count(x => x == COLOR_BLOCK);
+            _slider.maxValue = level.blocksData.Count(x => x >= COLOR_BLOCK);
         }
 
         public void IncrementProgress(IEvent ievnt)
@@ -33,8 +33,10 @@ namespace Assets.Scripts.ProgressBar
 
         private void ResetProgress(IEvent ievent)
         {
+            DOTween.Kill(_slider);
             var level = LevelManager.GetInstance.GetCurrentLevel();
-            _slider.maxValue = level.blocksData.Count(x => x == COLOR_BLOCK);
+            _slider.value = 0;
+            _slider.maxValue = level.blocksData.Count(x => x >= COLOR_BLOCK);
             _targetProgress = 0;
         }
 
@@ -49,7 +51,7 @@ namespace Assets.Scripts.ProgressBar
         private void OnDisable()
         {
             EventBusManager.GetInstance.Unsubscribe<OnLevelsInitialized>(ResetProgress);
-            EventBusManager.GetInstance.Unsubscribe<OnLevelCompletedEvent>(ResetProgress);
+            EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ResetProgress);
             EventBusManager.GetInstance.Unsubscribe<OnBlockDestroyEvent>(IncrementProgress);
         }
     }

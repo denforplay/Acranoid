@@ -66,6 +66,7 @@ namespace Assets.Scripts.Block
                     case NEW_ROW:
                         {
                             CalculateDataForNewRow(blocksData, i);
+                            BlocksManager.GetInstance.SetNewRow();
                             position.y -= 5;
                             continue;
                         }

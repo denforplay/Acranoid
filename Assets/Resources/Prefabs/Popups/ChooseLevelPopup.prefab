@@ -90,10 +90,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelPacksConfig: {fileID: 11400000, guid: 4c22da79433c3554fa162b9c99964c24, type: 2}
-  _scrollViewPackage: {fileID: 4261931259722573027}
   _scrollViewContent: {fileID: 4261931259722573026}
   _levelScrollContent: {fileID: 4261931258692220517}
-  _levelButtonPrefab: {fileID: 1302502957644668427, guid: 5bd8d231c55a981478ead2c825a0d5ec, type: 3}
+  _levelButtonPrefab: {fileID: 4598375244391404355, guid: 5bd8d231c55a981478ead2c825a0d5ec, type: 3}
   _levelScrollViewPrefab: {fileID: 4261931258692220514}
   _packageButtonPrefab: {fileID: 8652822535236707699, guid: 978f6114d10786a4c83002a5e0b76856, type: 3}
 --- !u!1001 &6871000613821716746
@@ -197,11 +196,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e77a8b6dec06e64a9ba68b7b855f245, type: 3}
---- !u!1 &4261931259722573027 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7241745599546015209, guid: 8e77a8b6dec06e64a9ba68b7b855f245, type: 3}
-  m_PrefabInstance: {fileID: 6871000613821716746}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4261931259722573029 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7241745599546015215, guid: 8e77a8b6dec06e64a9ba68b7b855f245, type: 3}

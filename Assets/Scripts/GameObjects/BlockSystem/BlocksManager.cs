@@ -16,21 +16,33 @@ namespace Assets.Scripts.Block
         public BlockConfig _graniteBlockConfig;
         private BlocksController _blocksController;
         private bool _isInitialized;
-        public List<BaseBlock> allBlocks;
+        public List<List<BaseBlock>> allBlocks;
+        private int _currentRow = 0;
         public void Initialize(BlocksController blocksController)
         {
-            allBlocks = new List<BaseBlock>();
+            allBlocks = new List<List<BaseBlock>>();
             _blocksController = blocksController;
             _isInitialized = true;
             EventBusManager.GetInstance.Subscribe<OnLevelCompletedEvent>(ReturnAllBlocks);
             EventBusManager.GetInstance.Invoke<OnBlocksManagerInitializedEvent>(new OnBlocksManagerInitializedEvent());
         }
 
+        public void SetNewRow()
+        {
+            _currentRow++;
+        }
+
         public BaseBlock GetBlock(BaseBlock baseBlock)
         {
             CheckInitialize();
+            List<BaseBlock> currentList;
+            if (allBlocks.Count <= _currentRow)
+            {
+                currentList = new List<BaseBlock>();
+                allBlocks.Add(currentList);
+            }
             BaseBlock block = _blocksController.GetBlock(baseBlock);
-            allBlocks.Add(block);
+            allBlocks[_currentRow].Add(block);
             return block;
         }
 
@@ -43,14 +55,18 @@ namespace Assets.Scripts.Block
         public void ReturnAllBlocks(IEvent ievent)
         {
             if (allBlocks != null)
-            foreach (var block in allBlocks)
-            {
-                if (block != null && block.gameObject.activeInHierarchy)
+                foreach (var row in allBlocks)
                 {
-                    block.ReturnToPool();
-                }
-            }
+                    foreach (var block in row)
+                    {
+                        if (block != null && block.gameObject.activeInHierarchy)
+                        {
+                            block.ReturnToPool();
+                        }
+                    }
 
+                }
+            _currentRow = 0;
             _blocksController.ReturnAllBlocks();
         }
         private void CheckInitialize()

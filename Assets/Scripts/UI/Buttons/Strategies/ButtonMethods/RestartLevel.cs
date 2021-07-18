@@ -9,8 +9,8 @@ namespace Assets.Scripts.UI.Buttons.Strategies.ButtonMethods
     {
         public void Call()
         {
-            EnergyManager.GetInstance.SpendEnergy(1);
             PopupManager.GetInstance.DeletePopUp();
+            EnergyManager.GetInstance.SpendEnergy(1);
             LevelManager.GetInstance.LoadCurrentLevel();
         }
     }

@@ -12,12 +12,12 @@ namespace Assets.Scripts.EnergySystem.Timer
 {
     public class TimerManager : Singleton<TimerManager>
     {
+        private const string TIMER_FORMAT = "{0}:{1:D2}:{2:D2}";
+        private const string TIMER_FULL = "Full";
         [SerializeField] private TextMeshProUGUI _timerText;
         public TimerController _timerController;
         private bool isInitialized = false;
-
         public DateTime NextEnergyTime => _timerController != null ? _timerController.NextEnergyTime : DateTime.Now;
-
         public void SetNextEnergyTime(DateTime value)
         {
             _timerController.SetNextEnergyTime(value);
@@ -45,12 +45,12 @@ namespace Assets.Scripts.EnergySystem.Timer
         {
             if (EnergyManager.GetInstance.TotalEnergy >= EnergyManager.GetInstance.MaxEnergy)
             {
-                _timerText.text = "Full";
+                _timerText.text = TIMER_FULL;
                 return;
             }
 
             TimeSpan timeSpan = _timerController.NextEnergyTime - DateTime.Now;
-            string value = String.Format("{0}:{1:D2}:{2:D2}", (int)timeSpan.TotalHours, timeSpan.Minutes, timeSpan.Seconds);
+            string value = String.Format(TIMER_FORMAT, (int)timeSpan.TotalHours, timeSpan.Minutes, timeSpan.Seconds);
             if (_timerText != null)
                 _timerText.text = value;
         }

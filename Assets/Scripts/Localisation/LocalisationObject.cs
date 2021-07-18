@@ -41,8 +41,9 @@ namespace Assets.Scripts.Localisation
 
         private void OnBecameInvisible()
         {
-            EventBusManager.GetInstance.Subscribe<OnLocalisationLoadedEvent>(Translate);
-            EventBusManager.GetInstance.Subscribe<OnLanguageChanged>(Translate);
+            EventBusManager.GetInstance.Unsubscribe<OnLocalisationLoadedEvent>(Translate);
+            EventBusManager.GetInstance.Unsubscribe<OnLanguageChanged>(Translate);
+            EventBusManager.GetInstance.Unsubscribe<OnLocalisationLoadedEvent>((OnLocalisationLoadedEvent) => EventBusManager.GetInstance.Subscribe<OnLocalisationObjectAwakeEvent>(Translate));
         }
     }
 }

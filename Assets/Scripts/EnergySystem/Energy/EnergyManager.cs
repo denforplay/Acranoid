@@ -15,7 +15,7 @@ namespace Assets.Scripts.EnergySystem.Energy
         [SerializeField] private int _maxEnergy;
 
         private EnergyController _energyController;
-        private int _restoreDuration = 30;
+        private int _restoreDuration = 15;
 
         public int RestoreDuration => _restoreDuration;
         public int TotalEnergy => _energyController.TotalEnergy;
@@ -40,6 +40,11 @@ namespace Assets.Scripts.EnergySystem.Energy
             NewStart();
         }
 
+        public void SpendEnergy(int value)
+        {
+            _energyController.SpendEnergy(value);
+        }
+
         public DateTime AddDuration(DateTime time, int duration)
         {
             return time.AddSeconds(duration);
@@ -47,12 +52,13 @@ namespace Assets.Scripts.EnergySystem.Energy
 
         private void UpdateEnergy(IEvent ievent)
         {
-            if (_energyText != null)
-                _energyText.text = _energyController.TotalEnergy.ToString();
+            _energyText.text = _energyController.TotalEnergy.ToString();
         }
 
         private void OnDestroy()
         {
+            if (_energyController != null)
+            _energyController.Save();
             EventBusManager.GetInstance.Unsubscribe<OnEnergySpendEvent>(UpdateEnergy);
             EventBusManager.GetInstance.Unsubscribe<OnRestoringEnergyEvent>(UpdateEnergy);
         }

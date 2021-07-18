@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Level;
+﻿using Assets.Scripts.EnergySystem.Energy;
+using Assets.Scripts.Level;
 using Assets.Scripts.Localisation;
 using Assets.Scripts.Scenes.SceneConfigs;
 using UnityEngine;
@@ -27,6 +28,7 @@ namespace Assets.Scripts.UI.PopupSystem
 
         private void RestartLevel()
         {
+            EnergyManager.GetInstance.SpendEnergy(1);
             PopupManager.GetInstance.DeletePopUp();
             LevelManager.GetInstance.LoadCurrentLevel();
         }

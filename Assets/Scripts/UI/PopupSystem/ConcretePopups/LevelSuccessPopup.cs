@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Level;
+﻿using Assets.Scripts.EnergySystem.Energy;
+using Assets.Scripts.Level;
 using Assets.Scripts.Scenes.SceneConfigs;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,6 +26,7 @@ namespace Assets.Scripts.UI.PopupSystem
 
         private void LoadNextLevel()
         {
+            EnergyManager.GetInstance.SpendEnergy(1);
             PopupManager.GetInstance.DeletePopUp();
             LevelManager.GetInstance.LoadNextLevel();
         }

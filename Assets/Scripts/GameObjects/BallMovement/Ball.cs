@@ -70,7 +70,7 @@ namespace Assets.Scripts.BallMovement
 
         private void BallInactivate()
         {
-            if (gameObject != null && _rememberedParent != null)
+            if (_rememberedParent != null && this.gameObject.activeInHierarchy)
             {
                 _rigidbody2D.velocity = Vector2.zero;
                 _rigidbody2D.isKinematic = false;

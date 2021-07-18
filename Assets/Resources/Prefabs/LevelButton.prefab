@@ -105,7 +105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1500028582250402300, guid: 978f6114d10786a4c83002a5e0b76856, type: 3}
       propertyPath: m_Name
-      value: LevelButtton
+      value: LevelButton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 978f6114d10786a4c83002a5e0b76856, type: 3}

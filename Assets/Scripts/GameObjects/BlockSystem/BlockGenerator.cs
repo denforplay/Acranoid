@@ -8,6 +8,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using Assets.Scripts.GameObjects.Borders;
+using Assets.Scripts.EnergySystem.Energy;
 
 namespace Assets.Scripts.Block
 {
@@ -44,7 +45,6 @@ namespace Assets.Scripts.Block
 
         private void ShowBlocks(IEvent ievent)
         {
-
             if (!initialized)
             {
                 EventBusManager.GetInstance.Invoke<OnNextLevelLoadedEvent>(new OnNextLevelLoadedEvent());

@@ -22,5 +22,10 @@ namespace Assets.Scripts.EnergySystem.Timer
             _timerRepository.nextEnergyTime = value;
             _timerRepository.Save();
         }
+
+        public void Save()
+        {
+            _timerRepository.Save();
+        }
     }
 }

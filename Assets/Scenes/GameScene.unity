@@ -939,7 +939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _energyText: {fileID: 1766597474}
-  _maxEnergy: 10
+  _maxEnergy: 3
 --- !u!4 &1388322461
 Transform:
   m_ObjectHideFlags: 0

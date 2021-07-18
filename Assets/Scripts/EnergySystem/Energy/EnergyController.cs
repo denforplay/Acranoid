@@ -16,6 +16,7 @@ namespace Assets.Scripts.EnergySystem.Energy
         public override void OnCreate()
         {
             _energyRepository = new EnergyRepository();
+            _energyRepository.Initialize();
         }
         public override void Initialize()
         {
@@ -38,6 +39,8 @@ namespace Assets.Scripts.EnergySystem.Energy
                     {
                         isAdding = true;
                         _energyRepository._totalEnergy++;
+                        EventBusManager.GetInstance.Invoke<OnRestoringEnergyEvent>(new OnRestoringEnergyEvent());
+                        _energyRepository.Save();
                         DateTime timeToAdd = _energyRepository._lastAddedTime > counter ? _energyRepository._lastAddedTime : counter;
                         counter = EnergyManager.GetInstance.AddDuration(timeToAdd, EnergyManager.GetInstance.RestoreDuration);
                     }
@@ -60,7 +63,7 @@ namespace Assets.Scripts.EnergySystem.Energy
             restoring = false;
         }
 
-        public void SpendEnergy()
+        public void SpendEnergy(int value)
         {
             if (_energyRepository._totalEnergy == 0)
             {
@@ -77,7 +80,11 @@ namespace Assets.Scripts.EnergySystem.Energy
                 }
                 Coroutines.Coroutines.StartRoutine(RestoreRoutine());
             }
+        }
 
+        public void Save()
+        {
+            _energyRepository.Save();
         }
     }
 }

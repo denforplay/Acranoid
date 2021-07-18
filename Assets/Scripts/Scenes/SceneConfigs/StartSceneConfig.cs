@@ -16,12 +16,18 @@ namespace Assets.Scripts.Scenes.SceneConfigs
         public const string SCENE_NAME = "StartScene";
         public override string SceneName => SCENE_NAME;
 
+        private bool isLocalisationInit1 = false;
+        private bool isLocalisationInit2 = false;
         public override Dictionary<Type, Controller> CreateAllControllers()
         {
             var controllersMap = new Dictionary<Type, Controller>();
             this.CreateController<TimerController>(controllersMap);
             this.CreateController<EnergyController>(controllersMap);
-            this.CreateController<LocalisationController>(controllersMap);
+            if (!isLocalisationInit1)
+            {
+                this.CreateController<LocalisationController>(controllersMap);
+                isLocalisationInit1 = true;
+            }
             this.CreateController<LevelsController>(controllersMap);
             return controllersMap;
         }
@@ -29,7 +35,11 @@ namespace Assets.Scripts.Scenes.SceneConfigs
         public override Dictionary<Type, Repository> CreateAllRepositories()
         {
             var repositoriesMap = new Dictionary<Type, Repository>();
-            this.CreateRepository<LocalisationRepository>(repositoriesMap);
+            if (!isLocalisationInit2)
+            {
+                this.CreateRepository<LocalisationRepository>(repositoriesMap);
+                isLocalisationInit2 = true;
+            }
             this.CreateRepository<LevelRepository>(repositoriesMap);
             return repositoriesMap;
         }

@@ -1,12 +1,17 @@
+using Assets.Scripts.Abstracts.EventBus;
 using Assets.Scripts.Abstracts.Game;
 using Assets.Scripts.Block;
+using Assets.Scripts.EnergySystem.Energy;
+using Assets.Scripts.EventBus;
 using Assets.Scripts.Level;
+using Assets.Scripts.Localisation;
 using Assets.Scripts.PlayerData;
 using Assets.Scripts.Scenes.SceneConfigs;
 using Assets.Scripts.UI.PopupSystem;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ChooseLevelPopup : Popup
@@ -53,6 +58,7 @@ public class ChooseLevelPopup : Popup
         Button button = Instantiate(_packageButtonPrefab, _scrollViewContent.transform);
         var btnText = button.GetComponentInChildren<TextMeshProUGUI>();
         btnText.text = levelPackObject.packName;
+        btnText.gameObject.AddComponent<LocalisationObject>();
         button.onClick.AddListener(() => OnPackageClickEvent(_levelPacksConfig.levelPacks[index]));
     }
 
@@ -61,6 +67,7 @@ public class ChooseLevelPopup : Popup
         Button button = Instantiate(_levelButtonPrefab, _levelScrollContent.transform);
         TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
         text.text = level.levelName;
+        text.gameObject.AddComponent<LocalisationObject>();
         button.onClick.AddListener(() => OnLevelClickEvent(index));
         if (prevLevel != null && !prevLevel.isCompleted)
         {
@@ -83,9 +90,17 @@ public class ChooseLevelPopup : Popup
 
     private void OnLevelClickEvent(int levelIndex)
     {
-        BlocksManager.GetInstance.ReturnAllBlocks(null);
-        LevelManager.GetInstance.SetCurrentLevel(this, levelIndex);
         PopupManager.GetInstance.DeleteAllPopups();
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            BlocksManager.GetInstance.ReturnAllBlocks(null);
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            Game.sceneManagerBase.LoadNewSceneAsync(GameSceneConfig.SCENE_NAME);
+        }
+        LevelManager.GetInstance.SetCurrentLevel(this, levelIndex);
+        EnergyManager.GetInstance.SpendEnergy(1);
     }
 
     private void OnPackageClickEvent(LevelPackObject _levelPackObject)

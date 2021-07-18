@@ -42,9 +42,10 @@ namespace Assets.Scripts.Block
 
         public void ReturnAllBlocks(IEvent ievent)
         {
+            if (allBlocks != null)
             foreach (var block in allBlocks)
             {
-                if (block.gameObject.activeInHierarchy)
+                if (block != null && block.gameObject.activeInHierarchy)
                 {
                     block.ReturnToPool();
                 }

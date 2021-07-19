@@ -14,4 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.15
   mouseSensivity: 0.1
-  borderPosition: 3.3

@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Abstracts.EventBus.Interfaces;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.PlatformEvents;
+using Assets.Scripts.GameObjects.Bonus;
 using UnityEngine;
 
 namespace Assets.Scripts.PlatformMovement
@@ -15,6 +16,10 @@ namespace Assets.Scripts.PlatformMovement
 
         private Vector2 _screen;
 
+        public void AddSpeed(float value)
+        {
+            _platformMoveConfig.speed += value;
+        }
         private void Awake()
         {
             _screen = new Vector2(Screen.width, Screen.height);
@@ -33,6 +38,14 @@ namespace Assets.Scripts.PlatformMovement
             float righterPosition = _screen.x - (_spriteRenderer.size.x/2) - _borderSpriteRenderer.size.x;
             positionX = Mathf.Clamp(positionX, lefterPosition, righterPosition);
             _rigidBody2D.MovePosition(new Vector2(positionX, _rigidBody2D.position.y));
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.TryGetComponent<BaseBonus>(out BaseBonus baseBonus))
+            {
+                baseBonus.Apply();
+            }
         }
 
         private void OnEnable()

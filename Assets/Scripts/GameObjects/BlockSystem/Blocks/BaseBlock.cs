@@ -11,7 +11,6 @@ namespace Assets.Scripts.Block
         protected int _score;
         public SpriteRenderer _spriteRenderer;
         protected int _life;
-
         public IObjectPool Origin { get ; set; }
 
         public void SetData(BlockConfig blockConfig)

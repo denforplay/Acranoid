@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Abstracts.Pool.Interfaces;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.BlockEvents;
+using Assets.Scripts.GameObjects.Bonus;
 
 namespace Assets.Scripts.Block
 {
@@ -11,6 +12,7 @@ namespace Assets.Scripts.Block
             _life--;
             if (_life < 1)
             {
+                BonusManager.GetInstance.GenerateBonus(this);
                 EventBusManager.GetInstance.Invoke<OnBlockDestroyEvent>(new OnBlockDestroyEvent());
                 BlocksManager.GetInstance.ReturnBlock(this);
             }

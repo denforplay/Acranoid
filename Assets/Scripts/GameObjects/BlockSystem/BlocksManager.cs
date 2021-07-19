@@ -66,6 +66,11 @@ namespace Assets.Scripts.Block
                     }
 
                 }
+            foreach(var blocks in allBlocks)
+            {
+                blocks.Clear();
+            }
+            allBlocks.Clear();
             _currentRow = 0;
             _blocksController.ReturnAllBlocks();
         }

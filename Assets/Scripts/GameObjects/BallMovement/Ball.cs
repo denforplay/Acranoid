@@ -30,6 +30,11 @@ namespace Assets.Scripts.BallMovement
             _camera = Camera.main;
         }
 
+        public void SetVelocity(float value)
+        {
+            _ballConfig.velocity += value;
+        }
+
         private void FixedUpdate()
         {
             _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * _ballConfig.velocity;

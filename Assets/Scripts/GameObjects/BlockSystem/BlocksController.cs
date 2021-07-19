@@ -30,23 +30,27 @@ namespace Assets.Scripts.Block
 
         public void ReturnBlock(BaseBlock block)
         {
-            _blocksRepository.Count--;
-            var pool = FindPool(block);
-            pool.ReturnToPool(block);
-            if (_blocksRepository.Count == 0)
+            if (block.gameObject.activeInHierarchy)
             {
-                JsonParser jsonParser = new JsonParser();
-                jsonParser.SetJsonData(LevelManager.GetInstance.CurrentLevel);
-                EventBusManager.GetInstance.Invoke(new OnLevelCompletedEvent());
-                if (LevelManager.GetInstance.IsCurrentLastLevel())
+                _blocksRepository.Count--;
+                var pool = FindPool(block);
+                pool.ReturnToPool(block);
+                if (_blocksRepository.Count == 0)
                 {
-                    PopupManager.GetInstance.SpawnPopup<PackSuccesPopup>();
-                }
-                else
-                {
-                    PopupManager.GetInstance.SpawnPopup<LevelSuccessPopup>();
+                    JsonParser jsonParser = new JsonParser();
+                    jsonParser.SetJsonData(LevelManager.GetInstance.CurrentLevel);
+                    EventBusManager.GetInstance.Invoke(new OnLevelCompletedEvent());
+                    if (LevelManager.GetInstance.IsCurrentLastLevel())
+                    {
+                        PopupManager.GetInstance.SpawnPopup<PackSuccesPopup>();
+                    }
+                    else
+                    {
+                        PopupManager.GetInstance.SpawnPopup<LevelSuccessPopup>();
+                    }
                 }
             }
+           
         }
 
         public void ReturnAllBlocks()

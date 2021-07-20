@@ -745,14 +745,15 @@ MonoBehaviour:
   _ball: {fileID: 358448143}
   _platform: {fileID: 1442874065}
   _bonuses:
+  - {fileID: -1997981583974593116, guid: dd363cc1e804bd74680159fd1a58ed4b, type: 3}
+  - {fileID: 3050912108310710211, guid: e14e2bb0a5682fa4ca669dce876d4aa8, type: 3}
   - {fileID: 5593276842963023894, guid: 178e034096e6c0d4ebf9832a469853e4, type: 3}
+  - {fileID: -3978346526542186866, guid: 2fde75162edd7c94d96514506e9f136e, type: 3}
+  - {fileID: -5602802435875056604, guid: d1bdc07e8f499d44f85f3db5b92912e8, type: 3}
+  - {fileID: 2110453950113958904, guid: 6066e04dd3c54354e99353edf4e2b5d4, type: 3}
   - {fileID: -3978346526542186866, guid: 166e1b3490b00894d9418bad6fcf6313, type: 3}
   - {fileID: -5602802435875056604, guid: 7bfccaa19e4c65842b5678a1f66f975f, type: 3}
   - {fileID: 2110453950113958904, guid: a7035a1af2302384a970263c74054674, type: 3}
-  - {fileID: -3978346526542186866, guid: 2fde75162edd7c94d96514506e9f136e, type: 3}
-  - {fileID: -5602802435875056604, guid: d1bdc07e8f499d44f85f3db5b92912e8, type: 3}
-  - {fileID: 3050912108310710211, guid: e14e2bb0a5682fa4ca669dce876d4aa8, type: 3}
-  - {fileID: 2110453950113958904, guid: 6066e04dd3c54354e99353edf4e2b5d4, type: 3}
   _bonusChance: 1
 --- !u!1 &991027445
 GameObject:

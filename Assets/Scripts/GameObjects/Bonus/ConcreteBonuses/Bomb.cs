@@ -1,14 +1,11 @@
 ﻿using Assets.Scripts.Block;
-using System;
+using UnityEngine;
 
 namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
 {
-    public class HorizontalBombBonus : BaseBonus
+    public class Bomb : BaseBonus
     {
-        private void Awake()
-        {
-            isInstantlyActivated = true;
-        }
+        [SerializeField] private int _damage = 1;
         public override void Apply()
         {
             var allBlocks = BlocksManager.GetInstance.allBlocks;
@@ -27,13 +24,28 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
                 if (isFinded) break;
             }
 
-            int i = 0;
-
-            for (; BlocksManager.GetInstance.allBlocks.Count != 0 && i < BlocksManager.GetInstance.allBlocks[row].Count; i++)
+            col--;
+            row--;
+            for (int i = row; i < row + 3; i++)
             {
-                if(BlocksManager.GetInstance.allBlocks[row][i] is ColorBlock && BlocksManager.GetInstance.allBlocks[row][i].gameObject.activeInHierarchy)
-                BlocksManager.GetInstance.ReturnBlock(BlocksManager.GetInstance.allBlocks[row][i]);
+                for (int j = col; j < col + 3; j++)
+                {
+                    try
+                    {
+                        int damage = _damage;
+                        while(damage > 0)
+                        {
+                            BlocksManager.GetInstance.allBlocks[i][j].ApplyDamage();
+                            damage--;
+                        }
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
             }
+
         }
 
         public override void Remove()

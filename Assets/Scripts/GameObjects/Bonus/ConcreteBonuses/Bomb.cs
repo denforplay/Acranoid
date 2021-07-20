@@ -1,11 +1,15 @@
 ﻿using Assets.Scripts.Block;
-using UnityEngine;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
 {
     public class Bomb : BaseBonus
     {
-        [SerializeField] private int _damage = 1;
+        private int _damage = 1;
         public override void Apply()
         {
             var allBlocks = BlocksManager.GetInstance.allBlocks;
@@ -32,12 +36,7 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
                 {
                     try
                     {
-                        int damage = _damage;
-                        while(damage > 0)
-                        {
-                            BlocksManager.GetInstance.allBlocks[i][j].ApplyDamage();
-                            damage--;
-                        }
+                        BlocksManager.GetInstance.ReturnBlock(allBlocks[i][j]);
                     }
                     catch
                     {
@@ -45,7 +44,6 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
                     }
                 }
             }
-
         }
 
         public override void Remove()

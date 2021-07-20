@@ -74,9 +74,10 @@ namespace Assets.Scripts.Block
                         {
                             BaseBlock block;
                             if (blocksData[i] != GRANITE_BLOCK)
-                            {
+                            { 
                                 block = BlocksManager.GetInstance.GetBlock(_blocksPrefabs[COLOR_BLOCK]);
                                 block.SetData(_blockConfigs[blocksData[i] - 1]);
+                                (block as ColorBlock).color = _blockConfigs[blocksData[i] - 1].baseColor;
                             }
                             else
                             {

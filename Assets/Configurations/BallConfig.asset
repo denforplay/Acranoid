@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb40102e4470e94dbca9e43d7a16559, type: 3}
   m_Name: BallConfig
   m_EditorClassIdentifier: 
-  velocity: 9
+  velocity: 8
   offSetX: 0
   rightDirection: 1
   leftDirection: -1

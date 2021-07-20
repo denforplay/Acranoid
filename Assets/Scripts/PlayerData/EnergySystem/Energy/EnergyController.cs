@@ -77,7 +77,7 @@ namespace Assets.Scripts.EnergySystem.Energy
             EventBusManager.GetInstance.Invoke<OnEnergySpendEvent>(new OnEnergySpendEvent());
             if (!restoring)
             {
-                if (_energyRepository._totalEnergy + 1 == EnergyManager.GetInstance.MaxEnergy)
+                if (_energyRepository._totalEnergy + 1 <= EnergyManager.GetInstance.MaxEnergy)
                 {
                     TimerManager.GetInstance.SetNextEnergyTime(EnergyManager.GetInstance.AddDuration(TimerManager.GetInstance.NextEnergyTime, EnergyManager.GetInstance.RestoreDuration));
                 }

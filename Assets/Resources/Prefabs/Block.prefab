@@ -124,3 +124,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sprites: []
   _spriteRenderer: {fileID: 0}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  _destroyParticle: {fileID: 4966882060784082841, guid: da2bc616fe654854c831182bee0b26d3, type: 3}

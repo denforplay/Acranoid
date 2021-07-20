@@ -11,7 +11,7 @@ namespace Assets.Scripts.UI.Buttons
 
         private void Awake()
         {
-            _resetProgressButton.onClick.AddListener(() => EnergyManager.GetInstance.SpendEnergy(1));
+            _resetProgressButton.onClick.AddListener(() => PlayerPrefs.DeleteAll());
         }
     }
 }

@@ -58,7 +58,6 @@ public class ChooseLevelPopup : Popup
     private void CreatePackageButton(LevelPackObject levelPackObject, int index)
     {
         Button button = Instantiate(_packageButtonPrefab, _scrollViewContent.transform);
-        button.gameObject.AddComponent<ButtonAnimation>();
         Image btnImage = button.GetComponentsInChildren<Image>()[1];
         btnImage.sprite = levelPackObject._packImage;
         TextMeshProUGUI[] btnTexts = button.GetComponentsInChildren<TextMeshProUGUI>();
@@ -70,7 +69,6 @@ public class ChooseLevelPopup : Popup
     private Button CreateLevelButton(Level currentLevel, Level nextLevel, int index)
     {
         Button button = Instantiate(_levelButtonPrefab, _levelScrollContent.transform);
-        button.gameObject.AddComponent<ButtonAnimation>();
         TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
         text.text = currentLevel.levelName;
         text.gameObject.AddComponent<LocalisationObject>();

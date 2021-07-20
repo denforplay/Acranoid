@@ -6,6 +6,7 @@ using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.Abstracts.EventBus.Interfaces;
 using Assets.Scripts.EventBus.Events.LevelEvents;
 using Assets.Scripts.Abstracts.Game;
+using Assets.Scripts.EventBus.Events.HealthEvents;
 
 namespace Assets.Scripts.Health
 {
@@ -20,6 +21,7 @@ namespace Assets.Scripts.Health
         {
             _heartsView = new List<Heart>();
             EventBusManager.GetInstance.Subscribe<OnHeartSpendEvent>(DeleteHealthView);
+            EventBusManager.GetInstance.Subscribe<OnHeartAddEvent>((OnHeartAddEvent) => AddHealthView(this, OnHeartAddEvent));
             EventBusManager.GetInstance.Subscribe<OnHeathInitizliedEvent>((OnHeathInitizliedEvent) =>
             {
                 EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>((OnNextLevelLoaded) =>
@@ -29,7 +31,7 @@ namespace Assets.Scripts.Health
                     ViewHearts();
                 });
             });
-            
+
             _healthRepository = Game.GetRepository<HealthRepository>();
         }
 
@@ -49,13 +51,15 @@ namespace Assets.Scripts.Health
 
         public void DeleteHealthView(IEvent ievent)
         {
-            try
-            {
-                _heartsView.Last(x => x != null && x.gameObject.activeInHierarchy).ReturnToPool();
-            }
-            catch
-            {
-            }
+            _heartsView.Last(x => x != null && x.gameObject.activeInHierarchy).ReturnToPool();
+        }
+
+        public void AddHealthView(object sender, IEvent ievent)
+        {
+            Heart heart = _healthRepository._heartPool.GetPrefabInstance();
+            heart.transform.SetParent(_healthContent.transform);
+            heart.gameObject.transform.position = _healthContent.transform.position;
+            _heartsView.Add(heart);
         }
 
         public void ViewHearts()

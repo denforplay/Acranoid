@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System;
 using Assets.Scripts.GameObjects.Borders;
 using Assets.Scripts.EnergySystem.Energy;
+using Assets.Scripts.GameObjects.Bonus;
 
 namespace Assets.Scripts.Block
 {
@@ -39,7 +40,7 @@ namespace Assets.Scripts.Block
             var screenInWorld = _camera.ScreenToWorldPoint(screen);
             distance.x = screen.x / _blockGeneratorConfig.screenWidth * _blockGeneratorConfig.blockWidth;
             distance.y = screen.y / _blockGeneratorConfig.screenHeight * _blockGeneratorConfig.blockHeight;
-            startPosition = new Vector2(_leftBorderRender.size.x - screenInWorld.x, screenInWorld.y - _topBorderRender.size.y -_blockRender.size.x/2);
+            startPosition = new Vector2(_leftBorderRender.size.x - screenInWorld.x, screenInWorld.y - _topBorderRender.size.y - _blockRender.size.x / 2);
             startPosition = _camera.WorldToScreenPoint(startPosition);
         }
 
@@ -54,9 +55,14 @@ namespace Assets.Scripts.Block
             Level.Level level = LevelManager.GetInstance.GetCurrentLevel();
             int[] blocksData = level.blocksData;
             InitializeData(blocksData);
+
+
             for (int i = 0; i < blocksData.Length; i++)
             {
-                switch (blocksData[i])
+                int blockIndex = blocksData[i];
+                if (blockIndex >= 10)
+                    blockIndex /= 10;
+                switch (blockIndex)
                 {
                     case EMPTY_BLOCK:
                         {
@@ -74,10 +80,9 @@ namespace Assets.Scripts.Block
                         {
                             BaseBlock block;
                             if (blocksData[i] != GRANITE_BLOCK)
-                            { 
+                            {
                                 block = BlocksManager.GetInstance.GetBlock(_blocksPrefabs[COLOR_BLOCK]);
-                                block.SetData(_blockConfigs[blocksData[i] - 1]);
-                                (block as ColorBlock).color = _blockConfigs[blocksData[i] - 1].baseColor;
+                                ConfigureBlock(block as ColorBlock, blocksData[i]);
                             }
                             else
                             {
@@ -95,6 +100,23 @@ namespace Assets.Scripts.Block
             }
             startPosition.x -= distance.x / 2;
             distance /= scaler;
+        }
+
+        private void ConfigureBlock(ColorBlock block, int blockData)
+        {
+            int count = 1;
+            int index = -1;
+            while (blockData >= 10)
+            {
+                if (index == -1) index = 0;
+                index += blockData % 10 * count;
+                count *= 10;
+                blockData /= 10;
+            }
+            if (index != -1)
+                (block as ColorBlock)._baseBonus = BonusManager.GetInstance.GetBonus(index);
+            block.SetData(_blockConfigs[blockData - 1]);
+            (block as ColorBlock).color = _blockConfigs[blockData - 1].baseColor;
         }
 
         private void InitializeData(int[] blocksData)
@@ -115,7 +137,7 @@ namespace Assets.Scripts.Block
             distance /= scaler;
             countInRow = blocksData.Skip(skipIndex + 1).TakeWhile(x => x != NEW_ROW).Count();
             if (countInRow != 0)
-            scaler = (Screen.width - 2 * startPosition.x) / (distance.x * countInRow);
+                scaler = (Screen.width - 2 * startPosition.x) / (distance.x * countInRow);
             distance *= scaler;
             startPosition.x += distance.x / 2;
             position.y -= distance.y;

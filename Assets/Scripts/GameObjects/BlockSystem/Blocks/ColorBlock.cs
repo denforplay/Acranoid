@@ -6,8 +6,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Block
 {
-    public class ColorBlock : BaseBlock, IPoolable
+    public class ColorBlock : BaseBlock
     {
+        [SerializeField] public BaseBonus _baseBonus;
         public Color color;
         [SerializeField] ParticleSystem _destroyParticle;
         public override void ApplyDamage()
@@ -15,11 +16,14 @@ namespace Assets.Scripts.Block
             _life--;
             if (_life < 1)
             {
-                BonusManager.GetInstance.GenerateBonus(this);
+                if (_baseBonus != null)
+                {
+                    BonusManager.GetInstance.GenerateBonus(this, _baseBonus);
+                }
                 EventBusManager.GetInstance.Invoke<OnBlockDestroyEvent>(new OnBlockDestroyEvent());
                 BlocksManager.GetInstance.ReturnBlock(this);
             }
-            else 
+            else
             {
                 _spriteRenderer.sprite = _sprites[_life - 1];
             }
@@ -28,6 +32,12 @@ namespace Assets.Scripts.Block
         public override void ReturnToPool()
         {
             base.ReturnToPool();
+            if (_life > 0)
+            {
+                _life = 0;
+                if (_baseBonus != null && _baseBonus.isInstantlyActivated)
+                BonusManager.GetInstance.GenerateBonus(this, _baseBonus);
+            }
             var particle = Instantiate(_destroyParticle);
             particle.transform.position = this.transform.position;
             particle.startColor = color;

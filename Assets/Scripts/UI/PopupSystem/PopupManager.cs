@@ -1,6 +1,4 @@
 ﻿using Assets.Scripts.Abstracts.Singeton;
-using Assets.Scripts.EventBus;
-using Assets.Scripts.EventBus.Events.Popup;
 using System.Collections.Generic;
 using UnityEngine;
 

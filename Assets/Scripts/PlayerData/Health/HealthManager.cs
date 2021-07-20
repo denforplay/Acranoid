@@ -6,6 +6,7 @@ using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.LevelEvents;
 using UnityEngine.UI;
 using Assets.Scripts.UI.PopupSystem;
+using Assets.Scripts.EventBus.Events.HealthEvents;
 
 namespace Assets.Scripts.Health
 {
@@ -37,6 +38,13 @@ namespace Assets.Scripts.Health
                 CheckHeartsInitialized();
                 return _healthController.Health;
             }
+        }
+
+        public void AddHeart(int value)
+        {
+            CheckHeartsInitialized();
+            EventBusManager.GetInstance.Invoke(new OnHeartAddEvent());
+            _healthController.AddLife(value);
         }
 
         public void SpendHeart(int value)

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2110453950113958905}
   - component: {fileID: 2110453950113958910}
   - component: {fileID: 2110453950113958911}
-  - component: {fileID: -1997981583974593116}
+  - component: {fileID: 6065477193474343823}
   m_Layer: 6
-  m_Name: VerticalBomb
+  m_Name: AddLifeBonus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,15 +74,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 0.9044877, g: 1, b: 0.1830188, a: 1}
+  m_Sprite: {fileID: 6485422151478870306, guid: 9930cc274b298234e9b15ae4f558c744, type: 3}
+  m_Color: {r: 1, g: 0.27092445, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.92, y: 0.23}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &2110453950113958910
@@ -132,7 +132,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-1997981583974593116
+--- !u!114 &6065477193474343823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,9 +141,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2110453950113958908}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f4169cbc83875d49b1cbb7711c07876, type: 3}
+  m_Script: {fileID: 11500000, guid: e5e72ad6a9ff3d6428c68302788b9950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInstantlyActivated: 1
-  _bombType: 0
-  _timeBetweenDestroy: 0.05
+  isInstantlyActivated: 0
+  _isAdd: 1

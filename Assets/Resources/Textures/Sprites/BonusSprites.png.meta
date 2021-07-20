@@ -20,6 +20,12 @@ TextureImporter:
   - first:
       213: -1906398792460722726
     second: BonusSprites_5
+  - first:
+      213: 6485422151478870306
+    second: BonusSprites_6
+  - first:
+      213: 2792822795813408307
+    second: BonusSprites_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -242,6 +248,48 @@ TextureImporter:
       bones: []
       spriteID: add1527166c1b85e0800000000000000
       internalID: -1906398792460722726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BonusSprites_6
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 70
+        width: 92
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2210955e519d00a50800000000000000
+      internalID: 6485422151478870306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BonusSprites_7
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 43
+        width: 92
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33e4219298912c620800000000000000
+      internalID: 2792822795813408307
       vertices: []
       indices: 
       edges: []

@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Abstracts.EventBus.Interfaces;
-using Assets.Scripts.Abstracts.Singeton;
+﻿using Assets.Scripts.Abstracts.Singeton;
 using Assets.Scripts.BallMovement;
 using Assets.Scripts.Block;
 using Assets.Scripts.PlatformMovement;
@@ -12,8 +11,7 @@ namespace Assets.Scripts.GameObjects.Bonus
     {
         [SerializeField] private Ball _ball;
         [SerializeField] private Platform _platform;
-        [SerializeField] private List<BaseBonus> _bonuses;
-        [SerializeField] private float _bonusChance = 1.0f;
+        [SerializeField] private List<BaseBonus> _baseBonuses;
         private ColorBlock _currentDestroyedBlock;
         public ColorBlock CurrentDestroyedBlock => _currentDestroyedBlock;
         public Ball Ball => _ball;
@@ -24,22 +22,22 @@ namespace Assets.Scripts.GameObjects.Bonus
             base.Awake();
         }
 
-        public void GenerateBonus(ColorBlock colorBlock)
+        public BaseBonus GetBonus(int index)
+        {
+            return _baseBonuses[index];
+        }
+
+        public void GenerateBonus(ColorBlock colorBlock, BaseBonus bonus)
         {
             _currentDestroyedBlock = colorBlock;
-            float bonusChance = Random.Range(0f, 1f);
-            if (bonusChance >= 0 && bonusChance <= _bonusChance)
+            if (!bonus.isInstantlyActivated)
             {
-                BaseBonus bonus = _bonuses[Random.Range(0, _bonuses.Count)];
-                if (!bonus.isInstantlyActivated)
-                {
-                    BaseBonus spawnedBonus = Instantiate(bonus);
-                    spawnedBonus.transform.position = colorBlock.transform.position;
-                }
-                else
-                {
-                    bonus.Apply();
-                }
+                BaseBonus spawnedBonus = Instantiate(bonus);
+                spawnedBonus.transform.position = colorBlock.transform.position;
+            }
+            else
+            {
+                bonus.Apply();
             }
         }
     }

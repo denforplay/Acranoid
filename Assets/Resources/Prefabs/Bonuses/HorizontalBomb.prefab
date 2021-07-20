@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2110453950113958905}
   - component: {fileID: 2110453950113958910}
   - component: {fileID: 2110453950113958911}
-  - component: {fileID: 3050912108310710211}
+  - component: {fileID: -1997981583974593116}
   m_Layer: 6
   m_Name: HorizontalBomb
   m_TagString: Untagged
@@ -132,7 +132,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3050912108310710211
+--- !u!114 &-1997981583974593116
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,8 +141,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2110453950113958908}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26ca6ffc6879bf64eafa3a3e1c79eeaa, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f4169cbc83875d49b1cbb7711c07876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _time: 2
   isInstantlyActivated: 1
+  _bombType: 1
+  _timeBetweenDestroy: 0.05

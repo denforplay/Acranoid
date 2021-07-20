@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd12dde9af43399408ae394bfd0db96d, type: 3}
   m_Name: PlatformConfig
   m_EditorClassIdentifier: 
-  speed: 0.2
-  mouseSensivity: 0.1
+  speed: 0.25
+  mouseSensivity: 0.2

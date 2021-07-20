@@ -10,7 +10,7 @@ namespace Assets.Scripts.UI.Buttons.Strategies.ButtonMethods
         public void Call()
         {
             EnergyManager.GetInstance.SpendEnergy(1);
-            PopupManager.GetInstance.DeletePopUp();
+            PopupManager.GetInstance.DeleteAllPopups();
             LevelManager.GetInstance.LoadNextLevel();
         }
     }

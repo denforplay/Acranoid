@@ -250,7 +250,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 588660237}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -368,7 +368,7 @@ RectTransform:
   m_Children:
   - {fileID: 674745430}
   m_Father: {fileID: 588660237}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -544,6 +544,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1950964170}
   - {fileID: 1403011434}
   - {fileID: 1620766761}
   - {fileID: 1758064252}
@@ -987,7 +988,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 588660237}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1404,9 +1405,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 900277695}
-  - {fileID: 1950964170}
   m_Father: {fileID: 588660237}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -1435,8 +1435,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: ARCANOID
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f81026376625f824ead8948bfa46c4fc, type: 2}
-  m_sharedMaterial: {fileID: -2455305641272628288, guid: f81026376625f824ead8948bfa46c4fc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1670,7 +1670,6 @@ GameObject:
   - component: {fileID: 1620766763}
   - component: {fileID: 1620766762}
   - component: {fileID: 1620766765}
-  - component: {fileID: 1620766766}
   m_Layer: 5
   m_Name: RussianChooseButton
   m_TagString: Untagged
@@ -1691,7 +1690,7 @@ RectTransform:
   m_Children:
   - {fileID: 1315985497}
   m_Father: {fileID: 588660237}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -1804,22 +1803,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb4131e0ed7caf43aa95c4f74148b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1620766766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1620766760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d5123606422dcf4fb0004bbab8c0f32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _downScale: 0.8
-  _upScale: 1
-  _duration: 0.1
-  _endColor: {r: 0.5, g: 0.5, b: 0.5, a: 255}
 --- !u!1 &1655557493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1977,7 +1960,6 @@ GameObject:
   - component: {fileID: 1758064254}
   - component: {fileID: 1758064253}
   - component: {fileID: 1758064256}
-  - component: {fileID: 1758064257}
   m_Layer: 5
   m_Name: EnglishChooseButton
   m_TagString: Untagged
@@ -1998,7 +1980,7 @@ RectTransform:
   m_Children:
   - {fileID: 1884502232}
   m_Father: {fileID: 588660237}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -2111,22 +2093,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb4131e0ed7caf43aa95c4f74148b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1758064257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1758064251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d5123606422dcf4fb0004bbab8c0f32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _downScale: 0.8
-  _upScale: 1
-  _duration: 0.1
-  _endColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 255}
 --- !u!1 &1884502231
 GameObject:
   m_ObjectHideFlags: 0
@@ -2219,7 +2185,6 @@ GameObject:
   - component: {fileID: 1950964172}
   - component: {fileID: 1950964171}
   - component: {fileID: 1950964174}
-  - component: {fileID: 1950964175}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -2239,12 +2204,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1537670063}
-  m_Father: {fileID: 1403011434}
-  m_RootOrder: 1
+  m_Father: {fileID: 588660237}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.999999, y: -281}
+  m_AnchoredPosition: {x: 24, y: 556.31256}
   m_SizeDelta: {x: 500, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1950964171
@@ -2353,19 +2318,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2878548cb5f0ea4c80392cf0394d78b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1950964175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1950964169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d5123606422dcf4fb0004bbab8c0f32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _downScale: 0.8
-  _upScale: 1
-  _duration: 0.1
-  _endColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}

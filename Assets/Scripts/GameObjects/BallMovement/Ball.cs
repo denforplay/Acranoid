@@ -21,10 +21,12 @@ namespace Assets.Scripts.BallMovement
         private Platform _rememberedParent;
         public bool isReturning = true;
         private bool isActivated = false;
+        private float velocity;
         public IObjectPool Origin { get; set; }
-        public float Velocity => _ballConfig.velocity;
+        public float Velocity => velocity;
         public void Initialize()
         {
+            velocity = _ballConfig.velocity;
             _circleCollider2D = GetComponent<CircleCollider2D>();
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
@@ -38,17 +40,17 @@ namespace Assets.Scripts.BallMovement
 
         public void SetVelocity(float value)
         {
-            _ballConfig.velocity = value;
+            velocity = value;
         }
 
         public void ChangeVelocity(float value)
         {
-            _ballConfig.velocity += value;
+            velocity += value;
         }
 
         private void FixedUpdate()
         {
-            _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * _ballConfig.velocity;
+            _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * velocity;
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -132,8 +134,6 @@ namespace Assets.Scripts.BallMovement
 
         public void ReturnToPool()
         {
-            gameObject.transform.SetParent(null);
-            _rigidbody2D.velocity = Vector2.zero;
         }
     }
 }

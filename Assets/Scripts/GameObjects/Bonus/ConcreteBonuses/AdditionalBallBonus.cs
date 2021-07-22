@@ -15,8 +15,8 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
                 var ballClone = BallManager.GetInstance.SpawnBall();
                 ballClone.transform.position = ball.transform.position + Vector3.one;
                 ballClone.isReturning = false;
-                ballClone.BallActivate(null);
                 ballClone.SetVelocity(8f);
+                ballClone.BallActivate(null);
             }
 
             gameObject.SetActive(false);

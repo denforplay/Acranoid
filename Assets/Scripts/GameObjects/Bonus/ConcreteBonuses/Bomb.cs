@@ -136,7 +136,7 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
                     int nextX = (int)(moveDirections[i].x + currentPoint.x);
                     int nextY = (int)(moveDirections[i].y + currentPoint.y);
                     Vector2 nextPoint = new Vector2(nextX, nextY);
-                    if (nextY >= 0 && nextY < BlocksManager.GetInstance.allBlocks.Count && nextX >= 0 && nextX < BlocksManager.GetInstance.allBlocks[nextY].Count)
+                    if (nextX >= 0 && nextX < BlocksManager.GetInstance.allBlocks.Count && nextY >= 0 && nextY < BlocksManager.GetInstance.allBlocks[nextX].Count)
                         if (BlocksManager.GetInstance.allBlocks[nextX][nextY] != null 
                             && BlocksManager.GetInstance.allBlocks[nextX][nextY].color == BlocksManager.GetInstance.allBlocks[(int)currentPoint.x][(int)currentPoint.y].color
                             && BlocksManager.GetInstance.allBlocks[nextX][nextY].gameObject.activeInHierarchy)

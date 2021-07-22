@@ -4,10 +4,6 @@ using UnityEngine;
 using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.LevelEvents;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using Assets.Scripts.Health;
-using UnityEngine.UI;
 
 namespace Assets.Scripts.Level
 {

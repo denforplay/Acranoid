@@ -1,7 +1,10 @@
 ﻿using Assets.Scripts.Abstracts.Pool.Interfaces;
+using Assets.Scripts.EnergySystem.Energy;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.BlockEvents;
 using Assets.Scripts.GameObjects.Bonus;
+using Assets.Scripts.Health;
+using Assets.Scripts.Level;
 using UnityEngine;
 
 namespace Assets.Scripts.Block
@@ -18,6 +21,10 @@ namespace Assets.Scripts.Block
             _life--;
             if (_life < 1)
             {
+                var particle = Instantiate(_destroyParticle);
+                particle.transform.position = this.transform.position;
+                particle.startColor = color;
+                Destroy(particle, particle.main.duration);
                 if (_baseBonus != null)
                 {
                     BonusManager.GetInstance.GenerateBonus(this, _baseBonus);
@@ -39,14 +46,13 @@ namespace Assets.Scripts.Block
                 if (_baseBonus != null && bonusUsage == 0)
                 {
                     bonusUsage++;
-                    BonusManager.GetInstance.GenerateBonus(this, _baseBonus);
+                    if (HealthManager.GetInstance.Health > 0 && !LevelManager.GetInstance.IsLevelCompleted)
+                    {
+                        BonusManager.GetInstance.GenerateBonus(this, _baseBonus);
+                    }
                 }
             }
             base.ReturnToPool();
-            var particle = Instantiate(_destroyParticle);
-            particle.transform.position = this.transform.position;
-            particle.startColor = color;
-            Destroy(particle, particle.main.duration);
         }
     }
 }

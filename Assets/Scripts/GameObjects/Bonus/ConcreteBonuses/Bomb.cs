@@ -137,10 +137,12 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
                     int nextY = (int)(moveDirections[i].y + currentPoint.y);
                     Vector2 nextPoint = new Vector2(nextX, nextY);
                     if (nextY >= 0 && nextY < BlocksManager.GetInstance.allBlocks.Count && nextX >= 0 && nextX < BlocksManager.GetInstance.allBlocks[nextY].Count)
-                        if (BlocksManager.GetInstance.allBlocks[nextX][nextY] != null && BlocksManager.GetInstance.allBlocks[nextX][nextY].color == BlocksManager.GetInstance.allBlocks[(int)currentPoint.x][(int)currentPoint.y].color)
+                        if (BlocksManager.GetInstance.allBlocks[nextX][nextY] != null 
+                            && BlocksManager.GetInstance.allBlocks[nextX][nextY].color == BlocksManager.GetInstance.allBlocks[(int)currentPoint.x][(int)currentPoint.y].color
+                            && BlocksManager.GetInstance.allBlocks[nextX][nextY].gameObject.activeInHierarchy)
                         {
                             BlocksManager.GetInstance.ReturnBlock(BlocksManager.GetInstance.allBlocks[nextX][nextY]);
-                            yield return null;
+                            yield return new WaitForSeconds(_timeBetweenDestroy);
                             nextPointQueue.Enqueue(new Vector2(nextX, nextY));
                         }
                 }

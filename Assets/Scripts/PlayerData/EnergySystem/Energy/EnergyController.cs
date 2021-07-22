@@ -2,6 +2,7 @@
 using Assets.Scripts.EnergySystem.Timer;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.Energy;
+using Assets.Scripts.Health;
 using Assets.Scripts.UI.PopupSystem;
 using Assets.Scripts.UI.PopupSystem.ConcretePopups;
 using System;

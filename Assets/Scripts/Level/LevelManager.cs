@@ -19,6 +19,8 @@ namespace Assets.Scripts.Level
         public Level CurrentLevel { get; private set; }
         public Sprite CurrentPackSprite { get; private set; }
         public string CurrentPackName { get; private set; }
+        private bool _isLevelCompleted = false;
+        public bool IsLevelCompleted => _isLevelCompleted;
         public void Initialize(LevelsController levelsController)
         {
             _levelsController = levelsController;
@@ -58,15 +60,19 @@ namespace Assets.Scripts.Level
         public Level LoadCurrentLevel()
         {
             CheckLevelsLoaded();
+            _isLevelCompleted = true;
             EventBusManager.GetInstance.Invoke<OnNextLevelLoadedEvent>(new OnNextLevelLoadedEvent());
+            _isLevelCompleted = false;
             return _levelsController.GetCurrentLevel();
         }
 
         public Level LoadNextLevel()
         {
             CheckLevelsLoaded();
+            _isLevelCompleted = true;
             CurrentLevel = _levelsController.LoadNextLevel();
             EventBusManager.GetInstance.Invoke<OnNextLevelLoadedEvent>(new OnNextLevelLoadedEvent());
+            _isLevelCompleted = false;
             return _levelsController.GetCurrentLevel();
         }
 

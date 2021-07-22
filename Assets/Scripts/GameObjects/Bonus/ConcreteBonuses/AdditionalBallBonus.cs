@@ -13,10 +13,10 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
             foreach (var ball in allBalls)
             {
                 var ballClone = BallManager.GetInstance.SpawnBall();
-                ballClone.SetVelocity(ball.Velocity);
                 ballClone.transform.position = ball.transform.position + Vector3.one;
                 ballClone.isReturning = false;
                 ballClone.BallActivate(null);
+                ballClone.SetVelocity(8f);
             }
 
             gameObject.SetActive(false);

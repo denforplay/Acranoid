@@ -146,4 +146,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInstantlyActivated: 0
   _isIncrease: 1
-  _speed: 2.5
+  _speed: 1.5

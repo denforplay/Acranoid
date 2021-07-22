@@ -652,7 +652,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089e5ac56e3d2e844b295618f79c14db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ball: {fileID: 0}
   _platform: {fileID: 1442874065}
   _baseBonuses:
   - {fileID: -1997981583974593116, guid: dd363cc1e804bd74680159fd1a58ed4b, type: 3}
@@ -667,7 +666,7 @@ MonoBehaviour:
   - {fileID: 6065477193474343823, guid: 1b14cf470617ae64fafc0ca38f21f81e, type: 3}
   - {fileID: 3597628633291290156, guid: 2e874dfb82d5ab94594bf66cb9d351b3, type: 3}
   - {fileID: -1997981583974593116, guid: 143ffd775db5e574ba4ada5bebec9641, type: 3}
-  - {fileID: 954099692707920638, guid: e8d49f5e5df18404ab81267179b696df, type: 3}
+  allBonuses: []
 --- !u!1 &991027445
 GameObject:
   m_ObjectHideFlags: 0

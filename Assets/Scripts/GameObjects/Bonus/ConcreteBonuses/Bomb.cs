@@ -2,6 +2,7 @@
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
@@ -56,10 +57,10 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
                     }
                 case BombType.ChainBomb:
                     {
+                        routine = Coroutines.Coroutines.StartRoutine(DestroyChain(row, col));
                         break;
                     }
             }
-
 
             EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>((OnNextLevelLoadedEvent) => Coroutines.Coroutines.StopRoutine(routine));
         }
@@ -111,6 +112,38 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
                 }
 
                 yield return new WaitForSeconds(_timeBetweenDestroy);
+            }
+        }
+
+        private IEnumerator DestroyChain(int row, int col)
+        {
+            Vector2 startPoint = new Vector2(row, col);
+            Queue<Vector2> nextPointQueue = new Queue<Vector2>();
+            Vector2[] moveDirections =
+{
+                new Vector2(0, -1),
+                new Vector2(0, 1),
+                new Vector2(-1, 0),
+                new Vector2(1, 0)
+            };
+            nextPointQueue.Enqueue(startPoint);
+
+            while (nextPointQueue.Count != 0)
+            {
+                Vector2 currentPoint = nextPointQueue.Dequeue();
+                for (int i = 0; i < moveDirections.Length; i++)
+                {
+                    int nextX = (int)(moveDirections[i].x + currentPoint.x);
+                    int nextY = (int)(moveDirections[i].y + currentPoint.y);
+                    Vector2 nextPoint = new Vector2(nextX, nextY);
+                    if (nextY >= 0 && nextY < BlocksManager.GetInstance.allBlocks.Count && nextX >= 0 && nextX < BlocksManager.GetInstance.allBlocks[nextY].Count)
+                        if (BlocksManager.GetInstance.allBlocks[nextX][nextY] != null && BlocksManager.GetInstance.allBlocks[nextX][nextY].color == BlocksManager.GetInstance.allBlocks[(int)currentPoint.x][(int)currentPoint.y].color)
+                        {
+                            BlocksManager.GetInstance.ReturnBlock(BlocksManager.GetInstance.allBlocks[nextX][nextY]);
+                            yield return null;
+                            nextPointQueue.Enqueue(new Vector2(nextX, nextY));
+                        }
+                }
             }
         }
 

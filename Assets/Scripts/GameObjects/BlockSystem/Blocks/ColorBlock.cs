@@ -11,6 +11,8 @@ namespace Assets.Scripts.Block
         [SerializeField] public BaseBonus _baseBonus;
         public Color color;
         [SerializeField] ParticleSystem _destroyParticle;
+
+        private int bonusUsage = 0;
         public override void ApplyDamage()
         {
             _life--;
@@ -31,13 +33,16 @@ namespace Assets.Scripts.Block
 
         public override void ReturnToPool()
         {
-            base.ReturnToPool();
             if (_life > 0)
             {
                 _life = 0;
-                if (_baseBonus != null && _baseBonus.isInstantlyActivated)
-                BonusManager.GetInstance.GenerateBonus(this, _baseBonus);
+                if (_baseBonus != null && bonusUsage == 0)
+                {
+                    bonusUsage++;
+                    BonusManager.GetInstance.GenerateBonus(this, _baseBonus);
+                }
             }
+            base.ReturnToPool();
             var particle = Instantiate(_destroyParticle);
             particle.transform.position = this.transform.position;
             particle.startColor = color;

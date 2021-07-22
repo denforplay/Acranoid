@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Abstracts.Singeton;
-using Assets.Scripts.BallMovement;
 using Assets.Scripts.Block;
 using Assets.Scripts.PlatformMovement;
 using System.Collections.Generic;
@@ -9,22 +8,33 @@ namespace Assets.Scripts.GameObjects.Bonus
 {
     public class BonusManager : Singleton<BonusManager>
     {
-        [SerializeField] private Ball _ball;
         [SerializeField] private Platform _platform;
         [SerializeField] private List<BaseBonus> _baseBonuses;
         private ColorBlock _currentDestroyedBlock;
         public ColorBlock CurrentDestroyedBlock => _currentDestroyedBlock;
-        public Ball Ball => _ball;
         public Platform Platform => _platform;
+        public List<BaseBonus> allBonuses;
         private new void Awake()
         {
             IsDestroy = true;
+            allBonuses = new List<BaseBonus>();
             base.Awake();
         }
 
         public BaseBonus GetBonus(int index)
         {
+            allBonuses.Add(_baseBonuses[index]);
             return _baseBonuses[index];
+        }
+
+        public void ReturnBonus(BaseBonus baseBonus)
+        {
+            allBonuses.Remove(baseBonus);
+        }
+
+        public void ReturnAllBonuses(BaseBonus baseBonus)
+        {
+            allBonuses.Clear();
         }
 
         public void GenerateBonus(ColorBlock colorBlock, BaseBonus bonus)

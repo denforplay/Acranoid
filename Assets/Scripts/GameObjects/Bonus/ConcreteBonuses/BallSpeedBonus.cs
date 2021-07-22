@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.BallMovement;
+using Assets.Scripts.GameObjects.BallMovement;
 using UnityEngine;
 
 namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
@@ -21,10 +22,11 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
 
         public void SetSpeed(float speed)
         {
-            Ball ball = BonusManager.GetInstance.Ball;
+            var balls = BallManager.GetInstance._allBalls;
+            foreach (var ball in balls)
             if (ball.TryGetComponent<Rigidbody2D>(out Rigidbody2D rigidBody))
             {
-                ball.SetVelocity(speed);
+                ball.ChangeVelocity(speed);
             }
         }
     }

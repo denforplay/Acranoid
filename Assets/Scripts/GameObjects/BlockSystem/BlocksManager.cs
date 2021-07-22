@@ -16,11 +16,11 @@ namespace Assets.Scripts.Block
         public BlockConfig _graniteBlockConfig;
         private BlocksController _blocksController;
         private bool _isInitialized;
-        public List<List<BaseBlock>> allBlocks;
+        public List<List<ColorBlock>> allBlocks;
         private int _currentRow = 0;
         public void Initialize(BlocksController blocksController)
         {
-            allBlocks = new List<List<BaseBlock>>();
+            allBlocks = new List<List<ColorBlock>>();
             _blocksController = blocksController;
             _isInitialized = true;
             EventBusManager.GetInstance.Subscribe<OnLevelCompletedEvent>(ReturnAllBlocks);
@@ -35,14 +35,15 @@ namespace Assets.Scripts.Block
         public BaseBlock GetBlock(BaseBlock baseBlock)
         {
             CheckInitialize();
-            List<BaseBlock> currentList;
+            List<ColorBlock> currentList;
             if (allBlocks.Count <= _currentRow)
             {
-                currentList = new List<BaseBlock>();
+                currentList = new List<ColorBlock>();
                 allBlocks.Add(currentList);
             }
             BaseBlock block = _blocksController.GetBlock(baseBlock);
-            allBlocks[_currentRow].Add(block);
+            if (block is ColorBlock)
+            allBlocks[_currentRow].Add(block as ColorBlock);
             return block;
         }
 

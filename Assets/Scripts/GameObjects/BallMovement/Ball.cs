@@ -7,30 +7,41 @@ using Assets.Scripts.Abstracts.Pool.Interfaces;
 using Assets.Scripts.EventBus.Events.BallEvents;
 using Assets.Scripts.EventBus.Events.LevelEvents;
 using System;
+using Assets.Scripts.PlatformMovement;
+using Assets.Scripts.GameObjects.BallMovement;
 
 namespace Assets.Scripts.BallMovement
 {
-    public class Ball : MonoBehaviour
+    public class Ball : MonoBehaviour, IPoolable
     {
         [SerializeField] private BallConfig _ballConfig;
         private BallCollisions _ballCollisions;
-        private Rigidbody2D _rigidbody2D;
+        public Rigidbody2D _rigidbody2D;
         private CircleCollider2D _circleCollider2D;
-        private GameObject _rememberedParent;
-        private Camera _camera;
-
+        private Platform _rememberedParent;
+        public bool isReturning = true;
+        private bool isActivated = false;
         public IObjectPool Origin { get; set; }
-
-        private void Start()
+        public float Velocity => _ballConfig.velocity;
+        public void Initialize()
         {
             _circleCollider2D = GetComponent<CircleCollider2D>();
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
             _ballCollisions = new BallCollisions(_ballConfig, _rigidbody2D);
-            _camera = Camera.main;
+        }
+
+        public void SetParent(Platform go)
+        {
+            _rememberedParent = go;
         }
 
         public void SetVelocity(float value)
+        {
+            _ballConfig.velocity = value;
+        }
+
+        public void ChangeVelocity(float value)
         {
             _ballConfig.velocity += value;
         }
@@ -47,8 +58,9 @@ namespace Assets.Scripts.BallMovement
 
         public void ReturnBallOnPosition(IEvent ievent)
         {
-            if (_rememberedParent != null && this != null && gameObject.activeInHierarchy != false)
+            if (isReturning && _rememberedParent != null && this != null && gameObject.activeInHierarchy != false)
             {
+                isActivated = false;
                 EventBusManager.GetInstance.Invoke<OnBallReturnEvent>(new OnBallReturnEvent());
                 _rigidbody2D.velocity = Vector2.zero;
                 _rigidbody2D.isKinematic = true;
@@ -65,29 +77,32 @@ namespace Assets.Scripts.BallMovement
             }
         }
 
-        private void BallActivate(IEvent ievent)
+        public void BallActivate(IEvent ievent)
         {
-            _rememberedParent = transform.parent.gameObject;
-            transform.SetParent(null);
-            _rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
-            _rigidbody2D.velocity = new Vector2(_ballConfig.offSetX, _ballConfig.velocity);
+            if (!isActivated)
+            {
+                isActivated = true;
+                transform.SetParent(null);
+                _rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
+                _rigidbody2D.velocity = new Vector2(_ballConfig.offSetX, _ballConfig.velocity);
+            }
         }
 
         private void BallInactivate()
         {
             if (_rememberedParent != null && this.gameObject.activeInHierarchy)
             {
+                isActivated = false;
                 _rigidbody2D.velocity = Vector2.zero;
                 _rigidbody2D.isKinematic = false;
                 EventBusManager.GetInstance.Invoke<OnBallInactivatingEvent>(new OnBallInactivatingEvent());
                 this.transform.SetParent(_rememberedParent.transform);
-                HealthManager.GetInstance.SpendHeart(1);
             }
         }
 
         private void OnBecameInvisible()
         {
-            BallInactivate();
+            BallManager.GetInstance.ReturnBall(this);
         }
 
         private void OnEnable()
@@ -113,6 +128,12 @@ namespace Assets.Scripts.BallMovement
             EventBusManager.GetInstance.Unsubscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
             EventBusManager.GetInstance.Unsubscribe<OnLevelCompletedEvent>(ReturnBallOnPosition);
             EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ReturnBallOnPosition);
+        }
+
+        public void ReturnToPool()
+        {
+            gameObject.transform.SetParent(null);
+            _rigidbody2D.velocity = Vector2.zero;
         }
     }
 }

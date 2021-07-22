@@ -27,7 +27,7 @@ namespace Assets.Scripts.Abstracts.Pool
                 if (instance != null)
                 {
                     instance.transform.SetParent(null);
-                    instance.gameObject.SetActive(true);
+                    instance.gameObject.SetActive(true);    
                 }
             }
             else
@@ -41,6 +41,7 @@ namespace Assets.Scripts.Abstracts.Pool
 
         public void ReturnToPool(T instance)
         {
+            instance.gameObject.SetActive(false);
             instance.ReturnToPool();
             _container.Add(instance);
         }

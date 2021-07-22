@@ -3,6 +3,7 @@ using Assets.Scripts.PlatformMovement;
 using Assets.Scripts.Block;
 using System;
 using Assets.Scripts.GameObjects.Bonus;
+using Assets.Scripts.GameObjects.BallMovement;
 
 namespace Assets.Scripts.BallMovement
 {

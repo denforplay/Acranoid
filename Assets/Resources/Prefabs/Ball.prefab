@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5890774749602213057}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.007, y: 0.186, z: -4.621975}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -135,4 +135,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ballConfig: {fileID: 11400000, guid: 67bc2a312ef3f244582be40a5c9d873b, type: 2}
+  _rigidbody2D: {fileID: 0}
   isReturning: 0

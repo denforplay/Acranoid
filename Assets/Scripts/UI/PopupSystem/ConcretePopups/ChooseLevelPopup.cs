@@ -89,7 +89,6 @@ public class ChooseLevelPopup : Popup
             Game.sceneManagerBase.LoadNewSceneAsync(GameSceneConfig.SCENE_NAME);
         }
         LevelManager.GetInstance.SetCurrentLevel(this, levelIndex);
-        EnergyManager.GetInstance.SpendEnergy(1);
     }
 
     private void OnPackageClickEvent(LevelPackObject _levelPackObject)

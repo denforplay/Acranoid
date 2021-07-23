@@ -28,6 +28,7 @@ namespace Assets.Scripts.UI.Buttons.Factories
         public Button GetNewInstance(LevelPackObject levelPackObject, Action btnAction)
         {
             Button button = GameObject.Instantiate(Prefab, _scrollView.transform);
+            button.gameObject.AddComponent<ButtonAnimation>();
             Image btnImage = button.GetComponentsInChildren<Image>()[1];
             btnImage.sprite = levelPackObject._packImage;
             TextMeshProUGUI[] btnTexts = button.GetComponentsInChildren<TextMeshProUGUI>();

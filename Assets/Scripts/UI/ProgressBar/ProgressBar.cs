@@ -28,12 +28,11 @@ namespace Assets.Scripts.ProgressBar
         public void IncrementProgress(IEvent ievnt)
         {
            _targetProgress = _slider.value + 1;
-            _slider.DOValue(_targetProgress, _fillSpeed);
+            //_slider.DOValue(_targetProgress, _fillSpeed);
         }
 
         private void ResetProgress(IEvent ievent)
         {
-            DOTween.Kill(_slider);
             var level = LevelManager.GetInstance.GetCurrentLevel();
             _slider.value = 0;
             _slider.maxValue = level.blocksData.Count(x => x >= COLOR_BLOCK);

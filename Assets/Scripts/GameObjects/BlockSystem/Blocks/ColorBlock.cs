@@ -18,13 +18,14 @@ namespace Assets.Scripts.Block
         private int bonusUsage = 0;
         public override void ApplyDamage(int value)
         {
-            _life-=value;
+            _life -= value;
             if (_life < 1)
             {
                 var particle = Instantiate(_destroyParticle);
                 particle.transform.position = this.transform.position;
                 particle.startColor = color;
                 Destroy(particle.gameObject, particle.main.duration);
+
                 if (_baseBonus != null)
                 {
                     BonusManager.GetInstance.GenerateBonus(this, _baseBonus);

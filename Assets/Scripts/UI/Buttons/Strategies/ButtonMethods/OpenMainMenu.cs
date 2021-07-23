@@ -12,9 +12,8 @@ namespace Assets.Scripts.UI.Buttons.Strategies.ButtonMethods
     {
         public void Call()
         {
-            //EventBusManager.GetInstance.Invoke<OnOpeningStartMenuEvent>(new OnOpeningStartMenuEvent());
-            Time.timeScale = 1;
             PopupManager.GetInstance.DeletePopUp();
+            Time.timeScale = 1;
             SceneManager.LoadScene(StartSceneConfig.SCENE_NAME);
         }
     }

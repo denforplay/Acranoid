@@ -21,9 +21,28 @@ namespace Assets.Scripts.UI.PopupSystem
         private IButtonMethod _continueButtonMethod = new ContinueGame();
         private void Awake()
         {
-            _continueButton.onClick.AddListener(() => _continueButtonMethod.Call());
+            _continueButton.onClick.AddListener(() =>
+            {
+                DisableInput();
+                transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, 2f).OnComplete(() =>
+                {
+                    EventBusManager.GetInstance.Invoke<OnPausePopupClosedEvent>(new OnPausePopupClosedEvent());
+                    Time.timeScale = 1;
+                    Destroy(gameObject);
+                    _continueButtonMethod.Call();
+                });
+            });
             _levelChooseButton.onClick.AddListener(() => _levelChooseButtonMethod.Call());
-            _mainMenuButton.onClick.AddListener(() => _mainMenuButtonMethod.Call());
+            _mainMenuButton.onClick.AddListener(() =>
+            {
+                DisableInput();
+                transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, 2f).OnComplete(() =>
+                {
+                    Time.timeScale = 1;
+                    Destroy(gameObject);
+                    _mainMenuButtonMethod.Call();
+                });
+            });
         }
 
         public override void Hide()
@@ -31,8 +50,8 @@ namespace Assets.Scripts.UI.PopupSystem
             DisableInput();
             transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, 2f).OnComplete(() =>
             {
-                Time.timeScale = 1;
                 EventBusManager.GetInstance.Invoke<OnPausePopupClosedEvent>(new OnPausePopupClosedEvent());
+                Time.timeScale = 1;
                 Destroy(gameObject);
             });
         }

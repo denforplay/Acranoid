@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 426879587848918968}
   - component: {fileID: 8502082435899810535}
   - component: {fileID: 1390883716344453336}
+  - component: {fileID: 3601588561759562281}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -121,6 +122,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3601588561759562281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3535465348469928044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d5123606422dcf4fb0004bbab8c0f32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _downScale: 0.7
+  _upScale: 1
+  _duration: 0.1
+  _endColor: {r: 100, g: 100, b: 100, a: 255}
 --- !u!1 &7124464301775456668
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,8 +173,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -60}
-  m_SizeDelta: {x: 1080, y: 120}
+  m_AnchoredPosition: {x: 0, y: -62.5}
+  m_SizeDelta: {x: 1080, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2491938702435337003
 CanvasRenderer:
@@ -526,6 +543,14 @@ PrefabInstance:
     - target: {fileID: 7241745599546015215, guid: 8e77a8b6dec06e64a9ba68b7b855f245, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7241745600594456424, guid: 8e77a8b6dec06e64a9ba68b7b855f245, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7241745600594456426, guid: 8e77a8b6dec06e64a9ba68b7b855f245, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -1800
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e77a8b6dec06e64a9ba68b7b855f245, type: 3}

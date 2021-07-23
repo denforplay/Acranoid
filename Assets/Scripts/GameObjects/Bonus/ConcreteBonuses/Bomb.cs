@@ -16,6 +16,7 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
     };
     public class Bomb : BaseBonus
     {
+        [SerializeField] private ParticleSystem _bombParticle;
         [SerializeField] private BombType _bombType;
         [SerializeField] private float _timeBetweenDestroy = 0.05f;
         private int _damage = 1;
@@ -87,6 +88,7 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
                     if (BlocksManager.GetInstance.allBlocks[nextX][nextY] != null
                         && BlocksManager.GetInstance.allBlocks[nextX][nextY].gameObject.activeInHierarchy)
                     {
+                        SpawnParticle(nextX, nextY);
                         BlocksManager.GetInstance.allBlocks[nextX][nextY].ApplyDamage(_damage);
                         yield return new WaitForSeconds(_timeBetweenDestroy);
                     }
@@ -116,6 +118,7 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
                         if (BlocksManager.GetInstance.allBlocks[nextX][nextY] != null
                             && BlocksManager.GetInstance.allBlocks[nextX][nextY].gameObject.activeInHierarchy)
                         {
+                            SpawnParticle(nextX, nextY);
                             BlocksManager.GetInstance.allBlocks[nextX][nextY].ApplyDamage(_damage);
                             yield return new WaitForSeconds(_timeBetweenDestroy);
                             nextPointQueue.Enqueue(nextPoint);
@@ -147,6 +150,7 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
                         if (BlocksManager.GetInstance.allBlocks[nextX][nextY] != null
                             && BlocksManager.GetInstance.allBlocks[nextX][nextY].gameObject.activeInHierarchy)
                         {
+                            SpawnParticle(nextX, nextY);
                             BlocksManager.GetInstance.allBlocks[nextX][nextY].ApplyDamage(_damage);
                             yield return new WaitForSeconds(_timeBetweenDestroy);
                             nextPointQueue.Enqueue(new Vector2(nextX, nextY));
@@ -181,6 +185,7 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
                             && BlocksManager.GetInstance.allBlocks[nextX][nextY].color == BlocksManager.GetInstance.allBlocks[(int)currentPoint.x][(int)currentPoint.y].color
                             && BlocksManager.GetInstance.allBlocks[nextX][nextY].gameObject.activeInHierarchy)
                         {
+                            SpawnParticle(nextX, nextY);
                             BlocksManager.GetInstance.allBlocks[nextX][nextY].ApplyDamage(_damage);
                             yield return new WaitForSeconds(_timeBetweenDestroy);
                             nextPointQueue.Enqueue(new Vector2(nextX, nextY));
@@ -189,6 +194,12 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
             }
         }
 
+        private void SpawnParticle(int nextX, int nextY)
+        {
+            var bombEffect = Instantiate(_bombParticle);
+            bombEffect.transform.position = BlocksManager.GetInstance.allBlocks[nextX][nextY].transform.position;
+            Destroy(bombEffect.gameObject, bombEffect.main.duration);
+        }
         public override void Remove()
         {
         }

@@ -1745,6 +1745,7 @@ GameObject:
   - component: {fileID: 1620766763}
   - component: {fileID: 1620766762}
   - component: {fileID: 1620766765}
+  - component: {fileID: 1620766766}
   m_Layer: 5
   m_Name: RussianChooseButton
   m_TagString: Untagged
@@ -1878,6 +1879,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb4131e0ed7caf43aa95c4f74148b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1620766766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620766760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d5123606422dcf4fb0004bbab8c0f32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _downScale: 0.7
+  _upScale: 1
+  _duration: 0.1
+  _endColor: {r: 100, g: 100, b: 100, a: 255}
 --- !u!1 &1655557493
 GameObject:
   m_ObjectHideFlags: 0
@@ -2036,6 +2053,7 @@ GameObject:
   - component: {fileID: 1758064254}
   - component: {fileID: 1758064253}
   - component: {fileID: 1758064256}
+  - component: {fileID: 1758064257}
   m_Layer: 5
   m_Name: EnglishChooseButton
   m_TagString: Untagged
@@ -2169,6 +2187,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb4131e0ed7caf43aa95c4f74148b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1758064257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758064251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d5123606422dcf4fb0004bbab8c0f32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _downScale: 0.7
+  _upScale: 1
+  _duration: 0.1
+  _endColor: {r: 100, g: 100, b: 100, a: 255}
 --- !u!1 &1884502231
 GameObject:
   m_ObjectHideFlags: 0
@@ -2261,6 +2295,7 @@ GameObject:
   - component: {fileID: 1950964172}
   - component: {fileID: 1950964171}
   - component: {fileID: 1950964174}
+  - component: {fileID: 1950964175}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -2394,3 +2429,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2878548cb5f0ea4c80392cf0394d78b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1950964175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950964169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d5123606422dcf4fb0004bbab8c0f32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _downScale: 0.7
+  _upScale: 1
+  _duration: 0.1
+  _endColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 255}

@@ -29,9 +29,9 @@ namespace Assets.Scripts.UI.PopupSystem.ConcretePopups
 
         public override void EnableInput()
         {
-            _addEnergyButton.interactable = false;
-            _mainMenuButton.interactable = false;
-            _restartLevelButton.interactable = false;
+            _addEnergyButton.interactable = true;
+            _mainMenuButton.interactable = true;
+            _restartLevelButton.interactable = true;
         }
 
         private void Awake()

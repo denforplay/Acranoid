@@ -5,6 +5,7 @@ using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.UI.PopupSystem;
 using Assets.Scripts.EventBus.Events.HealthEvents;
+using Assets.Scripts.EnergySystem.Energy;
 
 namespace Assets.Scripts.Health
 {
@@ -55,6 +56,7 @@ namespace Assets.Scripts.Health
             }
             else
             {
+                EnergyManager.GetInstance.SpendEnergy(1);
                 PopupManager.GetInstance.SpawnPopup<HeartEndsPopup>();
             }
         }

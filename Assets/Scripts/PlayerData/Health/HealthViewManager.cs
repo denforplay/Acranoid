@@ -6,18 +6,21 @@ using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.Abstracts.EventBus.Interfaces;
 using Assets.Scripts.Abstracts.Game;
 using Assets.Scripts.EventBus.Events.HealthEvents;
+using Assets.Scripts.Abstracts.Singeton;
 
 namespace Assets.Scripts.Health
 {
-    public class HealthViewManager : MonoBehaviour
+    public class HealthViewManager : Singleton<HealthViewManager>
     {
         [SerializeField] private GameObject _healthContent;
         private HealthRepository _healthRepository;
         private List<Heart> _heartsView;
         private int _health;
 
-        private void Awake()
+        private new void Awake()
         {
+            IsDestroy = true;
+            base.Awake();
             _heartsView = new List<Heart>();
             EventBusManager.GetInstance.Subscribe<OnHeartSpendEvent>(DeleteHealthView);
             EventBusManager.GetInstance.Subscribe<OnHeartAddEvent>((OnHeartAddEvent) => AddHealthView(this, OnHeartAddEvent));
@@ -34,72 +37,49 @@ namespace Assets.Scripts.Health
             _healthRepository = Game.GetRepository<HealthRepository>();
         }
 
-        public void Initialize()
+        public void DeleteHealthView(IEvent ievent)
         {
-            _heartsView = new List<Heart>();
+            _heartsView.Last(x => x != null && x.gameObject.activeInHierarchy).ReturnToPool();
         }
 
         public void DeleteAllHearts()
         {
             foreach (var heart in _heartsView)
             {
-                _healthRepository._heartPool.ReturnToPool(heart);
+                heart.ReturnToPool();
             }
             _heartsView.Clear();
         }
 
-        public void DeleteHealthView(IEvent ievent)
-        {
-            try
-            {
-                _heartsView.Last(x => x != null && x.gameObject.activeInHierarchy).ReturnToPool();
-            }
-            catch
-            {
-            }
-        }
-
         public void AddHealthView(object sender, IEvent ievent)
         {
-            Heart heart = _healthRepository._heartPool.GetPrefabInstance();
-            try
+            if (_healthContent != null)
             {
+                Heart heart = _healthRepository._heartPool.GetPrefabInstance();
                 heart.transform.SetParent(_healthContent.transform);
+                heart.gameObject.transform.position = _healthContent.transform.position;
+                _heartsView.Add(heart);
             }
-            catch
-            {
-                _healthContent = GameObject.Find("HealthContent");
-                heart.transform.SetParent(_healthContent.transform);
-            }
-            heart.gameObject.transform.position = _healthContent.transform.position;
-            _heartsView.Add(heart);
         }
 
         public void ViewHearts()
         {
-            if (_healthContent != null)
-                for (int i = 0; i < HealthManager.GetInstance.Health; i++)
-                {
-                    Heart heart = _healthRepository._heartPool.GetPrefabInstance();
-                    if (heart != null)
-                    {
-                        heart.transform.SetParent(_healthContent.transform);
-                        heart.gameObject.transform.position = _healthContent.transform.position;
-                        _heartsView.Add(heart);
-                    }
-                }
+            for (int i = 0; i < _health; i++)
+            {
+                if (_healthContent != null)
+                AddHealthView(this, null);
+            }
         }
 
         private void OnDestroy()
         {
-
             _heartsView.Clear();
             _healthRepository.Initialize();
             EventBusManager.GetInstance.Unsubscribe<OnHeartSpendEvent>(DeleteHealthView);
             EventBusManager.GetInstance.Unsubscribe<OnHeartAddEvent>((OnHeartAddEvent) => AddHealthView(this, OnHeartAddEvent));
             EventBusManager.GetInstance.Unsubscribe<OnHeathInitizliedEvent>((OnHeathInitizliedEvent) =>
             {
-                EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>((OnNextLevelLoaded) =>
+                EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>((OnNextLevelLoaded) =>
                 {
                     _health = HealthManager.GetInstance.Health;
                     DeleteAllHearts();
@@ -107,6 +87,11 @@ namespace Assets.Scripts.Health
                 });
             });
 
+            EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>((OnNextLevelLoaded) =>
+            {
+                _health = HealthManager.GetInstance.Health;
+                ViewHearts();
+            });
         }
     }
 }

@@ -3,6 +3,7 @@ using Assets.Scripts.Level;
 using Assets.Scripts.Scenes.SceneConfigs;
 using Assets.Scripts.UI.Buttons.Strategies.ButtonMethods;
 using Assets.Scripts.UI.Buttons.Strategies.Interfaces;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -31,8 +32,14 @@ namespace Assets.Scripts.UI.PopupSystem
 
         private void Awake()
         {
-            _mainMenuButton.onClick.AddListener(() => _mainMenuButtonMethod.Call());
-            _nextLevelButton.onClick.AddListener(() => _nextLevelButtonMethod.Call());
+            _mainMenuButton.onClick.AddListener(() =>
+            {
+                _mainMenuButtonMethod.Call();
+            });
+            _nextLevelButton.onClick.AddListener(() =>
+            {
+                _nextLevelButtonMethod.Call();
+            });
         }
     }
 }

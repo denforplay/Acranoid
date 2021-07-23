@@ -9,7 +9,7 @@ namespace Assets.Scripts.Health
 
         public void ReturnToPool()
         {
-            if (this != null)
+            transform.SetParent(null);
             this.gameObject.SetActive(false);
         }
     }

@@ -27,6 +27,7 @@ namespace Assets.Scripts.UI.Buttons.Factories
         public Button GetNewInstance(Level.Level currentLevel, Level.Level nextLevel, Action btnAction)
         {
             Button button = GameObject.Instantiate(Prefab, _scrollView.transform);
+            button.gameObject.AddComponent<ButtonAnimation>();
             TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
             text.text = currentLevel.levelName;
             text.gameObject.AddComponent<LocalisationObject>();

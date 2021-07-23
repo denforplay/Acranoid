@@ -1,9 +1,5 @@
-﻿using Assets.Scripts.Abstracts.EventBus.Interfaces;
-using Assets.Scripts.Abstracts.Singeton;
+﻿using Assets.Scripts.Abstracts.Singeton;
 using Assets.Scripts.Block;
-using Assets.Scripts.EventBus;
-using Assets.Scripts.EventBus.Events;
-using Assets.Scripts.EventBus.Events.LevelEvents;
 using Assets.Scripts.PlatformMovement;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,7 +32,7 @@ namespace Assets.Scripts.GameObjects.Bonus
             allBonuses.Remove(baseBonus);
         }
 
-        public void ReturnAllBonuses(IEvent ievent)
+        public void ReturnAllBonuses(BaseBonus baseBonus)
         {
             allBonuses.Clear();
         }
@@ -53,16 +49,6 @@ namespace Assets.Scripts.GameObjects.Bonus
             {
                 bonus.Apply();
             }
-        }
-
-        private void OnEnable()
-        {
-            EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>(ReturnAllBonuses);
-        }
-
-        private void OnDisable()
-        {
-            EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ReturnAllBonuses);
         }
     }
 }

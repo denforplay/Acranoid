@@ -21,7 +21,7 @@ namespace Assets.Scripts.Block
             _life = blockConfig._sprites.Count;
         }
 
-        public abstract void ApplyDamage();
+        public abstract void ApplyDamage(int value);
 
         public virtual void ReturnToPool()
         {

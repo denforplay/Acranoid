@@ -47,12 +47,12 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
                     }
                 case BombType.Horizontal:
                     {
-                        routine = Coroutines.Coroutines.StartRoutine(DestroyLine(row));
+                        routine = Coroutines.Coroutines.StartRoutine(DestroyLine(row, col));
                         break;
                     }
                 case BombType.Round:
                     {
-                        routine = Coroutines.Coroutines.StartRoutine(DestroyBlocksAround(--row, --col));
+                        routine = Coroutines.Coroutines.StartRoutine(DestroyBlocksAround(row, col));
                         break;
                     }
                 case BombType.ChainBomb:
@@ -67,51 +67,91 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
 
         private IEnumerator DestroyBlocksAround(int row, int col)
         {
-            for (int i = row; i < row + 3; i++)
+            Vector2[] moveDirections =
             {
-                for (int j = col; j < col + 3; j++)
-                {
-                    try
+                new Vector2(-1, 1),
+                new Vector2(0, 1),
+                new Vector2(1, 1),
+                new Vector2(0, 1),
+                new Vector2(1, -1),
+                new Vector2(0, -1),
+                new Vector2(-1, -1),
+                new Vector2(-1, 0),
+            };
+            for (int i = 0; i < moveDirections.Length; i++)
+            {
+                int nextX = (int)(moveDirections[i].x + row);
+                int nextY = (int)(moveDirections[i].y + col);
+                Vector2 nextPoint = new Vector2(nextX, nextY);
+                if (nextX >= 0 && nextX < BlocksManager.GetInstance.allBlocks.Count && nextY >= 0 && nextY < BlocksManager.GetInstance.allBlocks[nextX].Count)
+                    if (BlocksManager.GetInstance.allBlocks[nextX][nextY] != null
+                        && BlocksManager.GetInstance.allBlocks[nextX][nextY].gameObject.activeInHierarchy)
                     {
-                        BlocksManager.GetInstance.ReturnBlock(BlocksManager.GetInstance.allBlocks[i][j]);
+                        BlocksManager.GetInstance.allBlocks[nextX][nextY].ApplyDamage(_damage);
+                        yield return new WaitForSeconds(_timeBetweenDestroy);
                     }
-                    catch
-                    {
-                        continue;
-                    }
-                    yield return new WaitForSeconds(_timeBetweenDestroy);
-                }
             }
         }
 
-        public IEnumerator DestroyLine(int row)
+        public IEnumerator DestroyLine(int row, int col)
         {
-            for (int i = 0; BlocksManager.GetInstance.allBlocks.Count != 0 && i < BlocksManager.GetInstance.allBlocks[row].Count; i++)
+            Vector2 startPoint = new Vector2(row, col);
+            Queue<Vector2> nextPointQueue = new Queue<Vector2>();
+            Vector2[] moveDirections =
             {
-                if (BlocksManager.GetInstance.allBlocks[row][i] is ColorBlock && BlocksManager.GetInstance.allBlocks[row][i].gameObject.activeInHierarchy)
-                    BlocksManager.GetInstance.ReturnBlock(BlocksManager.GetInstance.allBlocks[row][i]);
-                yield return new WaitForSeconds(_timeBetweenDestroy);
+                new Vector2(-1, 0),
+                new Vector2(1, 0)
+            };
+            nextPointQueue.Enqueue(startPoint);
+
+            while (nextPointQueue.Count != 0)
+            {
+                Vector2 currentPoint = nextPointQueue.Dequeue();
+                for (int i = 0; i < moveDirections.Length; i++)
+                {
+                    int nextX = (int)(moveDirections[i].x + currentPoint.x);
+                    int nextY = (int)(moveDirections[i].y + currentPoint.y);
+                    Vector2 nextPoint = new Vector2(nextX, nextY);
+                    if (nextX >= 0 && nextX < BlocksManager.GetInstance.allBlocks.Count && nextY >= 0 && nextY < BlocksManager.GetInstance.allBlocks[nextX].Count)
+                        if (BlocksManager.GetInstance.allBlocks[nextX][nextY] != null
+                            && BlocksManager.GetInstance.allBlocks[nextX][nextY].gameObject.activeInHierarchy)
+                        {
+                            BlocksManager.GetInstance.allBlocks[nextX][nextY].ApplyDamage(_damage);
+                            yield return new WaitForSeconds(_timeBetweenDestroy);
+                            nextPointQueue.Enqueue(nextPoint);
+                        }
+                }
             }
         }
 
         private IEnumerator DestroyColumn(int row, int col)
         {
-            for (int i = 0; BlocksManager.GetInstance.allBlocks.Count != 0 && i < BlocksManager.GetInstance.allBlocks.Count; i++)
-            {
-                int index = BlocksManager.GetInstance.allBlocks[i].Count - BlocksManager.GetInstance.allBlocks[row].Count + col;
-                if (index < 0) continue;
-                try
-                {
-                    if (BlocksManager.GetInstance.allBlocks[i][index] is ColorBlock && BlocksManager.GetInstance.allBlocks[i][index].gameObject.activeInHierarchy)
-                    {
-                        BlocksManager.GetInstance.ReturnBlock(BlocksManager.GetInstance.allBlocks[i][index]);
-                    }
-                }
-                catch
-                {
-                }
+            Vector2 startPoint = new Vector2(row, col);
+            Queue<Vector2> nextPointQueue = new Queue<Vector2>();
+            Vector2[] moveDirections =
+{
+                new Vector2(0, -1),
+                new Vector2(0, 1),
+            };
+            nextPointQueue.Enqueue(startPoint);
 
-                yield return new WaitForSeconds(_timeBetweenDestroy);
+            while (nextPointQueue.Count != 0)
+            {
+                Vector2 currentPoint = nextPointQueue.Dequeue();
+                for (int i = 0; i < moveDirections.Length; i++)
+                {
+                    int nextX = (int)(moveDirections[i].x + currentPoint.x);
+                    int nextY = (int)(moveDirections[i].y + currentPoint.y);
+                    Vector2 nextPoint = new Vector2(nextX, nextY);
+                    if (nextX >= 0 && nextX < BlocksManager.GetInstance.allBlocks.Count && nextY >= 0 && nextY < BlocksManager.GetInstance.allBlocks[nextX].Count)
+                        if (BlocksManager.GetInstance.allBlocks[nextX][nextY] != null
+                            && BlocksManager.GetInstance.allBlocks[nextX][nextY].gameObject.activeInHierarchy)
+                        {
+                            BlocksManager.GetInstance.allBlocks[nextX][nextY].ApplyDamage(_damage);
+                            yield return new WaitForSeconds(_timeBetweenDestroy);
+                            nextPointQueue.Enqueue(new Vector2(nextX, nextY));
+                        }
+                }
             }
         }
 
@@ -137,11 +177,11 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
                     int nextY = (int)(moveDirections[i].y + currentPoint.y);
                     Vector2 nextPoint = new Vector2(nextX, nextY);
                     if (nextX >= 0 && nextX < BlocksManager.GetInstance.allBlocks.Count && nextY >= 0 && nextY < BlocksManager.GetInstance.allBlocks[nextX].Count)
-                        if (BlocksManager.GetInstance.allBlocks[nextX][nextY] != null 
+                        if (BlocksManager.GetInstance.allBlocks[nextX][nextY] != null
                             && BlocksManager.GetInstance.allBlocks[nextX][nextY].color == BlocksManager.GetInstance.allBlocks[(int)currentPoint.x][(int)currentPoint.y].color
                             && BlocksManager.GetInstance.allBlocks[nextX][nextY].gameObject.activeInHierarchy)
                         {
-                            BlocksManager.GetInstance.ReturnBlock(BlocksManager.GetInstance.allBlocks[nextX][nextY]);
+                            BlocksManager.GetInstance.allBlocks[nextX][nextY].ApplyDamage(_damage);
                             yield return new WaitForSeconds(_timeBetweenDestroy);
                             nextPointQueue.Enqueue(new Vector2(nextX, nextY));
                         }

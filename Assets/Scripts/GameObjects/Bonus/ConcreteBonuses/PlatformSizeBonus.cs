@@ -22,11 +22,11 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
         public void SetSize(float size)
         {
             Platform platform = BonusManager.GetInstance.Platform;
-            if (platform.TryGetComponent<SpriteRenderer>(out SpriteRenderer sprite))
-            {
-                sprite.size = new Vector2(sprite.size.x + size, sprite.size.y);
-            }
-            if (platform.TryGetComponent<BoxCollider2D>(out BoxCollider2D collider2D))
+                if (platform.TryGetComponent<SpriteRenderer>(out SpriteRenderer sprite))
+                {
+                    sprite.size = new Vector2(sprite.size.x + size, sprite.size.y);
+                }
+                if (platform.TryGetComponent<BoxCollider2D>(out BoxCollider2D collider2D))
             {
                 collider2D.size = new Vector2(collider2D.size.x + size, collider2D.size.y);
             }

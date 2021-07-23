@@ -3,6 +3,7 @@ using Assets.Scripts.EventBus.Events.Popup;
 using Assets.Scripts.Scenes.SceneConfigs;
 using Assets.Scripts.UI.Buttons.Strategies.ButtonMethods;
 using Assets.Scripts.UI.Buttons.Strategies.Interfaces;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -27,7 +28,27 @@ namespace Assets.Scripts.UI.PopupSystem
 
         public override void Hide()
         {
-            EventBusManager.GetInstance.Invoke<OnPausePopupClosedEvent>(new OnPausePopupClosedEvent());
+            DisableInput();
+            transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, 2f).OnComplete(() =>
+            {
+                Time.timeScale = 1;
+                EventBusManager.GetInstance.Invoke<OnPausePopupClosedEvent>(new OnPausePopupClosedEvent());
+                Destroy(gameObject);
+            });
+        }
+
+        public override void DisableInput()
+        {
+            _continueButton.enabled = false;
+            _levelChooseButton.enabled = false;
+            _mainMenuButton.enabled = false;
+        }
+
+        public override void EnableInput()
+        {
+            _continueButton.enabled = true;
+            _levelChooseButton.enabled = true;
+            _mainMenuButton.enabled = true;
         }
     }
 }

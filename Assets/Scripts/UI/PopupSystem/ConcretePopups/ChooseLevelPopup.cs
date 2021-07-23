@@ -8,6 +8,7 @@ using Assets.Scripts.UI.Buttons.Factories;
 using Assets.Scripts.UI.Buttons.Strategies.ButtonMethods;
 using Assets.Scripts.UI.Buttons.Strategies.Interfaces;
 using Assets.Scripts.UI.PopupSystem;
+using DG.Tweening;
 using Newtonsoft.Json;
 using System.Linq;
 using UnityEngine;
@@ -28,12 +29,11 @@ public class ChooseLevelPopup : Popup
     private LevelButtonFactory _levelButtonFactory;
     private PackageButtonFactory _packageButtonFactory;
 
-    public override void Show()
+    private void Awake()
     {
         _menuButton.onClick.AddListener(() => _mainMenuButton.Call());
         _packageButtonFactory = new PackageButtonFactory(_packageButtonPrefab, _scrollViewContent);
         _levelButtonFactory = new LevelButtonFactory(_levelButtonPrefab, _levelScrollContent);
-        base.Show();
         LoadPackageData();
     }
 
@@ -79,7 +79,7 @@ public class ChooseLevelPopup : Popup
 
     private void OnLevelClickEvent(int levelIndex)
     {
-        PopupManager.GetInstance.DeleteAllPopups();
+        PopupManager.GetInstance.DeletePopUp();
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             BlocksManager.GetInstance.ReturnAllBlocks(null);
@@ -96,5 +96,13 @@ public class ChooseLevelPopup : Popup
     {
         LevelManager.GetInstance.SetCurrentPack(_levelPackObject);
         SetLevelsData(_levelPackObject);
+    }
+
+    public override void DisableInput()
+    {
+    }
+
+    public override void EnableInput()
+    {
     }
 }

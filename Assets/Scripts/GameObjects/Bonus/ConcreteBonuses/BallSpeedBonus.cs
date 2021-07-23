@@ -22,12 +22,7 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
 
         public void SetSpeed(float speed)
         {
-            var balls = BallManager.GetInstance._allBalls;
-            foreach (var ball in balls)
-            if (ball.TryGetComponent<Rigidbody2D>(out Rigidbody2D rigidBody))
-            {
-                ball.ChangeVelocity(speed);
-            }
+            BallManager.GetInstance.ball.ChangeVelocity(speed);
         }
     }
 }

@@ -101,12 +101,6 @@ namespace Assets.Scripts.BallMovement
                 this.transform.SetParent(_rememberedParent.transform);
             }
         }
-
-        private void OnBecameInvisible()
-        {
-            BallManager.GetInstance.ReturnBall(this);
-        }
-
         private void OnEnable()
         {
             EventBusManager.GetInstance.Subscribe<OnBallActivatingEvent>(BallActivate);
@@ -130,6 +124,11 @@ namespace Assets.Scripts.BallMovement
             EventBusManager.GetInstance.Unsubscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
             EventBusManager.GetInstance.Unsubscribe<OnLevelCompletedEvent>(ReturnBallOnPosition);
             EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ReturnBallOnPosition);
+        }
+
+        private void OnBecameInvisible()
+        {
+            HealthManager.GetInstance.SpendHeart(1);
         }
 
         public void ReturnToPool()

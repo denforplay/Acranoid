@@ -41,7 +41,7 @@ namespace Assets.Scripts.BallMovement
         {
             if (collision.gameObject.TryGetComponent(out BaseBlock block))
             {
-                block.ApplyDamage();
+                block.ApplyDamage(1);
             }
         }
     }

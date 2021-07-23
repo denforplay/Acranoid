@@ -64,15 +64,15 @@ namespace Assets.Scripts.PlatformMovement
         private void OnEnable()
         {
             EventBusManager.GetInstance.Subscribe<OnPlatformMovingEvent>(Move);
-            EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>(ReturnBall);
             EventBusManager.GetInstance.Subscribe<OnHeartSpendEvent>(ReturnBall);
+            EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>(ReturnBall);
         }
 
         private void OnDisable()
         {
             EventBusManager.GetInstance.Unsubscribe<OnPlatformMovingEvent>(Move);
-            EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ReturnBall);
             EventBusManager.GetInstance.Unsubscribe<OnHeartSpendEvent>(ReturnBall);
+            EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ReturnBall);
         }
     }
 }

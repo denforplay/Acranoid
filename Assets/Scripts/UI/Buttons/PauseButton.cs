@@ -10,32 +10,24 @@ namespace Assets.Scripts.UI.Buttons
     public class PauseButton : MonoBehaviour
     {
         [SerializeField] private Button _stopGame;
-
-        private GameObject _stopGameGO;
         private void Start()
         {
+            EventBusManager.GetInstance.Subscribe<OnPausePopupClosedEvent>(ReturnButton);
             _stopGame.onClick.AddListener(PauseGame);
-            _stopGameGO = _stopGame.gameObject;
         }
 
         public void PauseGame()
         {
-            _stopGameGO.SetActive(false);
+            _stopGame.interactable = false;
             PopupManager.GetInstance.SpawnPopup<PausePopup>();
-            Time.timeScale = 0;
         }
 
         private void ReturnButton(IEvent ievent)
         {
-            _stopGameGO.SetActive(true);
+            _stopGame.interactable = true;
         }
 
-        public void OnDisable()
-        {
-            EventBusManager.GetInstance.Subscribe<OnPausePopupClosedEvent>(ReturnButton);
-        }
-
-        public void OnEnable()
+        private void OnDestroy()
         {
             EventBusManager.GetInstance.Unsubscribe<OnPausePopupClosedEvent>(ReturnButton);
         }

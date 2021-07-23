@@ -17,6 +17,18 @@ namespace Assets.Scripts.UI.PopupSystem
         private IButtonMethod _mainMenuButtonMethod = new OpenMainMenu();
         private IButtonMethod _nextLevelButtonMethod = new LoadNextLevel();
 
+        public override void DisableInput()
+        {
+            _mainMenuButton.enabled = false;
+            _nextLevelButton.enabled = false;
+        }
+
+        public override void EnableInput()
+        {
+            _mainMenuButton.enabled = true;
+            _nextLevelButton.enabled = true;
+        }
+
         private void Awake()
         {
             _mainMenuButton.onClick.AddListener(() => _mainMenuButtonMethod.Call());

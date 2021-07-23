@@ -35,8 +35,9 @@ namespace Assets.Scripts.Block
                 _blocksRepository.Count--;
                 var pool = FindPool(block);
                 pool.ReturnToPool(block);
-                if (_blocksRepository.Count == 0)
+                if (_blocksRepository.Count <= 0)
                 {
+                    _blocksRepository.Count = 0;
                     JsonParser jsonParser = new JsonParser();
                     jsonParser.SetJsonData(LevelManager.GetInstance.CurrentLevel);
                     EventBusManager.GetInstance.Invoke(new OnLevelCompletedEvent());

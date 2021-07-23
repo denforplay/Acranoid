@@ -3,8 +3,6 @@ using UnityEngine;
 using Assets.Scripts.Abstracts.Singeton;
 using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.EventBus;
-using Assets.Scripts.EventBus.Events.LevelEvents;
-using UnityEngine.UI;
 using Assets.Scripts.UI.PopupSystem;
 using Assets.Scripts.EventBus.Events.HealthEvents;
 
@@ -73,6 +71,7 @@ namespace Assets.Scripts.Health
             });
             EventBusManager.GetInstance.Invoke(new OnHeathInitizliedEvent());
         }
+
 
         private void CheckHeartsInitialized()
         {

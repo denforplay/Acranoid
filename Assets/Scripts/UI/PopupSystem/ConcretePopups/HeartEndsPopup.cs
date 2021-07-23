@@ -18,6 +18,18 @@ namespace Assets.Scripts.UI.PopupSystem
         IButtonMethod _mainMenuButtonMethod = new OpenMainMenu();
         IButtonMethod _restartLevelButtonMethod = new RestartLevel();
 
+        public override void DisableInput()
+        {
+            _mainMenuButton.enabled = false;
+            _restartLevelButton.enabled = false;
+        }
+
+        public override void EnableInput()
+        {
+            _mainMenuButton.enabled = true;
+            _restartLevelButton.enabled = true;
+        }
+
         private void Awake()
         {
             _mainMenuButton.onClick.AddListener(() => _mainMenuButtonMethod.Call());

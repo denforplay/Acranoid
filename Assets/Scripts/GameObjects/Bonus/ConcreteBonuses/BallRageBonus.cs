@@ -6,10 +6,7 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
     {
         public override void Apply()
         {
-            foreach (var ball in BallManager.GetInstance._allBalls)
-            {
 
-            }
         }
 
         public override void Remove()

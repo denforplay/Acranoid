@@ -12,6 +12,7 @@ namespace Assets.Scripts.Block
     {
         public List<ObjectPool<BaseBlock>> blocksPools;
         public int Count = 0;
+        private bool isInitialized;
         public override void Initialize()
         {
             EventBusManager.GetInstance.Subscribe<OnBlocksManagerInitializedEvent>(InitializePool);
@@ -19,8 +20,13 @@ namespace Assets.Scripts.Block
 
         public void InitializePool(IEvent ievent)
         {
-            InitializePools();
+            if (!isInitialized)
+            {
+                isInitialized = true;
+                InitializePools();
             EventBusManager.GetInstance.Invoke<OnBlocksRepositoryInitializedEvent>(new OnBlocksRepositoryInitializedEvent());
+            }
+            
         }
 
         public void InitializePools()

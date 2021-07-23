@@ -20,6 +20,20 @@ namespace Assets.Scripts.UI.PopupSystem.ConcretePopups
         private IButtonMethod _addEnergyButtonMethod = new AddEnergy();
         private IButtonMethod _restartLevelButtonMethod = new RestartLevel();
 
+        public override void DisableInput()
+        {
+            _addEnergyButton.interactable = false;
+            _mainMenuButton.interactable = false;
+            _restartLevelButton.interactable = false;
+        }
+
+        public override void EnableInput()
+        {
+            _addEnergyButton.interactable = false;
+            _mainMenuButton.interactable = false;
+            _restartLevelButton.interactable = false;
+        }
+
         private void Awake()
         {
             _mainMenuButton.onClick.AddListener(() => _mainMenuButtonMethod.Call());

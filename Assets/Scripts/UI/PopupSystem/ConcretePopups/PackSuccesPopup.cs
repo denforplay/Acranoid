@@ -15,6 +15,18 @@ namespace Assets.Scripts.UI.PopupSystem.ConcretePopups
         private IButtonMethod _nextPackButtonMethod = new ShowNextPack();
         private IButtonMethod _mainMenuButtonMethod = new OpenMainMenu();
 
+        public override void DisableInput()
+        {
+            _nextPackButton.enabled = false;
+            _mainMenuButton.enabled = false;
+        }
+
+        public override void EnableInput()
+        {
+            _nextPackButton.enabled = true;
+            _mainMenuButton.enabled = true;
+        }
+
         private void Awake()
         {
             _mainMenuButton.onClick.AddListener(() => _mainMenuButtonMethod.Call());

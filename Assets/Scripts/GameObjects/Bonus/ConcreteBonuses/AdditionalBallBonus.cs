@@ -9,17 +9,7 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
     {
         public override void Apply()
         {
-            List<Ball> allBalls = new List<Ball>(BallManager.GetInstance._allBalls);
-            foreach (var ball in allBalls)
-            {
-                var ballClone = BallManager.GetInstance.SpawnBall();
-                ballClone.transform.position = ball.transform.position + Vector3.one;
-                ballClone.isReturning = false;
-                ballClone.SetVelocity(8f);
-                ballClone.BallActivate(null);
-            }
-
-            gameObject.SetActive(false);
+            
         }
 
         public override void Remove()

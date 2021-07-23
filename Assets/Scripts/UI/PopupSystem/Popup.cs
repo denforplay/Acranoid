@@ -29,10 +29,14 @@ namespace Assets.Scripts.UI.PopupSystem
                 Destroy(gameObject);
             });
         }
-
         public void ReturnToPool()
         {
             gameObject.SetActive(false);
+        }
+
+        private void OnDestroy()
+        {
+            DOTween.Kill(transform);
         }
     }
 }

@@ -39,21 +39,5 @@ namespace Assets.Scripts.Block
             }
         }
 
-        public override void ReturnToPool()
-        {
-            if (_life > 0)
-            {
-                _life = 0;
-                if (_baseBonus != null && bonusUsage == 0)
-                {
-                    bonusUsage++;
-                    if (HealthManager.GetInstance.Health > 0 && !LevelManager.GetInstance.IsLevelCompleted)
-                    {
-                        BonusManager.GetInstance.GenerateBonus(this, _baseBonus);
-                    }
-                }
-            }
-            base.ReturnToPool();
-        }
     }
 }

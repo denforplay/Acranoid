@@ -24,7 +24,6 @@ public class ButtonAnimation : MonoBehaviour, IPointerUpHandler, IPointerDownHan
         if (_button.enabled)
         {
             _button.transform.DOScale(_downScale, _duration);
-            _button.image.DOColor(_endColor, _duration);
         }
     }
 
@@ -33,7 +32,11 @@ public class ButtonAnimation : MonoBehaviour, IPointerUpHandler, IPointerDownHan
         if (_button.enabled)
         {
             _button.transform.DOScale(_upScale, _duration);
-            _button.image.DOColor(_startColor, _duration);
         }
+    }
+
+    private void OnDestroy()
+    {
+        DOTween.Kill(transform);
     }
 }

@@ -128,8 +128,11 @@ namespace Assets.Scripts.BallMovement
 
         private void OnBecameInvisible()
         {
+            BallInactivate();
             HealthManager.GetInstance.SpendHeart(1);
         }
+
+
 
         public void ReturnToPool()
         {

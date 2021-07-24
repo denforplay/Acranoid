@@ -5,11 +5,13 @@ using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.EventBus.Events.LevelEvents;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Scripts.Block
 {
     public class BlocksManager : Singleton<BlocksManager>
     {
+        [SerializeField] private GameObject _blocksGO;
         public ColorBlock colorBlockPrefab;
         public GraniteBlock graniteBlockPrefab;
         public BlockConfig _colorBlockConfig;
@@ -42,6 +44,10 @@ namespace Assets.Scripts.Block
                 allBlocks.Add(currentList);
             }
             BaseBlock block = _blocksController.GetBlock(baseBlock);
+            if (block.transform.parent == null)
+            {
+                block.transform.SetParent(_blocksGO.transform);
+            }
             if (block is ColorBlock)
             allBlocks[_currentRow].Add(block as ColorBlock);
             return block;

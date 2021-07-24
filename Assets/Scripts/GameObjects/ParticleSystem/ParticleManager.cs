@@ -8,6 +8,7 @@ namespace Assets.Scripts.GameObjects.ParticleSystem
 {
     public class ParticleManager : Singleton<ParticleManager>
     {
+        [SerializeField] private GameObject _particleGO;
         [SerializeField] private ParticleConfig _particleConfig;
         private List<ParticleBase> allParticles;
         private ParticleController _particleController;
@@ -31,6 +32,8 @@ namespace Assets.Scripts.GameObjects.ParticleSystem
             CheckInitialize();
 
             ParticleBase particle = _particleController.GetParticle<T>();
+            if (particle.transform.parent == null)
+            particle.transform.SetParent(_particleGO.transform);
             allParticles.Add(particle);
             return particle;
         }

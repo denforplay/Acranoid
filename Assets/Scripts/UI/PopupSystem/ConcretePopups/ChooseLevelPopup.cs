@@ -46,12 +46,11 @@ public class ChooseLevelPopup : Popup
         {
             Level level = CreateLevel(_levelPackObject._jsonLevelsFiles[i]);
             int index = i;
-            Button button = _levelButtonFactory.GetNewInstance(currentLevel, level, () => OnLevelClickEvent(index));
+            Button button = _levelButtonFactory.GetNewInstance(currentLevel, level, () => OnLevelClickEvent(index + 1));
             currentLevel = level;
         }
 
-        Level nextLevel = CreateLevel(_levelPackObject._jsonLevelsFiles.First());
-        _levelButtonFactory.GetNewInstance(nextLevel, null, () => OnLevelClickEvent(0));
+        _levelButtonFactory.GetNewInstance(currentLevel, null, () => OnLevelClickEvent(0));
     }
 
 

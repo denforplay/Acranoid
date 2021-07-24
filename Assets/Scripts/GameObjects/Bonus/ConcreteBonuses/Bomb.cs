@@ -183,7 +183,7 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
                     Vector2 nextPoint = new Vector2(nextX, nextY);
                     if (nextX >= 0 && nextX < BlocksManager.GetInstance.allBlocks.Count && nextY >= 0 && nextY < BlocksManager.GetInstance.allBlocks[nextX].Count)
                         if (BlocksManager.GetInstance.allBlocks[nextX][nextY] != null
-                            && BlocksManager.GetInstance.allBlocks[nextX][nextY].color == BlocksManager.GetInstance.allBlocks[(int)currentPoint.x][(int)currentPoint.y].color
+                            && (BlocksManager.GetInstance.allBlocks[nextX][nextY] as ColorBlock).color == (BlocksManager.GetInstance.allBlocks[(int)currentPoint.x][(int)currentPoint.y] as ColorBlock).color
                             && BlocksManager.GetInstance.allBlocks[nextX][nextY].gameObject.activeInHierarchy)
                         {
                             SpawnParticle(nextX, nextY);

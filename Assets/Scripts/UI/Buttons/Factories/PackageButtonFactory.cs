@@ -25,7 +25,7 @@ namespace Assets.Scripts.UI.Buttons.Factories
             return null;
         }
 
-        public Button GetNewInstance(LevelPackObject levelPackObject, Action btnAction)
+        public Button GetNewInstance(LevelPackObject levelPackObject, LevelPackObject nextLevelPackObject, Action btnAction)
         {
             Button button = GameObject.Instantiate(Prefab, _scrollView.transform);
             button.gameObject.AddComponent<ButtonAnimation>();
@@ -36,6 +36,17 @@ namespace Assets.Scripts.UI.Buttons.Factories
             btnTexts[0].gameObject.AddComponent<LocalisationObject>();
             btnTexts[1].text = $"{LevelManager.GetInstance.GetPackProgress(levelPackObject)}/{LevelManager.GetInstance.GetPackCount(levelPackObject)}";
             button.onClick.AddListener(() => btnAction.Invoke());
+            
+            if (nextLevelPackObject != null)
+            {
+                int nextPackProgress = LevelManager.GetInstance.GetPackProgress(nextLevelPackObject);
+                int nextPackCount = LevelManager.GetInstance.GetPackCount(nextLevelPackObject);
+                if (nextPackProgress < nextPackCount)
+                {
+
+                    button.interactable = false;
+                }
+            }
             return button;
         }
     }

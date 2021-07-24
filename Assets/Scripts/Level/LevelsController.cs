@@ -42,7 +42,7 @@ namespace Assets.Scripts.Level
         {
             Level currentLevel = _levelRepository.CurrentPack.Find(x => x.levelName == _levelRepository.CurrentLevel.levelName);
             int currentLevelIndex = _levelRepository.CurrentPack.IndexOf(currentLevel);
-            return currentLevelIndex + 1 >= _levelRepository.CurrentPack.Count;
+            return currentLevelIndex + 1 >= LevelManager.GetInstance._levelPackObject._jsonLevelsFiles.Count;
         }
 
         public Level LoadNextLevel()

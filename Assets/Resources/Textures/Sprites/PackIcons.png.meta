@@ -8,6 +8,12 @@ TextureImporter:
   - first:
       213: 1322926182224112737
     second: PackIcons_1
+  - first:
+      213: -2455017068234928488
+    second: PackIcons_2
+  - first:
+      213: -2306678821066556778
+    second: PackIcons_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -146,6 +152,48 @@ TextureImporter:
       bones: []
       spriteID: 16c28838a5afb5210800000000000000
       internalID: 1322926182224112737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PackIcons_2
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 208
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89e0652dbf60eedd0800000000000000
+      internalID: -2455017068234928488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PackIcons_3
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 208
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69a396365d70dffd0800000000000000
+      internalID: -2306678821066556778
       vertices: []
       indices: 
       edges: []

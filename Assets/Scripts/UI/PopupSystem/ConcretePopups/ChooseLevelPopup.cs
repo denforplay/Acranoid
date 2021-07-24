@@ -56,11 +56,12 @@ public class ChooseLevelPopup : Popup
 
     public void LoadPackageData()
     {
-        for (int i = 0; i < _levelPacksConfig.levelPacks.Count; i++)
+        for (int i = _levelPacksConfig.levelPacks.Count - 1; i > 0; i--)
         {
             int index = i;
-            _packageButtonFactory.GetNewInstance(_levelPacksConfig.levelPacks[i], () => OnPackageClickEvent(_levelPacksConfig.levelPacks[index]));
+            _packageButtonFactory.GetNewInstance(_levelPacksConfig.levelPacks[i], _levelPacksConfig.levelPacks[i-1],() => OnPackageClickEvent(_levelPacksConfig.levelPacks[index]));
         }
+        _packageButtonFactory.GetNewInstance(_levelPacksConfig.levelPacks[0], null, () => OnPackageClickEvent(_levelPacksConfig.levelPacks[0]));
     }
     private void OnLevelClickEvent(int levelIndex)
     {

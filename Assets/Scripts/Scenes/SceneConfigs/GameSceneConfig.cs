@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Assets.Scripts.Block;
 using Assets.Scripts.EnergySystem.Timer;
 using Assets.Scripts.EnergySystem.Energy;
+using Assets.Scripts.GameObjects.ParticleSystem;
 
 namespace Assets.Scripts.Scenes.SceneConfigs
 {
@@ -23,6 +24,7 @@ namespace Assets.Scripts.Scenes.SceneConfigs
             this.CreateController<HealthController>(controllersMap);
             this.CreateController<BlocksController>(controllersMap);
             this.CreateController<LocalisationController>(controllersMap);
+            this.CreateController<ParticleController>(controllersMap);
             return controllersMap;
         }
 
@@ -32,6 +34,7 @@ namespace Assets.Scripts.Scenes.SceneConfigs
             this.CreateRepository<HealthRepository>(repositoriesMap);
             this.CreateRepository<BlocksRepository>(repositoriesMap);
             this.CreateRepository<LocalisationRepository>(repositoriesMap);
+            this.CreateRepository<ParticleRepository>(repositoriesMap);
             return repositoriesMap;
         }
     }

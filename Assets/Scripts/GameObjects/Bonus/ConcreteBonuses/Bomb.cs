@@ -1,6 +1,8 @@
 ﻿using Assets.Scripts.Block;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events;
+using Assets.Scripts.GameObjects.ParticleSystem;
+using Assets.Scripts.GameObjects.ParticleSystem.ConcreteParticles;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +18,6 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
     };
     public class Bomb : BaseBonus
     {
-        [SerializeField] private ParticleSystem _bombParticle;
         [SerializeField] private BombType _bombType;
         [SerializeField] private float _timeBetweenDestroy = 0.05f;
         private int _damage = 1;
@@ -196,9 +197,8 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
 
         private void SpawnParticle(int nextX, int nextY)
         {
-            var bombEffect = Instantiate(_bombParticle);
+            var bombEffect = ParticleManager.GetInstance.GetParticle<BombParticle>();
             bombEffect.transform.position = BlocksManager.GetInstance.allBlocks[nextX][nextY].transform.position;
-            Destroy(bombEffect.gameObject, bombEffect.main.duration);
         }
         public override void Remove()
         {

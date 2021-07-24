@@ -26,12 +26,17 @@ namespace Assets.Scripts.GameObjects.Bonus
 
         public BaseBonus GetBonus(int index)
         {
-            allBonuses.Add(_baseBonuses[index]);
             return _baseBonuses[index];
+        }
+
+        public void AddDroppedBonus(BaseBonus bonus)
+        {
+            _baseBonuses.Add(bonus);
         }
 
         public void ReturnBonus(BaseBonus baseBonus)
         {
+            Destroy(baseBonus.gameObject);
             allBonuses.Remove(baseBonus);
         }
 
@@ -39,7 +44,7 @@ namespace Assets.Scripts.GameObjects.Bonus
         {
             foreach (var bonus in allBonuses)
             {
-                   DestroyImmediate(bonus.gameObject);
+                Destroy(bonus.gameObject);
             }
 
             allBonuses.Clear();
@@ -51,6 +56,7 @@ namespace Assets.Scripts.GameObjects.Bonus
             if (!bonus.isInstantlyActivated)
             {
                 BaseBonus spawnedBonus = Instantiate(bonus);
+                allBonuses.Add(spawnedBonus);
                 spawnedBonus.transform.position = colorBlock.transform.position;
             }
             else

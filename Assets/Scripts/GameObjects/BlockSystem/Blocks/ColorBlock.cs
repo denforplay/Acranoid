@@ -3,6 +3,8 @@ using Assets.Scripts.EnergySystem.Energy;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.BlockEvents;
 using Assets.Scripts.GameObjects.Bonus;
+using Assets.Scripts.GameObjects.ParticleSystem;
+using Assets.Scripts.GameObjects.ParticleSystem.ConcreteParticles;
 using Assets.Scripts.Health;
 using Assets.Scripts.Level;
 using UnityEngine;
@@ -21,11 +23,9 @@ namespace Assets.Scripts.Block
             _life -= value;
             if (_life < 1)
             {
-                var particle = Instantiate(_destroyParticle);
+                var particle = ParticleManager.GetInstance.GetParticle<BlockDestroyParticle>();
                 particle.transform.position = this.transform.position;
-                particle.startColor = color;
-                Destroy(particle.gameObject, particle.main.duration);
-
+                particle.ParticlePrefab.startColor = color;
                 if (_baseBonus != null)
                 {
                     BonusManager.GetInstance.GenerateBonus(this, _baseBonus);

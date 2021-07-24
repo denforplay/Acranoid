@@ -22,6 +22,7 @@ namespace Assets.Scripts.GameObjects.ParticleSystem
 
         public void ReturnToPool()
         {
+            _particlePrefab.Stop();
             gameObject.SetActive(false);
         }
     }

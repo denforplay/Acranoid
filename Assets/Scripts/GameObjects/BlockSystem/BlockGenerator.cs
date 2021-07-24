@@ -36,11 +36,14 @@ namespace Assets.Scripts.Block
         private void Start()
         {
             _camera = Camera.main;
+            if (Application.isMobilePlatform)
+            screen = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+            else
             screen = new Vector2(Screen.width, Screen.height);
             var screenInWorld = _camera.ScreenToWorldPoint(screen);
-            distance.x = screen.x / _blockGeneratorConfig.screenWidth * _blockGeneratorConfig.blockWidth;
-            distance.y = screen.y / _blockGeneratorConfig.screenHeight * _blockGeneratorConfig.blockHeight;
-            startPosition = new Vector2(_leftBorderRender.size.x - screenInWorld.x, screenInWorld.y - _topBorderRender.size.y - _blockRender.size.x / 2);
+            distance.x = _blockGeneratorConfig.blockWidth;
+            distance.y = _blockGeneratorConfig.blockHeight;
+            startPosition = new Vector2(_leftBorderRender.size.x - screenInWorld.x, screenInWorld.y - _topBorderRender.size.y - _blockRender.size.y / 2);
             startPosition = _camera.WorldToScreenPoint(startPosition);
         }
 
@@ -73,7 +76,6 @@ namespace Assets.Scripts.Block
                         {
                             CalculateDataForNewRow(blocksData, i);
                             BlocksManager.GetInstance.SetNewRow();
-                            position.y -= 5;
                             continue;
                         }
                     default:
@@ -99,7 +101,7 @@ namespace Assets.Scripts.Block
                 }
             }
             startPosition.x -= distance.x / 2;
-            distance /= scaler;
+            distance.x /= scaler;
         }
 
         private void ConfigureBlock(ColorBlock block, int blockData)
@@ -125,7 +127,7 @@ namespace Assets.Scripts.Block
             position.y = startPosition.y;
             countInRow = blocksData.TakeWhile(x => x != NEW_ROW).Count();
             scaler = (screen.x - 2 * startPosition.x) / (distance.x * countInRow);
-            distance *= scaler;
+            distance.x *= scaler;
             startPosition.x += distance.x / 2;
             position.x = startPosition.x;
         }
@@ -134,11 +136,11 @@ namespace Assets.Scripts.Block
         {
             startPosition.x -= distance.x / 2;
             position.x -= distance.x / 2;
-            distance /= scaler;
+            distance.x /= scaler;
             countInRow = blocksData.Skip(skipIndex + 1).TakeWhile(x => x != NEW_ROW).Count();
             if (countInRow != 0)
                 scaler = (Screen.width - 2 * startPosition.x) / (distance.x * countInRow);
-            distance *= scaler;
+            distance.x *= scaler;
             startPosition.x += distance.x / 2;
             position.y -= distance.y;
             position.x = startPosition.x;

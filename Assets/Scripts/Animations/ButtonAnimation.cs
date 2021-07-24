@@ -6,8 +6,8 @@ using DG.Tweening;
 public class ButtonAnimation : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
     private Button _button;
-    [SerializeField] private float _downScale = 0.7f;
-    [SerializeField] private float _upScale = 1.0f;
+    private float _downScale = 0.9f;
+    private float _upScale = 1.0f;
     [SerializeField] private float _duration = 0.1f;
     [SerializeField] private Color _endColor = new Color(100,100,100,255);
 

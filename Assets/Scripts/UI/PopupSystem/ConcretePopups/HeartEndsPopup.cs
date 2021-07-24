@@ -4,6 +4,7 @@ using Assets.Scripts.Localisation;
 using Assets.Scripts.Scenes.SceneConfigs;
 using Assets.Scripts.UI.Buttons.Strategies.ButtonMethods;
 using Assets.Scripts.UI.Buttons.Strategies.Interfaces;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -32,8 +33,24 @@ namespace Assets.Scripts.UI.PopupSystem
 
         private void Awake()
         {
-            _mainMenuButton.onClick.AddListener(() => _mainMenuButtonMethod.Call());
-            _restartLevelButton.onClick.AddListener(() => _restartLevelButtonMethod.Call());
+            _mainMenuButton.onClick.AddListener(() =>
+            {
+                DisableInput();
+                transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, _duration).OnComplete(() =>
+                {
+                    Time.timeScale = 1;
+                    _mainMenuButtonMethod.Call();
+                });
+            });
+            _restartLevelButton.onClick.AddListener(() =>
+            {
+                DisableInput();
+                transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, _duration).OnComplete(() =>
+                {
+                    Time.timeScale = 1;
+                    _restartLevelButtonMethod.Call();
+                });
+            });
             LocalisationManager.GetInstance.Initialize();
         }
     }

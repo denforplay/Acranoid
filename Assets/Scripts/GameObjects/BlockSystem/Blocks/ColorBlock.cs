@@ -23,6 +23,7 @@ namespace Assets.Scripts.Block
             _life -= value;
             if (_life < 1)
             {
+                EventBusManager.GetInstance.Invoke<OnBlockDestroyEvent>(new OnBlockDestroyEvent());
                 var particle = ParticleManager.GetInstance.GetParticle<BlockDestroyParticle>();
                 particle.transform.position = this.transform.position;
                 particle.ParticlePrefab.startColor = color;
@@ -30,7 +31,6 @@ namespace Assets.Scripts.Block
                 {
                     BonusManager.GetInstance.GenerateBonus(this, _baseBonus);
                 }
-                EventBusManager.GetInstance.Invoke<OnBlockDestroyEvent>(new OnBlockDestroyEvent());
                 BlocksManager.GetInstance.ReturnBlock(this);
             }
             else

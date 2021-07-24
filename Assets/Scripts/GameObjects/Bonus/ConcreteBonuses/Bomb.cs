@@ -20,7 +20,7 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
     {
         [SerializeField] private BombType _bombType;
         [SerializeField] private float _timeBetweenDestroy = 0.05f;
-        private int _damage = 1;
+        [SerializeField, Range(1,3)] private int _damage = 1;
         public override void Apply()
         {
             var allBlocks = BlocksManager.GetInstance.allBlocks;

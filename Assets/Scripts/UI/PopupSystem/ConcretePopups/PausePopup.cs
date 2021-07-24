@@ -12,9 +12,9 @@ namespace Assets.Scripts.UI.PopupSystem
 {
     public class PausePopup : Popup
     {
-        [SerializeField] Button _continueButton;
-        [SerializeField] Button _levelChooseButton;
-        [SerializeField] Button _mainMenuButton;
+        [SerializeField] private Button _continueButton;
+        [SerializeField] private Button _levelChooseButton;
+        [SerializeField] private Button _mainMenuButton;
 
         private IButtonMethod _levelChooseButtonMethod = new ShowNextPack();
         private IButtonMethod _mainMenuButtonMethod = new OpenMainMenu();
@@ -24,22 +24,28 @@ namespace Assets.Scripts.UI.PopupSystem
             _continueButton.onClick.AddListener(() =>
             {
                 DisableInput();
-                transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, 2f).OnComplete(() =>
+                transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, _duration).OnComplete(() =>
                 {
-                    EventBusManager.GetInstance.Invoke<OnPausePopupClosedEvent>(new OnPausePopupClosedEvent());
                     Time.timeScale = 1;
-                    Destroy(gameObject);
                     _continueButtonMethod.Call();
                 });
             });
-            _levelChooseButton.onClick.AddListener(() => _levelChooseButtonMethod.Call());
+
+            _levelChooseButton.onClick.AddListener(() =>
+            {
+                DisableInput();
+                transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, _duration).OnComplete(() =>
+                {
+                    Time.timeScale = 1;
+                    _levelChooseButtonMethod.Call();
+                });
+            });
             _mainMenuButton.onClick.AddListener(() =>
             {
                 DisableInput();
-                transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, 2f).OnComplete(() =>
+                transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, _duration).OnComplete(() =>
                 {
                     Time.timeScale = 1;
-                    Destroy(gameObject);
                     _mainMenuButtonMethod.Call();
                 });
             });
@@ -48,9 +54,8 @@ namespace Assets.Scripts.UI.PopupSystem
         public override void Hide()
         {
             DisableInput();
-            transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, 2f).OnComplete(() =>
+            transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, _duration).OnComplete(() =>
             {
-                EventBusManager.GetInstance.Invoke<OnPausePopupClosedEvent>(new OnPausePopupClosedEvent());
                 Time.timeScale = 1;
                 Destroy(gameObject);
             });

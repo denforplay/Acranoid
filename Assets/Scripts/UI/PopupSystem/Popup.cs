@@ -6,6 +6,7 @@ namespace Assets.Scripts.UI.PopupSystem
 {
     public abstract class Popup : MonoBehaviour, IPoolable
     {
+        [SerializeField] protected float _duration = 1.0f;
         public IObjectPool Origin { get; set; }
         public abstract void DisableInput();
         public abstract void EnableInput();
@@ -14,7 +15,7 @@ namespace Assets.Scripts.UI.PopupSystem
             DisableInput();
             Time.timeScale = 0;
             transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, 0f);
-            transform.DOMoveY(PopupManager.GetInstance.Canvas.transform.position.y, 2f).OnComplete(() =>
+            transform.DOMoveY(PopupManager.GetInstance.Canvas.transform.position.y, _duration).OnComplete(() =>
             {
                 EnableInput();
             });
@@ -23,7 +24,7 @@ namespace Assets.Scripts.UI.PopupSystem
         public virtual void Hide()
         {
             DisableInput();
-            transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, 2f).OnComplete(() =>
+            transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, _duration).OnComplete(() =>
             {
                 Time.timeScale = 1;
                 Destroy(gameObject);

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlatformConfig
   m_EditorClassIdentifier: 
   speed: 0.25
-  mouseSensivity: 0.2
+  mouseSensivity: 0.15

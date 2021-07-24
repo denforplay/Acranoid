@@ -145,6 +145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInstantlyActivated: 1
-  _bombParticle: {fileID: 4913913800025681625, guid: 69e8bda77815b374380ce231cdbf9837, type: 3}
   _bombType: 2
   _timeBetweenDestroy: 0.05
+  _damage: 3

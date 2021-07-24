@@ -6,15 +6,13 @@ using Assets.Scripts.EventBus.Events.LevelEvents;
 using Assets.Scripts.Level;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 using System.Linq;
 
 namespace Assets.Scripts.ProgressBar
 {
-    public class ProgressBar : MonoBehaviour
+    public class LevelProgressBar : MonoBehaviour
     {
         private const int COLOR_BLOCK = 1;
-        [SerializeField] private float _fillSpeed = 0.15f;
         private Slider _slider;
         private float _targetProgress = 0;
 
@@ -28,7 +26,7 @@ namespace Assets.Scripts.ProgressBar
         public void IncrementProgress(IEvent ievnt)
         {
            _targetProgress = _slider.value + 1;
-            //_slider.DOValue(_targetProgress, _fillSpeed);
+            _slider.value = _targetProgress;
         }
 
         private void ResetProgress(IEvent ievent)

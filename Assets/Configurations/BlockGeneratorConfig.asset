@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenWidth: 1080
   screenHeight: 1920
-  blockWidth: 135
+  blockWidth: 140
   blockHeight: 45
-  startX: 70
+  startX: 180
   startY: 280

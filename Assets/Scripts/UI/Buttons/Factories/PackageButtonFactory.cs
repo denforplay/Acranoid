@@ -34,6 +34,7 @@ namespace Assets.Scripts.UI.Buttons.Factories
             TextMeshProUGUI[] btnTexts = button.GetComponentsInChildren<TextMeshProUGUI>();
             btnTexts[0].text = levelPackObject.packName;
             btnTexts[0].gameObject.AddComponent<LocalisationObject>();
+            btnTexts[1].text = $"{LevelManager.GetInstance.GetPackProgress(levelPackObject)}/{LevelManager.GetInstance.GetPackCount(levelPackObject)}";
             button.onClick.AddListener(() => btnAction.Invoke());
             return button;
         }

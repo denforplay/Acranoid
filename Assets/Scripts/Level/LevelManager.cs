@@ -4,12 +4,14 @@ using UnityEngine;
 using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.LevelEvents;
+using Newtonsoft.Json;
+using Assets.Scripts.PlayerData;
 
 namespace Assets.Scripts.Level
 {
     public class LevelManager : Singleton<LevelManager>
     {
-        [SerializeField] private LevelPackObject _levelPackObject;
+        public LevelPackObject _levelPackObject;
         private LevelsController _levelsController;
         public bool IsInitialized { get; private set; }
         public Level CurrentLevel { get; private set; }
@@ -25,6 +27,18 @@ namespace Assets.Scripts.Level
             EventBusManager.GetInstance.Invoke<OnLevelsInitialized>(new OnLevelsInitialized());
         }
 
+        public Level CreateLevel(TextAsset _levelAsset)
+        {
+            Level prevLevel = JsonConvert.DeserializeObject<Level>(_levelAsset.text);
+            var testLevel = PlayerDataManager.GetInstance.GetLevelDataForKey(_levelAsset.name);
+            if (testLevel != null)
+            {
+                prevLevel = testLevel;
+            }
+
+            return prevLevel;
+        }
+
         public bool IsCurrentLastLevel()
         {
             return _levelsController.IsCurrentLastLevel();
@@ -38,6 +52,25 @@ namespace Assets.Scripts.Level
             _levelsController.SetCurrentPack(levelPackObject);
         }
 
+        public int GetPackCount(LevelPackObject levelPack)
+        {
+            return levelPack._jsonLevelsFiles.Count;
+        }
+
+        public int GetPackProgress(LevelPackObject levelPack)
+        {
+            int counter = 0;
+            foreach (var levelFile in levelPack._jsonLevelsFiles)
+            {
+                var testLevel = CreateLevel(levelFile);
+                if (testLevel.isCompleted)
+                {
+                    counter++;
+                }
+            }
+
+            return counter;
+        }
 
         public void SetCurrentLevel(System.Object sender, int level)
         {

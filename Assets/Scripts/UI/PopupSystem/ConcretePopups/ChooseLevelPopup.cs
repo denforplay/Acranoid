@@ -41,10 +41,10 @@ public class ChooseLevelPopup : Popup
     {
         LevelManager.GetInstance.SetLevelPackObject(_levelPackObject);
         _levelScrollViewPrefab.SetActive(true);
-        Level currentLevel = CreateLevel(_levelPackObject._jsonLevelsFiles.Last());
+        Level currentLevel = LevelManager.GetInstance.CreateLevel(_levelPackObject._jsonLevelsFiles.Last());
         for (int i = _levelPackObject._jsonLevelsFiles.Count - 2; i >= 0; i--)
         {
-            Level level = CreateLevel(_levelPackObject._jsonLevelsFiles[i]);
+            Level level = LevelManager.GetInstance.CreateLevel(_levelPackObject._jsonLevelsFiles[i]);
             int index = i;
             Button button = _levelButtonFactory.GetNewInstance(currentLevel, level, () => OnLevelClickEvent(index + 1));
             currentLevel = level;
@@ -62,20 +62,6 @@ public class ChooseLevelPopup : Popup
             _packageButtonFactory.GetNewInstance(_levelPacksConfig.levelPacks[i], () => OnPackageClickEvent(_levelPacksConfig.levelPacks[index]));
         }
     }
-
-
-    private Level CreateLevel(TextAsset _levelAsset)
-    {
-        Level prevLevel = JsonConvert.DeserializeObject<Level>(_levelAsset.text);
-        var testLevel = PlayerDataManager.GetInstance.GetLevelDataForKey(_levelAsset.name);
-        if (testLevel != null)
-        {
-            prevLevel = testLevel;
-        }
-
-        return prevLevel;
-    }
-
     private void OnLevelClickEvent(int levelIndex)
     {
         PopupManager.GetInstance.DeletePopUp();
@@ -103,4 +89,5 @@ public class ChooseLevelPopup : Popup
     public override void EnableInput()
     {
     }
+
 }

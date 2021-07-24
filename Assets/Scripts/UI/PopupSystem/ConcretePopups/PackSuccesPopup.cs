@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Scenes.SceneConfigs;
 using Assets.Scripts.UI.Buttons.Strategies.ButtonMethods;
 using Assets.Scripts.UI.Buttons.Strategies.Interfaces;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -29,7 +30,16 @@ namespace Assets.Scripts.UI.PopupSystem.ConcretePopups
 
         private void Awake()
         {
-            _mainMenuButton.onClick.AddListener(() => _mainMenuButtonMethod.Call());
+            _mainMenuButton.onClick.AddListener(() =>
+            {
+                DisableInput();
+                transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, _duration).OnComplete(() =>
+                {
+                    Time.timeScale = 1;
+                    _mainMenuButtonMethod.Call();
+                });
+            }
+            );
             _nextPackButton.onClick.AddListener(() => _nextPackButtonMethod.Call());
         }
     }

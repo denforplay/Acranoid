@@ -1,4 +1,6 @@
 ﻿using Assets.Scripts.Abstracts.Singeton;
+using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events.Popup;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,8 +39,12 @@ namespace Assets.Scripts.UI.PopupSystem
 
         private Popup CreatePopup(Popup popupPrefab)
         {
-            Popup popUp = Instantiate(popupPrefab, GetCanvas.transform);
-            popUp.Show();
+            Popup popUp = null;
+            if (GetCanvas != null)
+            {
+                popUp = Instantiate(popupPrefab, GetCanvas.transform);
+                popUp.Show();
+            }
             return popUp;
         }
 
@@ -46,6 +52,10 @@ namespace Assets.Scripts.UI.PopupSystem
         {
             Time.timeScale = 1;
             Popup popup = _popupsOnCanvas.Pop();
+            if (popup is PausePopup)
+            {
+                EventBusManager.GetInstance.Invoke<OnPausePopupClosedEvent>(new OnPausePopupClosedEvent());
+            }
             popup.Hide();
             Destroy(popup.gameObject);
         }

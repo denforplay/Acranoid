@@ -34,11 +34,21 @@ namespace Assets.Scripts.UI.PopupSystem
         {
             _mainMenuButton.onClick.AddListener(() =>
             {
-                _mainMenuButtonMethod.Call();
+                DisableInput();
+                transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, _duration).OnComplete(() =>
+                {
+                    Time.timeScale = 1;
+                    _mainMenuButtonMethod.Call();
+                });
             });
             _nextLevelButton.onClick.AddListener(() =>
             {
-                _nextLevelButtonMethod.Call();
+                DisableInput();
+                transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, _duration).OnComplete(() =>
+                {
+                    Time.timeScale = 1;
+                    _nextLevelButtonMethod.Call();
+                });
             });
         }
     }

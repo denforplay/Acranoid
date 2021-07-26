@@ -1,8 +1,8 @@
 {
-  "isCompleted": true,
+  "isCompleted": false,
   "levelName": "Introduction",
   "blocksData": [
-1,1,-1,1,1
+13,17, 1, -1,1,19,1
   ],
-  "lifes": 25,
+  "lifes": 3,
 }

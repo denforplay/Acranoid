@@ -95,11 +95,5 @@ namespace Assets.Scripts.Block
                 throw new ArgumentNullException("Block manager not initialized yet" + this.GetType());
             }
         }
-
-        private void OnDestroy()
-        {
-            Debug.LogError(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-            Debug.Log("Block manager destroyed");
-        }
     }
 }

@@ -1,8 +1,10 @@
 {
-  "isCompleted": true,
+  "isCompleted": false,
   "levelName": "Autumn-1",
   "blocksData": [
-1,1,-1,112,112
+0,1,110,0,-1,
+1,112,15,15, -1,
+0,112,112,0
   ],
-  "lifes": 25,
+  "lifes": 3,
 }

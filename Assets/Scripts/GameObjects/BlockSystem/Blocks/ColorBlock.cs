@@ -17,7 +17,6 @@ namespace Assets.Scripts.Block
         public Color color;
         [SerializeField] ParticleSystem _destroyParticle;
 
-        private int bonusUsage = 0;
         public override void ApplyDamage(int value)
         {
             _life -= value;

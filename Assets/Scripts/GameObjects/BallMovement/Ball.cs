@@ -61,7 +61,7 @@ namespace Assets.Scripts.BallMovement
 
         public void ReturnBallOnPosition(IEvent ievent)
         {
-            if (isReturning && _rememberedParent != null && this != null && gameObject.activeInHierarchy != false)
+            if (isReturning && _rememberedParent != null && this != null && gameObject.activeInHierarchy)
             {
                 isActivated = false;
                 EventBusManager.GetInstance.Invoke<OnBallReturnEvent>(new OnBallReturnEvent());

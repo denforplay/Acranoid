@@ -1,5 +1,8 @@
 ﻿using Assets.Scripts.Abstracts.EventBus.Interfaces;
 using Assets.Scripts.Abstracts.Singeton;
+using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events;
+using Assets.Scripts.EventBus.Events.LevelEvents;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +21,7 @@ namespace Assets.Scripts.GameObjects.ParticleSystem
         {
             IsDestroy = true;
             allParticles = new List<ParticleBase>();
+            EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>(ReturnAllParticles);
             base.Awake();
         }
 
@@ -47,12 +51,13 @@ namespace Assets.Scripts.GameObjects.ParticleSystem
 
         public void ReturnAllParticles(IEvent ievent)
         {
+            var particles = new List<ParticleBase>(allParticles);
             if (allParticles != null)
-                foreach (var particle in allParticles)
+                foreach (var particle in particles)
                 {
                     if (particle != null && particle.gameObject.activeInHierarchy)
                     {
-                        particle.ReturnToPool();
+                        ReturnParticle(particle);
                     }
                 }
 
@@ -65,6 +70,11 @@ namespace Assets.Scripts.GameObjects.ParticleSystem
             {
                 throw new ArgumentNullException("Particle manager not initialized yet");
             }
+        }
+
+        private void OnDestroy()
+        {
+            EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ReturnAllParticles);
         }
     }
 }

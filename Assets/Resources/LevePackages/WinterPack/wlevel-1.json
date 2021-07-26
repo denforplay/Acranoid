@@ -1,5 +1,5 @@
 {
-  "isCompleted": true,
+  "isCompleted": false,
   "levelName": "winterPack-1",
   "blocksData": [
     11,
@@ -110,5 +110,5 @@
     112,
     211,
   ],
-  "lifes": 1
+  "lifes": 3
 }

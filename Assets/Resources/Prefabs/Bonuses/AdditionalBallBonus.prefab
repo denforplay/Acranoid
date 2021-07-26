@@ -144,4 +144,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f28a84f51497be7459bd7641401b28f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInstantlyActivated: 0
+  isInstantlyActivated: 1

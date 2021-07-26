@@ -3,6 +3,10 @@ using Assets.Scripts.Abstracts.Repository;
 using Assets.Scripts.Abstracts.Game;
 using System.Collections;
 using UnityEngine;
+using Assets.Scripts.Scenes.SceneConfigs;
+using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events;
+using Assets.Scripts.Block;
 
 namespace Assets.Scripts.Abstracts.Scene
 {
@@ -29,7 +33,6 @@ namespace Assets.Scripts.Abstracts.Scene
             _repositoriesBase.CreateAllRepositories();
             _controllerBase.CreateAllControllers();
             yield return null;
-
             _repositoriesBase.SendOnCreateToAllRepositories();
             _controllerBase.SendOnCreateToAllControllers();
             yield return null;
@@ -41,6 +44,11 @@ namespace Assets.Scripts.Abstracts.Scene
             _repositoriesBase.SendOnStartToAllRepositories();
             _controllerBase.SendOnStartToAllControllers();
             yield return null;
+
+            if (_sceneConfig is GameSceneConfig)
+            {
+                BlockGenerator.GetInstance.ShowBlocks(null);
+            }
         }
 
         public T GetRepository<T>() where T : Repository.Repository

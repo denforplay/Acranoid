@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Abstracts.Controller;
+using Assets.Scripts.Abstracts.Game;
 using System;
 
 namespace Assets.Scripts.EnergySystem.Timer
@@ -9,7 +10,7 @@ namespace Assets.Scripts.EnergySystem.Timer
         public DateTime NextEnergyTime => _timerRepository.nextEnergyTime;
         public override void OnCreate()
         {
-            _timerRepository = new TimerRepository();
+            _timerRepository = Game.GetRepository<TimerRepository>();
             _timerRepository.Initialize();
         }
         public override void Initialize()

@@ -19,7 +19,7 @@ namespace Assets.Scripts.BallMovement
         public Rigidbody2D _rigidbody2D;
         private CircleCollider2D _circleCollider2D;
         private Platform _rememberedParent;
-        public bool isReturning = true;
+        public bool isReturning = false;
         private bool isActivated = false;
         private float velocity;
         public IObjectPool Origin { get; set; }
@@ -29,7 +29,6 @@ namespace Assets.Scripts.BallMovement
             velocity = _ballConfig.velocity;
             _circleCollider2D = GetComponent<CircleCollider2D>();
             _rigidbody2D = GetComponent<Rigidbody2D>();
-            _rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
             _ballCollisions = new BallCollisions(_ballConfig, _rigidbody2D);
         }
 
@@ -101,6 +100,7 @@ namespace Assets.Scripts.BallMovement
                 this.transform.SetParent(_rememberedParent.transform);
             }
         }
+
         private void OnEnable()
         {
             EventBusManager.GetInstance.Subscribe<OnBallActivatingEvent>(BallActivate);
@@ -129,13 +129,12 @@ namespace Assets.Scripts.BallMovement
         private void OnBecameInvisible()
         {
             BallInactivate();
-            HealthManager.GetInstance.SpendHeart(1);
+            BallManager.GetInstance.ReturnBall(this);
         }
-
-
 
         public void ReturnToPool()
         {
+            gameObject.SetActive(false);
         }
     }
 }

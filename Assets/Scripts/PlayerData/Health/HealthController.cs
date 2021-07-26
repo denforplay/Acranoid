@@ -44,6 +44,7 @@ namespace Assets.Scripts.Health
         public void SpendLife(int value)
         {
             this._healthRepository.Health -= value;
+            HealthViewManager.GetInstance.DeleteHealthView(null);
             if (IsEnoughLifes(0))
             {
                 return;

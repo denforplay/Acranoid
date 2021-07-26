@@ -6,6 +6,9 @@ using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.LevelEvents;
 using Newtonsoft.Json;
 using Assets.Scripts.PlayerData;
+using Assets.Scripts.UI.PopupSystem.ConcretePopups;
+using Assets.Scripts.Block;
+using Assets.Scripts.EventBus.Events.BlockEvents;
 
 namespace Assets.Scripts.Level
 {
@@ -76,10 +79,7 @@ namespace Assets.Scripts.Level
         {
             _levelsController.SetCurrentLevel(level);
             CurrentLevel = _levelsController.GetCurrentLevel();
-            if (sender is ChooseLevelPopup)
-            {
-                EventBusManager.GetInstance.Invoke<OnNextLevelLoadedEvent>(new OnNextLevelLoadedEvent());
-            }
+            LoadCurrentLevel();
         }
 
         public void SetCurrentPack(LevelPackObject levelPackObject)

@@ -17,16 +17,22 @@ namespace Assets.Scripts.Block
         public BlockConfig _colorBlockConfig;
         public BlockConfig _graniteBlockConfig;
         private BlocksController _blocksController;
-        private bool _isInitialized;
+        public bool _isInitialized;
         public List<List<BaseBlock>> allBlocks;
         private int _currentRow = 0;
+
+        private new void Awake()
+        {
+            IsDestroy = true;
+            base.Awake();
+            allBlocks = new List<List<BaseBlock>>();
+        }
         public void Initialize(BlocksController blocksController)
         {
-            allBlocks = new List<List<BaseBlock>>();
             _blocksController = blocksController;
-            _isInitialized = true;
             EventBusManager.GetInstance.Subscribe<OnLevelCompletedEvent>(ReturnAllBlocks);
-            EventBusManager.GetInstance.Invoke<OnBlocksManagerInitializedEvent>(new OnBlocksManagerInitializedEvent());
+            _isInitialized = true;
+            Debug.Log("BlockManager initialized");
         }
 
         public void SetNewRow()

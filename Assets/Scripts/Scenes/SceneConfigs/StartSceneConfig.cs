@@ -35,6 +35,8 @@ namespace Assets.Scripts.Scenes.SceneConfigs
         public override Dictionary<Type, Repository> CreateAllRepositories()
         {
             var repositoriesMap = new Dictionary<Type, Repository>();
+            this.CreateRepository<TimerRepository>(repositoriesMap);
+            this.CreateRepository<EnergyRepository>(repositoriesMap);
             if (!isLocalisationInit2)
             {
                 this.CreateRepository<LocalisationRepository>(repositoriesMap);

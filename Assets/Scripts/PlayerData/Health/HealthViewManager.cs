@@ -22,7 +22,6 @@ namespace Assets.Scripts.Health
             IsDestroy = true;
             base.Awake();
             _heartsView = new List<Heart>();
-            EventBusManager.GetInstance.Subscribe<OnHeartSpendEvent>(DeleteHealthView);
             EventBusManager.GetInstance.Subscribe<OnHeartAddEvent>((OnHeartAddEvent) => AddHealthView(this, OnHeartAddEvent));
             EventBusManager.GetInstance.Subscribe<OnHeathInitizliedEvent>((OnHeathInitizliedEvent) =>
             {
@@ -77,7 +76,6 @@ namespace Assets.Scripts.Health
         {
             _heartsView.Clear();
             _healthRepository.Initialize();
-            EventBusManager.GetInstance.Unsubscribe<OnHeartSpendEvent>(DeleteHealthView);
             EventBusManager.GetInstance.Unsubscribe<OnHeartAddEvent>((OnHeartAddEvent) => AddHealthView(this, OnHeartAddEvent));
             EventBusManager.GetInstance.Unsubscribe<OnHeathInitizliedEvent>((OnHeathInitizliedEvent) =>
             {

@@ -6,6 +6,7 @@ using Assets.Scripts.EventBus;
 using Assets.Scripts.UI.PopupSystem;
 using Assets.Scripts.EventBus.Events.HealthEvents;
 using Assets.Scripts.EnergySystem.Energy;
+using Assets.Scripts.GameObjects.BallMovement;
 
 namespace Assets.Scripts.Health
 {
@@ -51,6 +52,7 @@ namespace Assets.Scripts.Health
             CheckHeartsInitialized();
             if (_healthController.IsEnoughLifes(0))
             {
+                if (BallManager.GetInstance.AllBalls.Count == 0)
                 EventBusManager.GetInstance.Invoke(new OnHeartSpendEvent());
                 _healthController.SpendLife(value);
             }

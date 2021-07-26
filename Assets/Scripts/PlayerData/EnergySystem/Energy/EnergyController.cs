@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Abstracts.Controller;
+using Assets.Scripts.Abstracts.Game;
 using Assets.Scripts.EnergySystem.Timer;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events.Energy;
@@ -18,7 +19,7 @@ namespace Assets.Scripts.EnergySystem.Energy
         public int TotalEnergy => _energyRepository._totalEnergy;
         public override void OnCreate()
         {
-            _energyRepository = new EnergyRepository();
+            _energyRepository = Game.GetRepository<EnergyRepository>();
             _energyRepository.Initialize();
         }
         public override void Initialize()

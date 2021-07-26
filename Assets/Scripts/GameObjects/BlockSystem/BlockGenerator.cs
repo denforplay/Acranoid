@@ -10,10 +10,11 @@ using System;
 using Assets.Scripts.GameObjects.Borders;
 using Assets.Scripts.EnergySystem.Energy;
 using Assets.Scripts.GameObjects.Bonus;
+using Assets.Scripts.Abstracts.Singeton;
 
 namespace Assets.Scripts.Block
 {
-    public class BlockGenerator : MonoBehaviour
+    public class BlockGenerator : Singleton<BlockGenerator>
     {
         private const int EMPTY_BLOCK = -2;
         private const int NEW_ROW = -1;
@@ -33,13 +34,21 @@ namespace Assets.Scripts.Block
         private float scaler;
         private bool initialized;
         private Camera _camera;
+
+        private new void Awake()
+        {
+            IsDestroy = true;
+            base.Awake();
+            EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>(ShowBlocks);
+        }
+
         private void Start()
         {
             _camera = Camera.main;
             if (Application.isMobilePlatform)
-            screen = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
+                screen = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
             else
-            screen = new Vector2(Screen.width, Screen.height);
+                screen = new Vector2(Screen.width, Screen.height);
             var screenInWorld = _camera.ScreenToWorldPoint(screen);
             distance.x = _blockGeneratorConfig.blockWidth;
             distance.y = _blockGeneratorConfig.blockHeight;
@@ -47,19 +56,16 @@ namespace Assets.Scripts.Block
             startPosition = _camera.WorldToScreenPoint(startPosition);
         }
 
-        private void ShowBlocks(IEvent ievent)
+        public void ShowBlocks(IEvent ievent)
         {
             if (!initialized)
             {
-                EventBusManager.GetInstance.Invoke<OnNextLevelLoadedEvent>(new OnNextLevelLoadedEvent());
-                EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>(ShowBlocks);
                 initialized = true;
+                EventBusManager.GetInstance.Invoke<OnNextLevelLoadedEvent>(new OnNextLevelLoadedEvent());
             }
             Level.Level level = LevelManager.GetInstance.GetCurrentLevel();
             int[] blocksData = level.blocksData;
             InitializeData(blocksData);
-
-
             for (int i = 0; i < blocksData.Length; i++)
             {
                 int blockIndex = blocksData[i];
@@ -90,6 +96,7 @@ namespace Assets.Scripts.Block
                             {
                                 block = BlocksManager.GetInstance.GetBlock(_blocksPrefabs[GRANITE_BLOCK]);
                             }
+
                             var scale = block.gameObject.transform.localScale;
                             block.gameObject.transform.localScale = new Vector3(scaler, scale.y, scale.z);
                             if (_camera != null)
@@ -100,6 +107,7 @@ namespace Assets.Scripts.Block
                         break;
                 }
             }
+
             startPosition.x -= distance.x / 2;
             distance.x /= scaler;
         }
@@ -144,11 +152,6 @@ namespace Assets.Scripts.Block
             startPosition.x += distance.x / 2;
             position.y -= distance.y;
             position.x = startPosition.x;
-        }
-
-        private void OnEnable()
-        {
-            EventBusManager.GetInstance.Subscribe<OnBlocksRepositoryInitializedEvent>(ShowBlocks);
         }
 
         private void OnDestroy()

@@ -16,26 +16,29 @@ namespace Assets.Scripts.Scenes.SceneConfigs
     {
         public const string SCENE_NAME = "GameScene";
         public override string SceneName => SCENE_NAME;
-        public override Dictionary<Type, Controller> CreateAllControllers()
-        {
-            var controllersMap = new Dictionary<Type, Controller>();
-            this.CreateController<TimerController>(controllersMap);
-            this.CreateController<EnergyController>(controllersMap);
-            this.CreateController<HealthController>(controllersMap);
-            this.CreateController<BlocksController>(controllersMap);
-            this.CreateController<LocalisationController>(controllersMap);
-            this.CreateController<ParticleController>(controllersMap);
-            return controllersMap;
-        }
 
         public override Dictionary<Type, Repository> CreateAllRepositories()
         {
             var repositoriesMap = new Dictionary<Type, Repository>();
-            this.CreateRepository<HealthRepository>(repositoriesMap);
             this.CreateRepository<BlocksRepository>(repositoriesMap);
+            this.CreateRepository<TimerRepository>(repositoriesMap);
+            this.CreateRepository<EnergyRepository>(repositoriesMap);
+            this.CreateRepository<HealthRepository>(repositoriesMap);
             this.CreateRepository<LocalisationRepository>(repositoriesMap);
             this.CreateRepository<ParticleRepository>(repositoriesMap);
             return repositoriesMap;
+        }
+
+        public override Dictionary<Type, Controller> CreateAllControllers()
+        {
+            var controllersMap = new Dictionary<Type, Controller>();
+            this.CreateController<BlocksController>(controllersMap);
+            this.CreateController<TimerController>(controllersMap);
+            this.CreateController<EnergyController>(controllersMap);
+            this.CreateController<HealthController>(controllersMap);
+            this.CreateController<LocalisationController>(controllersMap);
+            this.CreateController<ParticleController>(controllersMap);
+            return controllersMap;
         }
     }
 }

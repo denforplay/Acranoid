@@ -13,7 +13,7 @@ namespace Assets.Scripts.Block
 {
     public class ColorBlock : BaseBlock
     {
-        [SerializeField] public BaseBonus _baseBonus;
+        public BaseBonus _baseBonus;
         public Color color;
         [SerializeField] ParticleSystem _destroyParticle;
 
@@ -39,5 +39,10 @@ namespace Assets.Scripts.Block
             }
         }
 
+        public override void ReturnToPool()
+        {
+            _baseBonus = null;
+            base.ReturnToPool();
+        }
     }
 }

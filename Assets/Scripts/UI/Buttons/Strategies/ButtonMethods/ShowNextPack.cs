@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.UI.Buttons.Strategies.Interfaces;
 using Assets.Scripts.UI.PopupSystem;
+using Assets.Scripts.UI.PopupSystem.ConcretePopups;
 
 namespace Assets.Scripts.UI.Buttons.Strategies.ButtonMethods
 {
@@ -8,7 +9,7 @@ namespace Assets.Scripts.UI.Buttons.Strategies.ButtonMethods
         public void Call()
         {
             PopupManager.GetInstance.DeletePopUp();
-            PopupManager.GetInstance.SpawnPopup<ChooseLevelPopup>();
+            PopupManager.GetInstance.SpawnPopup<ChoosePackagePopup>();
         }
     }
 }

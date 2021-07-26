@@ -30,7 +30,6 @@ namespace Assets.Scripts.PlatformMovement
             _rigidBody2D = GetComponent<Rigidbody2D>();
             _camera = Camera.main;
             _screen = _camera.ScreenToWorldPoint(_screen);
-
         }
 
         private void Move(IEvent ievent)

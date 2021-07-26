@@ -73,6 +73,7 @@ namespace Assets.Scripts.Block
         public override void Initialize()
         {
             BlocksManager.GetInstance.Initialize(this);
+            _blocksRepository.InitializePools();
         }
     }
 }

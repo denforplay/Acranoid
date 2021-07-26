@@ -14,7 +14,6 @@ namespace Assets.Scripts.Abstracts.Scene
             T controller = new T();
             Type type = typeof(T);
             controllersMap[type] = controller;
-            Debug.Log(controller.GetType() + "initialized");
         }
 
         public void CreateRepository<T>(Dictionary<Type, Repository.Repository> repositoriesMap) where T : Repository.Repository, new()
@@ -22,7 +21,6 @@ namespace Assets.Scripts.Abstracts.Scene
             T repository = new T();
             Type type = typeof(T);
             repositoriesMap[type] = repository;
-            Debug.Log(repository.GetType() + "initialized");
         }
     }
 }

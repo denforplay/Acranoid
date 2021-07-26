@@ -6,6 +6,7 @@ using Assets.Scripts.EventBus.Events.LevelEvents;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Block
 {
@@ -17,7 +18,7 @@ namespace Assets.Scripts.Block
         public BlockConfig _colorBlockConfig;
         public BlockConfig _graniteBlockConfig;
         private BlocksController _blocksController;
-        public bool _isInitialized;
+        public static bool _isInitialized;
         public List<List<BaseBlock>> allBlocks;
         private int _currentRow = 0;
 
@@ -32,7 +33,7 @@ namespace Assets.Scripts.Block
             _blocksController = blocksController;
             EventBusManager.GetInstance.Subscribe<OnLevelCompletedEvent>(ReturnAllBlocks);
             _isInitialized = true;
-            Debug.Log("BlockManager initialized");
+            EventBusManager.GetInstance.Invoke<OnBlocksManagerInitializedEvent>(new OnBlocksManagerInitializedEvent());
         }
 
         public void SetNewRow()
@@ -91,8 +92,14 @@ namespace Assets.Scripts.Block
         {
             if (!_isInitialized)
             {
-                throw new ArgumentNullException("Block manager not initialized yet");
+                throw new ArgumentNullException("Block manager not initialized yet" + this.GetType());
             }
+        }
+
+        private void OnDestroy()
+        {
+            Debug.LogError(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            Debug.Log("Block manager destroyed");
         }
     }
 }

@@ -156,7 +156,6 @@ namespace Assets.Scripts.Block
 
         private void OnDestroy()
         {
-            EventBusManager.GetInstance.Unsubscribe<OnBlocksRepositoryInitializedEvent>(ShowBlocks);
             EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ShowBlocks);
         }
     }

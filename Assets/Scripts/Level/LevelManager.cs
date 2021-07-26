@@ -16,7 +16,7 @@ namespace Assets.Scripts.Level
     {
         public LevelPackObject _levelPackObject;
         private LevelsController _levelsController;
-        public bool IsInitialized { get; private set; }
+        public static bool IsInitialized { get; private set; }
         public Level CurrentLevel { get; private set; }
         public Sprite CurrentPackSprite { get; private set; }
         public string CurrentPackName { get; private set; }

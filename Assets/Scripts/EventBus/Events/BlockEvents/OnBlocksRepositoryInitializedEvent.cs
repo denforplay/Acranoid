@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.EventBus.Events
 {
-    public class OnBlocksRepositoryInitializedEvent : IEvent
+    public class OnBlocksRepositoryInitializedEvents : IEvent
     {
     }
 }

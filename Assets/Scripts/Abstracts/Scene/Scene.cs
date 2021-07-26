@@ -7,6 +7,7 @@ using Assets.Scripts.Scenes.SceneConfigs;
 using Assets.Scripts.EventBus;
 using Assets.Scripts.EventBus.Events;
 using Assets.Scripts.Block;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Abstracts.Scene
 {
@@ -45,9 +46,13 @@ namespace Assets.Scripts.Abstracts.Scene
             _controllerBase.SendOnStartToAllControllers();
             yield return null;
 
-            if (_sceneConfig is GameSceneConfig)
+            if (_sceneConfig is GameSceneConfig && BlocksManager._isInitialized)
             {
                 BlockGenerator.GetInstance.ShowBlocks(null);
+            }
+            else if (_sceneConfig is GameSceneConfig)
+            {
+                EventBusManager.GetInstance.Subscribe<OnBlocksManagerInitializedEvent>((OnBlocksManagerInitializedEvent) => BlockGenerator.GetInstance.ShowBlocks(null));
             }
         }
 

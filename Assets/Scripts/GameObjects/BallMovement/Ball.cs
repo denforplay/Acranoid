@@ -9,6 +9,7 @@ using Assets.Scripts.EventBus.Events.LevelEvents;
 using System;
 using Assets.Scripts.PlatformMovement;
 using Assets.Scripts.GameObjects.BallMovement;
+using Assets.Scripts.EventBus.Events.BlockEvents;
 
 namespace Assets.Scripts.BallMovement
 {
@@ -44,6 +45,7 @@ namespace Assets.Scripts.BallMovement
 
         public void ChangeVelocity(float value)
         {
+            if (velocity < _ballConfig.maximumVelocity)
             velocity += value;
         }
 
@@ -103,6 +105,7 @@ namespace Assets.Scripts.BallMovement
 
         private void OnEnable()
         {
+            EventBusManager.GetInstance.Subscribe<OnBlockDestroyEvent>((OnBlockDestroyEvent) => ChangeVelocity(_ballConfig.additionVelocity));
             EventBusManager.GetInstance.Subscribe<OnBallActivatingEvent>(BallActivate);
             EventBusManager.GetInstance.Subscribe<OnHeathInitizliedEvent>((OnHeathInitizliedEvent) =>
             {
@@ -115,6 +118,7 @@ namespace Assets.Scripts.BallMovement
         private void OnDestroy()
         {
             _rememberedParent = null;
+            EventBusManager.GetInstance.Unsubscribe<OnBlockDestroyEvent>((OnBlockDestroyEvent) => ChangeVelocity(0.25f));
             EventBusManager.GetInstance.Unsubscribe<OnHeathInitizliedEvent>((OnHeathInitizliedEvent) =>
             {
                 EventBusManager.GetInstance.Subscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
@@ -134,6 +138,7 @@ namespace Assets.Scripts.BallMovement
 
         public void ReturnToPool()
         {
+            SetVelocity(_ballConfig.velocity);
             gameObject.SetActive(false);
         }
     }

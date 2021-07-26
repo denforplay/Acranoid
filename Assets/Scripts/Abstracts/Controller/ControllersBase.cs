@@ -43,6 +43,8 @@ namespace Assets.Scripts.Abstracts.Controller
             {
                 controller.OnStart();
             }
+
+
         }
 
         public T GetController<T>() where T : Controller

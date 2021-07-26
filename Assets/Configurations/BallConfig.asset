@@ -16,3 +16,5 @@ MonoBehaviour:
   offSetX: 0
   rightDirection: 1
   leftDirection: -1
+  additionVelocity: 0.05
+  maximumVelocity: 12

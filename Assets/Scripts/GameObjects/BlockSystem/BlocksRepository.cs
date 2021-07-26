@@ -15,18 +15,6 @@ namespace Assets.Scripts.Block
         private bool isInitialized;
         public override void Initialize()
         {
-            EventBusManager.GetInstance.Subscribe<OnBlocksManagerInitializedEvent>(InitializePool);
-        }
-
-        public void InitializePool(IEvent ievent)
-        {
-            if (!isInitialized)
-            {
-                isInitialized = true;
-                InitializePools();
-            EventBusManager.GetInstance.Invoke<OnBlocksRepositoryInitializedEvent>(new OnBlocksRepositoryInitializedEvent());
-            }
-            
         }
 
         public void InitializePools()

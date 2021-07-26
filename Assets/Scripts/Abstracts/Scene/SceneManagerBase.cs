@@ -33,11 +33,6 @@ namespace Assets.Scripts.Abstracts.Scene
             return Coroutines.Coroutines.StartRoutine(this.LoadNewSceneRoutine(config));
         }
 
-        internal void LoadNewSceneAsync(object ganeSceneConfig)
-        {
-            throw new NotImplementedException();
-        }
-
         private IEnumerator LoadNewSceneRoutine(SceneConfig sceneConfig)
         {
             yield return Coroutines.Coroutines.StartRoutine(this.LoadSceneRoutine(sceneConfig));
@@ -58,6 +53,9 @@ namespace Assets.Scripts.Abstracts.Scene
                 yield return null;
             }
 
+            yield return null;
+            yield return null;
+            yield return null;
             asyncOperation.allowSceneActivation = true;
         }
 

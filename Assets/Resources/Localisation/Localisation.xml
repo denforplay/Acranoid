@@ -90,4 +90,40 @@
 			<ru>Начать игру</ru>
 		</Translates>
 	</Key>
+	<Key Name="AutumnPack">
+		<Translates>
+			<en>Autumn Pack</en>
+			<ru>Осенний набор</ru>
+		</Translates>
+	</Key>
+	<Key Name="SpringPack">
+		<Translates>
+			<en>Spring Pack</en>
+			<ru>Осенний набор</ru>
+		</Translates>
+	</Key>
+	<Key Name="Add energy">
+		<Translates>
+			<en>Add energy</en>
+			<ru>Добавить энергию</ru>
+		</Translates>
+	</Key>
+	<Key Name="Restart">
+		<Translates>
+			<en>Restart</en>
+			<ru>Рестарт</ru>
+		</Translates>
+	</Key>
+	<Key Name="Continue">
+		<Translates>
+			<en>Continue</en>
+			<ru>Продолжить</ru>
+		</Translates>
+	</Key>
+	<Key Name="Choose level">
+		<Translates>
+			<en>Choose level</en>
+			<ru>Выбрать уровень</ru>
+		</Translates>
+	</Key>
 </Keys>

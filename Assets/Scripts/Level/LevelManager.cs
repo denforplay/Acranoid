@@ -53,6 +53,7 @@ namespace Assets.Scripts.Level
             CurrentPackSprite = levelPackObject._packImage;
             CurrentPackName = levelPackObject.packName;
             _levelsController.SetCurrentPack(levelPackObject);
+            EventBusManager.GetInstance.Invoke<OnPackChangedEvent>(new OnPackChangedEvent());
         }
 
         public int GetPackCount(LevelPackObject levelPack)
@@ -85,6 +86,7 @@ namespace Assets.Scripts.Level
         public void SetCurrentPack(LevelPackObject levelPackObject)
         {
             _levelsController.SetCurrentPack(levelPackObject);
+            EventBusManager.GetInstance.Invoke<OnPackChangedEvent>(new OnPackChangedEvent());
         }
 
         public Level LoadCurrentLevel()

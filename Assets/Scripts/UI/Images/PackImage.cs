@@ -1,4 +1,7 @@
-﻿using Assets.Scripts.Level;
+﻿using Assets.Scripts.Abstracts.EventBus.Interfaces;
+using Assets.Scripts.EventBus;
+using Assets.Scripts.EventBus.Events.LevelEvents;
+using Assets.Scripts.Level;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +15,12 @@ namespace Assets.Scripts.UI.Images
         private void Awake()
         {
             _packImage = GetComponent<Image>();
+            ChangePackImage(null);
+            EventBusManager.GetInstance.Subscribe<OnPackChangedEvent>(ChangePackImage);
+        }
+
+        public void ChangePackImage(IEvent ievent)
+        {
             _packImage.sprite = LevelManager.GetInstance.CurrentPackSprite;
         }
     }

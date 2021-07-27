@@ -50,10 +50,6 @@ namespace Assets.Scripts.Abstracts.Scene
             {
                 BlockGenerator.GetInstance.ShowBlocks(null);
             }
-            else if (_sceneConfig is GameSceneConfig)
-            {
-                EventBusManager.GetInstance.Subscribe<OnBlocksManagerInitializedEvent>((OnBlocksManagerInitializedEvent) => BlockGenerator.GetInstance.ShowBlocks(null));
-            }
         }
 
         public T GetRepository<T>() where T : Repository.Repository

@@ -7,7 +7,6 @@ namespace Assets.Scripts.GameRealisation
     {
         private void Awake()
         {
-            Screen.SetResolution(1080, 1920, true);
             Game.Run();
         }
     }

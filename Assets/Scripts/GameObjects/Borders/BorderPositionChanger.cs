@@ -7,6 +7,7 @@ namespace Assets.Scripts.Borders
         [SerializeField] private GameObject _leftBorder;
         [SerializeField] private GameObject _rightBorder;
         [SerializeField] private GameObject _topBorder;
+        [SerializeField] private RectTransform _topUI;
         [SerializeField] private Camera _camera;
 
         private void Start()
@@ -15,9 +16,10 @@ namespace Assets.Scripts.Borders
             var leftRightSprite = _leftBorder.gameObject.GetComponent<SpriteRenderer>();
             var topSprite = _topBorder.gameObject.GetComponent<SpriteRenderer>();
             screen = _camera.ScreenToWorldPoint(screen);
+            var topUISize = _camera.ScreenToWorldPoint(_topUI.rect.size);
             var leftBorderPos = new Vector2(-screen.x + leftRightSprite.size.x / 2, 0);
             var rightBorderPos = new Vector2(screen.x - leftRightSprite.size.x / 2, 0);
-            var topBorderPos = new Vector2(0, screen.y - topSprite.size.y / 2);
+            var topBorderPos = new Vector2(0, screen.y - (1f - topSprite.size.y / 2));
             _leftBorder.transform.position = leftBorderPos;
             _rightBorder.transform.position = rightBorderPos;
             _topBorder.transform.position = topBorderPos;

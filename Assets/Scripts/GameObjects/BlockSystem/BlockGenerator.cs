@@ -22,7 +22,6 @@ namespace Assets.Scripts.Block
         private const int COLOR_BLOCK = 1;
         [SerializeField] List<BaseBlock> _blocksPrefabs;
         [SerializeField] List<BlockConfig> _blockConfigs;
-        [SerializeField] private BlockGeneratorConfig _blockGeneratorConfig;
         [SerializeField] private SpriteRenderer _leftBorderRender;
         [SerializeField] private SpriteRenderer _topBorderRender;
         [SerializeField] private SpriteRenderer _blockRender;
@@ -34,9 +33,10 @@ namespace Assets.Scripts.Block
         private float scaler;
         private bool initialized;
         private Camera _camera;
-
+        BoxCollider2D boxCollider2D;
         private new void Awake()
         {
+            boxCollider2D = _blocksPrefabs[0].GetComponent<BoxCollider2D>();
             IsDestroy = true;
             base.Awake();
             EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>(ShowBlocks);
@@ -45,15 +45,11 @@ namespace Assets.Scripts.Block
         private void Start()
         {
             _camera = Camera.main;
-            if (Application.isMobilePlatform)
-                screen = new Vector2(Screen.currentResolution.width, Screen.currentResolution.height);
-            else
                 screen = new Vector2(Screen.width, Screen.height);
-            var screenInWorld = _camera.ScreenToWorldPoint(screen);
-            distance.x = _blockGeneratorConfig.blockWidth;
-            distance.y = _blockGeneratorConfig.blockHeight;
-            startPosition = new Vector2(_leftBorderRender.size.x - screenInWorld.x, screenInWorld.y - _topBorderRender.size.y - _blockRender.size.y / 2);
-            startPosition = _camera.WorldToScreenPoint(startPosition);
+            screen = _camera.ScreenToWorldPoint(screen);
+            distance.x = boxCollider2D.size.x;
+            distance.y = boxCollider2D.size.y;
+            startPosition = new Vector2(-screen.x, screen.y - _topBorderRender.size.y - _blockRender.size.y / 2);
         }
 
         public void ShowBlocks(IEvent ievent)
@@ -62,6 +58,7 @@ namespace Assets.Scripts.Block
             {
                 initialized = true;
                 EventBusManager.GetInstance.Invoke<OnNextLevelLoadedEvent>(new OnNextLevelLoadedEvent());
+                return;
             }
             Level.Level level = LevelManager.GetInstance.GetCurrentLevel();
             int[] blocksData = level.blocksData;
@@ -97,10 +94,11 @@ namespace Assets.Scripts.Block
                                 block = BlocksManager.GetInstance.GetBlock(_blocksPrefabs[GRANITE_BLOCK]);
                             }
 
-                            var scale = block.gameObject.transform.localScale;
-                            block.gameObject.transform.localScale = new Vector3(scaler, scale.y, scale.z);
+                            var scale = block.transform.localScale;
+                            block.transform.localScale = new Vector3(scaler, scale.y, scale.z);
+
                             if (_camera != null)
-                                block.transform.position = _camera.ScreenToWorldPoint(new Vector3(position.x, position.y, _camera.nearClipPlane));
+                                block.transform.position = new Vector3(position.x, position.y, _camera.nearClipPlane);
 
                             position.x += distance.x;
                         }
@@ -134,7 +132,8 @@ namespace Assets.Scripts.Block
             position.x = startPosition.x;
             position.y = startPosition.y;
             countInRow = blocksData.TakeWhile(x => x != NEW_ROW).Count();
-            scaler = (screen.x - 2 * startPosition.x) / (distance.x * countInRow);
+            var blockSizeX = (screen.x * 2) / countInRow;
+            scaler = blockSizeX / boxCollider2D.size.x;
             distance.x *= scaler;
             startPosition.x += distance.x / 2;
             position.x = startPosition.x;
@@ -147,7 +146,11 @@ namespace Assets.Scripts.Block
             distance.x /= scaler;
             countInRow = blocksData.Skip(skipIndex + 1).TakeWhile(x => x != NEW_ROW).Count();
             if (countInRow != 0)
-                scaler = (Screen.width - 2 * startPosition.x) / (distance.x * countInRow);
+            {
+                var blockSizeX = (screen.x * 2) / countInRow;
+                scaler = blockSizeX / boxCollider2D.size.x;
+            }
+            
             distance.x *= scaler;
             startPosition.x += distance.x / 2;
             position.y -= distance.y;

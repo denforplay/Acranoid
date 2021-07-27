@@ -7,6 +7,7 @@ using Assets.Scripts.Abstracts.EventBus.Interfaces;
 using Assets.Scripts.Abstracts.Game;
 using Assets.Scripts.EventBus.Events.HealthEvents;
 using Assets.Scripts.Abstracts.Singeton;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Health
 {

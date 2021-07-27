@@ -14,14 +14,15 @@ namespace Assets.Scripts.Level
 {
     public class LevelManager : Singleton<LevelManager>
     {
-        public LevelPackObject _levelPackObject;
+        private bool _isLevelCompleted = false;
         private LevelsController _levelsController;
+        public LevelPackObject _levelPackObject;
         public static bool IsInitialized { get; private set; }
         public Level CurrentLevel { get; private set; }
         public Sprite CurrentPackSprite { get; private set; }
         public string CurrentPackName { get; private set; }
-        private bool _isLevelCompleted = false;
         public bool IsLevelCompleted => _isLevelCompleted;
+
         public void Initialize(LevelsController levelsController)
         {
             _levelsController = levelsController;

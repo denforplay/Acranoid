@@ -7,6 +7,7 @@ using Assets.Scripts.GameObjects.BallMovement;
 using Assets.Scripts.GameObjects.Bonus;
 using Assets.Scripts.Health;
 using UnityEngine;
+using System;
 
 namespace Assets.Scripts.PlatformMovement
 {
@@ -47,8 +48,12 @@ namespace Assets.Scripts.PlatformMovement
         private void ReturnBall(IEvent ievent)
         {
             Ball ball = BallManager.GetInstance.activeBall;
-            if (!ball.gameObject.activeInHierarchy)
-            ball.gameObject.SetActive(true);
+            try
+            {
+                ball.gameObject.SetActive(true);
+            }
+            catch
+            { }
             ball.isReturning = true;
             ball.SetParent(this);
             ball.ReturnBallOnPosition(null);

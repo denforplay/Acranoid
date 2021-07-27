@@ -31,6 +31,7 @@ namespace Assets.Scripts.GameObjects.BallMovement
                 {
                     allBalls.Add(_activeBall);
                 }
+
                 return _activeBall;
             }
         }

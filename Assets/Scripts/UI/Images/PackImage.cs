@@ -21,6 +21,7 @@ namespace Assets.Scripts.UI.Images
 
         public void ChangePackImage(IEvent ievent)
         {
+            if (_packImage != null)
             _packImage.sprite = LevelManager.GetInstance.CurrentPackSprite;
         }
     }

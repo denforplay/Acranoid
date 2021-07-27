@@ -128,6 +128,20 @@ namespace Assets.Scripts.BallMovement
             EventBusManager.GetInstance.Subscribe<OnLevelCompletedEvent>(ReturnBallOnPosition);
         }
 
+        private void OnDisable()
+        {
+            EventBusManager.GetInstance.Unsubscribe<OnBlockDestroyEvent>((OnBlockDestroyEvent) => ChangeVelocity(0.25f));
+            EventBusManager.GetInstance.Unsubscribe<OnHeathInitizliedEvent>((OnHeathInitizliedEvent) =>
+            {
+                EventBusManager.GetInstance.Subscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
+            });
+
+            EventBusManager.GetInstance.Unsubscribe<OnBallActivatingEvent>(BallActivate);
+            EventBusManager.GetInstance.Unsubscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
+            EventBusManager.GetInstance.Unsubscribe<OnLevelCompletedEvent>(ReturnBallOnPosition);
+            EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ReturnBallOnPosition);
+        }
+
         private void OnDestroy()
         {
             _rememberedParent = null;

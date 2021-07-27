@@ -18,16 +18,16 @@ namespace Assets.Scripts.BallMovement
             _rigidBody2D = rigidBody2D;
         }
 
-        public void Call(Collision2D collision)
+        public void Call(Collider2D ballCollider, Collider2D collider)
         {
-            MoveCollision(collision);
-            BlockDamageCollision(collision);
+            MoveCollision(collider);
+            BlockDamageCollision(ballCollider, collider);
         }
 
-        private void MoveCollision(Collision2D collision)
+        private void MoveCollision(Collider2D collider)
         {
             Vector2 ballPos = _rigidBody2D.transform.position;
-            if (collision.gameObject.TryGetComponent(out Platform platform))
+            if (collider.gameObject.TryGetComponent(out Platform platform))
             {
                 Vector2 platformPos = platform.gameObject.transform.position;
                 float distanceFromCenter = platformPos.x - ballPos.x;
@@ -37,11 +37,16 @@ namespace Assets.Scripts.BallMovement
             }
         }
 
-        private void BlockDamageCollision(Collision2D collision)
+        private void BlockDamageCollision(Collider2D ballCollider, Collider2D collider)
         {
-            if (collision.gameObject.TryGetComponent(out BaseBlock block))
+            if (collider.gameObject.TryGetComponent(out BaseBlock block))
             {
-                block.ApplyDamage(1);
+                if (ballCollider.isTrigger)
+                block.ApplyDamage(3);
+                else
+                {
+                    block.ApplyDamage(1);
+                }
             }
         }
     }

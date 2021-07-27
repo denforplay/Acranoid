@@ -18,17 +18,20 @@ namespace Assets.Scripts.BallMovement
         [SerializeField] private BallConfig _ballConfig;
         private BallCollisions _ballCollisions;
         public Rigidbody2D _rigidbody2D;
-        private CircleCollider2D _circleCollider2D;
+        [SerializeField] private CircleCollider2D _triggerCircleCollider2D;
+        [SerializeField] private CircleCollider2D _collisionCircleCollider2D;
         private Platform _rememberedParent;
         public bool isReturning = false;
         private bool isActivated = false;
         private float velocity;
+
+        private bool _isRage;
         public IObjectPool Origin { get; set; }
         public float Velocity => velocity;
         public void Initialize()
         {
+            _triggerCircleCollider2D.enabled = false;
             velocity = _ballConfig.velocity;
-            _circleCollider2D = GetComponent<CircleCollider2D>();
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _ballCollisions = new BallCollisions(_ballConfig, _rigidbody2D);
         }
@@ -56,7 +59,17 @@ namespace Assets.Scripts.BallMovement
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            _ballCollisions.Call(collision);
+            _ballCollisions.Call(_collisionCircleCollider2D,collision.collider);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            _ballCollisions.Call(_triggerCircleCollider2D, collider);
+        }
+
+        public void SetRageBallState(bool isRage)
+        {
+            _triggerCircleCollider2D.enabled = isRage;
         }
 
         public void ReturnBallOnPosition(IEvent ievent)
@@ -76,7 +89,7 @@ namespace Assets.Scripts.BallMovement
                 {
                 }
                 Vector3 positon = _rememberedParent.transform.position;
-                transform.position = new Vector3(positon.x, positon.y + _circleCollider2D.radius * 2, positon.z);
+                transform.position = new Vector3(positon.x, positon.y + _collisionCircleCollider2D.radius * 2, positon.z);
             }
         }
 

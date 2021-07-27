@@ -7,7 +7,7 @@ namespace Assets.Scripts.GameObjects.Bonus
 {
     public abstract class BaseBonus : MonoBehaviour, IPoolable
     {
-        private const float TIME_STEP = 2f;
+        [SerializeField] private float _duration = 2.0f;
         public bool isInstantlyActivated;
         public IObjectPool Origin { get; set; }
 
@@ -26,7 +26,7 @@ namespace Assets.Scripts.GameObjects.Bonus
 
         private IEnumerator Timer()
         {
-            yield return new WaitForSeconds(TIME_STEP);
+            yield return new WaitForSeconds(_duration);
             Remove();
         }
 

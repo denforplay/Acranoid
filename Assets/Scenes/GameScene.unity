@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 306617044}
   - component: {fileID: 306617043}
   - component: {fileID: 306617046}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TopBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -771,6 +771,7 @@ MonoBehaviour:
   - {fileID: 3597628633291290156, guid: 2e874dfb82d5ab94594bf66cb9d351b3, type: 3}
   - {fileID: -1997981583974593116, guid: 143ffd775db5e574ba4ada5bebec9641, type: 3}
   - {fileID: 954099692707920638, guid: e8d49f5e5df18404ab81267179b696df, type: 3}
+  - {fileID: -100666368811942798, guid: f783af8af7bce8c4b92a0b2d8044ed15, type: 3}
   allBonuses: []
 --- !u!1 &991027445
 GameObject:
@@ -815,7 +816,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02da3646acb0d0847bab9befce3f9093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blocksManager: {fileID: 2108143459}
   _blocksPrefabs:
   - {fileID: 2844844497975778269, guid: 372fbce1d7abc0944958e100048a5b2a, type: 3}
   - {fileID: 5777492366066851709, guid: 7c320b6fc9489094b8347a3dbc424e00, type: 3}
@@ -1060,7 +1060,7 @@ GameObject:
   - component: {fileID: 1191771985}
   - component: {fileID: 1191771984}
   - component: {fileID: 1191771986}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1597,7 +1597,7 @@ GameObject:
   - component: {fileID: 1520624802}
   - component: {fileID: 1520624801}
   - component: {fileID: 1520624805}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

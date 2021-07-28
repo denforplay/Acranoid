@@ -13,7 +13,7 @@ namespace Assets.Scripts.UI.Buttons.Strategies.ButtonMethods
         {
             PopupManager.GetInstance.DeletePopUp();
             BlocksManager.GetInstance.ReturnAllBlocks(null);
-            if (HealthManager.GetInstance.Health > 0)
+            if (!LevelManager.GetInstance.IsLevelCompleted)
             EnergyManager.GetInstance.SpendEnergy(1);
             LevelManager.GetInstance.LoadCurrentLevel();
         }

@@ -1,0 +1,11 @@
+{
+"isCompleted":true,
+"levelName":"HorizontalBombTest",
+"blocksData":
+[
+	1,1,1,1,1,1,1,1,11,-1,
+	11,1,1,1,1,1,1,1,1,-1,
+	1,1,1,1,11,1,1,1,1,-1,
+],
+"lifes":3
+}	

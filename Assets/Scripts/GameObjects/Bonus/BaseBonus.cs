@@ -11,7 +11,7 @@ namespace Assets.Scripts.GameObjects.Bonus
         [SerializeField] private Sprite _bonusOnBlockImage;
         [SerializeField] private float _duration = 2.0f;
         public bool isInstantlyActivated;
-        public Sprite BpnusOnBlockImage => _bonusOnBlockImage;
+        public Sprite BonusOnBlockImage => _bonusOnBlockImage;
         public IObjectPool Origin { get; set; }
 
         public abstract void Apply();

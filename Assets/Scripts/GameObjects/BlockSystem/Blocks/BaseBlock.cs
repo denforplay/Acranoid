@@ -8,8 +8,8 @@ namespace Assets.Scripts.Block
     public abstract class BaseBlock : MonoBehaviour, IPoolable
     {
         public List<Sprite> _sprites = new List<Sprite>();
+        public SpriteRenderer _spriteOnBlock;
         public SpriteRenderer _spriteRenderer;
-        public SpriteRenderer _bonusSpriteOnTheBlock;
         protected int _life;
         public IObjectPool Origin { get ; set; }
 
@@ -26,7 +26,7 @@ namespace Assets.Scripts.Block
 
         public virtual void ReturnToPool()
         {
-            _bonusSpriteOnTheBlock.sprite = null;
+            _spriteOnBlock.sprite = null;
             this.gameObject.SetActive(false);
             this._life = _sprites.Count;
             this._spriteRenderer.sprite = _sprites.Last();

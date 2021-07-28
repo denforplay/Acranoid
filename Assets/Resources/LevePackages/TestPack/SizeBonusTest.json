@@ -1,0 +1,11 @@
+{
+"isCompleted":true,
+"levelName":"SizeBonusTest",
+"blocksData":
+[1,1,1,-1
+ 15,15,15, -1,
+ 1,1,1,-1,
+ 18,18,18
+],
+"lifes":3
+}

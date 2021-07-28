@@ -124,7 +124,7 @@ namespace Assets.Scripts.Block
             if (index != -1)
             {
                 block._baseBonus = BonusManager.GetInstance.GetBonus(index);
-                block._bonusSpriteOnTheBlock.sprite = block._baseBonus.BpnusOnBlockImage;
+                block._spriteOnBlock.sprite = block._baseBonus.BonusOnBlockImage;
             }
             block.SetData(_blockConfigs[blockData - 1]);
             (block as ColorBlock).color = _blockConfigs[blockData - 1].baseColor;

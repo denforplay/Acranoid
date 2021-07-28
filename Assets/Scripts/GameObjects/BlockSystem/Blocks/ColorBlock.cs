@@ -23,14 +23,8 @@ namespace Assets.Scripts.Block
             if (_life < 1)
             {
                 EventBusManager.GetInstance.Invoke<OnBlockDestroyEvent>(new OnBlockDestroyEvent());
-                var particle = ParticleManager.GetInstance.GetParticle<BlockDestroyParticle>();
-                particle.transform.position = this.transform.position;
-                particle.ParticlePrefab.startColor = color;
-                if (_baseBonus != null)
-                {
-                    BonusManager.GetInstance.GenerateBonus(this, _baseBonus);
-                }
-                BlocksManager.GetInstance.ReturnBlock(this);
+                SpawnParticle();
+                GenerateBonus();
             }
             else
             {
@@ -40,8 +34,31 @@ namespace Assets.Scripts.Block
 
         public override void ReturnToPool()
         {
-            _baseBonus = null;
+            if (_life > 1 && HealthManager.GetInstance.Health > 0)
+            {
+                _life = 0;
+                EventBusManager.GetInstance.Invoke<OnBlockDestroyEvent>(new OnBlockDestroyEvent());
+                SpawnParticle();
+                GenerateBonus();
+            }
+                _baseBonus = null;
             base.ReturnToPool();
+        }
+
+        private void SpawnParticle()
+        {
+            var particle = ParticleManager.GetInstance.GetParticle<BlockDestroyParticle>();
+            particle.transform.position = this.transform.position;
+            particle.ParticlePrefab.startColor = color;
+        }
+
+        private void GenerateBonus()
+        {
+            if (_baseBonus != null)
+            {
+                BonusManager.GetInstance.GenerateBonus(this, _baseBonus);
+            }
+            BlocksManager.GetInstance.ReturnBlock(this);
         }
     }
 }

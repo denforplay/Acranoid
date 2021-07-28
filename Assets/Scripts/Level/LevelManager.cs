@@ -30,7 +30,11 @@ namespace Assets.Scripts.Level
             IsInitialized = true;
             EventBusManager.GetInstance.Invoke<OnLevelsInitialized>(new OnLevelsInitialized());
         }
-
+        
+        public void SetLevelCompleted(bool isCompleted)
+        {
+            _isLevelCompleted = true;
+        }
         public Level CreateLevel(TextAsset _levelAsset)
         {
             Level prevLevel = JsonConvert.DeserializeObject<Level>(_levelAsset.text);

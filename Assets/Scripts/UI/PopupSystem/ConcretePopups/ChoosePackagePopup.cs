@@ -35,7 +35,12 @@ namespace Assets.Scripts.UI.PopupSystem.ConcretePopups
 
         private void Awake()
         {
-            _menuButton.onClick.AddListener(() => _mainMenuButton.Call());
+            _menuButton.onClick.AddListener(() =>
+            {
+                if (!LevelManager.GetInstance.IsLevelCompleted)
+                _mainMenuButton.Call();
+            }
+            );
             _packageButtonFactory = new PackageButtonFactory(_packageButtonPrefab, _scrollViewContent);
             _levelButtonFactory = new LevelButtonFactory(_levelButtonPrefab, _levelScrollContent);
             LoadPackageData();

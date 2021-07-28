@@ -41,6 +41,7 @@ namespace Assets.Scripts.Block
                     _blocksRepository.Count = 0;
                     JsonParser jsonParser = new JsonParser();
                     jsonParser.SetJsonData(LevelManager.GetInstance.CurrentLevel);
+                    LevelManager.GetInstance.SetLevelCompleted(true);
                     EventBusManager.GetInstance.Invoke(new OnLevelCompletedEvent());
                     if (LevelManager.GetInstance.IsCurrentLastLevel())
                     {

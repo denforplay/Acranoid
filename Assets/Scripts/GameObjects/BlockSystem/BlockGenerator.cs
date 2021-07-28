@@ -122,7 +122,10 @@ namespace Assets.Scripts.Block
                 blockData /= 10;
             }
             if (index != -1)
-                (block as ColorBlock)._baseBonus = BonusManager.GetInstance.GetBonus(index);
+            {
+                block._baseBonus = BonusManager.GetInstance.GetBonus(index);
+                block._bonusSpriteOnTheBlock.sprite = block._baseBonus.BpnusOnBlockImage;
+            }
             block.SetData(_blockConfigs[blockData - 1]);
             (block as ColorBlock).color = _blockConfigs[blockData - 1].baseColor;
         }

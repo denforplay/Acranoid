@@ -144,6 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bff3390c15e6f614f85c821c98c0a1ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bonusOnBlockImage: {fileID: 389441009731772916, guid: 11c1f383faae6924aa8ee9b4977a8ddd, type: 3}
+  _duration: 2
   isInstantlyActivated: 0
   _isIncrease: 1
   _speed: 0.05

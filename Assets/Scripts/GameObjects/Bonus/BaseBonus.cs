@@ -2,13 +2,16 @@
 using Assets.Scripts.PlatformMovement;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.GameObjects.Bonus
 {
     public abstract class BaseBonus : MonoBehaviour, IPoolable
     {
+        [SerializeField] private Sprite _bonusOnBlockImage;
         [SerializeField] private float _duration = 2.0f;
         public bool isInstantlyActivated;
+        public Sprite BpnusOnBlockImage => _bonusOnBlockImage;
         public IObjectPool Origin { get; set; }
 
         public abstract void Apply();

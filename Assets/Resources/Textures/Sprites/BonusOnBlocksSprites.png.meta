@@ -1,0 +1,444 @@
+fileFormatVersion: 2
+guid: 11c1f383faae6924aa8ee9b4977a8ddd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 222604204733124603
+    second: BonusOnBlocksSprites_0
+  - first:
+      213: 1464056611339460498
+    second: BonusOnBlocksSprites_1
+  - first:
+      213: 8638940163348116876
+    second: BonusOnBlocksSprites_2
+  - first:
+      213: 8240919552586802522
+    second: BonusOnBlocksSprites_3
+  - first:
+      213: -36313877106662425
+    second: BonusOnBlocksSprites_4
+  - first:
+      213: 3972374382027236390
+    second: BonusOnBlocksSprites_5
+  - first:
+      213: -6341525713145339888
+    second: BonusOnBlocksSprites_6
+  - first:
+      213: 8195613790416139306
+    second: BonusOnBlocksSprites_7
+  - first:
+      213: 389441009731772916
+    second: BonusOnBlocksSprites_8
+  - first:
+      213: -7358818600754475908
+    second: BonusOnBlocksSprites_9
+  - first:
+      213: -1104806806204556509
+    second: BonusOnBlocksSprites_10
+  - first:
+      213: -1124865018750792083
+    second: BonusOnBlocksSprites_11
+  - first:
+      213: 978716599635810494
+    second: BonusOnBlocksSprites_12
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: 0
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BonusOnBlocksSprites_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 227
+        width: 52
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bff40a44859d61300800000000000000
+      internalID: 222604204733124603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BonusOnBlocksSprites_1
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 225
+        width: 52
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29f53f92bbf515410800000000000000
+      internalID: 1464056611339460498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BonusOnBlocksSprites_2
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 196
+        width: 50
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c853838be4ea3e770800000000000000
+      internalID: 8638940163348116876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BonusOnBlocksSprites_3
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 192
+        width: 41
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a55e18abba0ad5270800000000000000
+      internalID: 8240919552586802522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BonusOnBlocksSprites_4
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 164
+        width: 48
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e3e3ae98bcfe7ff0800000000000000
+      internalID: -36313877106662425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BonusOnBlocksSprites_5
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 161
+        width: 58
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62468933475b02730800000000000000
+      internalID: 3972374382027236390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BonusOnBlocksSprites_6
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 133
+        width: 47
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01067f576ff5ef7a0800000000000000
+      internalID: -6341525713145339888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BonusOnBlocksSprites_7
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 128
+        width: 57
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a24fb06f15bacb170800000000000000
+      internalID: 8195613790416139306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BonusOnBlocksSprites_8
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 101
+        width: 48
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f12806f882976500800000000000000
+      internalID: 389441009731772916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BonusOnBlocksSprites_9
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 66
+        width: 50
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7c0e77a87930e990800000000000000
+      internalID: -7358818600754475908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BonusOnBlocksSprites_10
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 34
+        width: 49
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32b5eb23010faa0f0800000000000000
+      internalID: -1104806806204556509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BonusOnBlocksSprites_11
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 9
+        width: 51
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6e8819a93da360f0800000000000000
+      internalID: -1124865018750792083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BonusOnBlocksSprites_12
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 9
+        width: 49
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb81219df89159d00800000000000000
+      internalID: 978716599635810494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline:
+    - - {x: -127.98145, y: 96.53856}
+      - {x: -127.98145, y: 127.70244}
+      - {x: -63.07817, y: 127.70244}
+      - {x: -63.07817, y: 96.53856}
+    - - {x: -128, y: 65.171265}
+      - {x: -127.809746, y: 96.710266}
+      - {x: -63.249878, y: 96.710266}
+      - {x: -63.249878, y: 65.63225}
+    - - {x: -127.92594, y: 31.95259}
+      - {x: -127.92594, y: 65.51106}
+      - {x: -63.436035, y: 65.51106}
+      - {x: -63.436035, y: 31.95259}
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

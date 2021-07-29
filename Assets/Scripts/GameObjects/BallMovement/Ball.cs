@@ -50,7 +50,7 @@ namespace Assets.Scripts.BallMovement
         public void ChangeVelocity(float value)
         {
             if (velocity < _ballConfig.maximumVelocity)
-            velocity += value;
+                velocity += value;
         }
 
         private void FixedUpdate()
@@ -60,7 +60,7 @@ namespace Assets.Scripts.BallMovement
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            _ballCollisions.Call(_collisionCircleCollider2D,collision.collider);
+            _ballCollisions.Call(_collisionCircleCollider2D, collision.collider);
         }
 
         private void OnTriggerEnter2D(Collider2D collider)
@@ -82,13 +82,8 @@ namespace Assets.Scripts.BallMovement
                 _rigidbody2D.velocity = Vector2.zero;
                 _rigidbody2D.isKinematic = true;
                 transform.SetParent(_rememberedParent.transform);
-                try
-                {
-                    this.gameObject.SetActive(true);
-                }
-                catch
-                {
-                }
+                this.gameObject.SetActive(true);
+
                 Vector3 positon = _rememberedParent.transform.position;
                 transform.position = new Vector3(positon.x, positon.y + _collisionCircleCollider2D.radius * 2, positon.z);
             }
@@ -112,7 +107,6 @@ namespace Assets.Scripts.BallMovement
                 isActivated = false;
                 _rigidbody2D.velocity = Vector2.zero;
                 _rigidbody2D.isKinematic = false;
-                EventBusManager.GetInstance.Invoke<OnBallInactivatingEvent>(new OnBallInactivatingEvent());
                 this.transform.SetParent(_rememberedParent.transform);
             }
         }
@@ -131,21 +125,17 @@ namespace Assets.Scripts.BallMovement
 
         private void OnDisable()
         {
-            EventBusManager.GetInstance.Unsubscribe<OnBlockDestroyEvent>((OnBlockDestroyEvent) => ChangeVelocity(0.25f));
-            EventBusManager.GetInstance.Unsubscribe<OnHeathInitizliedEvent>((OnHeathInitizliedEvent) =>
-            {
-                EventBusManager.GetInstance.Subscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
-            });
-
-            EventBusManager.GetInstance.Unsubscribe<OnBallActivatingEvent>(BallActivate);
-            EventBusManager.GetInstance.Unsubscribe<OnHeartSpendEvent>(ReturnBallOnPosition);
-            EventBusManager.GetInstance.Unsubscribe<OnLevelCompletedEvent>(ReturnBallOnPosition);
-            EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ReturnBallOnPosition);
+            Unsubscribe();
         }
 
         private void OnDestroy()
         {
             _rememberedParent = null;
+            Unsubscribe();
+        }
+
+        private void Unsubscribe()
+        {
             EventBusManager.GetInstance.Unsubscribe<OnBlockDestroyEvent>((OnBlockDestroyEvent) => ChangeVelocity(0.25f));
             EventBusManager.GetInstance.Unsubscribe<OnHeathInitizliedEvent>((OnHeathInitizliedEvent) =>
             {
@@ -157,6 +147,7 @@ namespace Assets.Scripts.BallMovement
             EventBusManager.GetInstance.Unsubscribe<OnLevelCompletedEvent>(ReturnBallOnPosition);
             EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ReturnBallOnPosition);
         }
+
 
         private void OnBecameInvisible()
         {

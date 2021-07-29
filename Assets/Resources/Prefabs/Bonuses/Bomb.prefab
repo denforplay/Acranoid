@@ -149,4 +149,4 @@ MonoBehaviour:
   isInstantlyActivated: 1
   _bombType: 2
   _timeBetweenDestroy: 0.2
-  _damage: 3
+  _damage: 1

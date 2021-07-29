@@ -149,3 +149,5 @@ MonoBehaviour:
   isInstantlyActivated: 0
   _ballsLayer: 0
   _blocksLayer: 0
+  _rageColor: {r: 1, g: 0, b: 0, a: 1}
+  _previousColor: {r: 1, g: 1, b: 1, a: 1}

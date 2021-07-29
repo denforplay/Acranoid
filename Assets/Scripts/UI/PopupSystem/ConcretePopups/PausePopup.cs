@@ -15,10 +15,12 @@ namespace Assets.Scripts.UI.PopupSystem
         [SerializeField] private Button _continueButton;
         [SerializeField] private Button _levelChooseButton;
         [SerializeField] private Button _mainMenuButton;
+        [SerializeField] private Button _restartLevelButton;
 
         private IButtonMethod _levelChooseButtonMethod = new ShowNextPack();
         private IButtonMethod _mainMenuButtonMethod = new OpenMainMenu();
         private IButtonMethod _continueButtonMethod = new ContinueGame();
+        private IButtonMethod _restartLevelButtonMethod = new RestartLevel();
         private void Awake()
         {
             _continueButton.onClick.AddListener(() =>
@@ -42,11 +44,16 @@ namespace Assets.Scripts.UI.PopupSystem
             });
             _mainMenuButton.onClick.AddListener(() =>
             {
+                
+            });
+
+            _restartLevelButton.onClick.AddListener(() =>
+            {
                 DisableInput();
                 transform.DOMoveY(-PopupManager.GetInstance.Canvas.transform.position.y, _duration).OnComplete(() =>
                 {
                     Time.timeScale = 1;
-                    _mainMenuButtonMethod.Call();
+                    _restartLevelButtonMethod.Call();
                 });
             });
         }

@@ -139,6 +139,7 @@ MonoBehaviour:
   _rigidbody2D: {fileID: 5890774749602213063}
   _triggerCircleCollider2D: {fileID: 5890774749602213056}
   _collisionCircleCollider2D: {fileID: -4590173614239002410}
+  _ballSprite: {fileID: 5890774749602213062}
   isReturning: 0
 --- !u!58 &-4590173614239002410
 CircleCollider2D:

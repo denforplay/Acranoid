@@ -20,6 +20,7 @@ namespace Assets.Scripts.BallMovement
         public Rigidbody2D _rigidbody2D;
         [SerializeField] private CircleCollider2D _triggerCircleCollider2D;
         [SerializeField] private CircleCollider2D _collisionCircleCollider2D;
+        public SpriteRenderer _ballSprite;
         private Platform _rememberedParent;
         public bool isReturning = false;
         private bool isActivated = false;

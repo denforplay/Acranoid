@@ -44,12 +44,20 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
             {
                 case BombType.Vertical:
                     {
-                        routine = Coroutines.Coroutines.StartRoutine(DestroyColumn(row, col));
+                        routine = Coroutines.Coroutines.StartRoutine(DestroyLine(row, col, new Vector2[]{
+                new Vector2(1, 0),
+                new Vector2(-1, 0),
+            }));
                         break;
                     }
                 case BombType.Horizontal:
                     {
-                        routine = Coroutines.Coroutines.StartRoutine(DestroyLine(row, col));
+                        routine = Coroutines.Coroutines.StartRoutine(DestroyLine(row, col, new Vector2[]
+                            {
+                                new Vector2(0, -1),
+                                new Vector2(0, 1)
+                            }
+                            ));
                         break;
                     }
                 case BombType.Round:
@@ -96,15 +104,10 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
             }
         }
 
-        public IEnumerator DestroyLine(int row, int col)
+        public IEnumerator DestroyLine(int row, int col, Vector2[] moveDirections)
         {
             Vector2 startPoint = new Vector2(row, col);
             Queue<Vector2> nextPointQueue = new Queue<Vector2>();
-            Vector2[] moveDirections =
-            {
-                new Vector2(0, -1),
-                new Vector2(0, 1)
-            };
 
             List<BaseBlock> checkedBlocks = new List<BaseBlock>();
             nextPointQueue.Enqueue(startPoint);
@@ -136,51 +139,6 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
 
                             checkedBlocks.Add(nextBlock);
 
-                        }
-                    }
-                }
-            }
-        }
-
-        private IEnumerator DestroyColumn(int row, int col)
-        {
-            Vector2 startPoint = new Vector2(row, col);
-            Queue<Vector2> nextPointQueue = new Queue<Vector2>();
-            Vector2[] moveDirections =
-{
-                new Vector2(1, 0),
-                new Vector2(-1, 0),
-            };
-            bool[] isVisited = new bool[BlocksManager.GetInstance.allBlocks.Count];
-            List<BaseBlock> checkedBlocks = new List<BaseBlock>();
-            nextPointQueue.Enqueue(startPoint);
-            while (nextPointQueue.Count != 0)
-            {
-                Vector2 currentPoint = nextPointQueue.Dequeue();
-                for (int i = 0; i < moveDirections.Length; i++)
-                {
-                    int nextX = (int)(currentPoint.x + moveDirections[i].x);
-                    int nextY = (int)(currentPoint.y + moveDirections[i].y);
-
-                    if (nextX >= 0 && nextX < BlocksManager.GetInstance.allBlocks.Count && nextY >= 0 && nextY < BlocksManager.GetInstance.allBlocks[nextX].Count)
-                    {
-                        var nextBlock = BlocksManager.GetInstance.allBlocks[nextX][nextY];
-                        if (nextBlock != null)
-                        {
-                            if (nextBlock.gameObject.activeInHierarchy)
-                            {
-                                SpawnParticle(nextX, nextY);
-                                BlocksManager.GetInstance.allBlocks[nextX][nextY].ApplyDamage(_damage);
-                                yield return new WaitForSeconds(_timeBetweenDestroy);
-                                nextPointQueue.Enqueue(new Vector2(nextX, nextY));
-                            }
-                            else if (!checkedBlocks.Contains(nextBlock))
-                            {
-                                yield return null;
-                                nextPointQueue.Enqueue(new Vector2(nextX, nextY));
-                            }
-
-                            checkedBlocks.Add(nextBlock);
                         }
                     }
                 }

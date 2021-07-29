@@ -1,15 +1,10 @@
 using Assets.Scripts.Abstracts.Game;
 using Assets.Scripts.Block;
-using Assets.Scripts.EnergySystem.Energy;
 using Assets.Scripts.Level;
-using Assets.Scripts.PlayerData;
 using Assets.Scripts.Scenes.SceneConfigs;
 using Assets.Scripts.UI.Buttons.Factories;
 using Assets.Scripts.UI.Buttons.Strategies.ButtonMethods;
 using Assets.Scripts.UI.Buttons.Strategies.Interfaces;
-using Assets.Scripts.UI.PopupSystem;
-using DG.Tweening;
-using Newtonsoft.Json;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;

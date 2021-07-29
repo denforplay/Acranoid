@@ -13,18 +13,19 @@ namespace Assets.Scripts.GameObjects.Bonus
         public bool isInstantlyActivated;
         public Sprite BonusOnBlockImage => _bonusOnBlockImage;
         public IObjectPool Origin { get; set; }
-
+        private Coroutine _bonusCoroutine;
         public abstract void Apply();
         public abstract void Remove();
 
         public void Stop()
         {
+            Coroutines.Coroutines.StopRoutine(_bonusCoroutine);
             Remove();
         }
 
         protected void StartTimer()
         {
-            Coroutines.Coroutines.StartRoutine(Timer());
+            _bonusCoroutine = Coroutines.Coroutines.StartRoutine(Timer());
         }
 
         private IEnumerator Timer()

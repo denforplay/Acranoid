@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusOnBlockImage: {fileID: -1124865018750792083, guid: 11c1f383faae6924aa8ee9b4977a8ddd, type: 3}
-  _duration: 2
+  _duration: 3
   isInstantlyActivated: 0
   _isIncrease: 1
   _size: 0.25

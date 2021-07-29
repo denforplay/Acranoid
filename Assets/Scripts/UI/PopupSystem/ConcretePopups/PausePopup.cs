@@ -44,7 +44,7 @@ namespace Assets.Scripts.UI.PopupSystem
             });
             _mainMenuButton.onClick.AddListener(() =>
             {
-                
+                _mainMenuButtonMethod.Call();
             });
 
             _restartLevelButton.onClick.AddListener(() =>

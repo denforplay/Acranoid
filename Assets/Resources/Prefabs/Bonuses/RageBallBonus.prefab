@@ -145,9 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bonusOnBlockImage: {fileID: 9048898492590837901, guid: 9930cc274b298234e9b15ae4f558c744, type: 3}
-  _duration: 2
+  _duration: 3
   isInstantlyActivated: 0
-  _ballsLayer: 0
-  _blocksLayer: 0
   _rageColor: {r: 1, g: 0, b: 0, a: 1}
   _previousColor: {r: 1, g: 1, b: 1, a: 1}

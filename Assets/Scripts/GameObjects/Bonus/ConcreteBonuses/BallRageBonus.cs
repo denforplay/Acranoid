@@ -6,14 +6,16 @@ namespace Assets.Scripts.GameObjects.Bonus.ConcreteBonuses
 {
     public class BallRageBonus : BaseBonus
     {
-        [SerializeField] private int _ballsLayer;
-        [SerializeField] private int _blocksLayer;
         [SerializeField] private Color _rageColor;
         [SerializeField] private Color _previousColor;
         public override void Apply()
         {
+            BonusManager.GetInstance.allBonuses.FindAll(x => x.GetType() == typeof(BallRageBonus)).ForEach(ballRage =>
+            {
+                ballRage.Stop();
+            });
             var allBals = BallManager.GetInstance.AllBalls;
-            foreach(var ball in allBals)
+            foreach (var ball in allBals)
             {
                 ball.SetRageBallState(true);
                 ball._ballSprite.color = _rageColor;

@@ -22,6 +22,7 @@ namespace Assets.Scripts.Level
         public Sprite CurrentPackSprite { get; private set; }
         public string CurrentPackName { get; private set; }
         public bool IsLevelCompleted => _isLevelCompleted;
+        public bool IsLevelRestarted;
 
         public void Initialize(LevelsController levelsController)
         {

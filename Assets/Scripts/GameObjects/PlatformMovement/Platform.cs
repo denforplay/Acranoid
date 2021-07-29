@@ -48,15 +48,11 @@ namespace Assets.Scripts.PlatformMovement
         private void ReturnBall(IEvent ievent)
         {
             Ball ball = BallManager.GetInstance.activeBall;
-            try
-            {
-                ball.gameObject.SetActive(true);
-            }
-            catch
-            { }
             ball.isReturning = true;
+            ball.gameObject.SetActive(true);
             ball.SetParent(this);
             ball.ReturnBallOnPosition(null);
+           
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -75,6 +71,16 @@ namespace Assets.Scripts.PlatformMovement
         }
 
         private void OnDisable()
+        {
+            Unsubscribe();
+        }
+
+        private void OnDestroy()
+        {
+            Unsubscribe();
+        }
+
+        private void Unsubscribe()
         {
             EventBusManager.GetInstance.Unsubscribe<OnPlatformMovingEvent>(Move);
             EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ReturnBall);

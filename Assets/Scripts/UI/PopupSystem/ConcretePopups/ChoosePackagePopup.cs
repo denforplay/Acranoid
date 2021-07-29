@@ -35,6 +35,7 @@ namespace Assets.Scripts.UI.PopupSystem.ConcretePopups
 
         private void Awake()
         {
+            LevelManager.GetInstance.IsLevelRestarted = true;
             _menuButton.onClick.AddListener(() =>
             {
                 if (!LevelManager.GetInstance.IsLevelCompleted)
@@ -84,6 +85,7 @@ namespace Assets.Scripts.UI.PopupSystem.ConcretePopups
                 Game.sceneManagerBase.LoadNewSceneAsync(GameSceneConfig.SCENE_NAME);
             }
             LevelManager.GetInstance.SetCurrentLevel(this, levelIndex);
+            LevelManager.GetInstance.IsLevelRestarted = false;
         }
 
         private void OnPackageClickEvent(LevelPackObject _levelPackObject)

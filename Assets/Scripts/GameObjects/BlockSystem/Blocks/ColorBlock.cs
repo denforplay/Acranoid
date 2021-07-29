@@ -34,7 +34,7 @@ namespace Assets.Scripts.Block
 
         public override void ReturnToPool()
         {
-            if (_life > 1 && HealthManager.GetInstance.Health > 0)
+            if (_life >= 1 && HealthManager.GetInstance.Health > 0 && !LevelManager.GetInstance.IsLevelRestarted)
             {
                 _life = 0;
                 EventBusManager.GetInstance.Invoke<OnBlockDestroyEvent>(new OnBlockDestroyEvent());

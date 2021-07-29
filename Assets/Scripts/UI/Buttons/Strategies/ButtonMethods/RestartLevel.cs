@@ -11,11 +11,13 @@ namespace Assets.Scripts.UI.Buttons.Strategies.ButtonMethods
     {
         public void Call()
         {
+            LevelManager.GetInstance.IsLevelRestarted = true;
             PopupManager.GetInstance.DeletePopUp();
             BlocksManager.GetInstance.ReturnAllBlocks(null);
             if (!LevelManager.GetInstance.IsLevelCompleted)
             EnergyManager.GetInstance.SpendEnergy(1);
             LevelManager.GetInstance.LoadCurrentLevel();
+            LevelManager.GetInstance.IsLevelRestarted = false;
         }
     }
 }

@@ -593,6 +593,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeartsView
       objectReference: {fileID: 0}
+    - target: {fileID: 8303932165148794750, guid: dd08eff6dc8c0704cbbfccdc187bbb7f, type: 3}
+      propertyPath: m_CellSize.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8303932165148794750, guid: dd08eff6dc8c0704cbbfccdc187bbb7f, type: 3}
+      propertyPath: m_CellSize.y
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5842377048690803464, guid: dd08eff6dc8c0704cbbfccdc187bbb7f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: dd08eff6dc8c0704cbbfccdc187bbb7f, type: 3}

@@ -45,7 +45,7 @@ namespace Assets.Scripts.BallMovement
             if (collider.gameObject.TryGetComponent(out BaseBlock block))
             {
                 if (ballCollider.isTrigger)
-                    block.ApplyDamage(3);
+                    block.ReturnToPool();
                 else
                 {
                     block.ApplyDamage(1);

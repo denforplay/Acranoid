@@ -25,7 +25,7 @@ namespace Assets.Scripts.BallMovement
         public bool isReturning = false;
         private bool isActivated = false;
         private float velocity;
-
+        private Color _defaultColor = Color.white;
         private bool _isRage;
         public IObjectPool Origin { get; set; }
         public float Velocity => velocity;
@@ -70,6 +70,10 @@ namespace Assets.Scripts.BallMovement
 
         public void SetRageBallState(bool isRage)
         {
+            if (!_isRage)
+            {
+                _ballSprite.color = _defaultColor;
+            }
             _triggerCircleCollider2D.enabled = isRage;
         }
 
@@ -151,6 +155,7 @@ namespace Assets.Scripts.BallMovement
 
         private void OnBecameInvisible()
         {
+            SetRageBallState(false);
             BallInactivate();
             BallManager.GetInstance.ReturnBall(this);
         }

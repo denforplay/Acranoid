@@ -593,6 +593,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeartsView
       objectReference: {fileID: 0}
+    - target: {fileID: 5842377048690803470, guid: dd08eff6dc8c0704cbbfccdc187bbb7f, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842377049326654061, guid: dd08eff6dc8c0704cbbfccdc187bbb7f, type: 3}
+      propertyPath: m_VerticalFit
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842377049326654063, guid: dd08eff6dc8c0704cbbfccdc187bbb7f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8303932165148794750, guid: dd08eff6dc8c0704cbbfccdc187bbb7f, type: 3}
       propertyPath: m_CellSize.x
       value: 50
@@ -600,6 +612,10 @@ PrefabInstance:
     - target: {fileID: 8303932165148794750, guid: dd08eff6dc8c0704cbbfccdc187bbb7f, type: 3}
       propertyPath: m_CellSize.y
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8303932165148794750, guid: dd08eff6dc8c0704cbbfccdc187bbb7f, type: 3}
+      propertyPath: m_Constraint
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5842377048690803464, guid: dd08eff6dc8c0704cbbfccdc187bbb7f, type: 3}

@@ -9,7 +9,6 @@ namespace Assets.Scripts.UI.Buttons.Strategies.ButtonMethods
         public void Call()
         {
             PopupManager.GetInstance.DeletePopUp();
-            LevelManager.GetInstance.IsLevelRestarted = false;
         }
     }
 }

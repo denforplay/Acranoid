@@ -129,6 +129,7 @@ namespace Assets.Scripts.BallMovement
 
         private void OnDisable()
         {
+            SetVelocity(_ballConfig.velocity);
             Unsubscribe();
         }
 
@@ -155,6 +156,7 @@ namespace Assets.Scripts.BallMovement
 
         private void OnBecameInvisible()
         {
+            SetVelocity(_ballConfig.velocity);
             SetRageBallState(false);
             BallInactivate();
             BallManager.GetInstance.ReturnBall(this);

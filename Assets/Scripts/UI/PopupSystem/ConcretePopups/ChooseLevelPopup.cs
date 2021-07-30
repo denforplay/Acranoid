@@ -18,7 +18,7 @@ namespace Assets.Scripts.UI.PopupSystem.ConcretePopups
         [SerializeField] private GameObject _levelScrollContent;
         [SerializeField] private Button _levelButtonPrefab;
         [SerializeField] private Button _backButton;
-
+        
         private IButtonMethod _backButtonMethod = new ClosePopupMethod();
 
         private LevelButtonFactory _levelButtonFactory;

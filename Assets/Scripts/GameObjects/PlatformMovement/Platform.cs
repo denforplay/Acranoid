@@ -8,6 +8,7 @@ using Assets.Scripts.GameObjects.Bonus;
 using Assets.Scripts.Health;
 using UnityEngine;
 using System;
+using Assets.Scripts.Level;
 
 namespace Assets.Scripts.PlatformMovement
 {

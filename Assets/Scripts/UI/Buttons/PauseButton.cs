@@ -12,7 +12,8 @@ namespace Assets.Scripts.UI.Buttons
         [SerializeField] private Button _stopGame;
         private void Start()
         {
-            EventBusManager.GetInstance.Subscribe<OnPausePopupClosedEvent>(ReturnButton);
+            EventBusManager.GetInstance.Subscribe<OnPopupOpened>(DisableButton);
+            EventBusManager.GetInstance.Subscribe<OnAllPopupClosed>(EnableButton);
             _stopGame.onClick.AddListener(PauseGame);
         }
 
@@ -22,14 +23,20 @@ namespace Assets.Scripts.UI.Buttons
             PopupManager.GetInstance.SpawnPopup<PausePopup>();
         }
 
-        private void ReturnButton(IEvent ievent)
+        private void EnableButton(IEvent ievent)
         {
             _stopGame.interactable = true;
         }
 
+        private void DisableButton(IEvent ievent)
+        {
+            _stopGame.interactable = false;
+        }
+
         private void OnDestroy()
         {
-            EventBusManager.GetInstance.Unsubscribe<OnPausePopupClosedEvent>(ReturnButton);
+            EventBusManager.GetInstance.Unsubscribe<OnPopupOpened>(DisableButton);
+            EventBusManager.GetInstance.Unsubscribe<OnAllPopupClosed>(EnableButton);
         }
     }
 }

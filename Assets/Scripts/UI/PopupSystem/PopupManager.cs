@@ -43,6 +43,7 @@ namespace Assets.Scripts.UI.PopupSystem
             if (GetCanvas != null)
             {
                 popUp = Instantiate(popupPrefab, GetCanvas.transform);
+                EventBusManager.GetInstance.Invoke<OnPopupOpened>(new OnPopupOpened());
                 popUp.Show();
             }
             return popUp;
@@ -52,9 +53,9 @@ namespace Assets.Scripts.UI.PopupSystem
         {
             Time.timeScale = 1;
             Popup popup = _popupsOnCanvas.Pop();
-            if (popup is PausePopup)
+            if (_popupsOnCanvas.Count == 0)
             {
-                EventBusManager.GetInstance.Invoke<OnPausePopupClosedEvent>(new OnPausePopupClosedEvent());
+                EventBusManager.GetInstance.Invoke<OnAllPopupClosed>(new OnAllPopupClosed());
             }
             popup.Hide();
             Destroy(popup.gameObject);
@@ -66,6 +67,8 @@ namespace Assets.Scripts.UI.PopupSystem
             {
                 DeletePopUp();
             }
+
+            EventBusManager.GetInstance.Invoke<OnAllPopupClosed>(new OnAllPopupClosed());
         }
 
         private void OnDestroy()

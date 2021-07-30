@@ -9,6 +9,7 @@ namespace Assets.Scripts.UI.Buttons.Strategies.ButtonMethods
     {
         public void Call()
         {
+            if (!LevelManager.GetInstance.IsLevelCompleted)
             EnergyManager.GetInstance.SpendEnergy(1);
             PopupManager.GetInstance.DeleteAllPopups();
             LevelManager.GetInstance.LoadNextLevel();

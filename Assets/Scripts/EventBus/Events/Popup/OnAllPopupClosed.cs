@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.EventBus.Events.Popup
 {
-    public class OnPausePopupClosedEvent : IEvent
+    public class OnAllPopupClosed : IEvent
     {
     }
 }

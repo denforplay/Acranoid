@@ -91,6 +91,7 @@ namespace Assets.Scripts.Level
 
         public void SetCurrentPack(LevelPackObject levelPackObject)
         {
+            _levelPackObject = levelPackObject;
             _levelsController.SetCurrentPack(levelPackObject);
             EventBusManager.GetInstance.Invoke<OnPackChangedEvent>(new OnPackChangedEvent());
         }

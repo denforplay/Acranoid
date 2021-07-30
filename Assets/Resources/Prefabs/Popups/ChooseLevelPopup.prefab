@@ -223,9 +223,9 @@ GameObject:
   - component: {fileID: 300133292981766812}
   - component: {fileID: 6577258093872931149}
   - component: {fileID: 3452810198603219295}
-  - component: {fileID: 6128516912139805389}
+  - component: {fileID: -3216989707861747250}
   m_Layer: 5
-  m_Name: ChoosePackagePopup
+  m_Name: ChooseLevelPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6128516912139805389
+--- !u!114 &-3216989707861747250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -299,17 +299,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7200738177788850575}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edab6688503141d45913bad5ef150618, type: 3}
+  m_Script: {fileID: 11500000, guid: c962544078c3eba48b93bfe772bf3040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _duration: 1
-  _levelPacksConfig: {fileID: 11400000, guid: 4c22da79433c3554fa162b9c99964c24, type: 2}
-  _scrollViewContent: {fileID: 2426229910449762218}
-  _levelScrollContent: {fileID: 0}
+  _levelScrollViewPrefab: {fileID: 2426229911571871335}
+  _levelScrollContent: {fileID: 2426229910449762218}
   _levelButtonPrefab: {fileID: 4598375244391404355, guid: 5bd8d231c55a981478ead2c825a0d5ec, type: 3}
-  _levelScrollViewPrefab: {fileID: 0}
-  _packageButtonPrefab: {fileID: 8652822535236707699, guid: 978f6114d10786a4c83002a5e0b76856, type: 3}
-  _menuButton: {fileID: 1390883716344453336}
+  _backButton: {fileID: 1390883716344453336}
 --- !u!1 &8233232926673336140
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,9 +448,53 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 300133292981766812}
     m_Modifications:
+    - target: {fileID: 5035839409790415471, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
+      propertyPath: m_Size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5035839410101920248, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5035839410101920248, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5035839410101920249, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
+      propertyPath: m_Name
+      value: LevelContent
+      objectReference: {fileID: 0}
+    - target: {fileID: 5035839410621181612, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5035839410621181614, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5035839410621181614, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5035839410621181614, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5035839410621181614, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5035839410621181614, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5035839410621181614, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5035839410621181615, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
+      propertyPath: m_Name
+      value: Levels
       objectReference: {fileID: 0}
     - target: {fileID: 5035839410905071905, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -481,7 +522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5035839411232421931, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5035839411232421931, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
       propertyPath: m_AnchorMax.y
@@ -489,7 +530,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5035839411232421931, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5035839411232421931, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
       propertyPath: m_AnchorMin.y
@@ -497,7 +538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5035839411232421931, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 927.0801
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5035839411232421931, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
       propertyPath: m_SizeDelta.y
@@ -553,7 +594,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5035839411232421940, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
       propertyPath: m_Name
-      value: PackagePanel
+      value: LevelPanel
       objectReference: {fileID: 0}
     - target: {fileID: 5035839411264371344, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -563,8 +604,17 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5035839411264371344, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
+--- !u!1 &2426229911571871335 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5035839411232421940, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}
+  m_PrefabInstance: {fileID: 7226402169862262355}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2426229911571871352 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5035839411232421931, guid: 98616d03ecb4baf47bc73c1b9419dfb0, type: 3}

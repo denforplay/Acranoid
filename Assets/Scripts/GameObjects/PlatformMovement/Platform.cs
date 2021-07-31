@@ -9,6 +9,7 @@ using Assets.Scripts.Health;
 using UnityEngine;
 using System;
 using Assets.Scripts.Level;
+using Assets.Scripts.EventBus.Events.BallEvents;
 
 namespace Assets.Scripts.PlatformMovement
 {
@@ -50,6 +51,7 @@ namespace Assets.Scripts.PlatformMovement
         {
             Ball ball = BallManager.GetInstance.activeBall;
             ball.isReturning = true;
+            if (!ball.gameObject.activeInHierarchy)
             ball.gameObject.SetActive(true);
             ball.SetParent(this);
             ball.ReturnBallOnPosition(null);
@@ -67,6 +69,7 @@ namespace Assets.Scripts.PlatformMovement
         private void OnEnable()
         {
             EventBusManager.GetInstance.Subscribe<OnPlatformMovingEvent>(Move);
+            EventBusManager.GetInstance.Subscribe<OnBallAddedEvent>(ReturnBall);
             EventBusManager.GetInstance.Subscribe<OnNextLevelLoadedEvent>(ReturnBall);
             EventBusManager.GetInstance.Subscribe<OnHeartSpendEvent>(ReturnBall);
         }
@@ -83,6 +86,7 @@ namespace Assets.Scripts.PlatformMovement
 
         private void Unsubscribe()
         {
+            EventBusManager.GetInstance.Unsubscribe<OnBallAddedEvent>(ReturnBall);
             EventBusManager.GetInstance.Unsubscribe<OnPlatformMovingEvent>(Move);
             EventBusManager.GetInstance.Unsubscribe<OnNextLevelLoadedEvent>(ReturnBall);
             EventBusManager.GetInstance.Unsubscribe<OnHeartSpendEvent>(ReturnBall);

@@ -10,6 +10,7 @@ using Assets.Scripts.Health;
 using Assets.Scripts.EventBus.Events;
 using DG.Tweening;
 using Assets.Scripts.PlatformMovement;
+using Assets.Scripts.Level;
 
 namespace Assets.Scripts.GameObjects.BallMovement
 {
@@ -67,7 +68,7 @@ namespace Assets.Scripts.GameObjects.BallMovement
         {
             ball.ReturnToPool();
             allBalls.Remove(ball);
-            if (allBalls.Count == 0)
+            if (allBalls.Count == 0 && !LevelManager.GetInstance.IsLevelRestarted)
             {
                 HealthManager.GetInstance.SpendHeart(1);
                 return;

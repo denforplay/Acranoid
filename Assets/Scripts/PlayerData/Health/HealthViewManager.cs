@@ -39,9 +39,14 @@ namespace Assets.Scripts.Health
 
         public void DeleteHealthView(IEvent ievent)
         {
-            var heart = _heartsView.Last(x => x != null && x.gameObject.activeInHierarchy);
-            if (heart != null)
-            heart.ReturnToPool();
+            try
+            {
+                var heart = _heartsView.Last(x => x != null && x.gameObject.activeInHierarchy);
+                heart.ReturnToPool();
+            }
+            catch
+            {
+            }
         }
 
         public void DeleteAllHearts()

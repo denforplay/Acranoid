@@ -51,10 +51,10 @@ namespace Assets.Scripts.UI.PopupSystem
 
         public void DeletePopUp()
         {
-            Time.timeScale = 1;
             Popup popup = _popupsOnCanvas.Pop();
             if (_popupsOnCanvas.Count == 0)
             {
+                Time.timeScale = 1;
                 EventBusManager.GetInstance.Invoke<OnAllPopupClosed>(new OnAllPopupClosed());
             }
             popup.Hide();

@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Abstracts.Game;
 using Assets.Scripts.Block;
+using Assets.Scripts.EnergySystem.Energy;
 using Assets.Scripts.Level;
 using Assets.Scripts.Scenes.SceneConfigs;
 using Assets.Scripts.UI.Buttons.Factories;
@@ -63,6 +64,10 @@ namespace Assets.Scripts.UI.PopupSystem.ConcretePopups
             if (SceneManager.GetActiveScene().buildIndex == 1)
             {
                 BlocksManager.GetInstance.ReturnAllBlocks(null);
+                if (!LevelManager.GetInstance.IsLevelCompleted)
+                {
+                    EnergyManager.GetInstance.SpendEnergy(1);
+                }
             }
             else if (SceneManager.GetActiveScene().buildIndex == 0)
             {

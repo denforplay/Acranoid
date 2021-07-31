@@ -61,7 +61,6 @@ namespace Assets.Scripts.Health
             {
                 if (!LevelManager.GetInstance.IsLevelCompleted)
                 {
-                    EnergyManager.GetInstance.SpendEnergy(1);
                     PopupManager.GetInstance.SpawnPopup<HeartEndsPopup>();
                 }
             }

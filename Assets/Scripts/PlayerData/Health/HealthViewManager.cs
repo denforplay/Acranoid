@@ -65,6 +65,7 @@ namespace Assets.Scripts.Health
                 Heart heart = _healthRepository._heartPool.GetPrefabInstance();
                 heart.transform.SetParent(_healthContent.transform);
                 heart.gameObject.transform.position = _healthContent.transform.position;
+                heart.transform.localScale = Vector3.one;
                 _heartsView.Add(heart);
             }
         }

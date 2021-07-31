@@ -17,7 +17,7 @@ namespace Assets.Scripts.EnergySystem.Timer
         [SerializeField] private TextMeshProUGUI _timerText;
         public TimerController _timerController;
         private bool isInitialized = false;
-        public DateTime NextEnergyTime => _timerController.NextEnergyTime;
+        public DateTime NextEnergyTime =>  _timerController.NextEnergyTime;
         public DateTime LastAddedEnergyTime => _timerController.LastAddedTime ;
         public void SetNextEnergyTime(DateTime value)
         {

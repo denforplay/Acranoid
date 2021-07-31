@@ -8,6 +8,7 @@ namespace Assets.Scripts.EnergySystem.Timer
     {
         private TimerRepository _timerRepository;
         public DateTime NextEnergyTime => _timerRepository.nextEnergyTime;
+        public DateTime LastAddedTime => _timerRepository.lastAddedTime;
         public override void OnCreate()
         {
             _timerRepository = Game.GetRepository<TimerRepository>();
@@ -21,6 +22,11 @@ namespace Assets.Scripts.EnergySystem.Timer
         public void SetNextEnergyTime(DateTime value)
         {
             _timerRepository.nextEnergyTime = value;
+            _timerRepository.Save();
+        }
+        public void SetLastAddedTime(DateTime value)
+        {
+            _timerRepository.lastAddedTime = value;
             _timerRepository.Save();
         }
 

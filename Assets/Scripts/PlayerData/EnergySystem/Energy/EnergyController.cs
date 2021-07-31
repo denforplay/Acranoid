@@ -36,6 +36,7 @@ namespace Assets.Scripts.EnergySystem.Energy
             {
                 DateTime currentTime = DateTime.Now;
                 DateTime counter = TimerManager.GetInstance.NextEnergyTime;
+
                 isAdding = false;
                 while (currentTime > counter)
                 {
@@ -45,7 +46,7 @@ namespace Assets.Scripts.EnergySystem.Energy
                         _energyRepository._totalEnergy++;
                         EventBusManager.GetInstance.Invoke<OnRestoringEnergyEvent>(new OnRestoringEnergyEvent());
                         _energyRepository.Save();
-                        DateTime timeToAdd = _energyRepository._lastAddedTime > counter ? _energyRepository._lastAddedTime : counter;
+                        DateTime timeToAdd = TimerManager.GetInstance.LastAddedEnergyTime > counter ? TimerManager.GetInstance.LastAddedEnergyTime : counter;
                         counter = EnergyManager.GetInstance.AddDuration(timeToAdd, EnergyManager.GetInstance.RestoreDuration);
                     }
                     else
@@ -56,7 +57,7 @@ namespace Assets.Scripts.EnergySystem.Energy
 
                 if (isAdding)
                 {
-                    _energyRepository._lastAddedTime = DateTime.Now;
+                    TimerManager.GetInstance.SetLastAddedEnergyTime(DateTime.Now);
                     TimerManager.GetInstance.SetNextEnergyTime(counter);
                 }
 

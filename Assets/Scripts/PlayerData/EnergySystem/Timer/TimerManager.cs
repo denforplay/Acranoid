@@ -17,10 +17,16 @@ namespace Assets.Scripts.EnergySystem.Timer
         [SerializeField] private TextMeshProUGUI _timerText;
         public TimerController _timerController;
         private bool isInitialized = false;
-        public DateTime NextEnergyTime => _timerController != null ? _timerController.NextEnergyTime : DateTime.Now;
+        public DateTime NextEnergyTime => _timerController.NextEnergyTime;
+        public DateTime LastAddedEnergyTime => _timerController.LastAddedTime ;
         public void SetNextEnergyTime(DateTime value)
         {
             _timerController.SetNextEnergyTime(value);
+        }
+
+        public void SetLastAddedEnergyTime(DateTime value)
+        {
+            _timerController.SetLastAddedTime(value);
         }
 
         private new void Awake()

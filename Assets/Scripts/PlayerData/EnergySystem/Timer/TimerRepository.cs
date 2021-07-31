@@ -15,6 +15,10 @@ namespace Assets.Scripts.EnergySystem.Timer
         public override void Initialize()
         {
             DateTime.TryParse(PlayerDataManager.GetInstance.GetStringDataForKey(NEXT_ENERGY_TIME), out nextEnergyTime);
+            if (nextEnergyTime < DateTime.Now)
+            {
+                nextEnergyTime = DateTime.Now;
+            }
             DateTime.TryParse(PlayerDataManager.GetInstance.GetStringDataForKey(LAST_ADDED_TIME), out lastAddedTime);
         }
 

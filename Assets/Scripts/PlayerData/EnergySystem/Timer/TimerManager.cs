@@ -15,10 +15,13 @@ namespace Assets.Scripts.EnergySystem.Timer
         private const string TIMER_FORMAT = "{0}:{1:D2}:{2:D2}";
         private const string TIMER_FULL = "Full";
         [SerializeField] private TextMeshProUGUI _timerText;
+        [SerializeField] private int _restoreDuration = 15;
+
         public TimerController _timerController;
         private bool isInitialized = false;
-        public DateTime NextEnergyTime =>  _timerController.NextEnergyTime;
-        public DateTime LastAddedEnergyTime => _timerController.LastAddedTime ;
+        public int RestoreDuration => _restoreDuration;
+        public DateTime NextEnergyTime =>  _timerController == null ? DateTime.Now.AddSeconds(_restoreDuration) : _timerController.NextEnergyTime;
+        public DateTime LastAddedEnergyTime => _timerController == null ? DateTime.Now : _timerController.LastAddedTime;
         public void SetNextEnergyTime(DateTime value)
         {
             _timerController.SetNextEnergyTime(value);
@@ -42,12 +45,17 @@ namespace Assets.Scripts.EnergySystem.Timer
             isInitialized = true;
         }
 
+        public DateTime AddDuration(DateTime time, int duration)
+        {
+            return time.AddSeconds(duration);
+        }
+
         public DateTime AddDurationInSeconds(DateTime time, int duration)
         {
             return time.AddSeconds(duration);
         }
 
-        private void UpdateTimer(IEvent ievent)
+        public void UpdateTimer(IEvent ievent)
         {
             if (EnergyManager.GetInstance.TotalEnergy >= EnergyManager.GetInstance.MaxEnergy)
             {
@@ -59,6 +67,12 @@ namespace Assets.Scripts.EnergySystem.Timer
             string value = String.Format(TIMER_FORMAT, (int)timeSpan.TotalHours, timeSpan.Minutes, timeSpan.Seconds);
             if (_timerText != null)
                 _timerText.text = value;
+        }
+
+        public void UpdateTime()
+        {
+            SetLastAddedEnergyTime(DateTime.Now);
+            SetNextEnergyTime(DateTime.Now.AddSeconds(_restoreDuration));
         }
 
         public void CheckInitialization()

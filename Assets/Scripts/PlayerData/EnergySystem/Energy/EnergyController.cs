@@ -30,6 +30,7 @@ namespace Assets.Scripts.EnergySystem.Energy
 
         private IEnumerator RestoreRoutine()
         {
+            TimerManager.GetInstance.UpdateTime();
             EventBusManager.GetInstance.Invoke<OnRestoringEnergyEvent>(new OnRestoringEnergyEvent());
             restoring = true;
             while (_energyRepository._totalEnergy < EnergyManager.GetInstance.MaxEnergy)
@@ -44,10 +45,10 @@ namespace Assets.Scripts.EnergySystem.Energy
                     {
                         isAdding = true;
                         _energyRepository._totalEnergy++;
-                        EventBusManager.GetInstance.Invoke<OnRestoringEnergyEvent>(new OnRestoringEnergyEvent());
                         _energyRepository.Save();
                         DateTime timeToAdd = TimerManager.GetInstance.LastAddedEnergyTime > counter ? TimerManager.GetInstance.LastAddedEnergyTime : counter;
-                        counter = EnergyManager.GetInstance.AddDuration(timeToAdd, EnergyManager.GetInstance.RestoreDuration);
+                        counter = TimerManager.GetInstance.AddDuration(timeToAdd, TimerManager.GetInstance.RestoreDuration);
+                        EventBusManager.GetInstance.Invoke<OnRestoringEnergyEvent>(new OnRestoringEnergyEvent());
                     }
                     else
                     {
@@ -82,7 +83,7 @@ namespace Assets.Scripts.EnergySystem.Energy
             {
                 if (_energyRepository._totalEnergy + 1 <= EnergyManager.GetInstance.MaxEnergy)
                 {
-                    TimerManager.GetInstance.SetNextEnergyTime(EnergyManager.GetInstance.AddDuration(TimerManager.GetInstance.NextEnergyTime, EnergyManager.GetInstance.RestoreDuration));
+                    TimerManager.GetInstance.SetNextEnergyTime(TimerManager.GetInstance.AddDuration(TimerManager.GetInstance.NextEnergyTime, TimerManager.GetInstance.RestoreDuration));
                 }
                 Coroutines.Coroutines.StartRoutine(RestoreRoutine());
             }
@@ -96,7 +97,7 @@ namespace Assets.Scripts.EnergySystem.Energy
             {
                 if (_energyRepository._totalEnergy < EnergyManager.GetInstance.MaxEnergy)
                 {
-                    TimerManager.GetInstance.SetNextEnergyTime(EnergyManager.GetInstance.AddDuration(TimerManager.GetInstance.NextEnergyTime, EnergyManager.GetInstance.RestoreDuration));
+                    TimerManager.GetInstance.SetNextEnergyTime(TimerManager.GetInstance.AddDuration(TimerManager.GetInstance.NextEnergyTime, TimerManager.GetInstance.RestoreDuration));
                 }
                 Coroutines.Coroutines.StartRoutine(RestoreRoutine());
             }

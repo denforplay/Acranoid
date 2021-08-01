@@ -12,11 +12,9 @@ namespace Assets.Scripts.EnergySystem.Energy
     {
         [SerializeField] private TextMeshProUGUI _energyText;
         [SerializeField] private int _maxEnergy;
-        [SerializeField] private int _restoreDuration = 15;
 
         private EnergyController _energyController;
 
-        public int RestoreDuration => _restoreDuration;
         public int TotalEnergy => _energyController.TotalEnergy;
         public int MaxEnergy => _maxEnergy;
 
@@ -49,10 +47,6 @@ namespace Assets.Scripts.EnergySystem.Energy
             _energyController.AddEnergy(value);
         }
 
-        public DateTime AddDuration(DateTime time, int duration)
-        {
-            return time.AddSeconds(duration);
-        }
 
         private void UpdateEnergy(IEvent ievent)
         {
